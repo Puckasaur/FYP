@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class newCam : MonoBehaviour {
+
+	public Text countText;
 
 	bool isSecondary;
 
@@ -15,7 +18,7 @@ public class newCam : MonoBehaviour {
 		isSecondary = false;
 
 	
-	}
+	}	
 	
 	// Update is called once per frame
 	void Update () {
@@ -31,8 +34,8 @@ public class newCam : MonoBehaviour {
 			secondaryCamera.SetActive(false);
 			mainCamera.SetActive(true);
 
-			
-			Debug.Log ("Main Camera");
+			countText.text = "Main Camera";
+			//Debug.Log ("Main Camera");
 
 			//secondaryCamera.transform.position = target.position;
 			secondaryCamera.transform.position = new Vector3(target.position.x, target.position.y, target.position.z);
@@ -42,8 +45,8 @@ public class newCam : MonoBehaviour {
 			secondaryCamera.SetActive(true);
 			mainCamera.SetActive(false);
 
-
-			Debug.Log ("Secondary Camera");
+			countText.text = "Secondary Camera";
+			//Debug.Log ("Secondary Camera");
 
 		}
 
