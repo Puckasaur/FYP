@@ -42,6 +42,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 		}
 
+		void Update()
+		{
+			if (Input.GetKey (KeyCode.F12)) {
+				m_GravityMultiplier = 2f;
+			} else
+				m_GravityMultiplier = 4f;
+				
+		}
+
 
 		public void Move(Vector3 move, bool crouch, bool jump)
 		{
