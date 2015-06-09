@@ -7,8 +7,6 @@ using System;
 public class pathfinding : MonoBehaviour 
 {
 
-	//public Transform seeker;
-	//public Transform target;
 	PathRequestManager prm;
 	Grid grid;
 
@@ -54,7 +52,7 @@ public class pathfinding : MonoBehaviour
 				{
 					sw.Stop ();
 					print ("path found in: " + sw.ElapsedMilliseconds + " ms");
-					pathSuccessful = true;					
+					pathSuccessful = true;				
 					break;
 				}
 				
