@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -30,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
-		float hatModifier;
+		floorHazards Haz;
 
 
 		void Start()
@@ -52,6 +53,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //			} else
 //				m_GravityMultiplier = 4f;
 				
+		}
+
+		void onTriggerEnter() 
+		{
+			Haz.playSound ();
 		}
 
 
