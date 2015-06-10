@@ -5,15 +5,22 @@ public class Destructible : MonoBehaviour {
 
 	public GameObject debrisPrefab;
 
+	floorHazards Haz;
+
+	void Start()
+	{
+		Haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
+	}
 	void Update()
 	{
-		if(Input.GetKey(KeyCode.F12)){
-			destroyMe ();
-		}
+
 	}
 
-	void OnTriggerEnter() {
+	void OnTriggerEnter(Collider Destructible) {
+	
+
 		destroyMe ();
+
 	}
 
 	void destroyMe()

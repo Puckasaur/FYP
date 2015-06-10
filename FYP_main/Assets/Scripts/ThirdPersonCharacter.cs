@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
-		floorHazards Haz;
+
 
 
 		void Start()
@@ -55,10 +55,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				
 		}
 
-		void onTriggerEnter() 
-		{
-			Haz.playSound ();
-		}
 
 
 		public void Move(Vector3 move, bool crouch, bool jump)

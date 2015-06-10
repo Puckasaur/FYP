@@ -4,7 +4,14 @@ using System.Collections;
 public class floorHazards : MonoBehaviour {
 
 	public AudioClip splash;
-	AudioSource audio;
+	new AudioSource audio;
+
+
+
+	public floorHazards ()
+	{
+			
+	}
 
 	// Use this for initialization
 	void Start () 
@@ -15,11 +22,19 @@ public class floorHazards : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
 	{
-			
+
+
+
+		if (Input.GetKey (KeyCode.Q)) {
+			playSound();
+		}
 	}
 
 	public void playSound()
 	{
-	audio.PlayOneShot (splash);
+		Debug.Log ("sound gonna play!");
+		audio.PlayOneShot(splash);
+		Debug.Log ("sound has played!");
+
 	}
 }
