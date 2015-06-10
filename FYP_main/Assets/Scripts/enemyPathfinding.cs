@@ -28,11 +28,9 @@ public class enemyPathfinding : MonoBehaviour {
 
 	float vectorTransformPositionx = 0;
 	float vectorTransformPositionz = 0;
-	float vectorTransformPositiony = 0;
 
 	float vectorCurrentTargetx = 0;
 	float vectorCurrentTargetz = 0;
-	float vectorCurrentTargety = 0;
 
 	float vectorx;
 	float vectorz;
