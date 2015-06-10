@@ -3,55 +3,43 @@ using System.Collections;
 
 public class ObstructionDetector : MonoBehaviour {
 
-	public Transform playerTrans;
-	private Platform m_LastPlatform;
+	public Transform playerTransform;
+	private Wall m_LastWall;
 
-	void Start () {
-		StartCoroutine (DetectPlayerObstructions ());
+	void Start ()
+	{
+		StartCoroutine (DetectPlayerObstructions());
 	}
 	
 	IEnumerator DetectPlayerObstructions()
 	{
-		while (true)
+		while (true) 
 		{
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(0.1f);
 
-			Vector3 Direction = (playerTrans.position - Camera.main.transform.position);
+			Vector3 direction = (playerTransform.position - Camera.main.transform.position).normalized;
 			RaycastHit rayCastHit;
-			Debug.Log("Platform1");
 
-			if (Physics.Raycast(Camera.main.transform.position, Direction, out rayCastHit, Mathf.Infinity))
-			{	
-				Debug.Log("Platform2");
-				Platform platform = rayCastHit.collider.gameObject.GetComponent<Platform>();
-				Debug.Log("Platform3");
-
-				if (platform)
-				{	
-					Debug.Log("Platform4");
-					platform.SetTransparent ();
-					m_LastPlatform = platform;
+			if (Physics.Raycast(Camera.main.transform.position, direction, out rayCastHit, Mathf.Infinity))
+			{
+				Wall wall = rayCastHit.collider.gameObject.GetComponent<Wall>();
+				if (wall)
+				{
+					wall.SetTransparent();
+					m_LastWall = wall;
 				}
+				//Working
 				else 
 				{
-					if (m_LastPlatform)
+					if (m_LastWall)
 					{
-						m_LastPlatform.SetToNormal();
-						m_LastPlatform = null;
+						m_LastWall.SetToNormal();
+						m_LastWall = null;
 					}
+				//Working
 				}
+
 			}
 		}
-	}
-
-	public void StartRayCast()
-	{
-		StopCoroutine ("DetectPlayerObstructions");
-		StartCoroutine (DetectPlayerObstructions());
-	}
-
-	public void StopRayCast()
-	{
-		StopCoroutine ("DetectPlayerObstructions");
 	}
 }
