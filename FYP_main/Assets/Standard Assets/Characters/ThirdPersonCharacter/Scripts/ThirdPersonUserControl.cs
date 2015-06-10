@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+        float pushForce = 0.0f;
         
         private void Start()
         {
@@ -38,6 +38,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+            }
+        }
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                Rigidbody body = hit.collider.attachedRigidbody;
+                if (body == null) { return; }
+
+                if (hit.gameObject.tag == "ball")
+                {
+                    body.isKinematic = false;
+                    Debug.Log("Toimii");
+                    pushForce = 2.0f;
+                    Vector3 pushDir = new Vector3(1, 0, 1);
+                    body.velocity = pushDir * pushForce;
+                    hit.gameObject.SendMessage("ObjectFalling", SendMessageOptions.DontRequireReceiver);
+                }
+                if (hit.gameObject.tag == "cube")
+                {
+                    body.isKinematic = false;
+                    Debug.Log("Toimii");
+                    pushForce = 50.0f;
+                    Vector3 pushDir = new Vector3(1, 0, 1);
+                    body.AddForce(pushDir * pushForce);
+                    hit.gameObject.SendMessage("ObjectFalling", SendMessageOptions.DontRequireReceiver);
+                }
             }
         }
 
@@ -72,4 +99,5 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Jump = false;
         }
     }
+
 }
