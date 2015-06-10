@@ -14,64 +14,97 @@ public class enemyPathfinding : MonoBehaviour {
 
 	List<Transform> targets = new List<Transform>();
 	public bool loopWaypoints;
-	float waypointOffsetMin = -1.2f;
-	float waypointOffsetMax = 1.2f;
+	float waypointOffsetMin = -1.0f;
+	float waypointOffsetMax = 1.0f;
 
 
 	public float speed = 10;
-	Vector3[] path;
+	Vector3[] path = new Vector3[0];
 	int targetIndex;
 	int targetCounter = 0;
+	bool hasWaypointsLeft;
+	Vector3 currentWaypoint;
+	int timer = 60;
 
+	float vectorTransformPositionx = 0;
+	float vectorTransformPositionz = 0;
+	float vectorTransformPositiony = 0;
 
+	float vectorCurrentTargetx = 0;
+	float vectorCurrentTargetz = 0;
+	float vectorCurrentTargety = 0;
+
+	float vectorx;
+	float vectorz;
 
 	void Start()
 	{
+
 
 		targets.Add (target1);
 		targets.Add (target2);
 		targets.Add (target3);
 
-		currentTarget = target1;
+
+		currentTarget = targets[0];
 		lastTarget = currentTarget;
+
 		PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);
+
 	}
 
 	void Update()
-	{
-		if(waypointOffsetMin < (transform.position.x - currentTarget.position.x) && waypointOffsetMax > (transform.position.x - currentTarget.position.x)
-		   || waypointOffsetMax < (transform.position.z - currentTarget.position.z) && waypointOffsetMax > (transform.position.z - currentTarget.position.z)|| 
-		  
-		  
-		   waypointOffsetMin < (transform.position.x - lastTarget.position.x) && waypointOffsetMax > (transform.position.x - lastTarget.position.x)
-		   || waypointOffsetMax < (transform.position.z - lastTarget.position.z) && waypointOffsetMax > (transform.position.z - lastTarget.position.z) 
-		   )
+	{		
+		vectorTransformPositionx = transform.position.x;
+		vectorTransformPositionz = transform.position.z;
+		
+		vectorCurrentTargetx = currentTarget.position.x;
+		vectorCurrentTargetz = currentTarget.position.z; 
+
+		if (vectorTransformPositionx < 0) 
 		{
-			print("New Path requested");
-			requestNewPath();
+			vectorTransformPositionx *= -1;
+		}
+	
+		if (vectorTransformPositionz < 0) 
+		{
+			vectorTransformPositionz *= -1;
+		}
+
+		if (vectorCurrentTargetx < 0) 
+		{
+			vectorCurrentTargetx *= -1;
+		}
+
+		if (vectorCurrentTargetz < 0) 
+		{
+			vectorCurrentTargetz *= -1;
+		}
+
+		vectorx = (vectorTransformPositionx -vectorCurrentTargetx);
+		vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+
+		if(vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+		{
+			if (timer <= 0) 
+		{
+
+			currentTarget = targets[targetCounter];
+
 			PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);
+				
+				timer += 60;
+			targetCounter++;
+			if(targetCounter > 2)
+			{
+				targetCounter = 0;
+			}
+		}
+			timer--;
 		}
 	}
 
-	void requestNewPath()
-	{	
-			if (loopWaypoints) 
-			{
-			if(targets[targetCounter - 1] == null)
-				targets.Add(targets[targetCounter - 1]);
-			}
-			targetCounter++;
-			lastTarget = targets [targetCounter];
 
-			print("New path set");
-			
-			currentTarget = targets[targetCounter];			
-
-			if (targets [targetCounter - 1] != null) 
-			{
-			targets.Remove(targets[targetCounter - 1]);
-			}	
-	}
 
 	public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
 	{
@@ -81,13 +114,13 @@ public class enemyPathfinding : MonoBehaviour {
 			StopCoroutine("followPath");
 			StartCoroutine("followPath");
 		}
-			else
-			print("_pathSuccessful = " + _pathSuccessful);
+
 	}
 
 	IEnumerator followPath()
 	{
-		Vector3 currentWaypoint = path [0];
+		currentWaypoint = path [0];
+
 		while (true) 
 		{
 			if(transform.position == currentWaypoint)
@@ -109,13 +142,17 @@ public class enemyPathfinding : MonoBehaviour {
 	public void OnDrawGizmos()
 	{
 		if (path != null) {
-			for (int i = targetIndex; i < path.Length; i++) {
+			for (int i = targetIndex; i < path.Length; i++) 
+			{
 				Gizmos.color = Color.black;
 				Gizmos.DrawWireCube (path [i], Vector3.one);
 
-				if (i == targetIndex) {
+				if (i == targetIndex) 
+				{
 					Gizmos.DrawLine (transform.position, path [i]);
-				} else {
+				} 
+				else 
+				{
 					Gizmos.DrawLine (path [i - 1], path [i]);
 				}
 			}

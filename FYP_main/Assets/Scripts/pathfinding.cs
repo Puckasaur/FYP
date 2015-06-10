@@ -32,57 +32,48 @@ public class pathfinding : MonoBehaviour
 		Node startNode = grid.NodeFromWorldPoint (startPos);
 		Node targetNode = grid.NodeFromWorldPoint (targetPos);
 
-		if (startNode.walkable && targetNode.walkable) 
-		{
+		if (startNode.walkable && targetNode.walkable) {
 		
-//		if(transform.position.x==currentWaypoint.x && transform.position.y == currentWaypoint.y)
-		//{
-			Heap<Node> openSet = new Heap<Node> (grid.maxSize);
-			HashSet<Node> closedSet = new HashSet<Node> ();
-			openSet.Add (startNode);
+
+				Heap<Node> openSet = new Heap<Node> (grid.maxSize);
+				HashSet<Node> closedSet = new HashSet<Node> ();
+				openSet.Add (startNode);
 			
 			
-			while (openSet.count > 0) 
-			{
-				Node currentNode = openSet.removeFirst ();
+				while (openSet.count > 0) {
+					Node currentNode = openSet.removeFirst ();
 				
-				closedSet.Add (currentNode);
+					closedSet.Add (currentNode);
 				
-				if (currentNode == targetNode) 
-				{
-					sw.Stop ();
-					print ("path found in: " + sw.ElapsedMilliseconds + " ms");
-					pathSuccessful = true;				
-					break;
-				}
-				
-				foreach (Node neighbour in grid.getNeighbours(currentNode)) 
-				{
-					if (!neighbour.walkable || closedSet.Contains (neighbour)) 
-					{
-						continue;
+					if (currentNode == targetNode) {
+						sw.Stop ();
+						//print ("path found in: " + sw.ElapsedMilliseconds + " ms");
+						pathSuccessful = true;				
+						break;
 					}
+				
+					foreach (Node neighbour in grid.getNeighbours(currentNode)) {
+						if (!neighbour.walkable || closedSet.Contains (neighbour)) {
+							continue;
+						}
 					
-					int newMovementCostToNeighbour = currentNode.gCost + getDistance (currentNode, neighbour);
+						int newMovementCostToNeighbour = currentNode.gCost + getDistance (currentNode, neighbour);
 					
-					if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains (neighbour)) 
-					{
-						neighbour.gCost = newMovementCostToNeighbour;
-						neighbour.hCost = getDistance (neighbour, targetNode);
-						neighbour.parent = currentNode;
+						if (newMovementCostToNeighbour < neighbour.gCost || !openSet.Contains (neighbour)) {
+							neighbour.gCost = newMovementCostToNeighbour;
+							neighbour.hCost = getDistance (neighbour, targetNode);
+							neighbour.parent = currentNode;
 						
-						if (!openSet.Contains (neighbour)) 
-						{
-							openSet.Add (neighbour);
-						} 
-						else 
-						{
-							openSet.updateItem (neighbour);
+							if (!openSet.Contains (neighbour)) {
+								openSet.Add (neighbour);
+							} else {
+								openSet.updateItem (neighbour);
+							}
 						}
 					}
 				}
 			}
-		}
+
 			yield return null;
 			if (pathSuccessful) 
 			{
