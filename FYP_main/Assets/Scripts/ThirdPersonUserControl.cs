@@ -12,6 +12,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
+
+		public float speedHat = 2.0f;
+		public float jumpHat = 2.0f;
+
+
+		private bool speedHatOn = false;
+		private bool jumpHatOn = false;
+
+
+
+
         
         private void Start()
         {
@@ -24,9 +35,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
             }
+
+			if (Input.GetKeyDown (KeyCode.Alpha1)) 
+			{
+				speedHatOn = true;
+				jumpHatOn = false;
+			}
+
+			if (Input.GetKeyDown (KeyCode.Alpha2))
+			{
+				jumpHatOn = true;
+				speedHatOn = false;
+			}
+
+			speedHatMod ();
+			jumpHatMod();
         }
 
+		private void speedHatMod ()
+		{
+			if (speedHatOn) {
+				speedHat = 2.0f;
+			} else 
+				speedHat = 1.5f;
+		}
+
+		private void jumpHatMod ()
+		{
+			if (jumpHatOn) {
+				jumpHat = 2.0f;
+			} else 
+				jumpHat = 4.0f;
+		}
 
         // Fixed update is called in sync with physics
         private void FixedUpdate()
@@ -37,11 +79,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             bool crouch = Input.GetKey(KeyCode.C);
 
             // we use world-relative directions in the case of no main camera
-            m_Move = v*Vector3.forward + h*Vector3.right;
+            m_Move = (v*Vector3.forward + h*Vector3.right)*0.5f;
            
 #if !MOBILE_INPUT
 			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
+	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= speedHat;
 #endif
 
             // pass all parameters to the character control script

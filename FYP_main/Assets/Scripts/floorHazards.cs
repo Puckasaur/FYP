@@ -25,7 +25,7 @@ public class floorHazards : MonoBehaviour {
 
 
 
-		if (Input.GetKey (KeyCode.Q)) {
+		if (Input.GetKeyDown (KeyCode.Q)) {
 			playSound();
 		}
 	}

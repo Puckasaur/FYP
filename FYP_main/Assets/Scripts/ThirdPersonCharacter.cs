@@ -31,7 +31,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
-
+		ThirdPersonUserControl TPUC;
 
 
 		void Start()
@@ -44,15 +44,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
+
+			TPUC = GameObject.Find ("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
 		}
 
-		void Update()
+		void FixedUpdate()
 		{
-//			if (Input.GetKey (KeyCode.F12)) {
-//				m_GravityMultiplier = 2f;
-//			} else
-//				m_GravityMultiplier = 4f;
-				
+			m_GravityMultiplier = TPUC.jumpHat;				
 		}
 
 
