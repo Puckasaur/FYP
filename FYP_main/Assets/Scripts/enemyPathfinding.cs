@@ -10,10 +10,16 @@ public class enemyPathfinding : MonoBehaviour {
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
+    //public GameObject player;
 
 
 	List<Transform> targets = new List<Transform>();
 	public bool loopWaypoints;
+    public bool patrol = true;
+    public bool lookForSound = false;
+    public bool chasePlayer = false;
+    //public float speed = 1.0f;
+    public float turnSpeed = 2.0f;
 	float waypointOffsetMin = -1.0f;
 	float waypointOffsetMax = 1.0f;
 
@@ -52,55 +58,105 @@ public class enemyPathfinding : MonoBehaviour {
 	}
 
 	void Update()
-	{		
-		vectorTransformPositionx = transform.position.x;
-		vectorTransformPositionz = transform.position.z;
-		
-		vectorCurrentTargetx = currentTarget.position.x;
-		vectorCurrentTargetz = currentTarget.position.z; 
+    {
+        if(patrol)
+        { 
+            vectorTransformPositionx = transform.position.x;
+            vectorTransformPositionz = transform.position.z;
 
-		if (vectorTransformPositionx < 0) 
-		{
-			vectorTransformPositionx *= -1;
-		}
-	
-		if (vectorTransformPositionz < 0) 
-		{
-			vectorTransformPositionz *= -1;
-		}
+            vectorCurrentTargetx = currentTarget.position.x;
+            vectorCurrentTargetz = currentTarget.position.z;
 
-		if (vectorCurrentTargetx < 0) 
-		{
-			vectorCurrentTargetx *= -1;
-		}
+            if (vectorTransformPositionx < 0)
+            {
+                vectorTransformPositionx *= -1;
+            }
 
-		if (vectorCurrentTargetz < 0) 
-		{
-			vectorCurrentTargetz *= -1;
-		}
+            if (vectorTransformPositionz < 0)
+            {
+                vectorTransformPositionz *= -1;
+            }
 
-		vectorx = (vectorTransformPositionx -vectorCurrentTargetx);
-		vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+            if (vectorCurrentTargetx < 0)
+            {
+                vectorCurrentTargetx *= -1;
+            }
 
-		if(vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-		{
-			if (timer <= 0) 
-		{
+            if (vectorCurrentTargetz < 0)
+            {
+                vectorCurrentTargetz *= -1;
+            }
 
-			currentTarget = targets[targetCounter];
+            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
+            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
 
-			PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);
-				
-				timer += 60;
-			targetCounter++;
-			if(targetCounter > 2)
-			{
-				targetCounter = 0;
-			}
-		}
-			timer--;
-		}
-	}
+            if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+            {
+                if (timer <= 0)
+                {
+
+                    currentTarget = targets[targetCounter];
+
+                    PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+                    timer += 60;
+                    targetCounter++;
+                    if (targetCounter > 2)
+                    {
+                        targetCounter = 0;
+                    }
+                }
+                timer--;
+            }
+        }
+        if(lookForSound)
+        {
+            GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
+            Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
+            if (brokenObject.tag == "Broken Object")
+            {
+                
+                transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
+                this.GetComponent<Rigidbody>().AddForce(dir * speed);
+            }
+            if (dir.x <= 2 && dir.x>= -2 && dir.z<= 2 && dir.z >= -2)
+                m_patrol();
+        }
+        if(chasePlayer)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Vector3 Player_direction = (player.transform.localPosition) - (this.transform.localPosition);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Player_direction), turnSpeed * Time.deltaTime);
+            Debug.Log("Found You!");
+            this.GetComponent<Rigidbody>().AddForce(Player_direction * speed);
+            float disx = Player_direction.x;
+            float disz = Player_direction.z;
+            Debug.Log("X:"+ disx+ "Z:"+ disz);
+            if((Player_direction.x >= 2) && Player_direction.x <= -2 && Player_direction.z >= 2 && Player_direction.z<= -2)
+                m_patrol();
+        }
+    }
+       
+    void m_patrol()
+    {
+        patrol = true;
+        lookForSound = false;
+        chasePlayer = false;
+    }
+    void m_lookForSound()
+    {
+        patrol = false;
+        lookForSound = true;
+        chasePlayer = false;
+
+    }
+    void m_chasePlayer()
+    {
+        patrol = false;
+        lookForSound = false;
+        chasePlayer = true;
+
+    }
 
 
 
