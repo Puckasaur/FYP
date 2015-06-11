@@ -1477,15 +1477,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11491360, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
       propertyPath: patrol
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11491360, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
       propertyPath: lookForSound
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5400256, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
       propertyPath: m_IsKinematic
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478726, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6478726, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5421446, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
@@ -1615,27 +1623,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 859963653}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &862742730 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 191178, guid: 965a4428bd7b650409981f55f290ccfb, type: 2}
-  m_PrefabInternal: {fileID: 1139995414}
---- !u!143 &862742737
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 862742730}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 1
-  m_Radius: .5
-  m_SlopeLimit: 45
-  m_StepOffset: .300000012
-  m_SkinWidth: .0799999982
-  m_MinMoveDistance: .00100000005
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &924821179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1975,7 +1962,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 458760, guid: 965a4428bd7b650409981f55f290ccfb, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.21999979
+      value: -33.0099983
       objectReference: {fileID: 0}
     - target: {fileID: 458760, guid: 965a4428bd7b650409981f55f290ccfb, type: 2}
       propertyPath: m_LocalPosition.y
@@ -2003,7 +1990,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 458760, guid: 965a4428bd7b650409981f55f290ccfb, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 191178, guid: 965a4428bd7b650409981f55f290ccfb, type: 2}
       propertyPath: m_Name
@@ -2860,7 +2847,7 @@ Transform:
   m_LocalScale: {x: 1.08559477, y: 1.04698277, z: 1.01088393}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!114 &1595545140
 MonoBehaviour:
   m_ObjectHideFlags: 0

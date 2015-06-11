@@ -20,6 +20,7 @@ public class enemyPathfinding : MonoBehaviour {
     public bool chasePlayer = false;
     //public float speed = 1.0f;
     public float turnSpeed = 2.0f;
+    public float escapeTimer = 0;
 	float waypointOffsetMin = -1.0f;
 	float waypointOffsetMax = 1.0f;
 
@@ -109,6 +110,10 @@ public class enemyPathfinding : MonoBehaviour {
                 timer--;
             }
         }
+        else
+        {
+            StopCoroutine("followPath");
+        }
         if(lookForSound)
         {
             GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
@@ -132,8 +137,17 @@ public class enemyPathfinding : MonoBehaviour {
             float disx = Player_direction.x;
             float disz = Player_direction.z;
             Debug.Log("X:"+ disx+ "Z:"+ disz);
-            if((Player_direction.x >= 2) && Player_direction.x <= -2 && Player_direction.z >= 2 && Player_direction.z<= -2)
-                m_patrol();
+            if(((Player_direction.x >= 10) || Player_direction.x <= -10 || Player_direction.z >= 10 || Player_direction.z<= -10))
+            {
+                escapeTimer += Time.deltaTime;
+                if (escapeTimer > 5)
+                {
+                    PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                    m_patrol();
+                }
+                   
+            }
+                
         }
     }
        
@@ -152,6 +166,7 @@ public class enemyPathfinding : MonoBehaviour {
     }
     void m_chasePlayer()
     {
+        escapeTimer = 0;
         patrol = false;
         lookForSound = false;
         chasePlayer = true;
@@ -188,6 +203,7 @@ public class enemyPathfinding : MonoBehaviour {
 				}
 				currentWaypoint = path[targetIndex];
 			}
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position-transform.position ), turnSpeed * Time.deltaTime);//this.transform.position - currentTarget.transform.position;
 			transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
 			yield return null;
 		}

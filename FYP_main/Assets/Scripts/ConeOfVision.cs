@@ -15,7 +15,7 @@ public class ConeOfVision : MonoBehaviour
     {
 
 	}
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         //if player crosses the cone, informs the parent(Enemy) of visible player
         if (other.gameObject.tag == "Player")
@@ -23,11 +23,11 @@ public class ConeOfVision : MonoBehaviour
             this.gameObject.transform.parent.SendMessage("m_chasePlayer", SendMessageOptions.DontRequireReceiver);
         }        
     }
-    void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "Player")
-        {
-            this.gameObject.transform.parent.SendMessage("m_patrol", SendMessageOptions.DontRequireReceiver);
-        }
-    }
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if(other.gameObject.tag == "Player")
+    //    {
+    //        this.gameObject.transform.parent.SendMessage("m_patrol", SendMessageOptions.DontRequireReceiver);
+    //    }
+    //}
 }
