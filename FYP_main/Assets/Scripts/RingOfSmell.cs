@@ -3,12 +3,9 @@ using System.Collections;
 
 public class RingOfSmell : MonoBehaviour {
 
-    float scale = 5.0f;
 	// Use this for initialization
-	void Start () 
-    {
-        this.transform.localScale += new Vector3 (scale,0,scale);
-
+	void Start () {
+	
 	}
 	
 	// Update is called once per frame
@@ -22,10 +19,5 @@ public class RingOfSmell : MonoBehaviour {
         {
             this.gameObject.transform.parent.SendMessage("playerSpotted", SendMessageOptions.DontRequireReceiver);
         }
-    }
-    void setScale()
-    {
-        this.transform.localScale += new Vector3(scale, 0, scale);
-
     }
 }
