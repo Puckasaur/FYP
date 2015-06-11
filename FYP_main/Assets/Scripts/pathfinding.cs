@@ -32,7 +32,7 @@ public class pathfinding : MonoBehaviour
 		Node startNode = grid.NodeFromWorldPoint (startPos);
 		Node targetNode = grid.NodeFromWorldPoint (targetPos);
 
-		if (startNode.walkable && targetNode.walkable) {
+		if (targetNode.walkable) {
 		
 
 				Heap<Node> openSet = new Heap<Node> (grid.maxSize);

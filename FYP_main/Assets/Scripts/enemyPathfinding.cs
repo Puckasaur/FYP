@@ -60,8 +60,8 @@ public class enemyPathfinding : MonoBehaviour {
 
 	void Update()
     {
-        if(patrol)
-        { 
+       // if(patrol)
+        //{ 
             vectorTransformPositionx = transform.position.x;
             vectorTransformPositionz = transform.position.z;
 
@@ -91,11 +91,13 @@ public class enemyPathfinding : MonoBehaviour {
             vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
 
-            if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+        if(patrol)
             {
+                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                {
                 if (timer <= 0)
                 {
-
+                    lastTarget = currentTarget;
                     currentTarget = targets[targetCounter];
 
                     PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
@@ -110,12 +112,13 @@ public class enemyPathfinding : MonoBehaviour {
                 timer--;
             }
         }
-        else
-        {
-            StopCoroutine("followPath");
-        }
+        //else
+        //{
+        //    StopCoroutine("followPath");
+        //}
         if(lookForSound)
         {
+            // Move to the broken object
             GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
             Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
             if (brokenObject.tag == "Broken Object")
@@ -124,24 +127,37 @@ public class enemyPathfinding : MonoBehaviour {
                 transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
                 this.GetComponent<Rigidbody>().AddForce(dir * speed);
             }
+            // stop looking after reaching the object
             if (dir.x <= 2 && dir.x>= -2 && dir.z<= 2 && dir.z >= -2)
                 m_patrol();
         }
         if(chasePlayer)
         {
+            // Move Enemy
+            //Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
+            //float maxspeed = 20;
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Debug.Log(player.transform.localPosition);
+            //float jokuarvo = velocity.x - maxspeed;
+            //this.GetComponent<Rigidbody>().AddForce(-jokuarvo * speed);
             Vector3 Player_direction = (player.transform.localPosition) - (this.transform.localPosition);
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Player_direction), turnSpeed * Time.deltaTime);
-            Debug.Log("Found You!");
-            this.GetComponent<Rigidbody>().AddForce(Player_direction * speed);
-            float disx = Player_direction.x;
-            float disz = Player_direction.z;
-            Debug.Log("X:"+ disx+ "Z:"+ disz);
+            
+            currentTarget = player.transform;
+            PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Player_direction), turnSpeed * Time.deltaTime);
+            //Debug.Log("Found You!");
+            //this.GetComponent<Rigidbody>().AddForce(Player_direction * speed);
+            //float disx = Player_direction.x;
+            //float disz = Player_direction.z;
+            //Debug.Log("X:"+ disx+ "Z:"+ disz);
+            // Escape from chase
             if(((Player_direction.x >= 10) || Player_direction.x <= -10 || Player_direction.z >= 10 || Player_direction.z<= -10))
             {
                 escapeTimer += Time.deltaTime;
                 if (escapeTimer > 5)
                 {
+                    currentTarget = lastTarget;
                     PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
                     m_patrol();
                 }
@@ -150,7 +166,9 @@ public class enemyPathfinding : MonoBehaviour {
                 
         }
     }
-       
+    //-------------//
+    //State Manager//
+    //-------------//
     void m_patrol()
     {
         patrol = true;
