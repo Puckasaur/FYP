@@ -28,7 +28,7 @@ public class SoundSphere : MonoBehaviour
         Debug.Log("Stuff");
         if (other.gameObject.tag == "looker")
         {
-            other.SendMessage("hearSound");            
+            other.SendMessage("m_lookForSound");            
         }
     }
     void setMaxDiameter(float value)
