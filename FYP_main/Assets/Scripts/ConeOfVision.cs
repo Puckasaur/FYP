@@ -23,11 +23,5 @@ public class ConeOfVision : MonoBehaviour
             this.gameObject.transform.parent.SendMessage("m_chasePlayer", SendMessageOptions.DontRequireReceiver);
         }        
     }
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if(other.gameObject.tag == "Player")
-    //    {
-    //        this.gameObject.transform.parent.SendMessage("m_patrol", SendMessageOptions.DontRequireReceiver);
-    //    }
-    //}
+
 }

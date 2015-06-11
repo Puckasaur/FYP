@@ -1595,7 +1595,7 @@ Prefab:
     - target: {fileID: 11491360, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
       propertyPath: target1
       value: 
-      objectReference: {fileID: 967753017}
+      objectReference: {fileID: 120865012}
     - target: {fileID: 11491360, guid: 2bf2861e9bb5c2545a335c1fd3663e09, type: 2}
       propertyPath: target2
       value: 
@@ -1993,7 +1993,7 @@ GameObject:
   - 4: {fileID: 939786809}
   - 114: {fileID: 939786808}
   m_Layer: 0
-  m_Name: Waypoint3
+  m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
