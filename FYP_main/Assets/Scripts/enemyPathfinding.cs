@@ -5,42 +5,52 @@ using System.Collections.Generic;
 
 public class enemyPathfinding : MonoBehaviour {
 
+	//Waypoints for pathfinding
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
-
-
+	//public GameObject player;
+	
+	
 	List<Transform> targets = new List<Transform>();
-	public bool loopWaypoints;
-    public bool patrol = true;
-    public bool lookForSound = false;
-    public bool chasePlayer = false;
-    public float turnSpeed = 2.0f;
-    public float escapeTimer = 0;
-	float waypointOffsetMin = -1.0f;
-	float waypointOffsetMax = 1.0f;
-
-
-	public float speed = 10;
+	
+	//Pathfinding values
 	Vector3[] path = new Vector3[0];
+	Vector3 currentWaypoint;
 	int targetIndex;
 	int targetCounter = 0;
-	bool hasWaypointsLeft;
-	Vector3 currentWaypoint;
 	int timer = 60;
-
+	public bool loopWaypoints;
+	
+	//waypoint offset
+	float waypointOffsetMin = -1.0f;
+	float waypointOffsetMax = 1.0f;
+	
+	//values for different states
+	public bool patrol = true;
+	public bool lookForSound = false;
+	public bool chasePlayer = false;
+	public bool idle = false;
+	
+	//Movement speed values
+	public float turnSpeed = 2.0f;
+	public float escapeTimer = 0;
+	public float speed = 10;
+	public float maxSpeed = 20;
+	
+	//values for general movement
 	float vectorTransformPositionx = 0;
 	float vectorTransformPositionz = 0;
-
+	
 	float vectorCurrentTargetx = 0;
 	float vectorCurrentTargetz = 0;
-
+	
 	float vectorx;
 	float vectorz;
 
-    float maxspeed = 20;
+
 	void Start()
 	{
 
@@ -66,19 +76,19 @@ public class enemyPathfinding : MonoBehaviour {
 
 
             Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
-            if (velocity.x > maxspeed)
+            if (velocity.x > maxSpeed)
             {
-                float temp = velocity.x - maxspeed;
+				float temp = velocity.x - maxSpeed;
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
             }
-            else if (velocity.y > maxspeed)
+            else if (velocity.y > maxSpeed)
             {
-                float temp = velocity.y - maxspeed;
+				float temp = velocity.y - maxSpeed;
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
             }
-            else if (velocity.z > maxspeed)
+            else if (velocity.z > maxSpeed)
             {
-                float temp = velocity.z - maxspeed;
+				float temp = velocity.z - maxSpeed;
                 this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
             }
         }
