@@ -1,7 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+public enum enumStates
+{
+    patrol,
+    idle,
+    chase,
+    alert,
+    idleSuspicious,
+    distracted,
+    detectSound
+}
 
 public class enemyPathfinding : MonoBehaviour {
 
@@ -10,8 +19,14 @@ public class enemyPathfinding : MonoBehaviour {
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
+    public int currenState;
+    public int lastState;
+
+    
+    public enumStates States;
     GameObject vision;
     GameObject smell;
+    GameObject bone;
 
 	List<Transform> targets = new List<Transform>();
 	public bool loopWaypoints;
@@ -19,12 +34,12 @@ public class enemyPathfinding : MonoBehaviour {
     public bool lookForSound = false;
     public bool chasePlayer = false;
     public bool distracted = false;
+    public bool eatbone = false;
 
     public float turnSpeed = 2.0f;
     public float escapeTimer = 0;
 	float waypointOffsetMin = -1.0f;
 	float waypointOffsetMax = 1.0f;
-
 
 	public float speed = 10;
 	Vector3[] path = new Vector3[0];
@@ -32,7 +47,7 @@ public class enemyPathfinding : MonoBehaviour {
 	int targetCounter = 0;
 	bool hasWaypointsLeft;
 	Vector3 currentWaypoint;
-	int timer = 60;
+	public int timer = 400;
 
 	float vectorTransformPositionx = 0;
 	float vectorTransformPositionz = 0;
@@ -56,26 +71,39 @@ public class enemyPathfinding : MonoBehaviour {
 		lastTarget = currentTarget;
 
 		PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
-        m_distracted();
+        //stateDistracted();
 	}
 
 	void Update()
     {
+
         // if(patrol)
         //{ 
-        if (distracted)
+        
+        if (eatbone)
         {
-
+            currentTarget = lastTarget;
             if (timer <= 0)
             {
                 distracted = false;
                 vision.SetActive(true);
                 smell.SetActive(true);
+                eatbone = false;
+
+                currentTarget = lastTarget;
+                PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                Destroy(bone);
             }
             timer--;
         }
-        if (!distracted)
+        if (!eatbone)
         {
+
+
+            //Vector3 fwd = transform.TransformDirection(Vector3.forward);
+            //if(Physics.Raycast(transform.position,fwd,10))
+
+
             if (speed > 4)
             {
 
@@ -134,7 +162,7 @@ public class enemyPathfinding : MonoBehaviour {
                 if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                 {
                     Debug.Log("Yohoo");
-                    if (timer <= 0)
+                    if (timer <= 0 && (!distracted))
                     {
                         lastTarget = currentTarget;
                         currentTarget = targets[targetCounter];
@@ -158,16 +186,32 @@ public class enemyPathfinding : MonoBehaviour {
             {
                 // Move to the broken object
                 GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
+                currentTarget = brokenObject.transform;
+                PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
                 Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
-                if (brokenObject.tag == "Broken Object")
+                if (dir.x <= 2 && dir.x >= -2 && dir.z <= 2 && dir.z >= -2) 
                 {
-
-                    transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
-                    this.GetComponent<Rigidbody>().AddForce(dir * speed);
+                    //m_suspicious();
+                    statePatrol();
                 }
-                // stop looking after reaching the object
-                if (dir.x <= 2 && dir.x >= -2 && dir.z <= 2 && dir.z >= -2)
-                    m_patrol();
+                
+            }
+            if(distracted)
+            {
+                {
+                    PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                    Vector3 dir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
+                    if (dir.x <= 4 && dir.x >= -4 && dir.z <= 4 && dir.z >= -4)
+                    {
+                        Debug.Log("It's a bone!");
+                        timer = 400;
+                        distracted = false;
+                        eatbone = true;
+                        
+                    
+                    }
+                }
+                
             }
             if (chasePlayer)
             {
@@ -188,33 +232,34 @@ public class enemyPathfinding : MonoBehaviour {
                     {
                         currentTarget = lastTarget;
                         PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-                        m_patrol();
+                        statePatrol();
                     }
 
                 }
 
             }
         }
-
+        if (Input.GetKey(KeyCode.T))
+            stateDistracted();
         
     }
     //-------------//
     //State Manager//
     //-------------//
-    void m_patrol()
+    void statePatrol()
     {
         patrol = true;
         lookForSound = false;
         chasePlayer = false;
     }
-    void m_lookForSound()
+    void stateLookForSound()
     {
         patrol = false;
         lookForSound = true;
         chasePlayer = false;
 
     }
-    void m_chasePlayer()
+    void stateChasePlayer()
     {
         escapeTimer = 0;
         patrol = false;
@@ -222,14 +267,19 @@ public class enemyPathfinding : MonoBehaviour {
         chasePlayer = true;
 
     }
-    void m_distracted()
+    void stateDistracted()
     {
-        distracted = true;
-        vision = GameObject.FindGameObjectWithTag("Vision");
+        bone = GameObject.FindGameObjectWithTag("Bone");
+        currentTarget = bone.transform;
+        GameObject temp = GameObject.FindGameObjectWithTag("Vision");
+        vision = temp.gameObject;
         vision.SetActive(false);
-        smell = GameObject.FindGameObjectWithTag("Smell");
+        
+        temp = GameObject.FindGameObjectWithTag("Smell");
+        smell = temp.gameObject;
         smell.SetActive(false);
-        timer += 400;
+        distracted = true;
+        
     }
 
 
@@ -244,6 +294,10 @@ public class enemyPathfinding : MonoBehaviour {
 		}
 
 	}
+    void m_suspicious()
+    {
+        Debug.Log("lol");
+    }
 
 	IEnumerator followPath()
 	{

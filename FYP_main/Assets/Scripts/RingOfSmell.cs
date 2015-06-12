@@ -12,12 +12,12 @@ public class RingOfSmell : MonoBehaviour {
 	void Update () {
 	
 	}
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         //if player crosses the cone, informs the parent(Enemy) of visible player
         if (other.gameObject.tag == "Player")
         {
-            this.gameObject.transform.parent.SendMessage("m_chasePlayer", SendMessageOptions.DontRequireReceiver);
+            this.gameObject.transform.parent.SendMessage("stateChasePlayer", SendMessageOptions.DontRequireReceiver);
         }
     }
 }
