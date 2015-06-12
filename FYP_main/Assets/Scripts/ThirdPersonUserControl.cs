@@ -20,7 +20,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool speedHatOn = false;
 		private bool jumpHatOn = false;
 
+		bool crouch = false;
 
+	
 
 
         
@@ -38,13 +40,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             }
 
-			if (Input.GetKeyDown (KeyCode.Alpha1)) 
+			if (Input.GetButtonDown ("Hat 1")) 
 			{
 				speedHatOn = true;
 				jumpHatOn = false;
 			}
 
-			if (Input.GetKeyDown (KeyCode.Alpha2))
+			if (Input.GetButtonDown ("Hat 2"))
 			{
 				jumpHatOn = true;
 				speedHatOn = false;
@@ -76,15 +78,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
-            bool crouch = Input.GetKey(KeyCode.C);
+
+			
+
+			if (Input.GetButtonDown ("Crouch"))
+			{
+				crouch = !crouch;
+			}
 
             // we use world-relative directions in the case of no main camera
             m_Move = (v*Vector3.forward + h*Vector3.right)*0.5f;
            
-#if !MOBILE_INPUT
 			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= speedHat;
-#endif
+	        if (Input.GetButton("Sprint")) m_Move *= speedHat;
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
