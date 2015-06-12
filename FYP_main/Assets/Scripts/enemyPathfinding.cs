@@ -10,13 +10,16 @@ public class enemyPathfinding : MonoBehaviour {
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
-
+    GameObject vision;
+    GameObject smell;
 
 	List<Transform> targets = new List<Transform>();
 	public bool loopWaypoints;
     public bool patrol = true;
     public bool lookForSound = false;
     public bool chasePlayer = false;
+    public bool distracted = false;
+
     public float turnSpeed = 2.0f;
     public float escapeTimer = 0;
 	float waypointOffsetMin = -1.0f;
@@ -44,7 +47,6 @@ public class enemyPathfinding : MonoBehaviour {
 	void Start()
 	{
 
-
 		targets.Add (target1);
 		targets.Add (target2);
 		targets.Add (target3);
@@ -53,132 +55,148 @@ public class enemyPathfinding : MonoBehaviour {
 		currentTarget = targets[0];
 		lastTarget = currentTarget;
 
-		PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);
-
+		PathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
+        m_distracted();
 	}
 
 	void Update()
     {
         // if(patrol)
         //{ 
-        if(speed >4)
+        if (distracted)
         {
 
-
-            Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
-            if (velocity.x > maxspeed)
+            if (timer <= 0)
             {
-                float temp = velocity.x - maxspeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
+                distracted = false;
+                vision.SetActive(true);
+                smell.SetActive(true);
             }
-            else if (velocity.y > maxspeed)
+            timer--;
+        }
+        if (!distracted)
+        {
+            if (speed > 4)
             {
-                float temp = velocity.y - maxspeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
-            }
-            else if (velocity.z > maxspeed)
-            {
-                float temp = velocity.z - maxspeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
-            }
-        }
 
 
-        vectorTransformPositionx = transform.position.x;
-        vectorTransformPositionz = transform.position.z;
-
-        vectorCurrentTargetx = currentTarget.position.x;
-        vectorCurrentTargetz = currentTarget.position.z;
-
-        if (vectorTransformPositionx < 0)
-        {
-            vectorTransformPositionx *= -1;
-        }
-
-        if (vectorTransformPositionz < 0)
-        {
-            vectorTransformPositionz *= -1;
-        }
-
-        if (vectorCurrentTargetx < 0)
-        {
-            vectorCurrentTargetx *= -1;
-        }
-
-        if (vectorCurrentTargetz < 0)
-        {
-            vectorCurrentTargetz *= -1;
-        }
-
-        vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
-        vectorz = (vectorTransformPositionz - vectorCurrentTargetz -5);
-
-        if (patrol)
-        {
-            Debug.Log("X: "+vectorx +" Z: " +vectorz);
-            if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-            {
-                Debug.Log("Yohoo");
-                if (timer <= 0)
+                Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
+                if (velocity.x > maxspeed)
                 {
-                    lastTarget = currentTarget;
-                    currentTarget = targets[targetCounter];
+                    float temp = velocity.x - maxspeed;
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
+                }
+                else if (velocity.y > maxspeed)
+                {
+                    float temp = velocity.y - maxspeed;
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
+                }
+                else if (velocity.z > maxspeed)
+                {
+                    float temp = velocity.z - maxspeed;
+                    this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
+                }
+            }
 
-                    PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 
-                    timer += 60;
-                    targetCounter++;
-                    if (targetCounter > 2)
+            vectorTransformPositionx = transform.position.x;
+            vectorTransformPositionz = transform.position.z;
+
+            vectorCurrentTargetx = currentTarget.position.x;
+            vectorCurrentTargetz = currentTarget.position.z;
+
+            if (vectorTransformPositionx < 0)
+            {
+                vectorTransformPositionx *= -1;
+            }
+
+            if (vectorTransformPositionz < 0)
+            {
+                vectorTransformPositionz *= -1;
+            }
+
+            if (vectorCurrentTargetx < 0)
+            {
+                vectorCurrentTargetx *= -1;
+            }
+
+            if (vectorCurrentTargetz < 0)
+            {
+                vectorCurrentTargetz *= -1;
+            }
+
+            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
+            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+
+            if (patrol)
+            {
+                Debug.Log("X: " + vectorx + " Z: " + vectorz);
+                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                {
+                    Debug.Log("Yohoo");
+                    if (timer <= 0)
                     {
-                        targetCounter = 0;
+                        lastTarget = currentTarget;
+                        currentTarget = targets[targetCounter];
+
+                        PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+                        timer += 60;
+                        targetCounter++;
+                        if (targetCounter > 2)
+                        {
+                            targetCounter = 0;
+                        }
                     }
+                    //m_distracted();
+                    timer--;
                 }
-                timer--;
             }
-        }
+        
 
-        if (lookForSound)
-        {
-            // Move to the broken object
-            GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
-            Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
-            if (brokenObject.tag == "Broken Object")
+            if (lookForSound)
             {
-
-                transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
-                this.GetComponent<Rigidbody>().AddForce(dir * speed);
-            }
-            // stop looking after reaching the object
-            if (dir.x <= 2 && dir.x >= -2 && dir.z <= 2 && dir.z >= -2)
-                m_patrol();
-        }
-        if (chasePlayer)
-        {
-            // Move Enemy
-
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            Debug.Log(player.transform.localPosition);
-
-
-            currentTarget = player.transform;
-            PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-
-            // Escape from chase
-
-            Vector3 Player_direction = (player.transform.localPosition) - (this.transform.localPosition);
-            if (((Player_direction.x >= 10) || Player_direction.x <= -10 || Player_direction.z >= 10 || Player_direction.z <= -10))
-            {
-                escapeTimer += Time.deltaTime;
-                if (escapeTimer > 5)
+                // Move to the broken object
+                GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
+                Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
+                if (brokenObject.tag == "Broken Object")
                 {
-                    currentTarget = lastTarget;
-                    PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+                    transform.localRotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), turnSpeed * Time.deltaTime);
+                    this.GetComponent<Rigidbody>().AddForce(dir * speed);
+                }
+                // stop looking after reaching the object
+                if (dir.x <= 2 && dir.x >= -2 && dir.z <= 2 && dir.z >= -2)
                     m_patrol();
+            }
+            if (chasePlayer)
+            {
+                // Move Enemy
+
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                Debug.Log(player.transform.localPosition);
+                currentTarget = player.transform;
+                PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+                // Escape from chase
+
+                Vector3 Player_direction = (player.transform.localPosition) - (this.transform.localPosition);
+                if (((Player_direction.x >= 10) || Player_direction.x <= -10 || Player_direction.z >= 10 || Player_direction.z <= -10))
+                {
+                    escapeTimer += Time.deltaTime;
+                    if (escapeTimer > 5)
+                    {
+                        currentTarget = lastTarget;
+                        PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                        m_patrol();
+                    }
+
                 }
 
             }
-
         }
+
+        
     }
     //-------------//
     //State Manager//
@@ -203,6 +221,15 @@ public class enemyPathfinding : MonoBehaviour {
         lookForSound = false;
         chasePlayer = true;
 
+    }
+    void m_distracted()
+    {
+        distracted = true;
+        vision = GameObject.FindGameObjectWithTag("Vision");
+        vision.SetActive(false);
+        smell = GameObject.FindGameObjectWithTag("Smell");
+        smell.SetActive(false);
+        timer += 400;
     }
 
 
