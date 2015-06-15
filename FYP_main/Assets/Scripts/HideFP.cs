@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
 using System.Collections;
 
 
-public class Hide : MonoBehaviour {
+public class HideFP : MonoBehaviour {
 
 	public Camera mainCamera;
 	public Camera hideCamera;
 	public Transform character;
 	public Transform prevPosition;
-	public GameObject onScreenCharacter;
 
 	public Text onScreenInstruction;
 	public Text onScreenInstructionExit;
@@ -42,7 +40,6 @@ public class Hide : MonoBehaviour {
 				hideCamera.enabled = true;
 
 				Debug.Log ("DO IT NOW!");
-				
 
 				StartCoroutine(Wait());
 
@@ -52,8 +49,10 @@ public class Hide : MonoBehaviour {
 
 	void Update()
 	{
-		if (isHiding == true) {
-			if (Input.GetKeyDown ("e")) {
+		if (isHiding == true) 
+        {
+			if (Input.GetKeyDown ("e")) 
+            {
 				Debug.Log ("DO IT!");
 				//hideCamera.enabled = false;
 				//mainCamera.enabled = true;
@@ -89,6 +88,7 @@ public class Hide : MonoBehaviour {
 		mainCamera.enabled = true;
 		character.transform.position = prevPosition.transform.position;
 		onScreenInstructionExit.enabled = false;
+		
 	}
 
 }
