@@ -4,6 +4,9 @@ using System.Collections;
 public class Player_Movement : MonoBehaviour 
 {
     // just initializing variables
+    public GameObject bone;
+    GameObject boneSpawner;
+    GameObject newBone;
     public float PLAYER_VELOCITY = 0f;
     static float PLAYER_ACCELERATION = 0.7f;
     static float PLAYER_DECCELERATION = 0.5f;
@@ -16,10 +19,12 @@ public class Player_Movement : MonoBehaviour
     public float jump_cooldown = 1;
     public float time_not_jumping = 0;
     float pushForce = 0.0f;
+    float throwForce = 00.00010f;
+    int bones = 2;
 	// Use this for initialization
 	void Start () 
     {
-	
+        boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
 	}
 	
 	// Update is called once per frame
@@ -62,7 +67,14 @@ public class Player_Movement : MonoBehaviour
             }
                 
         }
-        // cuts the small details of movement, to exclude idle movement
+        if(Input.GetKeyDown(KeyCode.T)&& bones > 0)
+        {
+
+            newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+            newBone.GetComponent<Rigidbody>().AddForce(this.transform.forward * throwForce + this.transform.up * (throwForce / 2));
+        }
+
+        // cuts the small details of movement to exclude idle movement
         if (Z_Velocity < 0.01f && Z_Velocity > -0.01f) { Z_Velocity = 0.0f; }
         if (X_Velocity < 0.01f && X_Velocity > -0.01f) { X_Velocity = 0.0f; }
 

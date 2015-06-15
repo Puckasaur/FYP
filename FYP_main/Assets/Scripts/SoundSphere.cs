@@ -6,7 +6,7 @@ public class SoundSphere : MonoBehaviour
 {
     Vector3 scalingRate = new Vector3(1.0f, 1.0f, 1.0f);
     public float maxDiameter;
-    Enemy hearSound;
+    //Enemy hearSound;
 	// Use this for initialization
 	void Start () 
     {
@@ -28,7 +28,7 @@ public class SoundSphere : MonoBehaviour
         Debug.Log("Stuff");
         if (other.gameObject.tag == "looker")
         {
-            other.SendMessage("stateLookForSound");            
+            other.SendMessage("stateManager", 6);
         }
     }
     void setMaxDiameter(float value)

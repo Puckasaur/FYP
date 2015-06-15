@@ -11,6 +11,8 @@ public class BreakableObject: MonoBehaviour
     public GameObject brokenSphere;
     public GameObject brokenCube;
     bool makeSound = false;
+    public float timer = 60.0f;
+    public float expireTimer = 10;
 	// Use this for initialization
 	void Start () 
     {
@@ -19,6 +21,8 @@ public class BreakableObject: MonoBehaviour
             maxScale = 100.0f;
         else if (this.gameObject.tag == "cube")
             maxScale = 50.0f;
+        else if (this.gameObject.tag == "Bone")
+            maxScale = 25.0f;
         
 	}
 	
@@ -27,13 +31,32 @@ public class BreakableObject: MonoBehaviour
     {
         // expands the sound sphere until maximum range
 
-        
+        if (this.gameObject.tag == "Bone")
+        {
+            if(timer <=0)
+            {
+            Debug.Log("Catch a bone");
+            newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+            makeSound = false;
+            timer += 60;
+            if (newSphere)
+            {
+                newSphere.SendMessage("setMaxDiameter", maxScale,SendMessageOptions.DontRequireReceiver);
+                expireTimer--;
+            }
+            }
+            timer--;
+
+        }
+        if (expireTimer <= 0)
+            Destroy(gameObject);
 	    
 	}
     void OnCollisionEnter(Collision other)
     {
+
         // When object falls to the ground it creates a sound sphere
-      
+        Debug.Log("Collision");
         if(makeSound)
         {
             if (this.transform.localPosition.y <= 1.0f)
@@ -43,22 +66,23 @@ public class BreakableObject: MonoBehaviour
                 if (newSphere)
                 {
                     newSphere.SendMessage("setMaxDiameter", maxScale, SendMessageOptions.DontRequireReceiver);
-                    if(this.gameObject.tag == "ball")
+                    if (this.gameObject.tag == "ball")
                     {
-                      brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
-                      Destroy(this.gameObject);
+                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
+                        Destroy(this.gameObject);
                     }
 
-                    if(this.gameObject.tag == "cube")
+                    if (this.gameObject.tag == "cube")
                     {
-                      brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
-                      Destroy(this.gameObject);
+                        brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
+                        Destroy(this.gameObject);
                     }
                 }
             }
             
-
+            
         }
+
     }
     void ObjectFalling()
     {
