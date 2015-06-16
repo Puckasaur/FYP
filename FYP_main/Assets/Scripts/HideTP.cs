@@ -12,10 +12,13 @@ public class HideTP : MonoBehaviour {
     public Text onScreenInstructionExit;
 
     private bool isHiding;
+	private bool isPaused;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
         isHiding = false;
+        isPaused = false;
 
         onScreenInstruction.enabled = false;
         onScreenInstructionExit.enabled = false;
@@ -23,56 +26,78 @@ public class HideTP : MonoBehaviour {
 
     void OnTriggerStay()
     {
-        onScreenInstruction.enabled = true;
-
+	    onScreenInstruction.enabled = true;
+	
         if (isHiding == false)
         {
             if (Input.GetKeyDown("e"))
             {
-                character.transform.position = hidingPosition.transform.position;
-
 				
+				character.transform.position = hidingPosition.transform.position;
+
 				StartCoroutine(Wait());
             }
         }
     }
+	void OnTriggerExit()
+	{
+		
+		
+		onScreenInstruction.enabled = false;
+		
+		
+	}
 
-	// Update is called once per frame
 	void Update () 
     {
-        if (isHiding == true) {
+        if (isHiding == true) 
+		{
+
 			if (Input.GetKeyDown ("e"))
 			{
+   
+				
 				StartCoroutine (Delayed ());
 
 				isHiding = false;
-       
+				isPaused = false;;
+				
 			}
 		}
+
+		if (isPaused == true) 
+		{
+			//pause
+
+			character.GetComponent<Rigidbody> ().isKinematic = true;
+
+		} else if (isPaused == false){
+			//unpause
+			character.GetComponent<Rigidbody>().isKinematic = false;
+
+		}
+
 	}
 
-	void OnTriggerExit()
-	{
-
-	}
 
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(0.1f);
-        isHiding = true;
-        onScreenInstruction.enabled = false;
-        onScreenInstructionExit.enabled = true;
+
+		isPaused = true;
 		
-		GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
-		GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>().velocity = Vector3.zero;
+        isHiding = true;
+      	onScreenInstruction.enabled = false;
+        onScreenInstructionExit.enabled = true;
 	}
 	
 	IEnumerator Delayed()
-    {
+	{
         yield return new WaitForSeconds(0.1f);
+
         character.transform.position = prevPosition.transform.position;
         onScreenInstructionExit.enabled = false;
-
-    }
+   
+	}
 
 }
