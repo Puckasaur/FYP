@@ -13,22 +13,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
+		public float speedHat = 2.0f;
+		public float jumpHat = 2.0f;
+
+
+		private bool speedHatOn = false;
+		private bool jumpHatOn = false;
+
+		bool crouch = false;
+
+	
+
+
         
         private void Start()
         {
-           /* // get the transform of the main camera
-            if (Camera.main != null)
-            {
-                m_Cam = Camera.main.transform;
-            }
-            else
-            {
-                Debug.LogWarning(
-                    "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.");
-                // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
-            }
-
-            // get the third person character ( this should never be null due to require component )*/
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
 
@@ -38,9 +37,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
             }
+
+			if (Input.GetButtonDown ("Hat 1")) 
+			{
+				speedHatOn = true;
+				jumpHatOn = false;
+			}
+
+			if (Input.GetButtonDown ("Hat 2"))
+			{
+				jumpHatOn = true;
+				speedHatOn = false;
+			}
+
+			speedHatMod ();
+			jumpHatMod();
         }
 
+		private void speedHatMod ()
+		{
+			if (speedHatOn) {
+				speedHat = 2.0f;
+			} else 
+				speedHat = 1.5f;
+		}
+
+		private void jumpHatMod ()
+		{
+			if (jumpHatOn) {
+				jumpHat = 2.0f;
+			} else 
+				jumpHat = 4.0f;
+		}
 
         // Fixed update is called in sync with physics
         private void FixedUpdate()
@@ -48,24 +78,19 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             // read inputs
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
-            bool crouch = Input.GetKey(KeyCode.C);
 
-            // calculate move direction to pass to character
-            /*if (m_Cam != null)
-            {
-                // calculate camera relative direction to move:
-                m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = v*m_CamForward + h*m_Cam.right;
-            }
-            else*/
-            //{
-                // we use world-relative directions in the case of no main camera
-                m_Move = v*Vector3.forward + h*Vector3.right;
-            //}
-#if !MOBILE_INPUT
+			
+
+			if (Input.GetButtonDown ("Crouch"))
+			{
+				crouch = !crouch;
+			}
+
+            // we use world-relative directions in the case of no main camera
+            m_Move = (v*Vector3.forward + h*Vector3.right)*0.5f;
+           
 			// walk speed multiplier
-	        if (Input.GetKey(KeyCode.LeftShift)) m_Move *= 0.5f;
-#endif
+	        if (Input.GetButton("Sprint")) m_Move *= speedHat;
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
