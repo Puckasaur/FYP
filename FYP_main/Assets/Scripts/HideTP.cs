@@ -31,32 +31,25 @@ public class HideTP : MonoBehaviour {
         if (isHiding == false)
         {
             if (Input.GetKeyDown("e"))
-            {
-				
+			{
 				character.transform.position = hidingPosition.transform.position;
 
 				StartCoroutine(Wait());
             }
         }
     }
+
 	void OnTriggerExit()
 	{
-		
-		
 		onScreenInstruction.enabled = false;
-		
-		
 	}
 
 	void Update () 
     {
         if (isHiding == true) 
 		{
-
 			if (Input.GetKeyDown ("e"))
 			{
-   
-				
 				StartCoroutine (Delayed ());
 
 				isHiding = false;
@@ -68,10 +61,11 @@ public class HideTP : MonoBehaviour {
 		if (isPaused == true) 
 		{
 			//pause
-
 			character.GetComponent<Rigidbody> ().isKinematic = true;
 
-		} else if (isPaused == false){
+		} 
+		else if (isPaused == false)
+		{
 			//unpause
 			character.GetComponent<Rigidbody>().isKinematic = false;
 
@@ -85,8 +79,8 @@ public class HideTP : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
 		isPaused = true;
-		
         isHiding = true;
+
       	onScreenInstruction.enabled = false;
         onScreenInstructionExit.enabled = true;
 	}
