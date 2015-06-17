@@ -30,7 +30,7 @@ public class HideTP : MonoBehaviour {
 	
         if (isHiding == false)
         {
-            if (Input.GetKeyDown("e"))
+			if (Input.GetButtonDown("Interact"))
 			{
 				character.transform.position = hidingPosition.transform.position;
 
@@ -48,7 +48,7 @@ public class HideTP : MonoBehaviour {
     {
         if (isHiding == true) 
 		{
-			if (Input.GetKeyDown ("e"))
+			if (Input.GetButtonDown ("Interact"))
 			{
 				StartCoroutine (Delayed ());
 
