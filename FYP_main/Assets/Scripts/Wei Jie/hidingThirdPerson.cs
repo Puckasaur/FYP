@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class HideTP : MonoBehaviour {
+public class hidingThirdPerson : MonoBehaviour {
 
     public Transform character;
     public Transform prevPosition;

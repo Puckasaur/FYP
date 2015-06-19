@@ -1,26 +1,27 @@
-﻿	using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class Wall : MonoBehaviour {
+public class wall : MonoBehaviour
+{
 
 
-	public Color transparenColor;
-	private Color m_InitialColor;
+    public Color transparenColor;
+    private Color m_InitialColor;
 
-	void Start () 
-	{
-		m_InitialColor = GetComponent<Renderer> ().material.color;	
-	}
-	
-	public void SetTransparent()
-	{
+    void Start()
+    {
+        m_InitialColor = GetComponent<Renderer>().material.color;
+    }
 
-		GetComponent<Renderer> ().material.color = transparenColor;
-	}
+    public void SetTransparent()
+    {
 
-	public void SetToNormal()
-	{
-			
-		GetComponent<Renderer> ().material.color = m_InitialColor;
-	}
+        GetComponent<Renderer>().material.color = transparenColor;
+    }
+
+    public void SetToNormal()
+    {
+
+        GetComponent<Renderer>().material.color = m_InitialColor;
+    }
 }

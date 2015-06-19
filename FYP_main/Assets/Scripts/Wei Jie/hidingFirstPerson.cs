@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 
-public class HideFP : MonoBehaviour {
+public class hidingFirstPerson : MonoBehaviour {
 
 	public Camera mainCamera;
 	public Camera hideCamera;

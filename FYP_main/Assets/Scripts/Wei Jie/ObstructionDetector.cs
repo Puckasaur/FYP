@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ObstructionDetector : MonoBehaviour {
+public class obstructionDetector : MonoBehaviour {
 
 	public Transform playerTransform;
-	private Wall m_LastWall;
+	private wall m_LastWall;
 
 	void Start ()
 	{
@@ -22,7 +22,7 @@ public class ObstructionDetector : MonoBehaviour {
 
 			if (Physics.Raycast(Camera.main.transform.position, direction, out rayCastHit, Mathf.Infinity))
 			{
-				Wall wall = rayCastHit.collider.gameObject.GetComponent<Wall>();
+				wall wall = rayCastHit.collider.gameObject.GetComponent<wall>();
 				if (wall)
 				{
 					wall.SetTransparent();
