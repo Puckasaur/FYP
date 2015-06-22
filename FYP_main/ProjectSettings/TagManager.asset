@@ -6,6 +6,24 @@ TagManager:
   tags:
   - Hide
   - OD
+  - ball
+  - enemy
+  - soundSphere
+  - brokenObject
+  - vision
+  - smell
+  - bone
+  - boneSpawner
+  - cube
+  - alertArea
+  - player
+  - Smell
+  - Vision
+  - looker
+  - Broken Object
+  - Alert Area
+  - bone
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -16,6 +34,7 @@ TagManager:
   - 
   - 
   - Dog
+  - Unwalkable
   - 
   - 
   - 
