@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class obstructionDetector : MonoBehaviour {
+public class ObstructionDetector : MonoBehaviour {
 
 	public Transform playerTransform;
 	private wall m_LastWall;
