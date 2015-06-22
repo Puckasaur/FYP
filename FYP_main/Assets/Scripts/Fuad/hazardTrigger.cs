@@ -7,7 +7,8 @@ public class hazardTrigger : MonoBehaviour {
 	
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		Haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
 	}
 	

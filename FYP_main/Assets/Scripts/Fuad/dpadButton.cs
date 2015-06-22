@@ -19,24 +19,34 @@ public class dpadButton : MonoBehaviour {
 	}
  
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 
-		if(Input.GetAxis ("DPadX") == 1 && lastX != 1) { 
-			right = true; } else { right = false; }
+		if(Input.GetAxis ("DPadX") == 1 && lastX != 1) 
+		{ 
+			right = true; } else { right = false; 
+		}
 
-		if(Input.GetAxis ("DPadX") == -1 && lastX != -1) { 
-			left = true; } else { left = false; }
+		if(Input.GetAxis ("DPadX") == -1 && lastX != -1) 
+		{ 
+			left = true; } else { left = false; 
+		}
 
-		if(Input.GetAxis ("DPadY") == 1 && lastY != 1) { 
-			up = true; } else { up = false; }
+		if(Input.GetAxis ("DPadY") == 1 && lastY != 1) 
+		{ 
+			up = true; } else { up = false; 
+		}
 
-		if(Input.GetAxis ("DPadY") == -1 && lastY != -1) {
-			down = true; } else { down = false; }
+		if(Input.GetAxis ("DPadY") == -1 && lastY != -1) 
+		{
+			down = true; } else { down = false; 
+		}
 	
 	}
 }
