@@ -12,7 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         //private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-<<<<<<< HEAD:FYP_main/Assets/Scripts/ThirdPersonUserControl.cs
+
 
 		public float speedHat = 2.0f;
 		public float jumpHat = 2.0f;
@@ -23,12 +23,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		bool crouch = false;
 
-	
-
-
-=======
         float pushForce = 0.0f;
->>>>>>> origin/Toni_Merge:FYP_main/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs
         
         private void Start()
         {
