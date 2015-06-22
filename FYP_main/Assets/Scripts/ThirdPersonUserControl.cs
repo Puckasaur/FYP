@@ -8,10 +8,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     public class ThirdPersonUserControl : MonoBehaviour
     {
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
-        private Transform m_Cam;                  // A reference to the main camera in the scenes transform
-        private Vector3 m_CamForward;             // The current forward direction of the camera
+        //private Transform m_Cam;                  // A reference to the main camera in the scenes transform
+        //private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
+<<<<<<< HEAD:FYP_main/Assets/Scripts/ThirdPersonUserControl.cs
 
 		public float speedHat = 2.0f;
 		public float jumpHat = 2.0f;
@@ -25,6 +26,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 	
 
 
+=======
+        float pushForce = 0.0f;
+>>>>>>> origin/Toni_Merge:FYP_main/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs
         
         private void Start()
         {
@@ -54,6 +58,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			speedHatMod ();
 			jumpHatMod();
+        }
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                Rigidbody body = hit.collider.attachedRigidbody;
+                if (body == null) { return; }
+
+                if (hit.gameObject.tag == "ball")
+                {
+                    body.isKinematic = false;
+                    Debug.Log("Toimii");
+                    pushForce = 2.0f;
+                    Vector3 pushDir = new Vector3(1, 0, 1);
+                    body.velocity = pushDir * pushForce;
+                    hit.gameObject.SendMessage("ObjectFalling", SendMessageOptions.DontRequireReceiver);
+                }
+                if (hit.gameObject.tag == "cube")
+                {
+                    body.isKinematic = false;
+                    Debug.Log("Toimii");
+                    pushForce = 50.0f;
+                    Vector3 pushDir = new Vector3(1, 0, 1);
+                    body.AddForce(pushDir * pushForce);
+                    hit.gameObject.SendMessage("ObjectFalling", SendMessageOptions.DontRequireReceiver);
+                }
+            }
         }
 
 		private void speedHatMod ()
@@ -97,4 +128,5 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             m_Jump = false;
         }
     }
+
 }

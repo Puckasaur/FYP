@@ -4,8 +4,29 @@
 TagManager:
   serializedVersion: 2
   tags:
+<<<<<<< HEAD
   - Hide
   - OD
+=======
+  - ball
+  - enemy
+  - soundSphere
+  - brokenObject
+  - vision
+  - smell
+  - bone
+  - boneSpawner
+  - cube
+  - alertArea
+  - player
+  - Smell
+  - Vision
+  - looker
+  - Broken Object
+  - Alert Area
+  - bone
+  - enemy
+>>>>>>> origin/Toni_Merge
   layers:
   - Default
   - TransparentFX
@@ -15,7 +36,11 @@ TagManager:
   - UI
   - 
   - 
+<<<<<<< HEAD
   - Dog
+=======
+  - Unwalkable
+>>>>>>> origin/Toni_Merge
   - 
   - 
   - 

@@ -10,7 +10,6 @@ public class rtsCam : MonoBehaviour {
 
 	void Start()
 	{
-		//positionOffSet = target.transform.position;
 	}
 
 	// Update is called once per frame
