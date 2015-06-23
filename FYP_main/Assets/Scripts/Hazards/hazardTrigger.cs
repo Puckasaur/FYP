@@ -3,13 +3,13 @@ using System.Collections;
 
 public class hazardTrigger : MonoBehaviour {
 
-	floorHazards Haz;
+	floorHazards haz;
 	
 
 	// Use this for initialization
 	void Start () 
 	{
-		Haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
+		haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
 	}
 	
 	// Update is called once per frame
@@ -19,6 +19,6 @@ public class hazardTrigger : MonoBehaviour {
 
 	void OnTriggerEnter (Collider MainCamera)
 	{
-		Haz.playSound ();
+		haz.playSound ();
 	}
 }
