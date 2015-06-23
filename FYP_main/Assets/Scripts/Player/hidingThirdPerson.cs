@@ -20,13 +20,13 @@ public class hidingThirdPerson : MonoBehaviour {
         isHiding = false;
         isPaused = false;
 
-        onScreenInstruction.enabled = false;
-        onScreenInstructionExit.enabled = false;
+       //onScreenInstruction.enabled = false;
+        //onScreenInstructionExit.enabled = false;
 	}
 
     void OnTriggerStay()
     {
-	    onScreenInstruction.enabled = true;
+	    //onScreenInstruction.enabled = true;
 	
         if (isHiding == false)
         {
@@ -41,7 +41,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		onScreenInstruction.enabled = false;
+		//onScreenInstruction.enabled = false;
 	}
 
 	void Update () 
@@ -81,8 +81,8 @@ public class hidingThirdPerson : MonoBehaviour {
 		isPaused = true;
         isHiding = true;
 
-      	onScreenInstruction.enabled = false;
-        onScreenInstructionExit.enabled = true;
+      	//onScreenInstruction.enabled = false;
+        //onScreenInstructionExit.enabled = true;
 	}
 	
 	IEnumerator Delayed()
@@ -90,7 +90,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-        onScreenInstructionExit.enabled = false;
+        //onScreenInstructionExit.enabled = false;
    
 	}
 
