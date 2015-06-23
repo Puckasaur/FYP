@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CamTracking : MonoBehaviour {
+public class camTracking : MonoBehaviour {
 
 	public Transform target;
 
