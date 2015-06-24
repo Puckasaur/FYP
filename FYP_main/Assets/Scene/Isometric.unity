@@ -594,7 +594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e78e09d8ef9f3647a1575a445968310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 1478677478}
 --- !u!4 &1015011235
 Transform:
   m_ObjectHideFlags: 0
@@ -954,6 +954,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 778735955}
   m_RootOrder: 1
+--- !u!4 &1478677478 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 455584, guid: 0baf19aec52622a48add9ca025fdb4a6, type: 2}
+  m_PrefabInternal: {fileID: 1816244998}
 --- !u!1 &1591149285
 GameObject:
   m_ObjectHideFlags: 0
