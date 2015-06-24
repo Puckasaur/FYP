@@ -182,7 +182,7 @@ public class enemyPathfinding : MonoBehaviour
                         //----------------------------------------------------------------------------//
                         
                         currentTarget = player.transform;
-                        pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                        //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 
                         //------------------//
                         //Bark While chasing//
