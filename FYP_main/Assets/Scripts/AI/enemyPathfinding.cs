@@ -85,6 +85,11 @@ public class enemyPathfinding : MonoBehaviour
     public int idleTimer = 100;    
     public int barkTimer = 120;
     public int lastState;
+    public int defaultEatTimer = 120;
+    public int defaultIdleTimer = 100;
+    public int defaultBarkTimer = 120;
+    public int defaultTimer = 60;
+    public int defaultAlertTimer = 400;
 	int targetIndex;
 	int targetCounter = 0;
     int areaCounter = 0;
@@ -190,7 +195,8 @@ public class enemyPathfinding : MonoBehaviour
                         if (barkTimer < 0)
                         {
                             newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
-                            barkTimer = 120;
+                            newSphere.transform.parent = transform;
+                            barkTimer = defaultBarkTimer;
                             if (newSphere)
                             {
                                 sphereScript = newSphere.GetComponent<soundSphere>();
@@ -205,13 +211,13 @@ public class enemyPathfinding : MonoBehaviour
                         Vector3 playerDirection = (player.transform.localPosition) - (this.transform.localPosition);
                         if (((playerDirection.x >= 10) || playerDirection.x <= -10 || playerDirection.z >= 10 || playerDirection.z <= -10))
                         {
-                            escapeTimer += Time.deltaTime;
-                            if (escapeTimer > 5)
-                            {
 
+                            escapeTimer += Time.deltaTime;
+                            if (escapeTimer >= 5)
+                            {
                                 //escapeTimer = 0;
                                 //if(lastTarget != null)
-
+                                escapeTimer = 0;
                                     currentTarget = alertArea[areaCounter];
                                     areaCounter++;
                                     stateManager(3);
@@ -244,6 +250,7 @@ public class enemyPathfinding : MonoBehaviour
                     }
                 if(alertTimer <= 0)
                 {
+                    alertTimer += defaultAlertTimer;
                     currentTarget = targets[0];
                     lastTarget = currentTarget;
                     targetCounter++;
@@ -300,7 +307,7 @@ public class enemyPathfinding : MonoBehaviour
                             distracted = false;
                             if (!eatBone)
                             {
-                                eatTimer = 400;
+                                eatTimer = defaultEatTimer;
                             }
 
                             eatBone = true;
@@ -314,7 +321,7 @@ public class enemyPathfinding : MonoBehaviour
                         // when sound is heard, move towards the source//
                         //---------------------------------------------//
                         GameObject brokenObject = GameObject.FindGameObjectWithTag("brokenObject");
-                        bone = GameObject.FindGameObjectWithTag("Bone");
+                        bone = GameObject.FindGameObjectWithTag("bone");
                         if(brokenObject)
                         {
                             Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
@@ -368,6 +375,7 @@ public class enemyPathfinding : MonoBehaviour
                         if (eatTimer <= 0)
 
                         {
+                            eatTimer = defaultEatTimer;// 120;
                             distracted = false;
                             vision.SetActive(true);
                             smell.SetActive(true);
@@ -447,8 +455,11 @@ public class enemyPathfinding : MonoBehaviour
             pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
         }
         timer--;
-
+        //-------------//
+        //End of Update//
+        //-------------//
     }
+
     //-------------//
     //State Manager//
     //-------------//

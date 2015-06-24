@@ -32,9 +32,11 @@ public class soundSphere : MonoBehaviour
         {
 
 			script = other.GetComponent<enemyPathfinding>();
-			script.escapeTimer = 0;
-			script.stateManager(6);
-
+            if (this.transform.parent != other.transform)
+            {
+                script.escapeTimer = 0;
+                script.stateManager(6);
+            }
         }
     }
     public void setMaxDiameter(float value)
