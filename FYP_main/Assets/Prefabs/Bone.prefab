@@ -86,6 +86,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 132896}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: a6ca5841d59f732439ec939bcb012d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -94,6 +95,16 @@ MonoBehaviour:
   brokenCube: {fileID: 104782, guid: bb99cbe37e2e83e4bb7995915e694f8e, type: 2}
   Timer: 60
   expireTimer: 20
+=======
+  m_Script: {fileID: 11500000, guid: a7e1c1f24b6e37a49abcc39c70736bb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sphere: {fileID: 106016, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  brokenSphere: {fileID: 0}
+  brokenCube: {fileID: 0}
+  Timer: 60
+  expireTimer: 10
+>>>>>>> origin/Toni_Sound&Vision
 --- !u!136 &13612558
 CapsuleCollider:
   m_ObjectHideFlags: 1

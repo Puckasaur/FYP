@@ -14,17 +14,29 @@ public interface IHeapItem<T> : IComparable<T>
 
 }
 
+<<<<<<< HEAD
 public class Heap<T> where T : IHeapItem<T>
+=======
+public class heap<T> where T : IHeapItem<T>
+>>>>>>> origin/Toni_Sound&Vision
 {
 	T[] items;
 	int currentItemCount;
 
+<<<<<<< HEAD
 	public Heap(int maxHeapSize)
+=======
+	public heap(int maxHeapSize)
+>>>>>>> origin/Toni_Sound&Vision
 	{
 		items = new T[maxHeapSize];
 	}
 
+<<<<<<< HEAD
 	public void Add(T item)
+=======
+	public void add(T item)
+>>>>>>> origin/Toni_Sound&Vision
 	{
 		item.heapIndex = currentItemCount;
 		items[currentItemCount] = item;
@@ -42,7 +54,11 @@ public class Heap<T> where T : IHeapItem<T>
 	return firstItem;
 	}
 
+<<<<<<< HEAD
 	public bool Contains(T item)
+=======
+	public bool contains(T item)
+>>>>>>> origin/Toni_Sound&Vision
 	{
 		return Equals(items[item.heapIndex], item);
 	}

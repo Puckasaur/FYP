@@ -13,12 +13,21 @@ public class alertArea : MonoBehaviour {
     {
 	
 	}
+<<<<<<< HEAD
     void OnTriggerEnter(Collider Other)
     {
         if (Other.GetComponent<Collider>().tag == "enemy")
         
         {
             script = Other.gameObject.GetComponent<enemyPathfinding>();
+=======
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Collider>().tag == "enemy")
+        
+        {
+            script = other.gameObject.GetComponent<enemyPathfinding>();
+>>>>>>> origin/Toni_Sound&Vision
             script.setAlertArea(this.gameObject); 
         }
                

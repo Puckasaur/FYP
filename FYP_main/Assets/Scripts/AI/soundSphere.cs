@@ -4,7 +4,11 @@ using System.Collections;
 
 public class soundSphere : MonoBehaviour 
 {
+<<<<<<< HEAD
     enemyPathfinding Script;
+=======
+    enemyPathfinding script;
+>>>>>>> origin/Toni_Sound&Vision
     Vector3 scalingRate = new Vector3(1.0f, 1.0f, 1.0f);
     public float maxDiameter;
 	// Use this for initialization
@@ -29,9 +33,15 @@ public class soundSphere : MonoBehaviour
         //----------------------------------------------------------------------------//
         if (other.gameObject.tag == "enemy")
         {
+<<<<<<< HEAD
             Script = other.GetComponent<enemyPathfinding>();
             Script.escapeTimer = 0;
             Script.stateManager(6);
+=======
+            script = other.GetComponent<enemyPathfinding>();
+            script.escapeTimer = 0;
+            script.stateManager(6);
+>>>>>>> origin/Toni_Sound&Vision
         }
     }
     public void setMaxDiameter(float value)
