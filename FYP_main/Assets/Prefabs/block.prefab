@@ -10,7 +10,8 @@ GameObject:
   - 4: {fileID: 437506}
   - 65: {fileID: 6534892}
   - 54: {fileID: 5463046}
-  - 114: {fileID: 11457684}
+  - 114: {fileID: 11462854}
+  - 114: {fileID: 11424724}
   m_Layer: 0
   m_Name: block
   m_TagString: Untagged
@@ -136,7 +137,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11457684
+--- !u!114 &11424724
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -144,10 +145,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 128300}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1eed2bbbf7f2f954f863f279db933ea0, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d59ecef75c5bdb45b7ff7d37780ef3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debrisPrefab: {fileID: 108124, guid: 39861986d472b794d962e342075700bf, type: 2}
+  Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  brokenSphere: {fileID: 0}
+  brokenCube: {fileID: 0}
+  timer: 60
+  expireTimer: 10
+--- !u!114 &11462854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14fe836921b12144a91d9e4957e18af6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  debrisPrefab: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
