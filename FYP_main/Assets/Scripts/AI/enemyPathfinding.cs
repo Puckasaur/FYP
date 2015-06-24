@@ -258,7 +258,7 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         targetCounter = 0;
                     }
-                    stateManager(0);
+                    stateManager(4);
                 }
                     alertTimer--;
 
@@ -268,28 +268,41 @@ public class enemyPathfinding : MonoBehaviour
                         //-----------------------------------------------//
                         //Stand on the spot and look at preset directions//
                         //-----------------------------------------------//
+						
 
-                        StopCoroutine("followPath");
+						if(idleTimer > 0)
+						{
+						rotateEnemy(currentTargetDirection, rotationStep);
 
-                        //print ("turnTimer   " + turnTimer);
+							if (rotationCompleted)
+							{
+							print("rotation completed");
+							directionDegrees.Add(directionDegrees[0]);
+							directionDegrees.Remove(directionDegrees[0]);
+							currentTargetDirection = directionDegrees[0];
+							rotationCompleted = false;
+					
+							} 
 
-                        //print(directionDegrees[0] + "    <<directionDegrees[0]");
-                        //
-                        //		if (rotationInProgress == false) 
-                        //		{ 
+						}
+                      
+						else if (idleTimer <= 0)
+						{
+							lastTarget = currentTarget;
+							currentTarget = targets[targetCounter];
+				
+							pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+				
+							idleTimer += 100;
+							targetCounter++;
+							if (targetCounter > 2)
+							{
+								targetCounter = 0;
+							}
+							stateManager(0);
+						}
 
-
-                        rotateEnemy(currentTargetDirection, rotationStep);
-                        //		} 
-                        if (rotationCompleted)
-                        {
-                            print("rotation completed");
-                            directionDegrees.Add(directionDegrees[0]);
-                            directionDegrees.Remove(directionDegrees[0]);
-                            currentTargetDirection = directionDegrees[0];
-                            rotationCompleted = false;
-
-                        } 
+						idleTimer--;						
                         break;
                     }
             case enumStates.distracted:
