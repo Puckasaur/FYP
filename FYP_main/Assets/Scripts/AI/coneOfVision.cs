@@ -3,9 +3,7 @@ using System.Collections;
 
 public class coneOfVision : MonoBehaviour 
 {
-<<<<<<< HEAD
-    enemyPathfinding Script;
-=======
+
     enemyPathfinding script;
     RaycastHit hit;
     public float width;
@@ -34,40 +32,37 @@ public class coneOfVision : MonoBehaviour
             }
         }
     }
->>>>>>> origin/Toni_Sound&Vision
+
     void OnTriggerStay(Collider other)
     {
-        //-----------------------------------------------------------------------//
-        //if player crosses the cone, informs the parent(Enemy) of visible player//
-        //-----------------------------------------------------------------------//
-        if (other.gameObject.tag == "player")
-        {
-<<<<<<< HEAD
-           RaycastHit hit;
-           if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
-               if (hit.collider == other)
-               {
-                   Script = this.transform.parent.GetComponent<enemyPathfinding>();
-                   Script.escapeTimer = 0;
-                   Script.stateManager(2);
-                   Debug.Log(hit);
-               }
-        }     
-    }
-=======
-            script.escapeTimer = 0;
-           if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
-               if (hit.collider == other)
-               {
-                   if(detectionTimer <= 0)
-                   {
-                       script.stateManager(2);
-                   }
-                   detectionTimer--;
+		//-----------------------------------------------------------------------//
+		//if player crosses the cone, informs the parent(Enemy) of visible player//
+		//-----------------------------------------------------------------------//
+		if (other.gameObject.tag == "player") {
 
-               }
-        }     
-    }
+			RaycastHit hit;
+			if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
+			if (hit.collider == other) {
+				script = this.transform.parent.GetComponent<enemyPathfinding> ();
+				script.escapeTimer = 0;
+				script.stateManager (2);
+				Debug.Log (hit);
+               
+            
+    
+
+				script.escapeTimer = 0;
+				if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
+				if (hit.collider == other) {
+					if (detectionTimer <= 0) {
+						script.stateManager (2);
+					}
+					detectionTimer--;
+
+				}
+			}     
+		}
+	}
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "player")
@@ -85,6 +80,6 @@ public class coneOfVision : MonoBehaviour
             }
         }
     }
->>>>>>> origin/Toni_Sound&Vision
+
 
 }

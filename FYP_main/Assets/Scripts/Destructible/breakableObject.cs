@@ -12,7 +12,7 @@ public class breakableObject: MonoBehaviour
     public GameObject brokenSphere;
     public GameObject brokenCube;
     bool makeSound = false;
-    public float Timer = 60.0f;
+    public float timer = 60.0f;
     public float expireTimer = 10;
     soundSphere sphereScript;
 	// Use this for initialization
@@ -39,20 +39,19 @@ public class breakableObject: MonoBehaviour
 
         if (this.gameObject.tag == "Bone")
         {
-            if(Timer <=0)
+            if(timer <=0)
             {
             newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
             makeSound = false;
-            Timer += 60;
+            timer += 60;
             if (newSphere)
             {
-                Debug.Log("toimii");
                 sphereScript = newSphere.GetComponent<soundSphere>();
                 sphereScript.setMaxDiameter(maxScale);
                 expireTimer--;
             }
             }
-            Timer--;
+            timer--;
 
         }
         if (expireTimer <= 0)

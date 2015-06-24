@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-<<<<<<< HEAD
-public class Node : IHeapItem<Node>
-=======
+
 public class node : IHeapItem<node>
->>>>>>> origin/Toni_Sound&Vision
 {
 	
 	public bool walkable;
@@ -15,18 +12,7 @@ public class node : IHeapItem<node>
 
 	public int gCost;
 	public int hCost;
-<<<<<<< HEAD
-	public int _heapIndex;
 
-	public Node parent;
-
-	public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
-	{
-		walkable = _walkable;
-		worldPosition = _worldPos;
-		gridX = _gridX;
-		gridY = _gridY;
-=======
 	public int mainHeapIndex;
 
 	public node parent;
@@ -37,7 +23,6 @@ public class node : IHeapItem<node>
 		worldPosition = mainWorldPos;
 		gridX = mainGridX;
 		gridY = mainGridY;
->>>>>>> origin/Toni_Sound&Vision
 
 	}
 	public int fCost
@@ -52,17 +37,7 @@ public class node : IHeapItem<node>
 	{
 		get
 		{
-<<<<<<< HEAD
-			return _heapIndex;
-		}
-		set
-		{
-			_heapIndex  = value;
-		}
-	}
 
-	public int CompareTo(Node nodeToCompare)
-=======
 			return mainHeapIndex;
 		}
 		set
@@ -72,7 +47,7 @@ public class node : IHeapItem<node>
 	}
 
 	public int CompareTo(node nodeToCompare)
->>>>>>> origin/Toni_Sound&Vision
+
 	{
 		int compare = fCost.CompareTo (nodeToCompare.fCost);
 

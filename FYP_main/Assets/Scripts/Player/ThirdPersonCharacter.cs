@@ -45,7 +45,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 
-			TPUC = GameObject.Find ("ThirdPersonController").GetComponent<ThirdPersonUserControl>();
+			TPUC = GameObject.Find ("catController").GetComponent<ThirdPersonUserControl>();
 		}
 
 		void FixedUpdate()

@@ -9,11 +9,8 @@ using System.Collections;
 // note you will get inevitable breaks in the smooth shading at cone tips
 // note the resulting mesh will be created as an asset in Assets/Editor
 // Author: Wolfram Kresse
-<<<<<<< HEAD
-public class CreateCone : ScriptableWizard
-=======
+
 public class createCone : ScriptableWizard
->>>>>>> origin/Toni_Sound&Vision
 {
 
     public int numVertices = 10;
@@ -26,21 +23,13 @@ public class createCone : ScriptableWizard
     public bool addCollider = false;
 
     [MenuItem("GameObject/Create Other/Cone")]
-<<<<<<< HEAD
-    static void CreateWizard()
-    {
-        ScriptableWizard.DisplayWizard("Create Cone", typeof(CreateCone));
-    }
 
-    void OnWizardCreate()
-=======
     static void createWizard()
     {
         ScriptableWizard.DisplayWizard("Create Cone", typeof(createCone));
     }
 
     void onWizardCreate()
->>>>>>> origin/Toni_Sound&Vision
     {
         GameObject newCone = new GameObject("Cone");
         if (openingAngle > 0 && openingAngle < 180)

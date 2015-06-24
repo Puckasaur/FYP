@@ -3,9 +3,7 @@ using System.Collections;
 
 public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
-<<<<<<< HEAD
 
-=======
     public float radius;
     bool playerSeen = false;
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
@@ -51,7 +49,7 @@ public class ringOfSmell : MonoBehaviour {
             }
         }
     }
->>>>>>> origin/Toni_Sound&Vision
+
     void OnTriggerStay(Collider other)
     {
         //-----------------------------------------------------------------------//
@@ -59,10 +57,10 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-<<<<<<< HEAD
+
             script = this.transform.parent.GetComponent<enemyPathfinding>();
             script.stateManager(2);
-=======
+
             detectionTimer--;
 
             if (detectionTimer <= 0)
@@ -85,7 +83,7 @@ public class ringOfSmell : MonoBehaviour {
                 script.currentTarget = script.alertArea[1];
                 script.stateManager(3);
             }
->>>>>>> origin/Toni_Sound&Vision
+
         }
     }
 }
