@@ -25,7 +25,7 @@ public class breakableObject: MonoBehaviour
             maxScale = 100.0f;
         else if (this.gameObject.tag == "cube")
             maxScale = 50.0f;
-        else if (this.gameObject.tag == "Bone")
+        else if (this.gameObject.tag == "bone")
             maxScale = 25.0f;
         
 	}
@@ -37,7 +37,7 @@ public class breakableObject: MonoBehaviour
         // expands the sound sphere until maximum range//
         //---------------------------------------------//
 
-        if (this.gameObject.tag == "Bone")
+        if (this.gameObject.tag == "bone")
         {
             if(timer <=0)
             {

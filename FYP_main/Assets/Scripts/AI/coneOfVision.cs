@@ -26,9 +26,9 @@ public class coneOfVision : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            if (script.States != enumStates.chase)
+            if (script.States != enumStates.chase || script.States != enumStates.alert)
             {
-                transform.parent.LookAt(other.transform);
+               // transform.parent.LookAt(other.transform);
             }
         }
     }
