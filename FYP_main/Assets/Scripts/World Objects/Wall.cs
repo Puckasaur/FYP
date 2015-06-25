@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class wall : MonoBehaviour
+public class Wall : MonoBehaviour
 {
 	private Renderer[] children;
 	
