@@ -19,7 +19,7 @@ Material:
           name: _MainTex
         second:
           m_Texture: {fileID: 2800000, guid: d94e24fb1613dfb4085ca3e1d0de81e8, type: 3}
-          m_Scale: {x: 5, y: 5}
+          m_Scale: {x: 50, y: 5}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -54,7 +54,7 @@ Material:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Scale: {x: 50, y: 5}
           m_Offset: {x: 0, y: 0}
       data:
         first:

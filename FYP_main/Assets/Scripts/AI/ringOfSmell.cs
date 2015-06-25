@@ -32,6 +32,10 @@ public class ringOfSmell : MonoBehaviour {
                 if (script.States != enumStates.alert)
                 { transform.parent.LookAt(player.transform); }
                 detectionTimer--;
+                if(script.States == enumStates.alert)
+                {
+                    playerSeen = false;
+                }
 
             }
         }

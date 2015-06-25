@@ -36,6 +36,7 @@ public class enemyPathfinding : MonoBehaviour
     GameObject newSphere;
     public GameObject sphere;
 
+    NavMeshAgent Fortyseven;
 	List<Transform> targets = new List<Transform>();
     public List<Transform> alertArea = new List<Transform>();
 
@@ -44,9 +45,7 @@ public class enemyPathfinding : MonoBehaviour
     public bool distracted = false;
 
     public float turnSpeed = 2.0f;
-    public float escapeTimer = 0;
-    public float alertTimer = 0;
-    public float eatTimer = 0;
+
 	public float speed = 10;
 
     float maxSpeed = 20;
@@ -80,16 +79,20 @@ public class enemyPathfinding : MonoBehaviour
     public bool rotationCompleted = false;
     float turnTimer = 200.0f;
     float currentTargetDirection;
-    //
-	public int timer = 60;
-    public int idleTimer = 100;    
-    public int barkTimer = 120;
-    public int lastState;
-    public int defaultEatTimer = 120;
-    public int defaultIdleTimer = 100;
-    public int defaultBarkTimer = 120;
-    public int defaultTimer = 60;
-    public int defaultAlertTimer = 400;
+    //So many timers
+	public int timer;
+    public int idleTimer;    
+    public int barkTimer;
+    public float escapeTimer;
+    public float alertTimer;
+    public float eatTimer;
+    public int defaultEatTimer;
+    public int defaultIdleTimer;
+    public int defaultBarkTimer;
+    public int defaultTimer;
+    public int defaultAlertTimer;
+    public int defaultEscapeTimer;
+    public int playerOutOfSight;
 	int targetIndex;
 	int targetCounter = 0;
     int areaCounter = 0;
@@ -112,10 +115,18 @@ public class enemyPathfinding : MonoBehaviour
         setTargetWaypoints();
 		currentTarget = targets[0];
 		lastTarget = currentTarget;
+        Fortyseven = GetComponent<NavMeshAgent>();
 
+        Fortyseven.SetDestination(currentTarget.position);
+		//pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
 
-		
-		pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
+        //Setting Timers
+        timer = defaultTimer;
+        eatTimer = defaultEatTimer;
+        idleTimer = defaultIdleTimer;
+        barkTimer = defaultBarkTimer;
+        alertTimer = defaultAlertTimer;
+        escapeTimer = defaultEscapeTimer;
 	}
 
 	void Update()
@@ -166,9 +177,11 @@ public class enemyPathfinding : MonoBehaviour
                                 lastTarget = currentTarget;
                                 currentTarget = targets[targetCounter];
 
-                                pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+                                Fortyseven.SetDestination(currentTarget.position);
 
-                                idleTimer += 100;
+                                //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+
+                                idleTimer = defaultIdleTimer;
                                 targetCounter++;
                                 if (targetCounter > 2)
                                 {
@@ -183,11 +196,9 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         //----------------------------------------------------------------------------//
                         // chase the Player constantly searching for a waypoint at the Player position//
-
                         //----------------------------------------------------------------------------//
                         
                         currentTarget = player.transform;
-                        //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 
                         //------------------//
                         //Bark While chasing//
@@ -208,23 +219,49 @@ public class enemyPathfinding : MonoBehaviour
                         //-----------------//
                         //Escape from chase//
                         //-----------------//
-                        Vector3 playerDirection = (player.transform.localPosition) - (this.transform.localPosition);
-                        if (((playerDirection.x >= 10) || playerDirection.x <= -10 || playerDirection.z >= 10 || playerDirection.z <= -10))
+
+                        if (escapeTimer <= 0)
                         {
-
-                            escapeTimer += Time.deltaTime;
-                            if (escapeTimer >= 5)
+                            RaycastHit hit; 
+                            Physics.Linecast(transform.position, player.transform.position, out hit);
+                            print(hit);
+                            if (hit.collider == player.GetComponent<Collider>())
                             {
-                                //escapeTimer = 0;
-                                //if(lastTarget != null)
-                                escapeTimer = 0;
-                                    currentTarget = alertArea[areaCounter];
-                                    areaCounter++;
-                                    stateManager(3);
 
 
+                                playerOutOfSight =3;
+                                escapeTimer = defaultEscapeTimer;
+                            }
+                            else
+                            {
+                                playerOutOfSight--;
+                                escapeTimer = defaultEscapeTimer;
+                            }
+                            if (playerOutOfSight <= 0)
+                            {
+                                playerOutOfSight = 5;
+                                currentTarget = alertArea[areaCounter];
+                                areaCounter++;
+                                stateManager(3);
                             }
                         }
+                        escapeTimer-= Time.deltaTime;
+
+                        //Vector3 playerDirection = (player.transform.localPosition) - (this.transform.localPosition);
+                        //if (((playerDirection.x >= 10) || playerDirection.x <= -10 || playerDirection.z >= 10 || playerDirection.z <= -10))
+                        //{
+
+                        //    escapeTimer += Time.deltaTime;
+                        //    if (escapeTimer >= 5)
+                        //    {
+                        //        escapeTimer = 0;
+                        //            currentTarget = alertArea[areaCounter];
+                        //            areaCounter++;
+                        //            stateManager(3);
+
+
+                        //    }
+                        //}
 
                     }
                     break;
@@ -367,7 +404,7 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             vision.SetActive(true);
                             smell.SetActive(true);
-                            alertTimer += 500;
+                            alertTimer += defaultAlertTimer;
                             stateManager(3);
                             currentTarget = alertArea[areaCounter];
                         }
@@ -383,7 +420,7 @@ public class enemyPathfinding : MonoBehaviour
 
                             currentTarget = alertArea[areaCounter];
                             Destroy(bone);
-                            alertTimer += 500;
+                            alertTimer += defaultAlertTimer;
                             stateManager(3);
                            
                         }
@@ -451,8 +488,10 @@ public class enemyPathfinding : MonoBehaviour
 
         if(timer <= 0)
         {
-            timer+=60;
-            pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+            timer+=defaultTimer;
+            Fortyseven.SetDestination(currentTarget.position);
+
+            //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
         }
         timer--;
         //-------------//
