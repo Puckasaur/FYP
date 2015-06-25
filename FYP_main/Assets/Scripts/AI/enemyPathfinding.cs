@@ -70,7 +70,7 @@ public class enemyPathfinding : MonoBehaviour
     GameObject enemyObject;
 
     bool rotating = false;
-    float rotationStep = 10.0f;
+    float rotationStep = 30.0f;
     public float rotationDegrees = 90;
     float currentAngle = 0;
     float targetAngle = 0;
@@ -80,6 +80,7 @@ public class enemyPathfinding : MonoBehaviour
     public bool rotationCompleted = false;
     float turnTimer = 200.0f;
     float currentTargetDirection;
+	int turnCounter = 0;
     //
 	public int timer = 60;
     public int idleTimer = 100;    
@@ -89,10 +90,11 @@ public class enemyPathfinding : MonoBehaviour
     public int defaultIdleTimer = 100;
     public int defaultBarkTimer = 120;
     public int defaultTimer = 60;
-    public int defaultAlertTimer = 400;
+	public int defaultAlertTimer = 50;//400;
 	int targetIndex;
 	int targetCounter = 0;
     int areaCounter = 0;
+
 
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -220,6 +222,7 @@ public class enemyPathfinding : MonoBehaviour
                                 escapeTimer = 0;
                                     currentTarget = alertArea[areaCounter];
                                     areaCounter++;
+									alertTimer += defaultAlertTimer;
                                     stateManager(3);
 
 
@@ -249,18 +252,24 @@ public class enemyPathfinding : MonoBehaviour
                         
                     }
                 if(alertTimer <= 0)
-                {
-                    alertTimer += defaultAlertTimer;
-                    currentTarget = targets[0];
-                    lastTarget = currentTarget;
-                    targetCounter++;
-                    if(targetCounter > 2)
-                    {
-                        targetCounter = 0;
-                    }
+                {                  
+
+					if(turnCounter != 0)
+					{
+					turnCounter = 0;
+					}
+					if(idleTimer != 100)
+					{
+					idleTimer = 200;
+					}
                     stateManager(4);
                 }
-                    alertTimer--;
+                    
+			alertTimer--;
+			if(alertTimer <= 0)
+			{
+				alertTimer = 0;
+			}
 
                     break;
             case enumStates.idleSuspicious:
@@ -269,40 +278,51 @@ public class enemyPathfinding : MonoBehaviour
                         //Stand on the spot and look at preset directions//
                         //-----------------------------------------------//
 						
-
-						if(idleTimer > 0)
+						
+						if(turnCounter < 3)
 						{
+						
+						currentTargetDirection = directionDegrees[0];					
 						rotateEnemy(currentTargetDirection, rotationStep);
-
+						
+						
+						
 							if (rotationCompleted)
-							{
+							{							
 							print("rotation completed");
 							directionDegrees.Add(directionDegrees[0]);
-							directionDegrees.Remove(directionDegrees[0]);
-							currentTargetDirection = directionDegrees[0];
+							directionDegrees.Remove(directionDegrees[0]);							
 							rotationCompleted = false;
-					
+							print ("turnTimer  " + turnTimer);
+							turnCounter++;
+							turnTimer += 200;
+							print("currentTargetDirection " + currentTargetDirection);
+							
 							} 
 
 						}
-                      
-						else if (idleTimer <= 0)
+                      	
+				
+						else if (turnCounter > 2)
 						{
-							lastTarget = currentTarget;
-							currentTarget = targets[targetCounter];
-				
-							pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-				
-							idleTimer += 100;
-							targetCounter++;
-							if (targetCounter > 2)
+
+						if(idleTimer <= 0)
+						{
+						lastTarget = currentTarget;
+						currentTarget = alertArea[areaCounter];									
+						pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+					print("vectorx  >>" + vectorx + "  vectorz  >>" + vectorz + "  waypointOffsetMin  >>" + waypointOffsetMin + "  waypointOffsetMax  >>" + waypointOffsetMax);
+							if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 							{
-								targetCounter = 0;
-							}
+							
 							stateManager(0);
+						print("state manager: patrol!");
+							}
+						}	
+						idleTimer--;	
 						}
 
-						idleTimer--;						
+												
                         break;
                     }
             case enumStates.distracted:
@@ -548,8 +568,11 @@ public class enemyPathfinding : MonoBehaviour
     {
 
         directionDegrees.Add(firstDirection);
+		print(directionDegrees[0]);
         directionDegrees.Add(secondDirection);
+		print(directionDegrees[1]);
         directionDegrees.Add(thirdDirection);
+		print(directionDegrees[2]);
 
     }
 
@@ -560,6 +583,11 @@ public class enemyPathfinding : MonoBehaviour
         targets.Add(target2);
         targets.Add(target3);
     }
+
+	//==================================================//
+	//================rotate enemy======================//
+	//==================================================//
+
 
     void rotateEnemy(float targetDegrees, float rotationStep)
     {
