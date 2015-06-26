@@ -19,6 +19,7 @@ public class enemyPathfinding : MonoBehaviour
 {
 
     soundSphere sphereScript;
+    RaycastHit hit; 
 
 
 	public Transform target1;
@@ -26,6 +27,7 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
+    public Vector3 lasSeenPosition;
 
     
     public enumStates States;
@@ -197,7 +199,7 @@ public class enemyPathfinding : MonoBehaviour
                         //----------------------------------------------------------------------------//
                         // chase the Player constantly searching for a waypoint at the Player position//
                         //----------------------------------------------------------------------------//
-                        currentTarget = player.transform;
+                        //currentTarget = player.transform;
                         //------------------//
                         //Bark While chasing//
                         //------------------//
@@ -218,21 +220,27 @@ public class enemyPathfinding : MonoBehaviour
                         //Escape from chase//
                         //-----------------//
 
-                        if (escapeTimer <= 0)
-                        {
-                            RaycastHit hit; 
+                        //if (escapeTimer <= 0)
+                        //{
                             Physics.Linecast(transform.position, player.transform.position, out hit);
                             if (hit.collider == player.GetComponent<Collider>())
                             {
-                                playerOutOfSight =3;
-                                escapeTimer = defaultEscapeTimer;
+                                lasSeenPosition = player.transform.position;
+                                currentTarget.position=lasSeenPosition;
+                                //playerOutOfSight =3;
+                                //escapeTimer = defaultEscapeTimer;
                             }
-                            else
-                            {
-                                playerOutOfSight--;
-                                escapeTimer = defaultEscapeTimer;
-                            }
-                            if (playerOutOfSight <= 0)
+                            else{
+                                //timer = defaultTimer;
+                                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                            
+                           // }
+                               //  else
+                            //{
+                              //  playerOutOfSight--;
+                                //escapeTimer = defaultEscapeTimer;
+                            //}
+                            //if (playerOutOfSight <= 0)
                             {
                                 print("ImOuttaHere");
                                 escapeTimer = defaultEscapeTimer;
@@ -270,7 +278,13 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-
+                Physics.Linecast(transform.position, player.transform.position, out hit);
+                if (hit.collider == player.GetComponent<Collider>())
+                {
+                    lasSeenPosition = player.transform.position;
+                    currentTarget.position = lasSeenPosition;
+                    stateManager(2);
+                }
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
                         if (timer <= 0 && (!distracted))
