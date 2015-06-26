@@ -6,7 +6,7 @@ public class rtsCam : MonoBehaviour {
 	public GameObject target = null;
 	public bool orbitY = false;
 
-	private Vector3 positionOffSet = Vector3.zero;
+	//private Vector3 positionOffSet = Vector3.zero;
 
 	void Start()
 	{
@@ -22,7 +22,7 @@ public class rtsCam : MonoBehaviour {
 		float scrollSpeed = 2 * Camera.main.orthographicSize + 2;
 			
 
-		Vector3 aPosition = new Vector3 (0, 0, 0);
+		//Vector3 aPosition = new Vector3 (0, 0, 0);
 
 		float scrollAmount = scrollSpeed * Time.deltaTime;
 

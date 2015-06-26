@@ -18,6 +18,7 @@ public class ringOfSmell : MonoBehaviour {
     }
     void Update()
     {
+        GetComponent<Rigidbody>().WakeUp();
         if (this.transform.localScale.x < radius)
         {
             this.transform.localScale += scalingRate;
@@ -31,7 +32,6 @@ public class ringOfSmell : MonoBehaviour {
             {
                 if (script.States != enumStates.alert)
                 { transform.parent.LookAt(player.transform); }
-                detectionTimer--;
                 if(script.States == enumStates.alert)
                 {
                     playerSeen = false;
@@ -45,25 +45,22 @@ public class ringOfSmell : MonoBehaviour {
         if (other.gameObject.tag == "player")
         {
             player = other.gameObject;
-            script.escapeTimer = 0;
-            if (script.States != enumStates.chase || script.States != enumStates.alert)
-            {
+
                 playerSeen = true;
-                //transform.parent.LookAt(other.transform);
-            }
+
         }
     }
 
     void OnTriggerStay(Collider other)
     {
+        print("hello");
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-
-            script = this.transform.parent.GetComponent<enemyPathfinding>();
-            script.stateManager(2);
+            //print("hello");
+            //script.stateManager(2);
 
             detectionTimer--;
 
@@ -80,11 +77,15 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "player")
         {
-            detectionTimer = 60.0f;
-            if (script.States != enumStates.chase)
-            {
+            
+            if (script.States != enumStates.chase && script.States != enumStates.alert)
+            {detectionTimer = 60.0f;
                 script.alertTimer = 500;
-                script.currentTarget = script.alertArea[1];
+                script.currentTarget = script.alertArea[script.areaCounter];
+                if(script.areaCounter >2)
+                {
+                    script.areaCounter = 0;
+                }
                 script.stateManager(3);
             }
 

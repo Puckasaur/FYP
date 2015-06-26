@@ -68,7 +68,7 @@ public class enemyPathfinding : MonoBehaviour
     List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
 
-    bool rotating = false;
+    //bool rotating = false;
     float rotationStep = 10.0f;
     public float rotationDegrees = 90;
     float currentAngle = 0;
@@ -95,7 +95,7 @@ public class enemyPathfinding : MonoBehaviour
     public int playerOutOfSight;
 	int targetIndex;
 	int targetCounter = 0;
-    int areaCounter = 0;
+    public int areaCounter = 0;
 
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -103,8 +103,8 @@ public class enemyPathfinding : MonoBehaviour
     //values if enemy doesn't receive a new waypoint to prevent them from being stuck
     Vector3 worldPositionNow;
     Vector3 worldPositionPast;
-    int checkIfStuck = 100;
-    bool isStuck = false;
+    //int checkIfStuck = 100;
+    //bool isStuck = false;
 
 	void Start()
 	{        
@@ -197,9 +197,7 @@ public class enemyPathfinding : MonoBehaviour
                         //----------------------------------------------------------------------------//
                         // chase the Player constantly searching for a waypoint at the Player position//
                         //----------------------------------------------------------------------------//
-                        
                         currentTarget = player.transform;
-
                         //------------------//
                         //Bark While chasing//
                         //------------------//
@@ -224,7 +222,6 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             RaycastHit hit; 
                             Physics.Linecast(transform.position, player.transform.position, out hit);
-                            print(hit);
                             if (hit.collider == player.GetComponent<Collider>())
                             {
 
@@ -239,9 +236,15 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             if (playerOutOfSight <= 0)
                             {
-                                playerOutOfSight = 5;
+                                print("ImOuttaHere");
+                                escapeTimer = defaultEscapeTimer;
+                                playerOutOfSight = 2;
                                 currentTarget = alertArea[areaCounter];
                                 areaCounter++;
+                                if(areaCounter > 2)
+                                {
+                                    areaCounter = 0;
+                                }
                                 stateManager(3);
                             }
                         }
@@ -505,7 +508,6 @@ public class enemyPathfinding : MonoBehaviour
     public void stateManager(int value)
     {
         States = (enumStates)value;
-
     }
 
 	public void onPathFound(Vector3[] newPath, bool _pathSuccessful)

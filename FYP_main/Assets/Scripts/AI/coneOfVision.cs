@@ -22,17 +22,6 @@ public class coneOfVision : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "player")
-        {
-            if (script.States != enumStates.chase || script.States != enumStates.alert)
-            {
-               // transform.parent.LookAt(other.transform);
-            }
-        }
-    }
-
     void OnTriggerStay(Collider other)
     {
 		//-----------------------------------------------------------------------//
@@ -41,25 +30,17 @@ public class coneOfVision : MonoBehaviour
 		if (other.gameObject.tag == "player") {
 
 			RaycastHit hit;
-			if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
-			if (hit.collider == other) {
-				script = this.transform.parent.GetComponent<enemyPathfinding> ();
-				script.escapeTimer = 0;
-				script.stateManager (2);
-				Debug.Log (hit);
-               
-            
-    
-
-				script.escapeTimer = 0;
-				if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
-				if (hit.collider == other) {
-					if (detectionTimer <= 0) {
-						script.stateManager (2);
-					}
-					detectionTimer--;
-
+            Physics.Linecast(transform.parent.position, other.transform.position, out hit);
+			if (hit.collider == other.GetComponent<Collider>()) 
+            {
+				if (detectionTimer <= 0) 
+                {
+                    detectionTimer = 60;
+				    script.stateManager (2);
 				}
+				detectionTimer--;
+
+				
 			}     
 		}
 	}
@@ -71,10 +52,14 @@ public class coneOfVision : MonoBehaviour
             if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
             {
                 if (hit.collider == other)
-                    if (script.States != enumStates.chase)
+                    if (script.States != enumStates.chase && script.States != enumStates.alert)
                     {
                         script.alertTimer = 500;
-                        script.currentTarget = script.alertArea[1];
+                        script.currentTarget = script.alertArea[script.areaCounter];
+                        if (script.areaCounter > 2)
+                        {
+                            script.areaCounter = 0;
+                        }
                         script.stateManager(3);
                     }
             }

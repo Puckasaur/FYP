@@ -5,11 +5,11 @@ public class destructible : MonoBehaviour {
 	
 	public GameObject debrisPrefab;
 	
-	floorHazards haz;
+	//floorHazards haz;
 	
 	void Start()
 	{
-		haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
+		//haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
 	}
 	void Update()
 	{

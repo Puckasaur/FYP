@@ -22,7 +22,7 @@ public class playerMovement : MonoBehaviour
     public float timeNotJumping = 0;
     float pushForce = 0.0f;
     float throwForce = 00.00010f;
-    int bones = 2;
+    public int bones = 2;
 	// Use this for initialization
 	void Start () 
     {

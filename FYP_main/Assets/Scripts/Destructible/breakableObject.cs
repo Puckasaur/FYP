@@ -6,7 +6,7 @@ using System.Collections;
 public class breakableObject: MonoBehaviour 
 {
     GameObject newSphere;
-    GameObject brokenObject;
+    //GameObject brokenObject;
     float maxScale = 0.0f;
     public GameObject Sphere;
     public GameObject brokenSphere;
@@ -76,13 +76,13 @@ public class breakableObject: MonoBehaviour
                     sphereScript.setMaxDiameter(maxScale);
                     if (this.gameObject.tag == "ball")
                     {
-                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
+                        //brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
                         Destroy(this.gameObject);
                     }
 
                     if (this.gameObject.tag == "cube")
                     {
-                        brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
+                        //brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
                         Destroy(this.gameObject);
                     }
                 }
