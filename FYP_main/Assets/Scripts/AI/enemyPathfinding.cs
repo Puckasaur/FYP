@@ -27,7 +27,7 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
-    public Vector3 lasSeenPosition;
+    public Vector3 lastSeenPosition;
 
     
     public enumStates States;
@@ -98,6 +98,7 @@ public class enemyPathfinding : MonoBehaviour
 	int targetIndex;
 	int targetCounter = 0;
     public int areaCounter = 0;
+    public int turnCounter = 0;
 
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -148,17 +149,7 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
-                        //if (timer <= 0 && (!distracted))
-                        //{
-                        //    lastTarget = currentTarget;
-                        //    currentTarget = targets[targetCounter];
 
-                        //    targetCounter++;
-                        //    if (targetCounter > 2)
-                        //    {
-                        //        targetCounter = 0;
-                        //    }
-                        //}
                         stateManager(1);
 
                     }
@@ -180,9 +171,6 @@ public class enemyPathfinding : MonoBehaviour
                                 currentTarget = targets[targetCounter];
 
                                 Fortyseven.SetDestination(currentTarget.position);
-
-                                //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-
                                 idleTimer = defaultIdleTimer;
                                 targetCounter++;
                                 if (targetCounter > 2)
@@ -199,7 +187,7 @@ public class enemyPathfinding : MonoBehaviour
                         //----------------------------------------------------------------------------//
                         // chase the Player constantly searching for a waypoint at the Player position//
                         //----------------------------------------------------------------------------//
-                        //currentTarget = player.transform;
+
                         //------------------//
                         //Bark While chasing//
                         //------------------//
@@ -220,27 +208,19 @@ public class enemyPathfinding : MonoBehaviour
                         //Escape from chase//
                         //-----------------//
 
-                        //if (escapeTimer <= 0)
-                        //{
                             Physics.Linecast(transform.position, player.transform.position, out hit);
                             if (hit.collider == player.GetComponent<Collider>())
                             {
-                                lasSeenPosition = player.transform.position;
-                                currentTarget.position=lasSeenPosition;
-                                //playerOutOfSight =3;
-                                //escapeTimer = defaultEscapeTimer;
+                                lastSeenPosition = player.transform.position;
+                                currentTarget.position=lastSeenPosition;
+
                             }
                             else{
-                                //timer = defaultTimer;
+
                                 if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                            
-                           // }
-                               //  else
-                            //{
-                              //  playerOutOfSight--;
-                                //escapeTimer = defaultEscapeTimer;
-                            //}
-                            //if (playerOutOfSight <= 0)
+                                //-----------------//
+                                //Go to alert-state//
+                                //-----------------//
                             {
                                 print("ImOuttaHere");
                                 escapeTimer = defaultEscapeTimer;
@@ -254,23 +234,6 @@ public class enemyPathfinding : MonoBehaviour
                                 stateManager(3);
                             }
                         }
-                        escapeTimer-= Time.deltaTime;
-
-                        //Vector3 playerDirection = (player.transform.localPosition) - (this.transform.localPosition);
-                        //if (((playerDirection.x >= 10) || playerDirection.x <= -10 || playerDirection.z >= 10 || playerDirection.z <= -10))
-                        //{
-
-                        //    escapeTimer += Time.deltaTime;
-                        //    if (escapeTimer >= 5)
-                        //    {
-                        //        escapeTimer = 0;
-                        //            currentTarget = alertArea[areaCounter];
-                        //            areaCounter++;
-                        //            stateManager(3);
-
-
-                        //    }
-                        //}
 
                     }
                     break;
@@ -281,8 +244,8 @@ public class enemyPathfinding : MonoBehaviour
                 Physics.Linecast(transform.position, player.transform.position, out hit);
                 if (hit.collider == player.GetComponent<Collider>())
                 {
-                    lasSeenPosition = player.transform.position;
-                    currentTarget.position = lasSeenPosition;
+                    lastSeenPosition = player.transform.position;
+                    currentTarget.position = lastSeenPosition;
                     stateManager(2);
                 }
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
@@ -300,20 +263,41 @@ public class enemyPathfinding : MonoBehaviour
 
                         
                     }
-                if(alertTimer <= 0)
-                {
-                    alertTimer += defaultAlertTimer;
-                    currentTarget = targets[0];
-                    lastTarget = currentTarget;
-                    targetCounter++;
-                    if(targetCounter > 2)
-                    {
-                        targetCounter = 0;
-                    }
-                    stateManager(0);
-                }
-                    alertTimer--;
 
+                //if(alertTimer <= 0)
+                //{
+                //    alertTimer += defaultAlertTimer;
+                //    currentTarget = targets[0];
+                //    lastTarget = currentTarget;
+                //    targetCounter++;
+                //    if(targetCounter > 2)
+                //    {
+                //        targetCounter = 0;
+                //    }
+                //    stateManager(0);
+                //}
+                //    alertTimer--;
+
+                if(alertTimer <= 0)
+				{                  
+					
+					if(turnCounter != 0)
+					{
+						turnCounter = 0;
+					}
+					if(idleTimer != 50)
+					{
+						idleTimer = 50;
+					}
+					currentTarget = lastTarget;
+					stateManager(4);
+				}
+				
+				alertTimer--;
+				if(alertTimer <= 0)
+				{
+					alertTimer = 0;
+				}
                     break;
             case enumStates.idleSuspicious:
                     {
@@ -321,27 +305,65 @@ public class enemyPathfinding : MonoBehaviour
                         //Stand on the spot and look at preset directions//
                         //-----------------------------------------------//
 
-                        StopCoroutine("followPath");
-
-                        //print ("turnTimer   " + turnTimer);
-
-                        //print(directionDegrees[0] + "    <<directionDegrees[0]");
-                        //
-                        //		if (rotationInProgress == false) 
-                        //		{ 
+                        //StopCoroutine("followPath");
 
 
-                        rotateEnemy(currentTargetDirection, rotationStep);
-                        //		} 
-                        if (rotationCompleted)
+                        //rotateEnemy(currentTargetDirection, rotationStep);
+                        ////		} 
+                        //if (rotationCompleted)
+                        //{
+                        //    print("rotation completed");
+                        //    directionDegrees.Add(directionDegrees[0]);
+                        //    directionDegrees.Remove(directionDegrees[0]);
+                        //    currentTargetDirection = directionDegrees[0];
+                        //    rotationCompleted = false;
+
+                        //} 
+                        //break;
+                        if (turnCounter < 3)
                         {
-                            print("rotation completed");
-                            directionDegrees.Add(directionDegrees[0]);
-                            directionDegrees.Remove(directionDegrees[0]);
-                            currentTargetDirection = directionDegrees[0];
-                            rotationCompleted = false;
 
-                        } 
+                            currentTargetDirection = directionDegrees[0];
+                            print(currentTargetDirection + " << currentTargetDirection");
+                            rotateEnemy(currentTargetDirection, rotationStep);
+
+
+
+                            if (rotationCompleted)
+                            {
+
+                                directionDegrees.Add(directionDegrees[0]);
+                                directionDegrees.Remove(directionDegrees[0]);
+                                rotationCompleted = false;
+                                print("turnTimer  " + turnTimer);
+
+                                turnCounter++;
+                                turnTimer += 100;
+                                print("currentTargetDirection >> " + currentTargetDirection);
+
+                            }
+
+                        }
+
+
+                        else if (turnCounter > 2)
+                        {
+
+                            if (idleTimer <= 0)
+                            {
+
+
+                                if (currentTarget != null)
+                                {
+                                    Fortyseven.SetDestination(currentTarget.position);
+                                }
+                                stateManager(0);
+                                print("state manager: patrol!");
+                            }
+                            idleTimer--;
+                        }
+
+
                         break;
                     }
             case enumStates.distracted:
@@ -506,7 +528,6 @@ public class enemyPathfinding : MonoBehaviour
             timer+=defaultTimer;
             Fortyseven.SetDestination(currentTarget.position);
 
-            //pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
         }
         timer--;
         //-------------//
@@ -830,187 +851,3 @@ public class enemyPathfinding : MonoBehaviour
     }
 }
 
-//if (eatBone)
-//{
-//    currentTarget = lastTarget;
-//    if (Timer <= 0)
-//    {
-
-//        distracted = false;
-//        vision.SetActive(true);
-//        smell.SetActive(true);
-//        eatBone = false;
-
-//        stateManager(lastState);
-//        currentTarget = lastTarget;
-//        PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-//        Destroy(Bone);
-//    }
-//    Timer--;
-//}
-//if (!eatBone)
-//{
-
-
-
-
-
-//    if (States == enumStates.patrol)
-//    {
-//        Debug.Log("X: " + vectorx + " Z: " + vectorz);
-//        if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-//        {
-//            Debug.Log("Yohoo");
-
-//            if (Timer <= 0 && (!distracted))
-//            {
-//                lastTarget = currentTarget;
-//                currentTarget = Targets[targetCounter];
-
-//                PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-
-//                Timer += 60;
-//                targetCounter++;
-//                if (targetCounter > 2)
-//                {
-//                    targetCounter = 0;
-//                }
-//            }
-//            Timer--;
-//        }
-//    }
-
-
-
-//    if(States == enumStates.detectSound)
-//    {
-//        // Move to the broken object
-//        GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
-//        currentTarget = brokenObject.transform;
-//        PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-//        Vector3 dir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
-//        if (dir.x <= 2 && dir.x >= -2 && dir.z <= 2 && dir.z >= -2) 
-//        {
-//            stateManager(0);
-//            currentTarget = lastTarget;
-//            PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-
-//        }
-
-//    }
-
-//    if (States == enumStates.distracted)
-//    {
-//        {
-//            PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-//            Vector3 dir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
-//            if (dir.x <= 4 && dir.x >= -4 && dir.z <= 4 && dir.z >= -4)
-//            {
-//                Debug.Log("It's a Bone!");
-//                Timer = 400;
-
-//                distracted = false;
-
-//                eatBone = true;
-
-
-//            }
-//        }
-
-//    }
-
-//    if (States == enumStates.chase)
-
-//    {
-//        // Move Enemy
-//        Debug.Log(Player.transform.localPosition);
-//        currentTarget = Player.transform;
-//        PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-
-
-//        // Escape from chase
-
-
-//        Vector3 playerDirection = (Player.transform.localPosition) - (this.transform.localPosition);
-//        if (((playerDirection.x >= 10) || playerDirection.x <= -10 || playerDirection.z >= 10 || playerDirection.z <= -10))
-//        {
-//            escapeTimer += Time.deltaTime;
-//            if (escapeTimer > 5)
-//            {
-//                currentTarget = lastTarget;
-//                PathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-//                stateManager(0);
-
-//                //statepatrol();
-
-//            }
-
-//        }
-
-//    }
-
-//    if(States == enumStates.alert)
-
-//    {
-
-//  }
-//}
-//if (Input.GetKeyDown(KeyCode.T))
-//{
-//    lastState = (int)States;
-//    stateManager(5);
-//    Bone = GameObject.FindGameObjectWithTag("Bone");
-//    currentTarget = Bone.transform;
-//    GameObject temp = GameObject.FindGameObjectWithTag("Vision");
-//    vision = temp.gameObject;
-//    vision.SetActive(false);
-
-//    temp = GameObject.FindGameObjectWithTag("Smell");
-//    smell = temp.gameObject;
-//    smell.SetActive(false);
-//}
-
-//void statepatrol()
-//{
-//    patrol = true;
-
-//    lookForSound = false;
-//    chasePlayer = false;
-//}
-//void stateLookForSound()
-//{
-
-//    patrol = false;
-
-//    lookForSound = true;
-//    chasePlayer = false;
-
-//}
-
-//void statechasePlayer()
-//{
-//    escapeTimer = 0;
-//    patrol = false;
-
-//    lookForSound = false;
-//    chasePlayer = true;
-
-//}
-
-//void statedistracted()
-
-//{
-//    Bone = GameObject.FindGameObjectWithTag("Bone");
-//    currentTarget = Bone.transform;
-//    GameObject temp = GameObject.FindGameObjectWithTag("Vision");
-//    vision = temp.gameObject;
-//    vision.SetActive(false);
-
-//    temp = GameObject.FindGameObjectWithTag("Smell");
-//    smell = temp.gameObject;
-//    smell.SetActive(false);
-
-//    distracted = true;
-
-
-//}
