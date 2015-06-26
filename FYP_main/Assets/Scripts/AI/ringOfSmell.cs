@@ -10,10 +10,12 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionTimer = 60.0f;
     GameObject player;
     RaycastHit hit;
+
     
     
     void Start()
     {
+
         script = this.transform.parent.GetComponent<enemyPathfinding>();
     }
     void Update()
@@ -24,19 +26,29 @@ public class ringOfSmell : MonoBehaviour {
         }
         if (playerSeen)
         {
-
-            Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-            print(hit.collider);
-            if (hit.collider == player.GetComponent<Collider>())
-            {
-                if (script.States != enumStates.alert)
-                { transform.parent.LookAt(player.transform); }
-                detectionTimer--;
-				if(script.States == enumStates.alert)
+			Physics.Raycast(transform.parent.position, player.transform.position, out hit, 0.1f);
+			//Debug.DrawRay(transform.parent.position, player.transform.position*0.1f,Color.white , 1);
+			if(hit.collider == player.GetComponent<Collider>())
+			{
+				if (script.States != enumStates.alert)
+				{ transform.parent.LookAt(player.transform); }
+				else if(script.States == enumStates.alert)
 				{
 					playerSeen = false;
 				}
-            }
+			}
+
+//            Physics.Linecast(transform.parent.position, player.transform.position, out hit);
+//            print(hit.collider);
+//            if (hit.collider == player.GetComponent<Collider>())
+//            {
+//                if (script.States != enumStates.alert)
+//                { transform.parent.LookAt(player.transform); }
+//               if(script.States == enumStates.alert)
+//				{
+//					playerSeen = false;
+//				}
+//            }
         }
     }
     void OnTriggerEnter(Collider other)

@@ -70,9 +70,9 @@ public class enemyPathfinding : MonoBehaviour
 	GameObject enemyObject;
 	
 	bool rotating = false;
-	float rotationStep = 30.0f;
+	float rotationStep = 45.0f;
 	public float rotationDegrees = 90;
-	float currentAngle = 0;
+	public float currentAngle = 0;
 	float targetAngle = 0;
 	float angleOffsetMax = 1.0f;
 	float angleOffsetMin = -1.0f;
@@ -83,11 +83,11 @@ public class enemyPathfinding : MonoBehaviour
 	int turnCounter = 0;
 	//
 	public int timer = 60;
-	public int idleTimer = 100;    
+	public int idleTimer = 50;    
 	public int barkTimer = 120;
 	public int lastState;
 	public int defaultEatTimer = 120;
-	public int defaultIdleTimer = 100;
+	public int defaultIdleTimer = 50;
 	public int defaultBarkTimer = 120;
 	public int defaultTimer = 60;
 	public int defaultAlertTimer = 50;//400;
@@ -95,7 +95,7 @@ public class enemyPathfinding : MonoBehaviour
 	int targetIndex;
 	int targetCounter = 0;
 	int areaCounter = 0;
-	int playerOutOfSight;
+	public int playerOutOfSight;
 	
 	
 	Vector3[] path = new Vector3[0];
@@ -108,7 +108,8 @@ public class enemyPathfinding : MonoBehaviour
 	bool isStuck = false;
 	
 	void Start()
-	{        
+	{    
+		alertTimer = defaultAlertTimer;
 		escapeTimer = defaultEscapeTimer;
 		agent = GetComponent<NavMeshAgent> ();
 		player = GameObject.FindGameObjectWithTag("player");
@@ -134,24 +135,15 @@ public class enemyPathfinding : MonoBehaviour
 			
 		case enumStates.patrol:
 		{
+			alertTimer = defaultAlertTimer;
 			//-----------------------------------------------------------------------------------------//
 			//patrol, moves from one waypoint to the next waiting for a second before advancing forward//
 			//-----------------------------------------------------------------------------------------//
+
+			//if(currentTarget !=)
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
-				//if (timer <= 0 && (!distracted))
-				//{
-				//    lastTarget = currentTarget;
-				//    currentTarget = targets[targetCounter];
-				
-				//    targetCounter++;
-				//    if (targetCounter > 2)
-				//    {
-				//        targetCounter = 0;
-				//    }
-				//}
 				stateManager(1);
-				
 			}
 			
 		}
@@ -181,7 +173,11 @@ public class enemyPathfinding : MonoBehaviour
 				}
 				stateManager(0);
 			}
-			idleTimer--;
+			else
+			{
+				idleTimer--;
+			}
+
 			break;
 		}
 		case enumStates.chase:
@@ -230,11 +226,14 @@ public class enemyPathfinding : MonoBehaviour
 						escapeTimer = defaultEscapeTimer;
 					}
 					if(playerOutOfSight <= 0)
-					{
-						print("On maassa mahtavassa..");
+					{						
 						playerOutOfSight = 3;
 						currentTarget = alertArea[areaCounter];
 						areaCounter++;
+						if(areaCounter > 2)
+					{
+						areaCounter = 0;
+					}
 						stateManager(3);
 					}
 
@@ -250,8 +249,11 @@ public class enemyPathfinding : MonoBehaviour
 			
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
+				//stateManager(4);
+				agent.SetDestination (currentTarget.position);
 				if (timer <= 0 && (!distracted))
 				{
+
 					lastTarget = currentTarget;
 					currentTarget = alertArea[areaCounter];
 					areaCounter++;
@@ -270,10 +272,11 @@ public class enemyPathfinding : MonoBehaviour
 				{
 					turnCounter = 0;
 				}
-				if(idleTimer != 100)
+				if(idleTimer != 50)
 				{
-					idleTimer = 200;
+					idleTimer = 50;
 				}
+				currentTarget = lastTarget;
 				stateManager(4);
 			}
 			
@@ -282,32 +285,35 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				alertTimer = 0;
 			}
-			
+
+
 			break;
 		case enumStates.idleSuspicious:
 		{
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
-			
+
 			
 			if(turnCounter < 3)
 			{
 				
-				currentTargetDirection = directionDegrees[0];					
+				currentTargetDirection = directionDegrees[0];	
+				print (currentTargetDirection + " currentTargetDirection");
 				rotateEnemy(currentTargetDirection, rotationStep);
 				
 				
 				
 				if (rotationCompleted)
 				{							
-					print("rotation completed");
+
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
 					print ("turnTimer  " + turnTimer);
+
 					turnCounter++;
-					turnTimer += 200;
+					turnTimer += 100;
 					print("currentTargetDirection " + currentTargetDirection);
 					
 				} 
@@ -320,19 +326,14 @@ public class enemyPathfinding : MonoBehaviour
 				
 				if(idleTimer <= 0)
 				{
-					lastTarget = currentTarget;
-					currentTarget = alertArea[areaCounter];
 
-					agent.SetDestination (currentTarget.position);
 
-					//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-//					print("vectorx  >>" + vectorx + "  vectorz  >>" + vectorz + "  waypointOffsetMin  >>" + waypointOffsetMin + "  waypointOffsetMax  >>" + waypointOffsetMax);
-//					if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-//					{
-						
+					if(currentTarget != null)
+					{
+						agent.SetDestination (currentTarget.position);
+					}
 						stateManager(0);
 						print("state manager: patrol!");
-//					}
 				}	
 				idleTimer--;	
 			}
@@ -499,7 +500,7 @@ public class enemyPathfinding : MonoBehaviour
 		
 		if(timer <= 0)
 		{
-			timer+=60;
+			timer+=20;
 			agent.SetDestination (currentTarget.position);
 		//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 		}
@@ -611,7 +612,7 @@ public class enemyPathfinding : MonoBehaviour
 		//rotationInProgress = true;
 		//		while (rotationInProgress == true) 
 		float rotationDifference = 0;
-		
+		//print (currentAngle);
 		
 		if (turnTimer <= 0)
 		{
@@ -621,7 +622,7 @@ public class enemyPathfinding : MonoBehaviour
 				currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 				targetAngle = targetDegrees;//currentAngle + targetDegrees;
 				rotationInProgress = true;
-				print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
+				//print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
 			}
 			
 			else if (rotationInProgress)
@@ -629,74 +630,37 @@ public class enemyPathfinding : MonoBehaviour
 				if (turnTimer == 0 && rotationDifference >= 0)
 				{
 					if (targetAngle <= 180 && targetAngle >= 0) //decide which side the target is. 0-180 left, 0 - (-180)
-					{
+					{	
+						//=============//
+						// First Sector//
+						//=============//
 						if (targetAngle <= 90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
 						{
 							
-							if (currentAngle <= targetAngle && turnTimer == 0)
+							if (currentAngle <= targetAngle || currentAngle > targetAngle - 180)
 							{
 								print("entered the rotation loop");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
-								if (rotationDifference < 0)
-								{
-									rotationDifference = rotationDifference * -1;
-								}
-								
-								print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
-								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-								}
-							}
-							else if (currentAngle > targetAngle && turnTimer == 0)
-							{
-								
-								print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-								}
-								
-							}
-							
-						}
-						else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
-						{
-							if (currentAngle <= targetAngle)
-							{
-								print("entered the rotation loop");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								
+								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else if (currentAngle > targetAngle && turnTimer == 0)
+							else //if (currentAngle > targetAngle && turnTimer == 0)
 							{
+								
 								print("entered the rotation loop 2");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
@@ -705,41 +669,91 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+								}
+								
+							}
+							
+						}
+
+						//=============//
+						//Second Sector//
+						//=============//
+
+						else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
+						{
+							if ( currentAngle > targetAngle || currentAngle <= targetAngle - 180 )
+							{
+								print("entered the rotation loop 3");
+								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+								rotationDifference = targetAngle - currentAngle;
+								//print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+								if (rotationDifference < 0)
+								{
+									rotationDifference = rotationDifference * -1;
+								}
+								
+								
+								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+								{
+									rotationCompleted = true;
+									rotationInProgress = false;
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+								}
+							}
+							else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
+							{
+								print("entered the rotation loop 4");
+								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+								rotationDifference = targetAngle - currentAngle;
+								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+								{
+									rotationCompleted = true;
+									rotationInProgress = false;
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
 						}
 					}
+
 					else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
 					{
+
+						//=============//
+						//Third Sector //
+						//=============//
 						if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
 						{
-							if (currentAngle >= targetAngle && turnTimer == 0)
+							if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
 							{
-								print("entered the rotation loop -90 - 0");
+								print("entered the rotation loop 5");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else if (currentAngle < targetAngle && turnTimer == 0)
+							else //if (currentAngle < targetAngle && turnTimer == 0)
 							{
 								
-								print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
+								print("entered the rotation loop 6");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
@@ -747,39 +761,42 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
 							}
 						}
-						if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+						//=============//
+						//Fourth Sector//
+						//=============//
+						else if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
 						{
-							if (currentAngle >= targetAngle && turnTimer == 0)
+							if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
 							{
-								print("entered the rotation loop -90 - 0");
+								print("entered the rotation loop 7");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else if (currentAngle < targetAngle && turnTimer == 0)
+							else //if (currentAngle < targetAngle && turnTimer == 0)
 							{
-								
-								print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
+								 
+								print("entered the rotation loop 8");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
@@ -787,13 +804,14 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 200f * Time.deltaTime;
-									print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+									turnTimer += 100f * Time.deltaTime;
+									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
 							}
 						}
 					}
+
 				}
 				
 			}
