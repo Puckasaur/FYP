@@ -21,7 +21,7 @@ public class playerMovement : MonoBehaviour
     public float jumpCooldown = 1;
     public float timeNotJumping = 0;
     float pushForce = 0.0f;
-    float throwForce = 00.00010f;
+    public float throwForce = 00.00010f;
     public int bones = 2;
 	// Use this for initialization
 	void Start () 
@@ -37,7 +37,7 @@ public class playerMovement : MonoBehaviour
         CharacterController controller = GetComponent<CharacterController>();
         if (Input.GetKey(KeyCode.W) && zVelocity < 1.0f)
         {
-            transform.eulerAngles = new Vector3(0,-90,0);
+            transform.eulerAngles = new Vector3(0, -90, 0);
             zVelocity += playerAcceleration * Time.deltaTime;
         }
             
@@ -45,21 +45,21 @@ public class playerMovement : MonoBehaviour
             zVelocity -= playerDecceleration * Time.deltaTime;
         if (Input.GetKey(KeyCode.S) && zVelocity > -1.0f)
         {
-            transform.eulerAngles = new Vector3(0, 90, 0);
+            transform.eulerAngles = new Vector3(0,90,0);
             zVelocity -= playerAcceleration * Time.deltaTime;
         }
         else if (zVelocity < -0.0f)
             zVelocity += playerDecceleration * Time.deltaTime;
         if (Input.GetKey(KeyCode.A) && xVelocity > -1.0f)
         {
-            transform.eulerAngles = new Vector3(0, 180, 0);
+            transform.eulerAngles = new Vector3(0,180,0);
             xVelocity -= playerAcceleration * Time.deltaTime;
         }
         else if (xVelocity < -0.0f)
             xVelocity += playerDecceleration * Time.deltaTime;
         if (Input.GetKey(KeyCode.D) && xVelocity < 1.0f)
         {
-            transform.eulerAngles = new Vector3(0, 0, 0);
+            transform.eulerAngles = Vector3.forward;
             xVelocity += playerAcceleration * Time.deltaTime;
         }
         else if (xVelocity > 0.0f)
@@ -89,9 +89,9 @@ public class playerMovement : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.T)&& bones > 0)
         {
-
+            bones--;
             newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
-            newBone.GetComponent<Rigidbody>().AddForce(this.transform.forward * throwForce + this.transform.up * (throwForce / 2));
+            newBone.GetComponent<Rigidbody>().AddForce(this.transform.right * throwForce + this.transform.up * (throwForce / 2));
         }
         //------------------------------------------------------------//
         // cuts the small details of Movement to exclude idle Movement//
