@@ -12,6 +12,7 @@ GameObject:
   - 136: {fileID: 13652580}
   - 23: {fileID: 2302106}
   - 114: {fileID: 11434108}
+  - 54: {fileID: 5443230}
   m_Layer: 0
   m_Name: Bone
   m_TagString: bone
@@ -62,6 +63,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118874}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &5443230
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118874}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!114 &11434108
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,6 +24,7 @@ public class coneOfVision : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        print(other);
         if (other.gameObject.tag == "player")
         {
             if (script.States != enumStates.chase || script.States != enumStates.alert)

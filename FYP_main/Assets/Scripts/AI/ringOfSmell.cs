@@ -29,12 +29,10 @@ public class ringOfSmell : MonoBehaviour {
             print(hit.collider);
             if (hit.collider == player.GetComponent<Collider>())
             {
-                
-                
-				transform.parent.LookAt(player.transform);
-				
+                if (script.States != enumStates.alert)
+                { transform.parent.LookAt(player.transform); }
                 detectionTimer--;
-				if (script.States == enumStates.alert )
+				if(script.States == enumStates.alert)
 				{
 					playerSeen = false;
 				}

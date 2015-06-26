@@ -21,13 +21,21 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool speedHatOn = false;
 		private bool jumpHatOn = false;
 
+		public GameObject bone;
+
+		GameObject boneSpawner;
+		GameObject newBone;
+
 		bool crouch = false;
 
         float pushForce = 0.0f;
+		float throwForce = 00.00010f;
+		int bones = 2;
         
         private void Start()
         {
             m_Character = GetComponent<ThirdPersonCharacter>();
+			boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
         }
 
 
@@ -36,6 +44,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
 
             }
 
@@ -49,6 +58,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			{
 				jumpHatOn = true;
 				speedHatOn = false;
+			}
+
+			if(Input.GetKeyDown(KeyCode.T)&& bones > 0)
+			{				
+				newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+				newBone.GetComponent<Rigidbody>().AddForce(this.transform.forward * throwForce + this.transform.up * (throwForce / 2));
 			}
 
 			speedHatMod ();
