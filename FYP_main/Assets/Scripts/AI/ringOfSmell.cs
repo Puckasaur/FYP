@@ -10,45 +10,34 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionTimer = 60.0f;
     GameObject player;
     RaycastHit hit;
-
     
     
     void Start()
     {
-
         script = this.transform.parent.GetComponent<enemyPathfinding>();
     }
     void Update()
     {
+        GetComponent<Rigidbody>().WakeUp();
         if (this.transform.localScale.x < radius)
         {
             this.transform.localScale += scalingRate;
         }
         if (playerSeen)
         {
-			Physics.Raycast(transform.parent.position, player.transform.position, out hit, 0.1f);
-			//Debug.DrawRay(transform.parent.position, player.transform.position*0.1f,Color.white , 1);
-			if(hit.collider == player.GetComponent<Collider>())
-			{
-				if (script.States != enumStates.alert)
-				{ transform.parent.LookAt(player.transform); }
-				else if(script.States == enumStates.alert)
-				{
-					playerSeen = false;
-				}
-			}
 
-//            Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-//            print(hit.collider);
-//            if (hit.collider == player.GetComponent<Collider>())
-//            {
-//                if (script.States != enumStates.alert)
-//                { transform.parent.LookAt(player.transform); }
-//               if(script.States == enumStates.alert)
-//				{
-//					playerSeen = false;
-//				}
-//            }
+            Physics.Linecast(transform.parent.position, player.transform.position, out hit);
+            print(hit.collider);
+            if (hit.collider == player.GetComponent<Collider>())
+            {
+                if (script.States != enumStates.alert)
+                { transform.parent.LookAt(player.transform); }
+                if(script.States == enumStates.alert)
+                {
+                    playerSeen = false;
+                }
+
+            }
         }
     }
     void OnTriggerEnter(Collider other)
@@ -56,25 +45,23 @@ public class ringOfSmell : MonoBehaviour {
         if (other.gameObject.tag == "player")
         {
             player = other.gameObject;
-            script.escapeTimer = 0;
-            if (script.States != enumStates.chase || script.States != enumStates.alert)
-            {
+
                 playerSeen = true;
-                //transform.parent.LookAt(other.transform);
-            }
+
         }
     }
 
     void OnTriggerStay(Collider other)
     {
+        
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-
-            script = this.transform.parent.GetComponent<enemyPathfinding>();
-            script.stateManager(2);
+			print("hello");
+            //print("hello");
+            //script.stateManager(2);
 
             detectionTimer--;
 
@@ -91,11 +78,21 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "player")
         {
-            detectionTimer = 60.0f;
-            if (script.States != enumStates.chase)
+            
+            if (script.States != enumStates.chase && script.States != enumStates.alert)
             {
+				detectionTimer = 60.0f;
                 script.alertTimer = 500;
-                script.currentTarget = script.alertArea[1];
+				if(script.alertArea[script.areaCounter] != null)
+				{
+				script.currentTarget = script.alertArea[script.areaCounter];
+				}
+               
+				print( script.currentTarget + " << ringOfSmell Target");
+                if(script.areaCounter >2)
+                {
+                    script.areaCounter = 0;
+                }
                 script.stateManager(3);
             }
 

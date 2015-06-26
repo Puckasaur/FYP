@@ -17,8 +17,9 @@ public enum enumStates
 
 public class enemyPathfinding : MonoBehaviour 
 {
-	NavMeshAgent agent;
+	
 	soundSphere sphereScript;
+	RaycastHit hit; 
 	
 	
 	public Transform target1;
@@ -26,6 +27,7 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target3;
 	public Transform currentTarget;
 	public Transform lastTarget;
+	public Vector3 lastSeenPosition;
 	
 	
 	public enumStates States;
@@ -36,6 +38,7 @@ public class enemyPathfinding : MonoBehaviour
 	GameObject newSphere;
 	public GameObject sphere;
 	
+	NavMeshAgent agent;
 	List<Transform> targets = new List<Transform>();
 	public List<Transform> alertArea = new List<Transform>();
 	
@@ -44,9 +47,7 @@ public class enemyPathfinding : MonoBehaviour
 	public bool distracted = false;
 	
 	public float turnSpeed = 2.0f;
-	public float escapeTimer = 0;
-	public float alertTimer = 0;
-	public float eatTimer = 0;
+	
 	public float speed = 10;
 	
 	float maxSpeed = 20;
@@ -81,22 +82,24 @@ public class enemyPathfinding : MonoBehaviour
 	float turnTimer = 200.0f;
 	float currentTargetDirection;
 	int turnCounter = 0;
-	//
-	public int timer = 60;
-	public int idleTimer = 50;    
-	public int barkTimer = 120;
-	public int lastState;
-	public int defaultEatTimer = 120;
-	public int defaultIdleTimer = 50;
-	public int defaultBarkTimer = 120;
-	public int defaultTimer = 60;
-	public int defaultAlertTimer = 50;//400;
+
+	//So many timers
+	public int timer;
+	public int idleTimer;    
+	public int barkTimer;
+	public float escapeTimer;
+	public float alertTimer;
+	public float eatTimer;
+	public int defaultEatTimer;
+	public int defaultIdleTimer;
+	public int defaultBarkTimer;
+	public int defaultTimer;
+	public int defaultAlertTimer;
 	public int defaultEscapeTimer;
+	public int playerOutOfSight;
 	int targetIndex;
 	int targetCounter = 0;
-	int areaCounter = 0;
-	public int playerOutOfSight;
-	
+	public int areaCounter = 0;
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -104,23 +107,31 @@ public class enemyPathfinding : MonoBehaviour
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck
 	Vector3 worldPositionNow;
 	Vector3 worldPositionPast;
-	int checkIfStuck = 100;
-	bool isStuck = false;
+	//int checkIfStuck = 100;
+	//bool isStuck = false;
 	
 	void Start()
-	{    
-		alertTimer = defaultAlertTimer;
-		escapeTimer = defaultEscapeTimer;
-		agent = GetComponent<NavMeshAgent> ();
+	{        
+		
+		
 		player = GameObject.FindGameObjectWithTag("player");
 		setDirectionsForIdle();
 		setTargetWaypoints();
 		currentTarget = targets[0];
+		print (targets [0] + "targets[0]");
 		lastTarget = currentTarget;
+		agent = GetComponent<NavMeshAgent>();
 		
-		
-		agent.SetDestination (currentTarget.position);
+		agent.SetDestination(currentTarget.position);
 		//pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
+		
+		//Setting Timers
+		timer = defaultTimer;
+		eatTimer = defaultEatTimer;
+		idleTimer = defaultIdleTimer;
+		barkTimer = defaultBarkTimer;
+		alertTimer = defaultAlertTimer;
+		escapeTimer = defaultEscapeTimer;
 	}
 	
 	void Update()
@@ -135,15 +146,13 @@ public class enemyPathfinding : MonoBehaviour
 			
 		case enumStates.patrol:
 		{
-			alertTimer = defaultAlertTimer;
 			//-----------------------------------------------------------------------------------------//
 			//patrol, moves from one waypoint to the next waiting for a second before advancing forward//
 			//-----------------------------------------------------------------------------------------//
-
-			//if(currentTarget !=)
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
+				
 			}
 			
 		}
@@ -154,7 +163,7 @@ public class enemyPathfinding : MonoBehaviour
 		case enumStates.idle:
 		{
 			//--------------------------------------------------------//
-			// idle, without moving towards any waypoints//
+			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
 			
 			if (idleTimer <= 0)
@@ -162,10 +171,13 @@ public class enemyPathfinding : MonoBehaviour
 				lastTarget = currentTarget;
 				currentTarget = targets[targetCounter];
 
-				agent.SetDestination (currentTarget.position);
-				//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-				
-				idleTimer += 100;
+				if(agent.SetDestination(currentTarget.position) != null)
+				{
+					agent.SetDestination(currentTarget.position);
+				}
+						
+
+				idleTimer = defaultIdleTimer;
 				targetCounter++;
 				if (targetCounter > 2)
 				{
@@ -173,27 +185,25 @@ public class enemyPathfinding : MonoBehaviour
 				}
 				stateManager(0);
 			}
-			else
-			{
-				idleTimer--;
-			}
-
+			idleTimer--;
 			break;
 		}
+
 		case enumStates.chase:
 		{
+			print (currentTarget + " << currentTarget chase 1");
+
+			//currentTarget = lastTarget;
 			//----------------------------------------------------------------------------//
 			// chase the Player constantly searching for a waypoint at the Player position//
 			//----------------------------------------------------------------------------//
-			
-			currentTarget = player.transform;
-			//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
-			
+			//currentTarget = player.transform;
 			//------------------//
 			//Bark While chasing//
 			//------------------//
 			if (barkTimer < 0)
 			{
+				print (currentTarget + " << currentTarget chase 2");
 				newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
 				newSphere.transform.parent = transform;
 				barkTimer = defaultBarkTimer;
@@ -208,84 +218,89 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------//
 			//Escape from chase//
 			//-----------------//
+			
 
-				if (escapeTimer <= 0)
+			Physics.Linecast(transform.position, player.transform.position, out hit);
+			print (hit);
+			if (hit.collider == player.GetComponent<Collider>())
+			{
+				lastSeenPosition = player.transform.position;
+				currentTarget.position = lastSeenPosition;
+				print (currentTarget + " << currentTarget chase 3");
+			}
+			else{
+				//timer = defaultTimer;
+				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
-					RaycastHit hit;
-					Physics.Linecast(transform.position, player.transform.position, out hit);
-					print(hit);
-					if(hit.collider == player.GetComponent<Collider>())
-					{
-						playerOutOfSight = 3;
-						escapeTimer = defaultEscapeTimer;
-					}
-					else
-					{
-						playerOutOfSight--;
-						print(playerOutOfSight);
-						escapeTimer = defaultEscapeTimer;
-					}
-					if(playerOutOfSight <= 0)
-					{						
-						playerOutOfSight = 3;
-						currentTarget = alertArea[areaCounter];
-						areaCounter++;
-						if(areaCounter > 2)
+					print("ImOuttaHere");
+					escapeTimer = defaultEscapeTimer;
+					playerOutOfSight = 2;
+					currentTarget = alertArea[areaCounter];
+					areaCounter++;
+					if(areaCounter > 2)
 					{
 						areaCounter = 0;
+						print (currentTarget + " << currentTarget chase 4");
 					}
-						stateManager(3);
-					}
-
+					stateManager(3);
 				}
-			escapeTimer -= Time.deltaTime;
-			
 			}
+			escapeTimer-= Time.deltaTime;
+		}
 			break;
 		case enumStates.alert:
 			//------------------------------------------------------//
 			//Look around a room by moving from waypoint to waypoint//
 			//------------------------------------------------------//
-			
-			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+			print (currentTarget + " <<  currentTarget Alert 1");
+			Physics.Linecast(transform.position, player.transform.position, out hit);
+			if (hit.collider == player.GetComponent<Collider>())
 			{
-				//stateManager(4);
-				agent.SetDestination (currentTarget.position);
-				if (timer <= 0 && (!distracted))
+				lastSeenPosition = player.transform.position;
+				currentTarget.position = lastSeenPosition;
+				stateManager(2);
+			}
+			else
+			{
+				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
-
-					lastTarget = currentTarget;
-					currentTarget = alertArea[areaCounter];
-					areaCounter++;
-					if (areaCounter > 2)
+					if (timer <= 0 && (!distracted))
 					{
-						areaCounter = 0;
+						lastTarget = currentTarget;
+						currentTarget = alertArea[areaCounter];
+						areaCounter++;
+						if (areaCounter > 2)
+						{
+							areaCounter = 0;
+						}
 					}
+					
+					
+				}
+				if(alertTimer <= 0)
+				{                  
+					
+					if(turnCounter != 0)
+					{
+						turnCounter = 0;
+					}
+					if(idleTimer != 50)
+					{
+						idleTimer = 50;
+					}
+					currentTarget = lastTarget;
+					print (currentTarget + " << currentTarget Alert 2");
+					stateManager(0);
 				}
 				
-				
-			}
-			if(alertTimer <= 0)
-			{                  
-				
-				if(turnCounter != 0)
+				alertTimer--;
+				if(alertTimer <= 0)
 				{
-					turnCounter = 0;
+					alertTimer = 0;
 				}
-				if(idleTimer != 50)
-				{
-					idleTimer = 50;
-				}
-				currentTarget = lastTarget;
-				stateManager(4);
-			}
-			
-			alertTimer--;
-			if(alertTimer <= 0)
-			{
-				alertTimer = 0;
-			}
+				
 
+			}
 
 			break;
 		case enumStates.idleSuspicious:
@@ -293,28 +308,28 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
-
+			
 			
 			if(turnCounter < 3)
 			{
 				
 				currentTargetDirection = directionDegrees[0];	
-				print (currentTargetDirection + " currentTargetDirection");
+				print (currentTargetDirection + " << currentTargetDirection");
 				rotateEnemy(currentTargetDirection, rotationStep);
 				
 				
 				
 				if (rotationCompleted)
 				{							
-
+					
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
 					print ("turnTimer  " + turnTimer);
-
+					
 					turnCounter++;
 					turnTimer += 100;
-					print("currentTargetDirection " + currentTargetDirection);
+					print("currentTargetDirection >> " + currentTargetDirection);
 					
 				} 
 				
@@ -326,14 +341,17 @@ public class enemyPathfinding : MonoBehaviour
 				
 				if(idleTimer <= 0)
 				{
-
-
+					
+					
 					if(currentTarget != null)
 					{
-						agent.SetDestination (currentTarget.position);
+						if(agent.SetDestination(currentTarget.position) != null)
+						{
+							agent.SetDestination(currentTarget.position);
+						}
 					}
-						stateManager(0);
-						print("state manager: patrol!");
+					stateManager(0);
+					print("state manager: patrol!");
 				}	
 				idleTimer--;	
 			}
@@ -416,7 +434,7 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				vision.SetActive(true);
 				smell.SetActive(true);
-				alertTimer += 500;
+				alertTimer += defaultAlertTimer;
 				stateManager(3);
 				currentTarget = alertArea[areaCounter];
 			}
@@ -432,7 +450,7 @@ public class enemyPathfinding : MonoBehaviour
 				
 				currentTarget = alertArea[areaCounter];
 				Destroy(bone);
-				alertTimer += 500;
+				alertTimer += defaultAlertTimer;
 				stateManager(3);
 				
 			}
@@ -500,9 +518,13 @@ public class enemyPathfinding : MonoBehaviour
 		
 		if(timer <= 0)
 		{
-			timer+=20;
-			agent.SetDestination (currentTarget.position);
-		//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
+			timer+=defaultTimer;
+			if(agent.SetDestination(currentTarget.position) != null)
+			{
+				agent.SetDestination(currentTarget.position);
+			}
+			
+			//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 		}
 		timer--;
 		//-------------//
@@ -516,7 +538,6 @@ public class enemyPathfinding : MonoBehaviour
 	public void stateManager(int value)
 	{
 		States = (enumStates)value;
-		
 	}
 	
 	public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
@@ -585,11 +606,8 @@ public class enemyPathfinding : MonoBehaviour
 	{
 		
 		directionDegrees.Add(firstDirection);
-		print(directionDegrees[0]);
 		directionDegrees.Add(secondDirection);
-		print(directionDegrees[1]);
 		directionDegrees.Add(thirdDirection);
-		print(directionDegrees[2]);
 		
 	}
 	
@@ -676,11 +694,11 @@ public class enemyPathfinding : MonoBehaviour
 							}
 							
 						}
-
+						
 						//=============//
 						//Second Sector//
 						//=============//
-
+						
 						else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
 						{
 							if ( currentAngle > targetAngle || currentAngle <= targetAngle - 180 )
@@ -720,10 +738,10 @@ public class enemyPathfinding : MonoBehaviour
 							}
 						}
 					}
-
+					
 					else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
 					{
-
+						
 						//=============//
 						//Third Sector //
 						//=============//
@@ -795,7 +813,7 @@ public class enemyPathfinding : MonoBehaviour
 							}
 							else //if (currentAngle < targetAngle && turnTimer == 0)
 							{
-								 
+								
 								print("entered the rotation loop 8");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
@@ -811,7 +829,7 @@ public class enemyPathfinding : MonoBehaviour
 							}
 						}
 					}
-
+					
 				}
 				
 			}

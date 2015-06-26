@@ -76,7 +76,7 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
-    agentRadius: .0500000007
+    agentRadius: .209999993
     agentHeight: 2
     agentSlope: 30
     agentClimb: .200000003
@@ -84,7 +84,7 @@ NavMeshSettings:
     maxJumpAcrossDistance: 0
     accuratePlacement: 1
     minRegionArea: 2
-    cellSize: .0166666675
+    cellSize: .0700000003
     manualCellSize: 0
   m_NavMeshData: {fileID: 23800000, guid: 914895e998ff0d541b07385946eabe2c, type: 2}
 --- !u!1001 &2444864
@@ -1191,6 +1191,7 @@ GameObject:
   - 136: {fileID: 336562077}
   - 23: {fileID: 336562076}
   - 114: {fileID: 336562075}
+  - 54: {fileID: 336562080}
   m_Layer: 2
   m_Name: ring of Smell
   m_TagString: Smell
@@ -1271,6 +1272,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 362562489}
   m_RootOrder: 1
+--- !u!54 &336562080
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 336562074}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1001 &338723331
 Prefab:
   m_ObjectHideFlags: 0
@@ -1435,16 +1451,14 @@ MonoBehaviour:
   target3: {fileID: 2104120810}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 4
+  lastSeenPosition: {x: 0, y: 0, z: 0}
+  States: 0
   sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   alertArea:
   - {fileID: 0}
   eatBone: 0
   distracted: 0
   turnSpeed: 2
-  escapeTimer: 0
-  alertTimer: 2000
-  eatTimer: 0
   speed: 1
   idleSuscpicious: 0
   firstDirection: -12
@@ -1456,7 +1470,9 @@ MonoBehaviour:
   timer: 10
   idleTimer: 100
   barkTimer: 120
-  lastState: 0
+  escapeTimer: 0
+  alertTimer: 2000
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 100
   defaultBarkTimer: 120
@@ -1464,6 +1480,7 @@ MonoBehaviour:
   defaultAlertTimer: 2000
   defaultEscapeTimer: 3
   playerOutOfSight: 1
+  areaCounter: 0
 --- !u!54 &362562491
 Rigidbody:
   m_ObjectHideFlags: 0
