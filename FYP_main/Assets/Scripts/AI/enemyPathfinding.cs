@@ -224,8 +224,6 @@ public class enemyPathfinding : MonoBehaviour
                             Physics.Linecast(transform.position, player.transform.position, out hit);
                             if (hit.collider == player.GetComponent<Collider>())
                             {
-
-
                                 playerOutOfSight =3;
                                 escapeTimer = defaultEscapeTimer;
                             }
