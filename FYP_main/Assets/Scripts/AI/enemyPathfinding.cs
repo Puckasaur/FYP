@@ -235,7 +235,11 @@ public class enemyPathfinding : MonoBehaviour
 					print("ImOuttaHere");
 					escapeTimer = defaultEscapeTimer;
 					playerOutOfSight = 2;
+					if(alertArea[areaCounter] != null)
+					{
 					currentTarget = alertArea[areaCounter];
+					}
+
 					areaCounter++;
 					if(areaCounter > 2)
 					{
@@ -267,7 +271,11 @@ public class enemyPathfinding : MonoBehaviour
 					if (timer <= 0 && (!distracted))
 					{
 						lastTarget = currentTarget;
+						if(alertArea[areaCounter] != null)
+						{
 						currentTarget = alertArea[areaCounter];
+						}
+
 						areaCounter++;
 						if (areaCounter > 2)
 						{
@@ -288,7 +296,10 @@ public class enemyPathfinding : MonoBehaviour
 					{
 						idleTimer = 50;
 					}
-					currentTarget = lastTarget;
+					if(lastTarget != null)
+					{
+						currentTarget = lastTarget;
+					}
 					print (currentTarget + " << currentTarget Alert 2");
 					stateManager(0);
 				}
@@ -395,13 +406,21 @@ public class enemyPathfinding : MonoBehaviour
 				if (objectdir.x <= 2 && objectdir.x >= -2 && objectdir.z <= 2 && objectdir.z >= -2 || !brokenObject) 
 				{
 					stateManager(0);
-					currentTarget = lastTarget;
+					if(lastTarget != null)
+					{
+						currentTarget = lastTarget;
+					}
+
 					
 					
 				}
 				else
 				{
-					currentTarget = brokenObject.transform;
+					if(brokenObject.transform != null)
+					{
+						currentTarget = brokenObject.transform;
+					}
+
 					
 					
 				}
@@ -409,7 +428,11 @@ public class enemyPathfinding : MonoBehaviour
 			else if(bone)
 			{
 				stateManager(5);
-				currentTarget = bone.transform;
+				if(bone.transform != null)
+				{
+					currentTarget = bone.transform;
+				}
+
 				
 				GameObject temp = GameObject.FindGameObjectWithTag("Vision");
 				vision = temp.gameObject;
