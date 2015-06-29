@@ -5,20 +5,55 @@ public class coneOfVision : MonoBehaviour
 {
 
     enemyPathfinding script;
+    guardDog guard;
     RaycastHit hit;
-    public float width;
-    public float height;
-    public float range;
+    float width;
+    public float startWidth;
+    float height;
+    public float startHeight;
+    float range;
+    public float startRange;
+    public float alarmBonus;
     public float detectionTimer = 60.0f;
     void Start()
     {
-        script = this.transform.parent.GetComponent<enemyPathfinding>();
+        if (transform.parent.tag == "enemy")
+        {
+            script = this.transform.parent.GetComponent<enemyPathfinding>();
+        }
+        else if (transform.parent.tag == "guard")
+        {
+            guard = transform.parent.GetComponent<guardDog>();
+        }
     }
     void Update()
     {
-        if (transform.localScale.x < width)
+        if (transform.parent.tag == "enemy")
         {
-            transform.localScale += new Vector3(width, height, range);
+
+
+            GetComponent<Rigidbody>().WakeUp();
+
+            if (transform.localScale.x < width)
+            {
+                transform.localScale = new Vector3(width, height, range);
+            }
+            else if (transform.localScale.x > width)
+            {
+                transform.localScale = new Vector3(width, height, range);
+            }
+            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
+            {
+                width = startWidth + alarmBonus;
+                height = startHeight + alarmBonus;
+                range = startRange + alarmBonus;
+            }
+            else
+            {
+                width = startWidth;
+                height = startHeight;
+                range = startRange;
+            }
         }
     }
 
@@ -31,6 +66,7 @@ public class coneOfVision : MonoBehaviour
 
 			RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
+            print(hit.collider);
 			if (hit.collider == other.GetComponent<Collider>()) 
             {
 				if (detectionTimer <= 0) 
@@ -54,7 +90,6 @@ public class coneOfVision : MonoBehaviour
                 if (hit.collider == other)
                     if (script.States != enumStates.chase && script.States != enumStates.alert)
                     {
-                        script.alertTimer = 500;
                         script.currentTarget = script.alertArea[script.areaCounter];
                         if (script.areaCounter > 2)
                         {

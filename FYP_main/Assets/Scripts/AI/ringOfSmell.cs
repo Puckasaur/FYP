@@ -3,40 +3,66 @@ using System.Collections;
 
 public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
-
-    public float radius;
+    guardDog guard;
+    float radius;
+    public float startRadius;
     bool playerSeen = false;
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     public float detectionTimer = 60.0f;
+    public float alarmBonus;
     GameObject player;
     RaycastHit hit;
     
     
     void Start()
     {
-        script = this.transform.parent.GetComponent<enemyPathfinding>();
+        if (transform.parent.tag == "enemy")
+        {
+            script = this.transform.parent.GetComponent<enemyPathfinding>(); 
+        }
+        else if (transform.parent.tag == "guard")
+        {
+            guard = transform.parent.GetComponent<guardDog>();
+        }
     }
     void Update()
     {
-        GetComponent<Rigidbody>().WakeUp();
-        if (this.transform.localScale.x < radius)
+        if (transform.parent.tag == "enemy")
         {
-            this.transform.localScale += scalingRate;
-        }
-        if (playerSeen)
-        {
-
-            Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-            print(hit.collider);
-            if (hit.collider == player.GetComponent<Collider>())
+            GetComponent<Rigidbody>().WakeUp();
+            if (this.transform.localScale.x < radius)
             {
-                if (script.States != enumStates.alert)
-                { transform.parent.LookAt(player.transform); }
-                if(script.States == enumStates.alert)
-                {
-                    playerSeen = false;
-                }
+                this.transform.localScale += scalingRate;
+            }
+            else if (transform.localScale.x > radius)
+            {
+                transform.localScale -= scalingRate;
+            }
+            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
+            {
+                radius = startRadius + alarmBonus;
 
+            }
+            else
+            {
+                radius = startRadius;
+
+            }
+            if (playerSeen)
+            {
+
+                Physics.Linecast(transform.parent.position, player.transform.position, out hit);
+                print(hit.collider);
+                if (hit.collider == player.GetComponent<Collider>())
+                {
+                    if (script.States != enumStates.alert)
+                    { transform.parent.LookAt(player.transform); }
+                    if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious)
+                    {
+                        playerSeen = false;
+                    }
+
+                }
             }
         }
     }
@@ -53,7 +79,6 @@ public class ringOfSmell : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        print("hello");
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
@@ -68,7 +93,6 @@ public class ringOfSmell : MonoBehaviour {
             {
                 detectionTimer = 60;
                 script.stateManager(2);
-                //script.stateManager(2);
             }
 
         }
@@ -80,7 +104,6 @@ public class ringOfSmell : MonoBehaviour {
             
             if (script.States != enumStates.chase && script.States != enumStates.alert)
             {detectionTimer = 60.0f;
-                script.alertTimer = 500;
                 script.currentTarget = script.alertArea[script.areaCounter];
                 if(script.areaCounter >2)
                 {

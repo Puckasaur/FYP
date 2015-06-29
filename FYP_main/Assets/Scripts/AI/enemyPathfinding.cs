@@ -102,6 +102,7 @@ public class enemyPathfinding : MonoBehaviour
 
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
+    Vector3 bonedir;
 
     //values if enemy doesn't receive a new waypoint to prevent them from being stuck
     Vector3 worldPositionNow;
@@ -173,7 +174,7 @@ public class enemyPathfinding : MonoBehaviour
                                 Fortyseven.SetDestination(currentTarget.position);
                                 idleTimer = defaultIdleTimer;
                                 targetCounter++;
-                                if (targetCounter > 2)
+                                if (targetCounter > 1)
                                 {
                                     targetCounter = 0;
                                 }
@@ -241,13 +242,15 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-                Physics.Linecast(transform.position, player.transform.position, out hit);
-                if (hit.collider == player.GetComponent<Collider>())
+                //Physics.Linecast(transform.position, player.transform.position, out hit);
+                //if (hit.collider == player.GetComponent<Collider>())
+                //{
+                //    lastSeenPosition = player.transform.position;
+                //    currentTarget.position = lastSeenPosition;
+                //    stateManager(2);
+                //}
+                //else
                 {
-                    lastSeenPosition = player.transform.position;
-                    currentTarget.position = lastSeenPosition;
-                    stateManager(2);
-                }
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
                         if (timer <= 0 && (!distracted))
@@ -260,44 +263,29 @@ public class enemyPathfinding : MonoBehaviour
                                 areaCounter = 0;
                             }
                         }
-
-                        
                     }
 
-                //if(alertTimer <= 0)
-                //{
-                //    alertTimer += defaultAlertTimer;
-                //    currentTarget = targets[0];
-                //    lastTarget = currentTarget;
-                //    targetCounter++;
-                //    if(targetCounter > 2)
-                //    {
-                //        targetCounter = 0;
-                //    }
-                //    stateManager(0);
-                //}
-                //    alertTimer--;
+                    if (alertTimer <= 0)
+                    {
 
-                if(alertTimer <= 0)
-				{                  
-					
-					if(turnCounter != 0)
-					{
-						turnCounter = 0;
-					}
-					if(idleTimer != 50)
-					{
-						idleTimer = 50;
-					}
-					currentTarget = lastTarget;
-					stateManager(4);
-				}
-				
-				alertTimer--;
-				if(alertTimer <= 0)
-				{
-					alertTimer = 0;
-				}
+                        if (turnCounter != 0)
+                        {
+                            turnCounter = 0;
+                        }
+                        if (idleTimer != 50)
+                        {
+                            idleTimer = 50;
+                        }
+                        currentTarget = lastTarget;
+                        stateManager(4);
+                    }
+
+                    alertTimer--;
+                    if (alertTimer <= 0)
+                    {
+                        alertTimer = 0;
+                    }
+                }
                     break;
             case enumStates.idleSuspicious:
                     {
@@ -373,8 +361,20 @@ public class enemyPathfinding : MonoBehaviour
                         // Move towards distraction//
                         //-------------------------//
 
+                       
+                        if (!bone)
+                        {
+                            vision.SetActive(true);
+                            smell.SetActive(true);
+                            alertTimer += defaultAlertTimer;
+                            stateManager(3);
+                            currentTarget = alertArea[areaCounter];
+                        } 
                         distracted = true;
-                        Vector3 bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
+                        if (currentTarget != null)
+                        {
+                            bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
+                        }
                         if (bonedir.x <= 4 && bonedir.x >= -4 && bonedir.z <= 4 && bonedir.z >= -4)
                         {
                             stateManager(7);
@@ -394,16 +394,22 @@ public class enemyPathfinding : MonoBehaviour
                         //---------------------------------------------//
                         // when sound is heard, move towards the source//
                         //---------------------------------------------//
-                        GameObject brokenObject = GameObject.FindGameObjectWithTag("brokenObject");
+                        GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
                         bone = GameObject.FindGameObjectWithTag("bone");
                         if(brokenObject)
                         {
                             Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
                             if (objectdir.x <= 2 && objectdir.x >= -2 && objectdir.z <= 2 && objectdir.z >= -2 || !brokenObject) 
                             {
-                                stateManager(0);
-                                currentTarget = lastTarget;
-
+                                //stateManager(0);
+                                //currentTarget = lastTarget;
+                                currentTarget = alertArea[areaCounter];
+                                areaCounter++;
+                                if (areaCounter > 2)
+                                {
+                                    areaCounter = 0;
+                                }
+                                stateManager(3);
 
                             }
                             else
@@ -446,7 +452,7 @@ public class enemyPathfinding : MonoBehaviour
                             currentTarget = alertArea[areaCounter];
                         }
                             
-                        if (eatTimer <= 0)
+                        else if (eatTimer <= 0)
 
                         {
                             eatTimer = defaultEatTimer;// 120;
@@ -456,9 +462,14 @@ public class enemyPathfinding : MonoBehaviour
                             eatBone = false;
 
                             currentTarget = alertArea[areaCounter];
-                            Destroy(bone);
-                            alertTimer += defaultAlertTimer;
+                            areaCounter++;
+                            if (areaCounter > 2)
+                            {
+                                areaCounter = 0;
+                            }
                             stateManager(3);
+                            Destroy(bone);
+
                            
                         }
                         eatTimer--;
@@ -523,7 +534,7 @@ public class enemyPathfinding : MonoBehaviour
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
         }
 
-        if(timer <= 0)
+        if(timer <= 0 && currentTarget != null)
         {
             timer+=defaultTimer;
             Fortyseven.SetDestination(currentTarget.position);
