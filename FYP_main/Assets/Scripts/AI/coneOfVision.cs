@@ -54,7 +54,7 @@ public class coneOfVision : MonoBehaviour
                 if (hit.collider == other)
                     if (script.States != enumStates.chase && script.States != enumStates.alert)
                     {
-                        script.alertTimer = 500;
+					script.alertTimer = script.defaultAlertTimer;
 					if(script.alertArea[script.areaCounter] != null)
 					{
 					script.currentTarget = script.alertArea[script.areaCounter];

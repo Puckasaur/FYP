@@ -52,8 +52,8 @@ public class enemyPathfinding : MonoBehaviour
 	
 	float maxSpeed = 20;
 	float maxScale = 60;
-	float waypointOffsetMin = -1.0f;
-	float waypointOffsetMax = 1.0f;
+	float waypointOffsetMin = -0.05f;
+	float waypointOffsetMax = 0.05f;
 	float vectorTransformPositionx = 0;
 	float vectorTransformPositionz = 0;
 	float vectorCurrentTargetx = 0;
@@ -71,7 +71,7 @@ public class enemyPathfinding : MonoBehaviour
 	GameObject enemyObject;
 	
 	bool rotating = false;
-	float rotationStep = 45.0f;
+	float rotationStep = 65.0f;
 	public float rotationDegrees = 90;
 	public float currentAngle = 0;
 	float targetAngle = 0;
@@ -84,6 +84,7 @@ public class enemyPathfinding : MonoBehaviour
 	int turnCounter = 0;
 
 	//So many timers
+	int tempcounters = 0;
 	public int timer;
 	public int idleTimer;    
 	public int barkTimer;
@@ -118,7 +119,7 @@ public class enemyPathfinding : MonoBehaviour
 		setDirectionsForIdle();
 		setTargetWaypoints();
 		currentTarget = targets[0];
-		print (targets [0] + "targets[0]");
+		//print (targets [0] + "targets[0]");
 		lastTarget = currentTarget;
 		agent = GetComponent<NavMeshAgent>();
 		
@@ -191,7 +192,7 @@ public class enemyPathfinding : MonoBehaviour
 
 		case enumStates.chase:
 		{
-			print (currentTarget + " << currentTarget chase 1");
+			//print (currentTarget + " << currentTarget chase 1");
 
 			//currentTarget = lastTarget;
 			//----------------------------------------------------------------------------//
@@ -203,7 +204,7 @@ public class enemyPathfinding : MonoBehaviour
 			//------------------//
 			if (barkTimer < 0)
 			{
-				print (currentTarget + " << currentTarget chase 2");
+				//print (currentTarget + " << currentTarget chase 2");
 				newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
 				newSphere.transform.parent = transform;
 				barkTimer = defaultBarkTimer;
@@ -221,18 +222,18 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
-			print (hit);
+			//print (hit);
 			if (hit.collider == player.GetComponent<Collider>())
 			{
 				lastSeenPosition = player.transform.position;
 				currentTarget.position = lastSeenPosition;
-				print (currentTarget + " << currentTarget chase 3");
+				//print (currentTarget + " << currentTarget chase 3");
 			}
 			else{
 				//timer = defaultTimer;
 				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
-					print("ImOuttaHere");
+					//print("ImOuttaHere");
 					escapeTimer = defaultEscapeTimer;
 					playerOutOfSight = 2;
 					if(alertArea[areaCounter] != null)
@@ -244,7 +245,7 @@ public class enemyPathfinding : MonoBehaviour
 					if(areaCounter > 2)
 					{
 						areaCounter = 0;
-						print (currentTarget + " << currentTarget chase 4");
+						//print (currentTarget + " << currentTarget chase 4");
 					}
 					stateManager(3);
 				}
@@ -252,24 +253,42 @@ public class enemyPathfinding : MonoBehaviour
 			escapeTimer-= Time.deltaTime;
 		}
 			break;
+
+
+
 		case enumStates.alert:
 			//------------------------------------------------------//
 			//Look around a room by moving from waypoint to waypoint//
 			//------------------------------------------------------//
-			print (currentTarget + " <<  currentTarget Alert 1");
+
+			//print (currentTarget + " <<  currentTarget Alert 1");
+
+			if(alertTimer == 0 || alertTimer < 0)
+			{
+				if(lastTarget != null)
+				{
+					currentTarget = lastTarget;
+					stateManager(0);
+				}
+			}
 			Physics.Linecast(transform.position, player.transform.position, out hit);
 			if (hit.collider == player.GetComponent<Collider>())
 			{
 				lastSeenPosition = player.transform.position;
 				currentTarget.position = lastSeenPosition;
+
+				tempcounters = 0;
 				stateManager(2);
 			}
 			else
 			{
+
 				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
+
+					//print (vectorx + "  << vectorX  " + vectorz + "  << vectorz" + waypointOffsetMin + "  <<  waypointoffsetMin  " + waypointOffsetMax + "  << waypointoffsetmax  ");
 					if (timer <= 0 && (!distracted))
-					{
+					{	
 						lastTarget = currentTarget;
 						if(alertArea[areaCounter] != null)
 						{
@@ -281,29 +300,25 @@ public class enemyPathfinding : MonoBehaviour
 						{
 							areaCounter = 0;
 						}
+						if(tempcounters < 6)
+						{
+							if(turnCounter != 0)
+							{
+								turnCounter = 0;
+							}
+							if(idleTimer != 30)
+							{
+								idleTimer = 30;
+							}
+							print ("state vaihdettu: 4");
+							stateManager(4);
+							tempcounters++;
+						}
 					}
 					
 					
 				}
-				if(alertTimer <= 0)
-				{                  
-					
-					if(turnCounter != 0)
-					{
-						turnCounter = 0;
-					}
-					if(idleTimer != 50)
-					{
-						idleTimer = 50;
-					}
-					if(lastTarget != null)
-					{
-						currentTarget = lastTarget;
-					}
-					print (currentTarget + " << currentTarget Alert 2");
-					stateManager(0);
-				}
-				
+								
 				alertTimer--;
 				if(alertTimer <= 0)
 				{
@@ -319,51 +334,47 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
-			
-			
+			if(alertTimer > 0)
+			{
+				alertTimer--;
+			}
+
+			if(alertTimer < 0)
+			{
+				alertTimer= 0;
+			}
 			if(turnCounter < 3)
 			{
-				
 				currentTargetDirection = directionDegrees[0];	
-				print (currentTargetDirection + " << currentTargetDirection");
 				rotateEnemy(currentTargetDirection, rotationStep);
-				
-				
-				
+				//turnCounter++;
+
 				if (rotationCompleted)
 				{							
-					
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
-					print ("turnTimer  " + turnTimer);
-					
 					turnCounter++;
 					turnTimer += 100;
-					print("currentTargetDirection >> " + currentTargetDirection);
-					
 				} 
 				
-			}
+			}			
 			
-			
-			else if (turnCounter > 2)
+			if (turnCounter > 2)
 			{
-				
-				if(idleTimer <= 0)
-				{
-					
-					
-					if(currentTarget != null)
+					print (tempcounters + " << tempcounters");
+					if(tempcounters > 5)
 					{
-						if(agent.SetDestination(currentTarget.position) != null)
-						{
-							agent.SetDestination(currentTarget.position);
-						}
+						tempcounters = 0;
+						stateManager(0);
 					}
-					stateManager(0);
-					print("state manager: patrol!");
-				}	
+
+					if(tempcounters < 6)
+					{
+					print ("vaihtaa alertiin");
+						stateManager(3);
+					}
+
 				idleTimer--;	
 			}
 			
@@ -542,11 +553,14 @@ public class enemyPathfinding : MonoBehaviour
 		if(timer <= 0)
 		{
 			timer+=defaultTimer;
+
+			if(States != enumStates.idleSuspicious)
+			{
 			if(agent.SetDestination(currentTarget.position) != null)
 			{
 				agent.SetDestination(currentTarget.position);
 			}
-			
+			}
 			//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 		}
 		timer--;
@@ -649,11 +663,7 @@ public class enemyPathfinding : MonoBehaviour
 	
 	void rotateEnemy(float targetDegrees, float rotationStep)
 	{
-		//print ("turnTimer  >> " + turnTimer);
-		//rotationInProgress = true;
-		//		while (rotationInProgress == true) 
 		float rotationDifference = 0;
-		//print (currentAngle);
 		
 		if (turnTimer <= 0)
 		{

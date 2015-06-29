@@ -27,12 +27,12 @@ public class ringOfSmell : MonoBehaviour {
         {
 
             Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-            print(hit.collider);
+           // print(hit.collider);
             if (hit.collider == player.GetComponent<Collider>())
             {
                 if (script.States != enumStates.alert)
                 { transform.parent.LookAt(player.transform); }
-                if(script.States == enumStates.alert)
+				if(script.States == enumStates.alert || script.States == enumStates.idleSuspicious)
                 {
                     playerSeen = false;
                 }
@@ -59,7 +59,7 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-			print("hello");
+			//print("hello");
             //print("hello");
             //script.stateManager(2);
 
@@ -82,13 +82,13 @@ public class ringOfSmell : MonoBehaviour {
             if (script.States != enumStates.chase && script.States != enumStates.alert)
             {
 				detectionTimer = 60.0f;
-                script.alertTimer = 500;
+				script.alertTimer = script.defaultAlertTimer;
 				if(script.alertArea[script.areaCounter] != null)
 				{
 				script.currentTarget = script.alertArea[script.areaCounter];
 				}
                
-				print( script.currentTarget + " << ringOfSmell Target");
+				//print( script.currentTarget + " << ringOfSmell Target");
                 if(script.areaCounter >2)
                 {
                     script.areaCounter = 0;
