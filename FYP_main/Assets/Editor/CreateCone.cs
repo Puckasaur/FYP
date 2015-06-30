@@ -16,7 +16,7 @@ public class createCone : ScriptableWizard
     public float radiusTop = 0f;
     public float radiusBottom = 1f;
     public float length = 1f;
-    public float openingAngle = 0f; // if >0, create a cone with this angle by setting radiusTop to 0, and adjust radiusBottom according to length;
+    public float openingAngle = 0.5f; // if >0, create a cone with this angle by setting radiusTop to 0, and adjust radiusBottom according to length;
     public bool outside = true;
     public bool inside = false;
     public bool addCollider = false;

@@ -5,30 +5,54 @@ public class coneOfVision : MonoBehaviour
 {
 
     enemyPathfinding script;
+    //guardDog guard;
     RaycastHit hit;
-    public float width;
-    public float height;
-    public float range;
+    float width;
+    public float startWidth;
+    float height;
+    public float startHeight;
+    float range;
+    public float startRange;
+    public float alarmBonus;
     public float detectionTimer = 60.0f;
     void Start()
     {
+        if (transform.parent.tag == "enemy")
+        {
         script = this.transform.parent.GetComponent<enemyPathfinding>();
+    }
+        //else if (transform.parent.tag == "guard")
+        //{
+        //    guard = transform.parent.GetComponent<guardDog>();
+        //}
     }
     void Update()
     {
+        if (transform.parent.tag == "enemy")
+        {
+
+
+            GetComponent<Rigidbody>().WakeUp();
+
         if (transform.localScale.x < width)
         {
-            transform.localScale += new Vector3(width, height, range);
+                transform.localScale = new Vector3(width, height, range);
         }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "player")
-        {
-            if (script.States != enumStates.chase || script.States != enumStates.alert)
+            else if (transform.localScale.x > width)
             {
-               // transform.parent.LookAt(other.transform);
+                transform.localScale = new Vector3(width, height, range);
+    }
+            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
+            {
+                width = startWidth + alarmBonus;
+                height = startHeight + alarmBonus;
+                range = startRange + alarmBonus;
+            }
+            else
+            {
+                width = startWidth;
+                height = startHeight;
+                range = startRange;
             }
         }
     }
@@ -59,10 +83,11 @@ public class coneOfVision : MonoBehaviour
 					}
 					detectionTimer--;
 
+				
 				}
 			}     
 		}
-	}
+    }
     void OnTriggerExit(Collider other)
     {
         if(other.gameObject.tag == "player")
@@ -73,8 +98,8 @@ public class coneOfVision : MonoBehaviour
                 if (hit.collider == other)
                     if (script.States != enumStates.chase)
                     {
-                        script.alertTimer = 500;
-                        script.currentTarget = script.alertArea[1];
+                            script.areaCounter = 0;
+                        }
                         script.stateManager(3);
                     }
             }
@@ -82,4 +107,4 @@ public class coneOfVision : MonoBehaviour
     }
 
 
-}
+

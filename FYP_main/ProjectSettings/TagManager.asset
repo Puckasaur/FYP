@@ -4,19 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hide
-  - OD
-  - ball
-  - enemy
-  - soundSphere
-  - brokenObject
-  - vision
-  - smell
-  - bone
-  - boneSpawner
-  - cube
-  - alertArea
   - player
+<<<<<<< HEAD
   - Smell
   - Vision
   - looker
@@ -26,6 +15,20 @@ TagManager:
   - Waypoint
   - ladder
   - wall
+=======
+  - Waypoint
+  - smell
+  - vision
+  - enemy
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+>>>>>>> origin/AiTestGround
   layers:
   - Default
   - TransparentFX
@@ -35,8 +38,8 @@ TagManager:
   - UI
   - 
   - 
-  - Dog
-  - Unwalkable
+  - 
+  - 
   - 
   - 
   - 
