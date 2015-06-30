@@ -17,15 +17,16 @@ TagManager:
   - cube
   - alertArea
   - player
-  - Smell
+  - smellparticles
   - Vision
-  - looker
+  - sniff
   - Broken Object
   - Alert Area
   - Bone
   - PARENT
   - Waypoint
   - guard
+  - Smell
   layers:
   - Default
   - TransparentFX

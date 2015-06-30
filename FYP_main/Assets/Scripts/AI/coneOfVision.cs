@@ -5,7 +5,7 @@ public class coneOfVision : MonoBehaviour
 {
 
     enemyPathfinding script;
-    guardDog guard;
+    //guardDog guard;
     RaycastHit hit;
     float width;
     public float startWidth;
@@ -21,10 +21,10 @@ public class coneOfVision : MonoBehaviour
         {
             script = this.transform.parent.GetComponent<enemyPathfinding>();
         }
-        else if (transform.parent.tag == "guard")
-        {
-            guard = transform.parent.GetComponent<guardDog>();
-        }
+        //else if (transform.parent.tag == "guard")
+        //{
+        //    guard = transform.parent.GetComponent<guardDog>();
+        //}
     }
     void Update()
     {
