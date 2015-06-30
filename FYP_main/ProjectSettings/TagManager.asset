@@ -3,32 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - player
-<<<<<<< HEAD
-  - Smell
-  - Vision
-  - looker
-  - Broken Object
-  - Alert Area
-  - PARENT
-  - Waypoint
-  - ladder
-  - wall
-=======
-  - Waypoint
-  - smell
-  - vision
-  - enemy
-  - New Tag
-  - New Tag
-  - New Tag
-  - New Tag
-  - New Tag
-  - New Tag
-  - New Tag
-  - New Tag
->>>>>>> origin/AiTestGround
+  tags: []
   layers:
   - Default
   - TransparentFX
