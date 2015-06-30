@@ -17,14 +17,22 @@ TagManager:
   - cube
   - alertArea
   - player
-  - Smell
+  - smellparticles
   - Vision
-  - looker
+  - sniff
   - Broken Object
   - Alert Area
+<<<<<<< HEAD
   - PARENT
   - Waypoint
   - Unwalkable
+=======
+  - Bone
+  - PARENT
+  - Waypoint
+  - guard
+  - Smell
+>>>>>>> origin/Toni-prototype1
   layers:
   - Default
   - TransparentFX
