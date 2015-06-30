@@ -75,11 +75,11 @@ public class enemyPathfinding : MonoBehaviour
 	public float rotationDegrees = 90;
 	public float currentAngle = 0;
 	float targetAngle = 0;
-	float angleOffsetMax = 1.0f;
-	float angleOffsetMin = -1.0f;
+	public float angleOffsetMax = 10.0f;
+	public float angleOffsetMin = -10.0f;
 	bool rotationInProgress = false;
 	public bool rotationCompleted = false;
-	float turnTimer = 200.0f;
+	public float turnTimer = 100.0f;
 	float currentTargetDirection;
 	int turnCounter = 0;
 
@@ -101,6 +101,7 @@ public class enemyPathfinding : MonoBehaviour
 	int targetIndex;
 	int targetCounter = 0;
 	public int areaCounter = 0;
+	public float defaultTurnTimer;
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -133,6 +134,7 @@ public class enemyPathfinding : MonoBehaviour
 		barkTimer = defaultBarkTimer;
 		alertTimer = defaultAlertTimer;
 		escapeTimer = defaultEscapeTimer;
+		turnTimer = defaultTurnTimer;
 	}
 	
 	void Update()
@@ -229,8 +231,7 @@ public class enemyPathfinding : MonoBehaviour
 				currentTarget.position = lastSeenPosition;
 				//print (currentTarget + " << currentTarget chase 3");
 			}
-			else{
-				//timer = defaultTimer;
+			else{				//timer = defaultTimer;
 				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
 					//print("ImOuttaHere");
@@ -262,26 +263,26 @@ public class enemyPathfinding : MonoBehaviour
 			//------------------------------------------------------//
 
 			//print (currentTarget + " <<  currentTarget Alert 1");
-
-			if(alertTimer == 0 || alertTimer < 0)
-			{
-				if(lastTarget != null)
-				{
-					currentTarget = lastTarget;
-					stateManager(0);
-				}
-			}
-			Physics.Linecast(transform.position, player.transform.position, out hit);
-			if (hit.collider == player.GetComponent<Collider>())
-			{
-				lastSeenPosition = player.transform.position;
-				currentTarget.position = lastSeenPosition;
-
-				tempcounters = 0;
-				stateManager(2);
-			}
-			else
-			{
+//
+//			if(alertTimer == 0 || alertTimer < 0)
+//			{
+//				if(lastTarget != null)
+//				{
+//					currentTarget = lastTarget;
+//					stateManager(0);
+//				}
+//			}
+//			Physics.Linecast(transform.position, player.transform.position, out hit);
+//			if (hit.collider == player.GetComponent<Collider>())
+//			{
+//				lastSeenPosition = player.transform.position;
+//				currentTarget.position = lastSeenPosition;
+//
+//				tempcounters = 0;
+//				stateManager(2);
+//			}
+//			else
+//			{
 
 				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
@@ -326,7 +327,7 @@ public class enemyPathfinding : MonoBehaviour
 				}
 				
 
-			}
+//			}
 
 			break;
 		case enumStates.idleSuspicious:
@@ -347,15 +348,17 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				currentTargetDirection = directionDegrees[0];	
 				rotateEnemy(currentTargetDirection, rotationStep);
+				print ("enemy rotating!");
 				//turnCounter++;
 
 				if (rotationCompleted)
-				{							
+				{	
+					print ("rotationCompleted !");
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
 					turnCounter++;
-					turnTimer += 100;
+					turnTimer += defaultTurnTimer * Time.deltaTime;
 				} 
 				
 			}			
@@ -705,7 +708,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
@@ -720,7 +723,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
@@ -751,7 +754,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
@@ -765,7 +768,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
@@ -797,7 +800,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
@@ -812,7 +815,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
@@ -840,7 +843,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
@@ -855,7 +858,7 @@ public class enemyPathfinding : MonoBehaviour
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
-									turnTimer += 100f * Time.deltaTime;
+									turnTimer += defaultTurnTimer * Time.deltaTime;
 									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								

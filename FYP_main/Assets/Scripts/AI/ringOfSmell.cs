@@ -17,12 +17,15 @@ public class ringOfSmell : MonoBehaviour {
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
+	AudioSource sniff;
     
     void Start()
     {
         if (transform.parent.tag == "enemy")
         {
         script = this.transform.parent.GetComponent<enemyPathfinding>();
+			sniff = GetComponent<AudioSource>();
+
     }
         //else if (transform.parent.tag == "guard")
         //{
@@ -58,10 +61,13 @@ public class ringOfSmell : MonoBehaviour {
             Physics.Linecast(transform.parent.position, player.transform.position, out hit);
            // print(hit.collider);
             if (hit.collider == player.GetComponent<Collider>())
-            {
-                if (script.States != enumStates.alert)
-                { transform.parent.LookAt(player.transform); }
-                detectionTimer--;
+			{             
+				if (script.States != enumStates.alert)
+				{ transform.parent.LookAt(player.transform); }
+				if(script.States == enumStates.alert || script.States == enumStates.idleSuspicious)
+				{
+					playerSeen = false;
+				}
 
             }
         }
@@ -97,7 +103,11 @@ public class ringOfSmell : MonoBehaviour {
             Physics.Raycast(transform.parent.position, player.transform.position, out hit);
             if(hit.distance <= sniffDistance)
             {
-                //script.playAnimation
+
+				if(!sniff.isPlaying)
+				{
+					sniff.Play();
+				}
             }
             if(hit.distance <= visualDistance)
             {
@@ -129,6 +139,10 @@ public class ringOfSmell : MonoBehaviour {
             {
                 Destroy(GetComponent<ParticleSystem>());
             }
+			if(sniff.isPlaying)
+			{
+				sniff.Stop();
+			}
         }
     }
 }
