@@ -4,15 +4,27 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Hide
+  - OD
   - ball
-  - looker
+  - enemy
   - soundSphere
-  - Broken Object
-  - Vision
-  - Smell
-  - Bone
+  - brokenObject
+  - vision
+  - smell
+  - bone
   - boneSpawner
   - cube
+  - alertArea
+  - player
+  - Smell
+  - Vision
+  - looker
+  - Broken Object
+  - Alert Area
+  - PARENT
+  - Waypoint
+  - Unwalkable
   layers:
   - Default
   - TransparentFX
@@ -22,8 +34,8 @@ TagManager:
   - UI
   - 
   - 
+  - Dog
   - Unwalkable
-  - 
   - 
   - 
   - 

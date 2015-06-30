@@ -9,7 +9,7 @@ using System.Collections;
 // note you will get inevitable breaks in the smooth shading at cone tips
 // note the resulting mesh will be created as an asset in Assets/Editor
 // Author: Wolfram Kresse
-public class CreateCone : ScriptableWizard
+public class createCone : ScriptableWizard
 {
 
     public int numVertices = 10;
@@ -24,7 +24,7 @@ public class CreateCone : ScriptableWizard
     [MenuItem("GameObject/Create Other/Cone")]
     static void CreateWizard()
     {
-        ScriptableWizard.DisplayWizard("Create Cone", typeof(CreateCone));
+        ScriptableWizard.DisplayWizard("Create Cone", typeof(createCone));
     }
 
     void OnWizardCreate()
