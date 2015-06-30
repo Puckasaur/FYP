@@ -51,6 +51,7 @@ public class Wall : MonoBehaviour {
 		}
 	}
 }
+<<<<<<< HEAD
 //=======
 //﻿using UnityEngine;
 //using System.Collections;
@@ -100,3 +101,5 @@ public class Wall : MonoBehaviour {
 //	}
 //}
 //>>>>>>> origin/AiTestGround
+=======
+>>>>>>> origin/mergeBranch

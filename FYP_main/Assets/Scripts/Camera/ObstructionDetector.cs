@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿﻿using UnityEngine;
+=======
+﻿using UnityEngine;
+>>>>>>> origin/mergeBranch
 using System.Collections;
 using System.Collections.Generic;
 
@@ -71,6 +75,7 @@ public class ObstructionDetector : MonoBehaviour {
 		}
 	}*/
 }
+<<<<<<< HEAD
 //=======
 //﻿using UnityEngine;
 //using System.Collections;
@@ -118,3 +123,5 @@ public class ObstructionDetector : MonoBehaviour {
 //	}
 //}
 //>>>>>>> origin/AiTestGround
+=======
+>>>>>>> origin/mergeBranch

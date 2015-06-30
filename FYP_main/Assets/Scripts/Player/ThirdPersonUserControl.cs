@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/mergeBranch
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
@@ -142,6 +145,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     }
 
 }
+<<<<<<< HEAD
 //=======
 //using System;
 //using UnityEngine;
@@ -286,3 +290,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //
 //}
 //>>>>>>> origin/AiTestGround
+=======
+
+>>>>>>> origin/mergeBranch

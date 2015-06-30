@@ -51,6 +51,7 @@ public class newCam : MonoBehaviour {
 		}
 
 	}
+<<<<<<< HEAD
 }
 //=======
 //﻿using UnityEngine;
@@ -108,3 +109,6 @@ public class newCam : MonoBehaviour {
 //	}
 //}
 //>>>>>>> origin/AiTestGround
+=======
+}
+>>>>>>> origin/mergeBranch

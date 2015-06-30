@@ -3,10 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
+<<<<<<< HEAD
   tags:
   - player
   - enemy
   - New Tag
+=======
+  tags: []
+>>>>>>> origin/mergeBranch
   layers:
   - Default
   - TransparentFX

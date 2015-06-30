@@ -238,6 +238,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 	}
+<<<<<<< HEAD
 }
 //=======
 //using UnityEngine;
@@ -479,3 +480,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //	}
 //}
 //>>>>>>> origin/AiTestGround
+=======
+}
+>>>>>>> origin/mergeBranch
