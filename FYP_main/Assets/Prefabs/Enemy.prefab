@@ -224,48 +224,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 186146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: f853a780d89194e4f9a59fa9d5cc6600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11437856
-=======
-  m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target1: {fileID: 0}
-  target2: {fileID: 0}
-  target3: {fileID: 0}
-  currentTarget: {fileID: 0}
-  lastTarget: {fileID: 0}
-  States: 0
-  sphere: {fileID: 0}
-  alertArea: []
-  eatBone: 0
-  distracted: 0
-  turnSpeed: 2
-  speed: 10
-  idleSuscpicious: 0
-  firstDirection: 0
-  secondDirection: 0
-  thirdDirection: 0
-  rotationDegrees: 90
-  rotationCompleted: 0
-  timer: 60
-  idleTimer: 100
-  barkTimer: 120
-  escapeTimer: 0
-  alertTimer: 0
-  eatTimer: 0
-  defaultEatTimer: 120
-  defaultIdleTimer: 100
-  defaultBarkTimer: 120
-  defaultTimer: 60
-  defaultAlertTimer: 400
-  defaultEscapeTimer: 0
-  playerOutOfSight: 0
---- !u!114 &11433018
->>>>>>> origin/Toni-prototype1
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

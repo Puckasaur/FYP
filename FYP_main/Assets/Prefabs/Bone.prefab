@@ -12,11 +12,7 @@ GameObject:
   - 136: {fileID: 13652580}
   - 23: {fileID: 2302106}
   - 114: {fileID: 11434108}
-<<<<<<< HEAD
   - 54: {fileID: 5443230}
-=======
-  - 54: {fileID: 5468758}
->>>>>>> origin/Toni-prototype1
   m_Layer: 0
   m_Name: Bone
   m_TagString: bone
@@ -67,11 +63,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118874}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
-<<<<<<< HEAD
 --- !u!54 &5443230
-=======
---- !u!54 &5468758
->>>>>>> origin/Toni-prototype1
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
