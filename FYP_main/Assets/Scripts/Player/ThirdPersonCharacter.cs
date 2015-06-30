@@ -18,6 +18,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		[SerializeField] float m_AnimSpeedMultiplier = 1f;
 		[SerializeField] float m_GroundCheckDistance = 0.1f;
 
+		public int jumpheight;
+
 		Rigidbody m_Rigidbody;
 		Animator m_Animator;
 		bool m_IsGrounded;
@@ -188,7 +190,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //			}
 			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
 			{
-				m_Rigidbody.AddForce(0,1000,0);
+				m_Rigidbody.AddForce(0,jumpheight,0);
 			}
 		}
 

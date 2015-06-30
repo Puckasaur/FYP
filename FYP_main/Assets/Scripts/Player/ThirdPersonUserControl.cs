@@ -7,6 +7,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
     [RequireComponent(typeof (ThirdPersonCharacter))]
     public class ThirdPersonUserControl : MonoBehaviour
     {
+		public Transform target;
+
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         //private Transform m_Cam;                  // A reference to the main camera in the scenes transform
         //private Vector3 m_CamForward;             // The current forward direction of the camera
@@ -129,7 +131,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // we use world-relative directions in the case of no main camera
 			//m_Move = (v * Vector3.forward + h * Vector3.right) * 0.5f;
-			m_Move = (v * Camera.main.transform.forward + h * Vector3.right) * 0.5f;
+			m_Move = (v * target.transform.forward + h * Vector3.right) * 0.5f;
            
 			// walk speed multiplier
 	        if (Input.GetButton("Sprint")) m_Move *= speedHat;
