@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -33,39 +32,39 @@ public class destructible : MonoBehaviour {
 		Destroy (gameObject);
 	}
 }
-=======
-﻿using UnityEngine;
-using System.Collections;
+//=======
+//﻿using UnityEngine;
+//using System.Collections;
 
-public class destructible : MonoBehaviour {
+//public class destructible : MonoBehaviour {
 	
-	public GameObject debrisPrefab;
+//    public GameObject debrisPrefab;
 	
-	//floorHazards haz;
+//    //floorHazards haz;
 	
-	void Start()
-	{
-		//haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
-	}
-	void Update()
-	{
+//    void Start()
+//    {
+//        //haz = GameObject.Find ("floorHazard").GetComponent<floorHazards>();
+//    }
+//    void Update()
+//    {
 		
-	}
+//    }
 	
-	void OnTriggerEnter(Collider Destructible) {
+//    void OnTriggerEnter(Collider Destructible) {
 		
 		
-		destroyMe ();
+//        destroyMe ();
 		
-	}
+//    }
 	
-	void destroyMe()
-	{
-		if (debrisPrefab) {
-			Instantiate (debrisPrefab, transform.position, transform.rotation);
-		}
+//    void destroyMe()
+//    {
+//        if (debrisPrefab) {
+//            Instantiate (debrisPrefab, transform.position, transform.rotation);
+//        }
 		
-		Destroy (gameObject);
-	}
-}
->>>>>>> origin/Toni-prototype1
+//        Destroy (gameObject);
+//    }
+//}
+//>>>>>>> origin/Toni-prototype1

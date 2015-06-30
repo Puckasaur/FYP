@@ -1347,7 +1347,7 @@ GameObject:
   - 54: {fileID: 406037454}
   m_Layer: 2
   m_Name: Ring of Smell
-  m_TagString: Smell
+  m_TagString: smell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1837,7 +1837,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c54c4eea28d39524784925fde660cd45, type: 2}
+  - {fileID: 2100000, guid: b8c16470718f7e24cae57a3abd9c8b58, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -2827,6 +2827,7 @@ MonoBehaviour:
   secondDirection: 0
   thirdDirection: 0
   rotationDegrees: 90
+  currentAngle: 0
   rotationCompleted: 0
   timer: 0
   idleTimer: 0
@@ -2842,7 +2843,6 @@ MonoBehaviour:
   defaultEscapeTimer: 2
   playerOutOfSight: 2
   areaCounter: 0
-  turnCounter: 0
 --- !u!54 &790563332
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3367,7 +3367,7 @@ MonoBehaviour:
     m_Bits: 512
   gridWorldSize: {x: 120, y: 120}
   nodeRadius: .5
-  displaymainGridGizmos: 0
+  displayGridGizmos: 0
 --- !u!114 &932067685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3712,7 +3712,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1108141445
 Transform:
   m_ObjectHideFlags: 0
@@ -3757,6 +3757,7 @@ MonoBehaviour:
   secondDirection: 0
   thirdDirection: 0
   rotationDegrees: 90
+  currentAngle: 0
   rotationCompleted: 0
   timer: 0
   idleTimer: 0
@@ -3772,7 +3773,6 @@ MonoBehaviour:
   defaultEscapeTimer: 0
   playerOutOfSight: 0
   areaCounter: 0
-  turnCounter: 0
 --- !u!195 &1108141447
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3924,7 +3924,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c54c4eea28d39524784925fde660cd45, type: 2}
+  - {fileID: 2100000, guid: b8c16470718f7e24cae57a3abd9c8b58, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -4135,7 +4135,7 @@ GameObject:
   - 64: {fileID: 1245947933}
   m_Layer: 2
   m_Name: Truncated Cone of Vision
-  m_TagString: Vision
+  m_TagString: vision
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5026,15 +5026,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 32.75
+      value: 33.0999985
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.16999996
+      value: -1.10000002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -27.7199993
+      value: -27.7000008
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalRotation.x
@@ -5054,11 +5054,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalScale.x
-      value: 15.0100002
+      value: 5.86644793
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalScale.z
@@ -5066,7 +5066,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4.80999994
+      value: 2.85945559
       objectReference: {fileID: 0}
     - target: {fileID: 6400000, guid: f9bd0bfd668dc084887ac80eee8965df, type: 3}
       propertyPath: m_Convex

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -903,869 +902,869 @@ public class enemyPathfinding : MonoBehaviour
 		}
 	}
 }
-=======
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-public enum enumStates
-{
+//=======
+//﻿using UnityEngine;
+//using System.Collections;
+//using System.Collections.Generic;
+//public enum enumStates
+//{
 
-    patrol = 0,
-    idle = 1,
-    chase = 2,
-    alert = 3,
-    idleSuspicious = 4,
-    distracted = 5,
+//    patrol = 0,
+//    idle = 1,
+//    chase = 2,
+//    alert = 3,
+//    idleSuspicious = 4,
+//    distracted = 5,
 
-    detectSound = 6,
-    eatBone = 7
-}
+//    detectSound = 6,
+//    eatBone = 7
+//}
 
-public class enemyPathfinding : MonoBehaviour 
-{
+//public class enemyPathfinding : MonoBehaviour 
+//{
 
-    soundSphere sphereScript;
-    RaycastHit hit; 
+//    soundSphere sphereScript;
+//    RaycastHit hit; 
 
 
-	public Transform target1;
-	public Transform target2;
-	public Transform target3;
-	public Transform currentTarget;
-	public Transform lastTarget;
-    public Vector3 lastSeenPosition;
+//    public Transform target1;
+//    public Transform target2;
+//    public Transform target3;
+//    public Transform currentTarget;
+//    public Transform lastTarget;
+//    public Vector3 lastSeenPosition;
 
     
-    public enumStates States;
-    GameObject vision;
-    GameObject smell;
-    GameObject bone;
-    GameObject player;
-    GameObject newSphere;
-    public GameObject sphere;
+//    public enumStates States;
+//    GameObject vision;
+//    GameObject smell;
+//    GameObject bone;
+//    GameObject player;
+//    GameObject newSphere;
+//    public GameObject sphere;
 
-    NavMeshAgent Fortyseven;
-	List<Transform> targets = new List<Transform>();
-    public List<Transform> alertArea = new List<Transform>();
+//    NavMeshAgent Fortyseven;
+//    List<Transform> targets = new List<Transform>();
+//    public List<Transform> alertArea = new List<Transform>();
 
-	bool hasWaypointsLeft;
-    public bool eatBone = false;
-    public bool distracted = false;
+//    bool hasWaypointsLeft;
+//    public bool eatBone = false;
+//    public bool distracted = false;
 
-    public float turnSpeed = 2.0f;
+//    public float turnSpeed = 2.0f;
 
-	public float speed = 10;
+//    public float speed = 10;
 
-    float maxSpeed = 20;
-    float maxScale = 60;
-	float waypointOffsetMin = -1.0f;
-	float waypointOffsetMax = 1.0f;
-	float vectorTransformPositionx = 0;
-	float vectorTransformPositionz = 0;
-	float vectorCurrentTargetx = 0;
-	float vectorCurrentTargetz = 0;
-	float vectorx;
-    float vectorz;
-
-
-    //Idle Suspicious values
-    public bool idleSuscpicious = false;
-    public float firstDirection; //= 33;
-    public float secondDirection; // = 66;
-    public float thirdDirection; // = 78;
-    List<float> directionDegrees = new List<float>();
-    GameObject enemyObject;
-
-    //bool rotating = false;
-    float rotationStep = 10.0f;
-    public float rotationDegrees = 90;
-    float currentAngle = 0;
-    float targetAngle = 0;
-    float angleOffsetMax = 1.0f;
-    float angleOffsetMin = -1.0f;
-    bool rotationInProgress = false;
-    public bool rotationCompleted = false;
-    float turnTimer = 200.0f;
-    float currentTargetDirection;
-    //So many timers
-	public int timer;
-    public int idleTimer;    
-    public int barkTimer;
-    public float escapeTimer;
-    public float alertTimer;
-    public float eatTimer;
-    public int defaultEatTimer;
-    public int defaultIdleTimer;
-    public int defaultBarkTimer;
-    public int defaultTimer;
-    public int defaultAlertTimer;
-    public int defaultEscapeTimer;
-    public int playerOutOfSight;
-	int targetIndex;
-	int targetCounter = 0;
-    public int areaCounter = 0;
-    public int turnCounter = 0;
-
-	Vector3[] path = new Vector3[0];
-	Vector3 currentWaypoint;
-    Vector3 bonedir;
-
-    //values if enemy doesn't receive a new waypoint to prevent them from being stuck
-    Vector3 worldPositionNow;
-    Vector3 worldPositionPast;
-    //int checkIfStuck = 100;
-    //bool isStuck = false;
-
-	void Start()
-	{        
+//    float maxSpeed = 20;
+//    float maxScale = 60;
+//    float waypointOffsetMin = -1.0f;
+//    float waypointOffsetMax = 1.0f;
+//    float vectorTransformPositionx = 0;
+//    float vectorTransformPositionz = 0;
+//    float vectorCurrentTargetx = 0;
+//    float vectorCurrentTargetz = 0;
+//    float vectorx;
+//    float vectorz;
 
 
-        player = GameObject.FindGameObjectWithTag("player");
-        setDirectionsForIdle();
-        setTargetWaypoints();
-		currentTarget = targets[0];
-		lastTarget = currentTarget;
-        Fortyseven = GetComponent<NavMeshAgent>();
+//    //Idle Suspicious values
+//    public bool idleSuscpicious = false;
+//    public float firstDirection; //= 33;
+//    public float secondDirection; // = 66;
+//    public float thirdDirection; // = 78;
+//    List<float> directionDegrees = new List<float>();
+//    GameObject enemyObject;
 
-        Fortyseven.SetDestination(currentTarget.position);
-		//pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
+//    //bool rotating = false;
+//    float rotationStep = 10.0f;
+//    public float rotationDegrees = 90;
+//    float currentAngle = 0;
+//    float targetAngle = 0;
+//    float angleOffsetMax = 1.0f;
+//    float angleOffsetMin = -1.0f;
+//    bool rotationInProgress = false;
+//    public bool rotationCompleted = false;
+//    float turnTimer = 200.0f;
+//    float currentTargetDirection;
+//    //So many timers
+//    public int timer;
+//    public int idleTimer;    
+//    public int barkTimer;
+//    public float escapeTimer;
+//    public float alertTimer;
+//    public float eatTimer;
+//    public int defaultEatTimer;
+//    public int defaultIdleTimer;
+//    public int defaultBarkTimer;
+//    public int defaultTimer;
+//    public int defaultAlertTimer;
+//    public int defaultEscapeTimer;
+//    public int playerOutOfSight;
+//    int targetIndex;
+//    int targetCounter = 0;
+//    public int areaCounter = 0;
+//    public int turnCounter = 0;
 
-        //Setting Timers
-        timer = defaultTimer;
-        eatTimer = defaultEatTimer;
-        idleTimer = defaultIdleTimer;
-        barkTimer = defaultBarkTimer;
-        alertTimer = defaultAlertTimer;
-        escapeTimer = defaultEscapeTimer;
-	}
+//    Vector3[] path = new Vector3[0];
+//    Vector3 currentWaypoint;
+//    Vector3 bonedir;
 
-	void Update()
-    {
+//    //values if enemy doesn't receive a new waypoint to prevent them from being stuck
+//    Vector3 worldPositionNow;
+//    Vector3 worldPositionPast;
+//    //int checkIfStuck = 100;
+//    //bool isStuck = false;
+
+//    void Start()
+//    {        
+
+
+//        player = GameObject.FindGameObjectWithTag("player");
+//        setDirectionsForIdle();
+//        setTargetWaypoints();
+//        currentTarget = targets[0];
+//        lastTarget = currentTarget;
+//        Fortyseven = GetComponent<NavMeshAgent>();
+
+//        Fortyseven.SetDestination(currentTarget.position);
+//        //pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
+
+//        //Setting Timers
+//        timer = defaultTimer;
+//        eatTimer = defaultEatTimer;
+//        idleTimer = defaultIdleTimer;
+//        barkTimer = defaultBarkTimer;
+//        alertTimer = defaultAlertTimer;
+//        escapeTimer = defaultEscapeTimer;
+//    }
+
+//    void Update()
+//    {
         
 
-        //------------------//
-        //Code of the states//
-        //------------------//
-        switch(States)
-        {
+//        //------------------//
+//        //Code of the states//
+//        //------------------//
+//        switch(States)
+//        {
 
-            case enumStates.patrol:
-                {
-                    //-----------------------------------------------------------------------------------------//
-                    //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
-                    //-----------------------------------------------------------------------------------------//
-                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {
+//            case enumStates.patrol:
+//                {
+//                    //-----------------------------------------------------------------------------------------//
+//                    //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
+//                    //-----------------------------------------------------------------------------------------//
+//                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+//                    {
 
-                        stateManager(1);
+//                        stateManager(1);
 
-                    }
+//                    }
                     
-                }
+//                }
                 
-                    break;
+//                    break;
 
 
-            case enumStates.idle:
-                    {
-                        //--------------------------------------------------------//
-                        // idle, look around, without moving towards any waypoints//
-                        //--------------------------------------------------------//
+//            case enumStates.idle:
+//                    {
+//                        //--------------------------------------------------------//
+//                        // idle, look around, without moving towards any waypoints//
+//                        //--------------------------------------------------------//
 
-                            if (idleTimer <= 0)
-                            {
-                                lastTarget = currentTarget;
-                                currentTarget = targets[targetCounter];
+//                            if (idleTimer <= 0)
+//                            {
+//                                lastTarget = currentTarget;
+//                                currentTarget = targets[targetCounter];
 
-                                Fortyseven.SetDestination(currentTarget.position);
-                                idleTimer = defaultIdleTimer;
-                                targetCounter++;
-                                if (targetCounter > 1)
-                                {
-                                    targetCounter = 0;
-                                }
-                                stateManager(0);
-                            }
-                            idleTimer--;
-                        break;
-                    }
-            case enumStates.chase:
-                    {
-                        //----------------------------------------------------------------------------//
-                        // chase the Player constantly searching for a waypoint at the Player position//
-                        //----------------------------------------------------------------------------//
+//                                Fortyseven.SetDestination(currentTarget.position);
+//                                idleTimer = defaultIdleTimer;
+//                                targetCounter++;
+//                                if (targetCounter > 1)
+//                                {
+//                                    targetCounter = 0;
+//                                }
+//                                stateManager(0);
+//                            }
+//                            idleTimer--;
+//                        break;
+//                    }
+//            case enumStates.chase:
+//                    {
+//                        //----------------------------------------------------------------------------//
+//                        // chase the Player constantly searching for a waypoint at the Player position//
+//                        //----------------------------------------------------------------------------//
 
-                        //------------------//
-                        //Bark While chasing//
-                        //------------------//
-                        if (barkTimer < 0)
-                        {
-                            newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
-                            newSphere.transform.parent = transform;
-                            barkTimer = defaultBarkTimer;
-                            if (newSphere)
-                            {
-                                sphereScript = newSphere.GetComponent<soundSphere>();
-                                sphereScript.setMaxDiameter(maxScale);
-                            }
+//                        //------------------//
+//                        //Bark While chasing//
+//                        //------------------//
+//                        if (barkTimer < 0)
+//                        {
+//                            newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
+//                            newSphere.transform.parent = transform;
+//                            barkTimer = defaultBarkTimer;
+//                            if (newSphere)
+//                            {
+//                                sphereScript = newSphere.GetComponent<soundSphere>();
+//                                sphereScript.setMaxDiameter(maxScale);
+//                            }
                             
-                        }
-                        barkTimer--;
-                        //-----------------//
-                        //Escape from chase//
-                        //-----------------//
+//                        }
+//                        barkTimer--;
+//                        //-----------------//
+//                        //Escape from chase//
+//                        //-----------------//
 
-                            Physics.Linecast(transform.position, player.transform.position, out hit);
-                            if (hit.collider == player.GetComponent<Collider>())
-                            {
-                                lastSeenPosition = player.transform.position;
-                                currentTarget.position=lastSeenPosition;
+//                            Physics.Linecast(transform.position, player.transform.position, out hit);
+//                            if (hit.collider == player.GetComponent<Collider>())
+//                            {
+//                                lastSeenPosition = player.transform.position;
+//                                currentTarget.position=lastSeenPosition;
 
-                            }
-                            else{
+//                            }
+//                            else{
 
-                                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                                //-----------------//
-                                //Go to alert-state//
-                                //-----------------//
-                            {
-                                print("ImOuttaHere");
-                                escapeTimer = defaultEscapeTimer;
-                                playerOutOfSight = 2;
-                                currentTarget = alertArea[areaCounter];
-                                areaCounter++;
-                                if(areaCounter > 2)
-                                {
-                                    areaCounter = 0;
-                                }
-                                stateManager(3);
-                            }
-                        }
+//                                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+//                                //-----------------//
+//                                //Go to alert-state//
+//                                //-----------------//
+//                            {
+//                                print("ImOuttaHere");
+//                                escapeTimer = defaultEscapeTimer;
+//                                playerOutOfSight = 2;
+//                                currentTarget = alertArea[areaCounter];
+//                                areaCounter++;
+//                                if(areaCounter > 2)
+//                                {
+//                                    areaCounter = 0;
+//                                }
+//                                stateManager(3);
+//                            }
+//                        }
 
-                    }
-                    break;
-            case enumStates.alert:
-                //------------------------------------------------------//
-                //Look around a room by moving from waypoint to waypoint//
-                //------------------------------------------------------//
-                //Physics.Linecast(transform.position, player.transform.position, out hit);
-                //if (hit.collider == player.GetComponent<Collider>())
-                //{
-                //    lastSeenPosition = player.transform.position;
-                //    currentTarget.position = lastSeenPosition;
-                //    stateManager(2);
-                //}
-                //else
-                {
-                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {
-                        if (timer <= 0 && (!distracted))
-                        {
-                            lastTarget = currentTarget;
-                            currentTarget = alertArea[areaCounter];
-                            areaCounter++;
-                            if (areaCounter > 2)
-                            {
-                                areaCounter = 0;
-                            }
-                        }
-                    }
+//                    }
+//                    break;
+//            case enumStates.alert:
+//                //------------------------------------------------------//
+//                //Look around a room by moving from waypoint to waypoint//
+//                //------------------------------------------------------//
+//                //Physics.Linecast(transform.position, player.transform.position, out hit);
+//                //if (hit.collider == player.GetComponent<Collider>())
+//                //{
+//                //    lastSeenPosition = player.transform.position;
+//                //    currentTarget.position = lastSeenPosition;
+//                //    stateManager(2);
+//                //}
+//                //else
+//                {
+//                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+//                    {
+//                        if (timer <= 0 && (!distracted))
+//                        {
+//                            lastTarget = currentTarget;
+//                            currentTarget = alertArea[areaCounter];
+//                            areaCounter++;
+//                            if (areaCounter > 2)
+//                            {
+//                                areaCounter = 0;
+//                            }
+//                        }
+//                    }
 
-                    if (alertTimer <= 0)
-                    {
+//                    if (alertTimer <= 0)
+//                    {
 
-                        if (turnCounter != 0)
-                        {
-                            turnCounter = 0;
-                        }
-                        if (idleTimer != 50)
-                        {
-                            idleTimer = 50;
-                        }
-                        currentTarget = lastTarget;
-                        stateManager(4);
-                    }
+//                        if (turnCounter != 0)
+//                        {
+//                            turnCounter = 0;
+//                        }
+//                        if (idleTimer != 50)
+//                        {
+//                            idleTimer = 50;
+//                        }
+//                        currentTarget = lastTarget;
+//                        stateManager(4);
+//                    }
 
-                    alertTimer--;
-                    if (alertTimer <= 0)
-                    {
-                        alertTimer = 0;
-                    }
-                }
-                    break;
-            case enumStates.idleSuspicious:
-                    {
-                        //-----------------------------------------------//
-                        //Stand on the spot and look at preset directions//
-                        //-----------------------------------------------//
+//                    alertTimer--;
+//                    if (alertTimer <= 0)
+//                    {
+//                        alertTimer = 0;
+//                    }
+//                }
+//                    break;
+//            case enumStates.idleSuspicious:
+//                    {
+//                        //-----------------------------------------------//
+//                        //Stand on the spot and look at preset directions//
+//                        //-----------------------------------------------//
 
-                        //StopCoroutine("followPath");
-
-
-                        //rotateEnemy(currentTargetDirection, rotationStep);
-                        ////		} 
-                        //if (rotationCompleted)
-                        //{
-                        //    print("rotation completed");
-                        //    directionDegrees.Add(directionDegrees[0]);
-                        //    directionDegrees.Remove(directionDegrees[0]);
-                        //    currentTargetDirection = directionDegrees[0];
-                        //    rotationCompleted = false;
-
-                        //} 
-                        //break;
-                        if (turnCounter < 3)
-                        {
-
-                            currentTargetDirection = directionDegrees[0];
-                            print(currentTargetDirection + " << currentTargetDirection");
-                            rotateEnemy(currentTargetDirection, rotationStep);
+//                        //StopCoroutine("followPath");
 
 
+//                        //rotateEnemy(currentTargetDirection, rotationStep);
+//                        ////		} 
+//                        //if (rotationCompleted)
+//                        //{
+//                        //    print("rotation completed");
+//                        //    directionDegrees.Add(directionDegrees[0]);
+//                        //    directionDegrees.Remove(directionDegrees[0]);
+//                        //    currentTargetDirection = directionDegrees[0];
+//                        //    rotationCompleted = false;
 
-                            if (rotationCompleted)
-                            {
+//                        //} 
+//                        //break;
+//                        if (turnCounter < 3)
+//                        {
 
-                                directionDegrees.Add(directionDegrees[0]);
-                                directionDegrees.Remove(directionDegrees[0]);
-                                rotationCompleted = false;
-                                print("turnTimer  " + turnTimer);
-
-                                turnCounter++;
-                                turnTimer += 100;
-                                print("currentTargetDirection >> " + currentTargetDirection);
-
-                            }
-
-                        }
-
-
-                        else if (turnCounter > 2)
-                        {
-
-                            if (idleTimer <= 0)
-                            {
+//                            currentTargetDirection = directionDegrees[0];
+//                            print(currentTargetDirection + " << currentTargetDirection");
+//                            rotateEnemy(currentTargetDirection, rotationStep);
 
 
-                                if (currentTarget != null)
-                                {
-                                    Fortyseven.SetDestination(currentTarget.position);
-                                }
-                                stateManager(0);
-                                print("state manager: patrol!");
-                            }
-                            idleTimer--;
-                        }
+
+//                            if (rotationCompleted)
+//                            {
+
+//                                directionDegrees.Add(directionDegrees[0]);
+//                                directionDegrees.Remove(directionDegrees[0]);
+//                                rotationCompleted = false;
+//                                print("turnTimer  " + turnTimer);
+
+//                                turnCounter++;
+//                                turnTimer += 100;
+//                                print("currentTargetDirection >> " + currentTargetDirection);
+
+//                            }
+
+//                        }
 
 
-                        break;
-                    }
-            case enumStates.distracted:
+//                        else if (turnCounter > 2)
+//                        {
 
-                    {
-                        //-------------------------//
-                        // Move towards distraction//
-                        //-------------------------//
+//                            if (idleTimer <= 0)
+//                            {
+
+
+//                                if (currentTarget != null)
+//                                {
+//                                    Fortyseven.SetDestination(currentTarget.position);
+//                                }
+//                                stateManager(0);
+//                                print("state manager: patrol!");
+//                            }
+//                            idleTimer--;
+//                        }
+
+
+//                        break;
+//                    }
+//            case enumStates.distracted:
+
+//                    {
+//                        //-------------------------//
+//                        // Move towards distraction//
+//                        //-------------------------//
 
                        
-                        if (!bone)
-                        {
-                            vision.SetActive(true);
-                            smell.SetActive(true);
-                            alertTimer += defaultAlertTimer;
-                            stateManager(3);
-                            currentTarget = alertArea[areaCounter];
-                        } 
-                        distracted = true;
-                        if (currentTarget != null)
-                        {
-                            bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
-                        }
-                        if (bonedir.x <= 4 && bonedir.x >= -4 && bonedir.z <= 4 && bonedir.z >= -4)
-                        {
-                            stateManager(7);
-                            distracted = false;
-                            if (!eatBone)
-                            {
-                                eatTimer = defaultEatTimer;
-                            }
+//                        if (!bone)
+//                        {
+//                            vision.SetActive(true);
+//                            smell.SetActive(true);
+//                            alertTimer += defaultAlertTimer;
+//                            stateManager(3);
+//                            currentTarget = alertArea[areaCounter];
+//                        } 
+//                        distracted = true;
+//                        if (currentTarget != null)
+//                        {
+//                            bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
+//                        }
+//                        if (bonedir.x <= 4 && bonedir.x >= -4 && bonedir.z <= 4 && bonedir.z >= -4)
+//                        {
+//                            stateManager(7);
+//                            distracted = false;
+//                            if (!eatBone)
+//                            {
+//                                eatTimer = defaultEatTimer;
+//                            }
 
-                            eatBone = true;
-                        }
-                    }
+//                            eatBone = true;
+//                        }
+//                    }
 
-                    break;
-            case enumStates.detectSound:
-                    {
-                        //---------------------------------------------//
-                        // when sound is heard, move towards the source//
-                        //---------------------------------------------//
-                        GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
-                        bone = GameObject.FindGameObjectWithTag("bone");
-                        if(brokenObject)
-                        {
-                            Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
-                            if (objectdir.x <= 2 && objectdir.x >= -2 && objectdir.z <= 2 && objectdir.z >= -2 || !brokenObject) 
-                            {
-                                //stateManager(0);
-                                //currentTarget = lastTarget;
-                                currentTarget = alertArea[areaCounter];
-                                areaCounter++;
-                                if (areaCounter > 2)
-                                {
-                                    areaCounter = 0;
-                                }
-                                stateManager(3);
+//                    break;
+//            case enumStates.detectSound:
+//                    {
+//                        //---------------------------------------------//
+//                        // when sound is heard, move towards the source//
+//                        //---------------------------------------------//
+//                        GameObject brokenObject = GameObject.FindGameObjectWithTag("Broken Object");
+//                        bone = GameObject.FindGameObjectWithTag("bone");
+//                        if(brokenObject)
+//                        {
+//                            Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
+//                            if (objectdir.x <= 2 && objectdir.x >= -2 && objectdir.z <= 2 && objectdir.z >= -2 || !brokenObject) 
+//                            {
+//                                //stateManager(0);
+//                                //currentTarget = lastTarget;
+//                                currentTarget = alertArea[areaCounter];
+//                                areaCounter++;
+//                                if (areaCounter > 2)
+//                                {
+//                                    areaCounter = 0;
+//                                }
+//                                stateManager(3);
 
-                            }
-                            else
-                            {
-                                currentTarget = brokenObject.transform;
+//                            }
+//                            else
+//                            {
+//                                currentTarget = brokenObject.transform;
 
 
-                            }
-                        }
-                        else if(bone)
-                        {
-                            stateManager(5);
-                            currentTarget = bone.transform;
+//                            }
+//                        }
+//                        else if(bone)
+//                        {
+//                            stateManager(5);
+//                            currentTarget = bone.transform;
 
-                            GameObject temp = GameObject.FindGameObjectWithTag("Vision");
-                            vision = temp.gameObject;
-                            vision.SetActive(false);
+//                            GameObject temp = GameObject.FindGameObjectWithTag("Vision");
+//                            vision = temp.gameObject;
+//                            vision.SetActive(false);
 
-                            temp = GameObject.FindGameObjectWithTag("Smell");
-                            smell = temp.gameObject;
-                            smell.SetActive(false);
-                        }
+//                            temp = GameObject.FindGameObjectWithTag("Smell");
+//                            smell = temp.gameObject;
+//                            smell.SetActive(false);
+//                        }
 
-                    }
+//                    }
 
-                    break;
-            case enumStates.eatBone:
-                    {
-                        //------------------------------------------------------------------//
-                        // holds the enemy still for long enough for the distraction to pass//
-                        //------------------------------------------------------------------//
+//                    break;
+//            case enumStates.eatBone:
+//                    {
+//                        //------------------------------------------------------------------//
+//                        // holds the enemy still for long enough for the distraction to pass//
+//                        //------------------------------------------------------------------//
 
-                        eatBone = true;
-                        if (!bone)
-                        {
-                            vision.SetActive(true);
-                            smell.SetActive(true);
-                            alertTimer += defaultAlertTimer;
-                            stateManager(3);
-                            currentTarget = alertArea[areaCounter];
-                        }
+//                        eatBone = true;
+//                        if (!bone)
+//                        {
+//                            vision.SetActive(true);
+//                            smell.SetActive(true);
+//                            alertTimer += defaultAlertTimer;
+//                            stateManager(3);
+//                            currentTarget = alertArea[areaCounter];
+//                        }
                             
-                        else if (eatTimer <= 0)
+//                        else if (eatTimer <= 0)
 
-                        {
-                            eatTimer = defaultEatTimer;// 120;
-                            distracted = false;
-                            vision.SetActive(true);
-                            smell.SetActive(true);
-                            eatBone = false;
+//                        {
+//                            eatTimer = defaultEatTimer;// 120;
+//                            distracted = false;
+//                            vision.SetActive(true);
+//                            smell.SetActive(true);
+//                            eatBone = false;
 
-                            currentTarget = alertArea[areaCounter];
-                            areaCounter++;
-                            if (areaCounter > 2)
-                            {
-                                areaCounter = 0;
-                            }
-                            stateManager(3);
-                            Destroy(bone);
+//                            currentTarget = alertArea[areaCounter];
+//                            areaCounter++;
+//                            if (areaCounter > 2)
+//                            {
+//                                areaCounter = 0;
+//                            }
+//                            stateManager(3);
+//                            Destroy(bone);
 
                            
-                        }
-                        eatTimer--;
+//                        }
+//                        eatTimer--;
 
-                    }
+//                    }
 
-                    break;
-            default:
-                    break;
-        }
-        if (speed > 4)
-        {
+//                    break;
+//            default:
+//                    break;
+//        }
+//        if (speed > 4)
+//        {
 
 
-            Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
-            if (velocity.x > maxSpeed)
-            {
-                float temp = velocity.x - maxSpeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
-            }
-            else if (velocity.y > maxSpeed)
-            {
-                float temp = velocity.y - maxSpeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
-            }
-            else if (velocity.z > maxSpeed)
-            {
-                float temp = velocity.z - maxSpeed;
-                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
-            }
-        }
+//            Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
+//            if (velocity.x > maxSpeed)
+//            {
+//                float temp = velocity.x - maxSpeed;
+//                this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
+//            }
+//            else if (velocity.y > maxSpeed)
+//            {
+//                float temp = velocity.y - maxSpeed;
+//                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
+//            }
+//            else if (velocity.z > maxSpeed)
+//            {
+//                float temp = velocity.z - maxSpeed;
+//                this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
+//            }
+//        }
 
-        if(currentTarget != null)
-        {
-            vectorTransformPositionx = transform.position.x;
-            vectorTransformPositionz = transform.position.z;
+//        if(currentTarget != null)
+//        {
+//            vectorTransformPositionx = transform.position.x;
+//            vectorTransformPositionz = transform.position.z;
 
-            vectorCurrentTargetx = currentTarget.position.x;
-            vectorCurrentTargetz = currentTarget.position.z;
+//            vectorCurrentTargetx = currentTarget.position.x;
+//            vectorCurrentTargetz = currentTarget.position.z;
 
-            if (vectorTransformPositionx < 0)
-            {
-                vectorTransformPositionx *= -1;
-            }  
+//            if (vectorTransformPositionx < 0)
+//            {
+//                vectorTransformPositionx *= -1;
+//            }  
 
-            if (vectorTransformPositionz < 0)
-            {
-                vectorTransformPositionz *= -1;
-            }
+//            if (vectorTransformPositionz < 0)
+//            {
+//                vectorTransformPositionz *= -1;
+//            }
 
-            if (vectorCurrentTargetx < 0)
-            {
-                vectorCurrentTargetx *= -1;
-            }
+//            if (vectorCurrentTargetx < 0)
+//            {
+//                vectorCurrentTargetx *= -1;
+//            }
 
-            if (vectorCurrentTargetz < 0)
-            {
-                vectorCurrentTargetz *= -1;
-            }
+//            if (vectorCurrentTargetz < 0)
+//            {
+//                vectorCurrentTargetz *= -1;
+//            }
 
-            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
-            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
-        }
+//            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
+//            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+//        }
 
-        if(timer <= 0 && currentTarget != null)
-        {
-            timer+=defaultTimer;
-            Fortyseven.SetDestination(currentTarget.position);
+//        if(timer <= 0 && currentTarget != null)
+//        {
+//            timer+=defaultTimer;
+//            Fortyseven.SetDestination(currentTarget.position);
 
-        }
-        timer--;
-        //-------------//
-        //End of Update//
-        //-------------//
-    }
+//        }
+//        timer--;
+//        //-------------//
+//        //End of Update//
+//        //-------------//
+//    }
 
-    //-------------//
-    //State Manager//
-    //-------------//
-    public void stateManager(int value)
-    {
-        States = (enumStates)value;
-    }
+//    //-------------//
+//    //State Manager//
+//    //-------------//
+//    public void stateManager(int value)
+//    {
+//        States = (enumStates)value;
+//    }
 
-	public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
-	{
-		if (_pathSuccessful) 
-		{
+//    public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
+//    {
+//        if (_pathSuccessful) 
+//        {
 
-			path = newPath;
-			StopCoroutine("followPath");
-			StartCoroutine("followPath");
-		}
+//            path = newPath;
+//            StopCoroutine("followPath");
+//            StartCoroutine("followPath");
+//        }
 
-	}
+//    }
 
-	IEnumerator followPath()
-	{
-		currentWaypoint = path [0];
+//    IEnumerator followPath()
+//    {
+//        currentWaypoint = path [0];
 
-		while (true) 
-		{
-			if(transform.position == currentWaypoint)
-			{
-				targetIndex ++;
+//        while (true) 
+//        {
+//            if(transform.position == currentWaypoint)
+//            {
+//                targetIndex ++;
 
-				if(targetIndex >= path.Length)
-				{
-					targetIndex = 0;
-					path = new Vector3[0];
-					yield break;
-				}
-				currentWaypoint = path[targetIndex];
+//                if(targetIndex >= path.Length)
+//                {
+//                    targetIndex = 0;
+//                    path = new Vector3[0];
+//                    yield break;
+//                }
+//                currentWaypoint = path[targetIndex];
 
-			}
-            if (currentTarget != null)
-            {
-                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position - transform.position), turnSpeed * Time.deltaTime);
-                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-            }
-			yield return null;
-		}
-	}
+//            }
+//            if (currentTarget != null)
+//            {
+//                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position - transform.position), turnSpeed * Time.deltaTime);
+//                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+//            }
+//            yield return null;
+//        }
+//    }
 
-	public void OnDrawGizmos()
-	{
-		if (path != null) {
-			for (int i = targetIndex; i < path.Length; i++) 
-			{
-				Gizmos.color = Color.black;
-				Gizmos.DrawWireCube (path [i], Vector3.one);
+//    public void OnDrawGizmos()
+//    {
+//        if (path != null) {
+//            for (int i = targetIndex; i < path.Length; i++) 
+//            {
+//                Gizmos.color = Color.black;
+//                Gizmos.DrawWireCube (path [i], Vector3.one);
 
-				if (i == targetIndex) 
-				{
-					Gizmos.DrawLine (transform.position, path [i]);
-				} 
-				else 
-				{
-					Gizmos.DrawLine (path [i - 1], path [i]);
+//                if (i == targetIndex) 
+//                {
+//                    Gizmos.DrawLine (transform.position, path [i]);
+//                } 
+//                else 
+//                {
+//                    Gizmos.DrawLine (path [i - 1], path [i]);
 
-				}
-			}
-		} 
+//                }
+//            }
+//        } 
 	
-	}
+//    }
 
-    void setDirectionsForIdle()
-    {
+//    void setDirectionsForIdle()
+//    {
 
-        directionDegrees.Add(firstDirection);
-        directionDegrees.Add(secondDirection);
-        directionDegrees.Add(thirdDirection);
+//        directionDegrees.Add(firstDirection);
+//        directionDegrees.Add(secondDirection);
+//        directionDegrees.Add(thirdDirection);
 
-    }
+//    }
 
-    void setTargetWaypoints()
-    {
+//    void setTargetWaypoints()
+//    {
 
-        targets.Add(target1);
-        targets.Add(target2);
-        targets.Add(target3);
-    }
+//        targets.Add(target1);
+//        targets.Add(target2);
+//        targets.Add(target3);
+//    }
 
-    void rotateEnemy(float targetDegrees, float rotationStep)
-    {
-        //print ("turnTimer  >> " + turnTimer);
-        //rotationInProgress = true;
-        //		while (rotationInProgress == true) 
-        float rotationDifference = 0;
-
-
-        if (turnTimer <= 0)
-        {
-            //print (turnTimer + "  << TurnTimer");
-            if (rotationInProgress == false)
-            {
-                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                targetAngle = targetDegrees;//currentAngle + targetDegrees;
-                rotationInProgress = true;
-                print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
-            }
-
-            else if (rotationInProgress)
-            {
-                if (turnTimer == 0 && rotationDifference >= 0)
-                {
-                    if (targetAngle <= 180 && targetAngle >= 0) //decide which side the target is. 0-180 left, 0 - (-180)
-                    {
-                        if (targetAngle <= 90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-                        {
-
-                            if (currentAngle <= targetAngle && turnTimer == 0)
-                            {
-                                print("entered the rotation loop");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
-                                if (rotationDifference < 0)
-                                {
-                                    rotationDifference = rotationDifference * -1;
-                                }
-
-                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
-                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-                            }
-                            else if (currentAngle > targetAngle && turnTimer == 0)
-                            {
-
-                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-
-                            }
-
-                        }
-                        else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
-                        {
-                            if (currentAngle <= targetAngle)
-                            {
-                                print("entered the rotation loop");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
-                                if (rotationDifference < 0)
-                                {
-                                    rotationDifference = rotationDifference * -1;
-                                }
+//    void rotateEnemy(float targetDegrees, float rotationStep)
+//    {
+//        //print ("turnTimer  >> " + turnTimer);
+//        //rotationInProgress = true;
+//        //		while (rotationInProgress == true) 
+//        float rotationDifference = 0;
 
 
-                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-                            }
-                            else if (currentAngle > targetAngle && turnTimer == 0)
-                            {
-                                print("entered the rotation loop 2");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-                            }
-                        }
-                    }
-                    else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
-                    {
-                        if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-                        {
-                            if (currentAngle >= targetAngle && turnTimer == 0)
-                            {
-                                print("entered the rotation loop -90 - 0");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
-                                if (rotationDifference < 0)
-                                {
-                                    rotationDifference = rotationDifference * -1;
-                                }
+//        if (turnTimer <= 0)
+//        {
+//            //print (turnTimer + "  << TurnTimer");
+//            if (rotationInProgress == false)
+//            {
+//                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                targetAngle = targetDegrees;//currentAngle + targetDegrees;
+//                rotationInProgress = true;
+//                print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
+//            }
 
-                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
-                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-                            }
-                            else if (currentAngle < targetAngle && turnTimer == 0)
-                            {
+//            else if (rotationInProgress)
+//            {
+//                if (turnTimer == 0 && rotationDifference >= 0)
+//                {
+//                    if (targetAngle <= 180 && targetAngle >= 0) //decide which side the target is. 0-180 left, 0 - (-180)
+//                    {
+//                        if (targetAngle <= 90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+//                        {
 
-                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
+//                            if (currentAngle <= targetAngle && turnTimer == 0)
+//                            {
+//                                print("entered the rotation loop");
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+//                                if (rotationDifference < 0)
+//                                {
+//                                    rotationDifference = rotationDifference * -1;
+//                                }
 
-                            }
-                        }
-                        if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-                        {
-                            if (currentAngle >= targetAngle && turnTimer == 0)
-                            {
-                                print("entered the rotation loop -90 - 0");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
-                                if (rotationDifference < 0)
-                                {
-                                    rotationDifference = rotationDifference * -1;
-                                }
+//                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+//                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+//                            }
+//                            else if (currentAngle > targetAngle && turnTimer == 0)
+//                            {
 
-                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
-                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
-                            }
-                            else if (currentAngle < targetAngle && turnTimer == 0)
-                            {
+//                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
 
-                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-                                rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-                                {
-                                    rotationCompleted = true;
-                                    rotationInProgress = false;
-                                    turnTimer += 200f * Time.deltaTime;
-                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
-                                }
+//                            }
 
-                            }
-                        }
-                    }
-                }
-
-            }
+//                        }
+//                        else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
+//                        {
+//                            if (currentAngle <= targetAngle)
+//                            {
+//                                print("entered the rotation loop");
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+//                                if (rotationDifference < 0)
+//                                {
+//                                    rotationDifference = rotationDifference * -1;
+//                                }
 
 
-        }
-        else
-        {
-            turnTimer--;
-            if (turnTimer < 0)
-            {
-                turnTimer = 0;
-            }
+//                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+//                            }
+//                            else if (currentAngle > targetAngle && turnTimer == 0)
+//                            {
+//                                print("entered the rotation loop 2");
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+//                            }
+//                        }
+//                    }
+//                    else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
+//                    {
+//                        if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+//                        {
+//                            if (currentAngle >= targetAngle && turnTimer == 0)
+//                            {
+//                                print("entered the rotation loop -90 - 0");
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+//                                if (rotationDifference < 0)
+//                                {
+//                                    rotationDifference = rotationDifference * -1;
+//                                }
+
+//                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+//                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+//                            }
+//                            else if (currentAngle < targetAngle && turnTimer == 0)
+//                            {
+
+//                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+
+//                            }
+//                        }
+//                        if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+//                        {
+//                            if (currentAngle >= targetAngle && turnTimer == 0)
+//                            {
+//                                print("entered the rotation loop -90 - 0");
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+//                                if (rotationDifference < 0)
+//                                {
+//                                    rotationDifference = rotationDifference * -1;
+//                                }
+
+//                                print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+//                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+//                            }
+//                            else if (currentAngle < targetAngle && turnTimer == 0)
+//                            {
+
+//                                print("entered the rotation loop 2" + "   targetAnle  >>   " + targetAngle);
+//                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+//                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+//                                rotationDifference = targetAngle - currentAngle;
+//                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+//                                {
+//                                    rotationCompleted = true;
+//                                    rotationInProgress = false;
+//                                    turnTimer += 200f * Time.deltaTime;
+//                                    print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+//                                }
+
+//                            }
+//                        }
+//                    }
+//                }
+
+//            }
 
 
-            //print ("turn timer  " + turnTimer);
-        }
+//        }
+//        else
+//        {
+//            turnTimer--;
+//            if (turnTimer < 0)
+//            {
+//                turnTimer = 0;
+//            }
 
-    }
-    //------------------------------------------------------------//
-    //Sets an area from a room the enemy is in for the alert-state//
-    //------------------------------------------------------------//
 
-    public void setAlertArea(GameObject area)
-    {
-        Component[] transforms;
-        alertArea.Clear();
-        transforms = area.GetComponentsInChildren<Transform>();
+//            //print ("turn timer  " + turnTimer);
+//        }
 
-        foreach(Transform alert in transforms)
-        {
-            if(alert.tag == "Waypoint")
-            {
-                alertArea.Add(alert);
-            }
+//    }
+//    //------------------------------------------------------------//
+//    //Sets an area from a room the enemy is in for the alert-state//
+//    //------------------------------------------------------------//
 
-        }
-    }
-}
+//    public void setAlertArea(GameObject area)
+//    {
+//        Component[] transforms;
+//        alertArea.Clear();
+//        transforms = area.GetComponentsInChildren<Transform>();
 
->>>>>>> origin/Toni-prototype1
+//        foreach(Transform alert in transforms)
+//        {
+//            if(alert.tag == "Waypoint")
+//            {
+//                alertArea.Add(alert);
+//            }
+
+//        }
+//    }
+//}
+
+//>>>>>>> origin/Toni-prototype1

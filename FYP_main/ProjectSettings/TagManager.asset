@@ -4,35 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Hide
-  - OD
-  - ball
-  - enemy
-  - soundSphere
-  - brokenObject
-  - vision
-  - smell
-  - bone
-  - boneSpawner
-  - cube
-  - alertArea
   - player
-  - smellparticles
-  - Vision
-  - sniff
-  - Broken Object
-  - Alert Area
-<<<<<<< HEAD
-  - PARENT
   - Waypoint
-  - Unwalkable
-=======
-  - Bone
-  - PARENT
-  - Waypoint
-  - guard
-  - Smell
->>>>>>> origin/Toni-prototype1
+  - smell
+  - vision
+  - enemy
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
+  - New Tag
   layers:
   - Default
   - TransparentFX
@@ -42,8 +26,8 @@ TagManager:
   - UI
   - 
   - 
-  - Dog
-  - Unwalkable
+  - 
+  - 
   - 
   - 
   - 

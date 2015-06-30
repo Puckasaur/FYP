@@ -66,7 +66,7 @@ public class ringOfSmell : MonoBehaviour {
             }
         }
     }
-    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "player")
