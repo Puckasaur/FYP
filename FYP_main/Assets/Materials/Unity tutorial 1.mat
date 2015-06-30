@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: New Material
+  m_Name: Unity tutorial 1
   m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 5
@@ -88,7 +88,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0
       data:
         first:
           name: _SrcBlend
@@ -140,7 +140,7 @@ Material:
       data:
         first:
           name: _RimPower
-        second: 2.31999993
+        second: 8
     m_Colors:
       data:
         first:
@@ -153,7 +153,7 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: .15082629, g: .433823526, b: .127595142, a: 1}
+        second: {r: .603373706, g: .68610549, b: .882352948, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -161,4 +161,8 @@ Material:
       data:
         first:
           name: _RimColor
-        second: {r: .25999999, g: .189999998, b: .159999996, a: 0}
+        second: {r: 1, g: .0735294223, b: .0735294223, a: 0}
+      data:
+        first:
+          name: _FogColor
+        second: {r: .153276399, g: .307972014, b: .772058845, a: 1}
