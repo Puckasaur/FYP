@@ -36,6 +36,7 @@ public class soundSphere : MonoBehaviour
             {
                 script.escapeTimer = 0;
                 script.stateManager(6);
+				script.soundSource = transform.parent.gameObject;
             }
         }
     }
