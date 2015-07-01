@@ -416,79 +416,17 @@ public class enemyPathfinding : MonoBehaviour
 		case enumStates.detectSound:
 		{
 
-			detectSoundTimer--;
-			if(detectSoundTimer <= 0)
-			{
-				stateManager(4);
-				detectSoundTimer += defaultDetectSoundTimer;
-			}
+			//detectSoundTimer--;
+			//if(detectSoundTimer <= 0)
+			//{
+				stateManager(3);
+				//detectSoundTimer += defaultDetectSoundTimer;
+			//}
 			//---------------------------------------------//
 			// when sound is heard, move towards the source//
 			//---------------------------------------------//
-			if(GameObject.FindGameObjectWithTag("brokenObject") != null)
-			{
-				brokenObject = GameObject.FindGameObjectWithTag("brokenObject");
-			}
 
-			if(GameObject.FindGameObjectWithTag("bone") != null)
-			{
-				bone = GameObject.FindGameObjectWithTag("bone");
-			}
-
-			if(brokenObject)
-			{
-				Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
-				if (objectdir.x <= 2 && objectdir.x >= -2 && objectdir.z <= 2 && objectdir.z >= -2 || !brokenObject) 
-				{
-					stateManager(0);
-					if(lastTarget != null)
-					{
-						currentTarget = lastTarget;
-						print ("currentTarget0: " + currentTarget);
-					}
-
-					
-					
-				}
-				else
-				{
-					if(brokenObject.transform != null)
-					{
-
-						currentTarget = brokenObject.transform;
-						print ("currentTarget1: " + currentTarget);
-					}
-
-					
-					
-				}
-			}
-			else if(bone)
-			{
-				stateManager(5);
-				if(bone.transform != null)
-				{
-					currentTarget = bone.transform;
-					print ("currentTarget2: " + currentTarget);
-				}
-
-				
-				GameObject temp = GameObject.FindGameObjectWithTag("Vision");
-				vision = temp.gameObject;
-				vision.SetActive(false);
-				
-				temp = GameObject.FindGameObjectWithTag("Smell");
-				smell = temp.gameObject;
-				smell.SetActive(false);
-			}
-			else
-			{
-				currentTarget = soundSource.transform;
-				print ("current target3: " + currentTarget);
-			}
-			
 		}
-			
 			break;
 		case enumStates.eatBone:
 		{
