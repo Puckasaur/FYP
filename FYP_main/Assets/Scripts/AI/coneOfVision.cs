@@ -67,27 +67,14 @@ public class coneOfVision : MonoBehaviour
 		{
 
 			RaycastHit hit;
-			if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
+            Physics.Linecast(transform.parent.position, other.transform.position, out hit);
 			if (hit.collider == other) 
 			{
-				script = this.transform.parent.GetComponent<enemyPathfinding> ();
 				script.escapeTimer = 0;
+                //script.transform.LookAt(other.transform);
 				script.stateManager (2);
 				Debug.Log (hit);
-               
-            
-    
 
-				script.escapeTimer = 0;
-				if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
-				if (hit.collider == other) {
-					if (detectionTimer <= 0) {
-						script.stateManager (2);
-					}
-					detectionTimer--;
-
-				
-				}
 			}  
 			print (hit.collider);
 		}

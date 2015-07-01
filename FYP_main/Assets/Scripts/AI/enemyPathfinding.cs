@@ -10,7 +10,6 @@ public enum enumStates
 	alert = 3,
 	idleSuspicious = 4,
 	distracted = 5,
-	
 	detectSound = 6,
 	eatBone = 7
 }
@@ -50,12 +49,12 @@ public class enemyPathfinding : MonoBehaviour
 	
 	public float turnSpeed = 2.0f;
 	
-	public float speed = 10;
+	public float speed = 2;
 	
-	float maxSpeed = 20;
+	float maxSpeed = 5;
 	float maxScale = 60;
-	float waypointOffsetMin = -0.05f;
-	float waypointOffsetMax = 0.05f;
+	float waypointOffsetMin = -2.05f;
+	float waypointOffsetMax = 2.05f;
 	float vectorTransformPositionx = 0;
 	float vectorTransformPositionz = 0;
 	float vectorCurrentTargetx = 0;
@@ -230,11 +229,15 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
-			//print (hit);
+			print (hit.collider);
 			if (hit.collider == player.GetComponent<Collider>())
 			{
-				lastSeenPosition = player.transform.position;
-				currentTarget.position = lastSeenPosition;
+                if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
+                {
+                    print("checkingPosition");
+                    lastSeenPosition = player.transform.position;
+                    currentTarget.position = lastSeenPosition;
+                }
 				//print (currentTarget + " << currentTarget chase 3");
 			}
 			else{				//timer = defaultTimer;
@@ -350,6 +353,10 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				alertTimer= 0;
 			}
+            if(alertTimer <= 0)
+            {
+                stateManager(0);
+            }
 			if(turnCounter < 3)
 			{
 				currentTargetDirection = directionDegrees[0];	
@@ -467,27 +474,26 @@ public class enemyPathfinding : MonoBehaviour
 		default:
 			break;
 		}
-		if (speed > 4)
-		{
+        //if (speed > 4)
+        //{
 			
-			
-			Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
-			if (velocity.x > maxSpeed)
-			{
-				float temp = velocity.x - maxSpeed;
-				this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
-			}
-			else if (velocity.y > maxSpeed)
-			{
-				float temp = velocity.y - maxSpeed;
-				this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
-			}
-			else if (velocity.z > maxSpeed)
-			{
-				float temp = velocity.z - maxSpeed;
-				this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
-			}
-		}
+        //    Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
+        //    if (velocity.x > maxSpeed)
+        //    {
+        //        float temp = velocity.x - maxSpeed;
+        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
+        //    }
+        //    else if (velocity.y > maxSpeed)
+        //    {
+        //        float temp = velocity.y - maxSpeed;
+        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
+        //    }
+        //    else if (velocity.z > maxSpeed)
+        //    {
+        //        float temp = velocity.z - maxSpeed;
+        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
+        //    }
+        //}
 		
 		if(currentTarget != null)
 		{
@@ -548,67 +554,67 @@ public class enemyPathfinding : MonoBehaviour
 		States = (enumStates)value;
 	}
 	
-	public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
-	{
-		if (_pathSuccessful) 
-		{
+    //public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
+    //{
+    //    if (_pathSuccessful) 
+    //    {
 			
-			path = newPath;
-			StopCoroutine("followPath");
-			StartCoroutine("followPath");
-		}
+    //        path = newPath;
+    //        StopCoroutine("followPath");
+    //        StartCoroutine("followPath");
+    //    }
 		
-	}
+    //}
 	
-	IEnumerator followPath()
-	{
-		currentWaypoint = path [0];
+	//IEnumerator followPath()
+    //{
+    //    currentWaypoint = path [0];
 		
-		while (true) 
-		{
-			if(transform.position == currentWaypoint)
-			{
-				targetIndex ++;
+    //    while (true) 
+    //    {
+    //        if(transform.position == currentWaypoint)
+    //        {
+    //            targetIndex ++;
 				
-				if(targetIndex >= path.Length)
-				{
-					targetIndex = 0;
-					path = new Vector3[0];
-					yield break;
-				}
-				currentWaypoint = path[targetIndex];
+    //            if(targetIndex >= path.Length)
+    //            {
+    //                targetIndex = 0;
+    //                path = new Vector3[0];
+    //                yield break;
+    //            }
+    //            currentWaypoint = path[targetIndex];
 				
-			}
-			if (currentTarget != null)
-			{
-				transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position - transform.position), turnSpeed * Time.deltaTime);
-				transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-			}
-			yield return null;
-		}
-	}
+    //        }
+    //        if (currentTarget != null)
+    //        {
+    //            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position - transform.position), turnSpeed * Time.deltaTime);
+    //            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+    //        }
+    //        yield return null;
+    //    }
+    //}
 	
-	public void OnDrawGizmos()
-	{
-		if (path != null) {
-			for (int i = targetIndex; i < path.Length; i++) 
-			{
-				Gizmos.color = Color.black;
-				Gizmos.DrawWireCube (path [i], Vector3.one);
+    //public void OnDrawGizmos()
+    //{
+    //    if (path != null) {
+    //        for (int i = targetIndex; i < path.Length; i++) 
+    //        {
+    //            Gizmos.color = Color.black;
+    //            Gizmos.DrawWireCube (path [i], Vector3.one);
 				
-				if (i == targetIndex) 
-				{
-					Gizmos.DrawLine (transform.position, path [i]);
-				} 
-				else 
-				{
-					Gizmos.DrawLine (path [i - 1], path [i]);
+    //            if (i == targetIndex) 
+    //            {
+    //                Gizmos.DrawLine (transform.position, path [i]);
+    //            } 
+    //            else 
+    //            {
+    //                Gizmos.DrawLine (path [i - 1], path [i]);
 					
-				}
-			}
-		} 
+    //            }
+    //        }
+    //    } 
 		
-	}
+    //}
 	
 	void setDirectionsForIdle()
 	{
