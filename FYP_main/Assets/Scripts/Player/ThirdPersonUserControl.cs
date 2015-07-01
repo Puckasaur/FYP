@@ -131,7 +131,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             // we use world-relative directions in the case of no main camera
 			//m_Move = (v * Vector3.forward + h * Vector3.right) * 0.5f;
-			m_Move = (v * target.transform.forward + h * Vector3.right) * 0.5f;
+			m_Move = (v * target.transform.forward + h * target.transform.right) * 0.5f;
            
 			// walk speed multiplier
 	        if (Input.GetButton("Sprint")) m_Move *= speedHat;
