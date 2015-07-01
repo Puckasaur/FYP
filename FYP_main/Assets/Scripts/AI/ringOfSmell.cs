@@ -90,9 +90,10 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
+       // print(other.gameObject.tag);
         if (other.gameObject.tag == "player")
         {
-
+print("lol");
             detectionTimer--;
 
             if (detectionTimer <= 0)
