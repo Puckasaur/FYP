@@ -1,4 +1,4 @@
-﻿﻿using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -21,7 +21,7 @@ public class ObstructionDetector : MonoBehaviour {
 		Vector3 direction = (playerTransform.position - Camera.main.transform.position).normalized;
 		RaycastHit[] rayCastHit;
 		
-		rayCastHit = Physics.RaycastAll(Camera.main.transform.position, direction, (playerTransform.position - Camera.main.transform.position).magnitude);
+		rayCastHit = Physics.SphereCastAll(Camera.main.transform.position,0.1f, direction, (playerTransform.position - Camera.main.transform.position).magnitude);
 		
 		for (int i = 0; i < rayCastHit.Length; i++) 
 		{

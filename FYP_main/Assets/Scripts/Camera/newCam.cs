@@ -34,7 +34,7 @@ public class newCam : MonoBehaviour {
 			secondaryCamera.SetActive(false);
 			mainCamera.SetActive(true);
 
-			countText.text = "Main Camera";
+//			countText.text = "Main Camera";
 			//Debug.Log ("Main Camera");
 
 			//secondaryCamera.transform.position = target.position;
@@ -45,7 +45,7 @@ public class newCam : MonoBehaviour {
 			secondaryCamera.SetActive(true);
 			mainCamera.SetActive(false);
 
-			countText.text = "Secondary Camera";
+			//countText.text = "Secondary Camera";
 			//Debug.Log ("Secondary Camera");
 
 		}
