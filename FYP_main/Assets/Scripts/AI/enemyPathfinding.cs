@@ -37,7 +37,9 @@ public class enemyPathfinding : MonoBehaviour
 	GameObject player;
 	GameObject newSphere;
 	public GameObject sphere;
-	
+	public GameObject soundSource;
+	GameObject brokenObject;
+
 	NavMeshAgent agent;
 	List<Transform> targets = new List<Transform>();
 	public List<Transform> alertArea = new List<Transform>();
@@ -102,6 +104,8 @@ public class enemyPathfinding : MonoBehaviour
 	int targetCounter = 0;
 	public int areaCounter = 0;
 	public float defaultTurnTimer;
+	public int defaultDetectSoundTimer;
+	int detectSoundTimer;
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -135,12 +139,14 @@ public class enemyPathfinding : MonoBehaviour
 		alertTimer = defaultAlertTimer;
 		escapeTimer = defaultEscapeTimer;
 		turnTimer = defaultTurnTimer;
+		detectSoundTimer = defaultDetectSoundTimer;
 	}
 	
 	void Update()
 	{
 		
-		
+
+		GetComponent<Rigidbody>().WakeUp();
 		//------------------//
 		//Code of the states//
 		//------------------//
@@ -207,7 +213,7 @@ public class enemyPathfinding : MonoBehaviour
 			if (barkTimer < 0)
 			{
 				//print (currentTarget + " << currentTarget chase 2");
-				newSphere = (GameObject)Instantiate(sphere, this.transform.localPosition, Quaternion.identity);
+				newSphere = (GameObject)Instantiate(sphere, this.transform.position, Quaternion.identity);
 				newSphere.transform.parent = transform;
 				barkTimer = defaultBarkTimer;
 				if (newSphere)
@@ -409,11 +415,26 @@ public class enemyPathfinding : MonoBehaviour
 			break;
 		case enumStates.detectSound:
 		{
+
+			detectSoundTimer--;
+			if(detectSoundTimer <= 0)
+			{
+				stateManager(4);
+				detectSoundTimer += defaultDetectSoundTimer;
+			}
 			//---------------------------------------------//
 			// when sound is heard, move towards the source//
 			//---------------------------------------------//
-			GameObject brokenObject = GameObject.FindGameObjectWithTag("brokenObject");
-			bone = GameObject.FindGameObjectWithTag("bone");
+			if(GameObject.FindGameObjectWithTag("brokenObject") != null)
+			{
+				brokenObject = GameObject.FindGameObjectWithTag("brokenObject");
+			}
+
+			if(GameObject.FindGameObjectWithTag("bone") != null)
+			{
+				bone = GameObject.FindGameObjectWithTag("bone");
+			}
+
 			if(brokenObject)
 			{
 				Vector3 objectdir = (brokenObject.transform.localPosition) - (this.transform.localPosition);
@@ -423,6 +444,7 @@ public class enemyPathfinding : MonoBehaviour
 					if(lastTarget != null)
 					{
 						currentTarget = lastTarget;
+						print ("currentTarget0: " + currentTarget);
 					}
 
 					
@@ -432,7 +454,9 @@ public class enemyPathfinding : MonoBehaviour
 				{
 					if(brokenObject.transform != null)
 					{
+
 						currentTarget = brokenObject.transform;
+						print ("currentTarget1: " + currentTarget);
 					}
 
 					
@@ -445,6 +469,7 @@ public class enemyPathfinding : MonoBehaviour
 				if(bone.transform != null)
 				{
 					currentTarget = bone.transform;
+					print ("currentTarget2: " + currentTarget);
 				}
 
 				
@@ -455,6 +480,11 @@ public class enemyPathfinding : MonoBehaviour
 				temp = GameObject.FindGameObjectWithTag("Smell");
 				smell = temp.gameObject;
 				smell.SetActive(false);
+			}
+			else
+			{
+				currentTarget = soundSource.transform;
+				print ("current target3: " + currentTarget);
 			}
 			
 		}

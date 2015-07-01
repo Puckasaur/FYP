@@ -59,14 +59,17 @@ public class coneOfVision : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
+
 		//-----------------------------------------------------------------------//
 		//if player crosses the cone, informs the parent(Enemy) of visible player//
 		//-----------------------------------------------------------------------//
-		if (other.gameObject.tag == "player") {
+		if (other.gameObject.tag == "player") 
+		{
 
 			RaycastHit hit;
 			if (Physics.Linecast (transform.parent.position, other.transform.position, out hit))
-			if (hit.collider == other) {
+			if (hit.collider == other) 
+			{
 				script = this.transform.parent.GetComponent<enemyPathfinding> ();
 				script.escapeTimer = 0;
 				script.stateManager (2);
@@ -85,7 +88,8 @@ public class coneOfVision : MonoBehaviour
 
 				
 				}
-			}     
+			}  
+			print (hit.collider);
 		}
     }
     void OnTriggerExit(Collider other)
