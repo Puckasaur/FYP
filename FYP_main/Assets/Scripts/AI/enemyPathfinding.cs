@@ -232,12 +232,12 @@ public class enemyPathfinding : MonoBehaviour
 			print (hit.collider);
 			if (hit.collider == player.GetComponent<Collider>())
 			{
-                if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
-                {
+                //if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
+                //{
                     print("checkingPosition");
                     lastSeenPosition = player.transform.position;
                     currentTarget.position = lastSeenPosition;
-                }
+                //}
 				//print (currentTarget + " << currentTarget chase 3");
 			}
 			else{				//timer = defaultTimer;
