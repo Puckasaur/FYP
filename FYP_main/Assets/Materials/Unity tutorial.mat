@@ -99,10 +99,6 @@ Material:
         second: 10
       data:
         first:
-          name: _RimPower
-        second: 8
-      data:
-        first:
           name: _Parallax
         second: .0199999996
       data:
@@ -141,6 +137,10 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _RimPower
+        second: 8
     m_Colors:
       data:
         first:
@@ -149,19 +149,19 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 1, g: 1, b: 1, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 0}
       data:
         first:
           name: _SpecColor
-        second: {r: .176470578, g: .00648788456, b: .00648788456, a: 1}
-      data:
-        first:
-          name: _RimColor
-        second: {r: 1, g: .0735294223, b: .0735294223, a: 0}
+        second: {r: 0, g: 0, b: 0, a: 1}
       data:
         first:
           name: _EmissionColorUI
         second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _RimColor
+        second: {r: 1, g: .0735294223, b: .0735294223, a: 0}
       data:
         first:
           name: _FogColor
