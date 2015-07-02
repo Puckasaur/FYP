@@ -24,9 +24,10 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
+    public Transform target4;
 	public Transform currentTarget;
 	public Transform lastTarget;
-	public Vector3 lastSeenPosition;
+	public Vector3 lastSeenPosition = new Vector3(0,0,0);
 	
 	
 	public enumStates States;
@@ -187,7 +188,7 @@ public class enemyPathfinding : MonoBehaviour
 
 				idleTimer = defaultIdleTimer;
 				targetCounter++;
-				if (targetCounter > 2)
+				if (targetCounter >= targets.Count)
 				{
 					targetCounter = 0;
 				}
@@ -227,7 +228,7 @@ public class enemyPathfinding : MonoBehaviour
 			//Escape from chase//
 			//-----------------//
 			
-
+            LayerMask mask = 31;
 			Physics.Linecast(transform.position, player.transform.position, out hit);
             print(hit.collider.tag);
             print(player.GetComponent<Collider>().tag);
@@ -237,18 +238,28 @@ public class enemyPathfinding : MonoBehaviour
                 //if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
                 //{
                     print("checkingPosition");
-                    lastSeenPosition = player.transform.position;
-                    currentTarget.position = lastSeenPosition;
-                    print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+                    //if (lastSeenPosition.x == 0 && lastSeenPosition.z == 0 && lastSeenPosition.y == 0)
+                    //{
+                      //  lastSeenPosition = currentTarget.position;
+                    //}
+                    if (currentTarget != player.transform)
+                    {
+                        lastTarget = currentTarget;
+                    }
+                    currentTarget = player.transform;//lastSeenPosition;
+                    //print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
                 //}
 				//print (currentTarget + " << currentTarget chase 3");
 			}
 			else{				//timer = defaultTimer;
-				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-				{
+				//if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+				//{
 					//print("ImOuttaHere");
 					escapeTimer = defaultEscapeTimer;
 					playerOutOfSight = 2;
+                    //currentTarget.position = lastSeenPosition;
+                    //lastSeenPosition = new Vector3(0,0,0);
+                    print (alertArea[areaCounter] + "Alert Area");
 					if(alertArea[areaCounter] != null)
 					{
 					currentTarget = alertArea[areaCounter];
@@ -260,8 +271,9 @@ public class enemyPathfinding : MonoBehaviour
 						areaCounter = 0;
 						//print (currentTarget + " << currentTarget chase 4");
 					}
+                    alertTimer = defaultAlertTimer;
 					stateManager(3);
-				}
+				//}
 			}
 			escapeTimer-= Time.deltaTime;
 		}
@@ -336,6 +348,7 @@ public class enemyPathfinding : MonoBehaviour
 				if(alertTimer <= 0)
 				{
 					alertTimer = 0;
+                    //stateManager(0);
 				}
 				
 
@@ -391,6 +404,7 @@ public class enemyPathfinding : MonoBehaviour
 					if(tempcounters < 6)
 					{
 					print ("vaihtaa alertiin");
+                    alertTimer = defaultAlertTimer;
 						stateManager(3);
 					}
 
@@ -429,6 +443,9 @@ public class enemyPathfinding : MonoBehaviour
 			//detectSoundTimer--;
 			//if(detectSoundTimer <= 0)
 			//{
+            currentTarget = soundSource.transform;
+            if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin *2) && vectorz <= (waypointOffsetMax * 2))            
+            alertTimer = defaultAlertTimer;
 				stateManager(3);
 				//detectSoundTimer += defaultDetectSoundTimer;
 			//}
@@ -634,6 +651,10 @@ public class enemyPathfinding : MonoBehaviour
 		targets.Add(target1);
 		targets.Add(target2);
 		targets.Add(target3);
+        if(target4 != null)
+        {
+            targets.Add(target4);
+        }
 	}
 	
 	//==================================================//

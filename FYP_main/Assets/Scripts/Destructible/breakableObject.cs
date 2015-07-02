@@ -65,25 +65,28 @@ public class breakableObject: MonoBehaviour
         //----------------------------------------------------------//
         // When object falls to the ground it creates a sound sphere//
         //----------------------------------------------------------//
-        if(makeSound)
+        //if(makeSound)
         {
-            if (this.transform.localPosition.y <= 1.0f)
+            if (this.transform.localPosition.y <= 0.60f)
             {
-                newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+                // newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
                 makeSound = false;
-                if (newSphere)
+                //if (newSphere)
                 {
-                    sphereScript = newSphere.GetComponent<soundSphere>();
-                    sphereScript.setMaxDiameter(maxScale);
+
                     if (this.gameObject.tag == "ball")
                     {
-                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
+                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+                        newSphere.transform.parent = brokenObject.transform;                    
+                        sphereScript = newSphere.GetComponent<soundSphere>();
+                        sphereScript.setMaxDiameter(maxScale);
                         Destroy(this.gameObject);
                     }
 
                     if (this.gameObject.tag == "cube")
                     {
-                        brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
+                        brokenObject = (GameObject)Instantiate(brokenCube, this.transform.position, Quaternion.identity);
                         Destroy(this.gameObject);
                     }
                 }
