@@ -450,11 +450,12 @@ MonoBehaviour:
   turnSpeed: 2
   speed: 7
   idleSuscpicious: 0
-  firstDirection: 0
-  secondDirection: 0
-  thirdDirection: 0
+  firstDirection: 90
+  secondDirection: -90
+  thirdDirection: 90
   rotationDegrees: 90
   currentAngle: 0
+  targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
   rotationCompleted: 0
