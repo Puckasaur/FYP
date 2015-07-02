@@ -229,14 +229,17 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
-			print (hit.collider);
-			if (hit.collider == player.GetComponent<Collider>())
+            print(hit.collider.tag);
+            print(player.GetComponent<Collider>().tag);
+            Debug.Log((player.GetComponent<Collider>()).Equals(hit.collider));
+			if (hit.collider.tag == player.GetComponent<Collider>().tag)
 			{
                 //if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
                 //{
                     print("checkingPosition");
                     lastSeenPosition = player.transform.position;
                     currentTarget.position = lastSeenPosition;
+                    print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
                 //}
 				//print (currentTarget + " << currentTarget chase 3");
 			}
