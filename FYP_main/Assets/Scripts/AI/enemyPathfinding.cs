@@ -18,9 +18,10 @@ public class enemyPathfinding : MonoBehaviour
 {
 	
 	soundSphere sphereScript;
-	RaycastHit hit; 
-	
-	
+	RaycastHit hit;
+
+    public Vector3 respawnPosition;
+
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
@@ -119,9 +120,9 @@ public class enemyPathfinding : MonoBehaviour
 	//bool isStuck = false;
 	
 	void Start()
-	{        
-		
-		
+	{
+
+        respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
 		setDirectionsForIdle();
 		setTargetWaypoints();
