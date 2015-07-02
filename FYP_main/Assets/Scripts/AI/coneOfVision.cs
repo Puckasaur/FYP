@@ -76,7 +76,7 @@ public class coneOfVision : MonoBehaviour
 				Debug.Log (hit);
 
 			}  
-			print (hit.collider);
+			//print (hit.collider);
 		}
     }
     void OnTriggerExit(Collider other)

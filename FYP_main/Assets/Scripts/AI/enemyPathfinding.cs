@@ -24,10 +24,10 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
+	public Transform target4;
 	public Transform currentTarget;
 	public Transform lastTarget;
-	public Vector3 lastSeenPosition;
-	
+	public Vector3 lastSeenPosition = new Vector3(0,0,0);
 	
 	public enumStates States;
 	GameObject vision;
@@ -75,7 +75,7 @@ public class enemyPathfinding : MonoBehaviour
 	float rotationStep = 65.0f;
 	public float rotationDegrees = 90;
 	public float currentAngle = 0;
-	float targetAngle = 0;
+	public float targetAngle = 0;
 	public float angleOffsetMax = 10.0f;
 	public float angleOffsetMin = -10.0f;
 	bool rotationInProgress = false;
@@ -187,7 +187,7 @@ public class enemyPathfinding : MonoBehaviour
 
 				idleTimer = defaultIdleTimer;
 				targetCounter++;
-				if (targetCounter > 2)
+				if (targetCounter >= targets.Count)
 				{
 					targetCounter = 0;
 				}
@@ -234,14 +234,17 @@ public class enemyPathfinding : MonoBehaviour
             Debug.Log((player.GetComponent<Collider>()).Equals(hit.collider));
 			if (hit.collider.tag == player.GetComponent<Collider>().tag)
 			{
-                //if (vectorx >= waypointOffsetMax || vectorz >= waypointOffsetMax || vectorx <= waypointOffsetMin || vectorz <= waypointOffsetMin)
-                //{
-                    print("checkingPosition");
-                    lastSeenPosition = player.transform.position;
-                    currentTarget.position = lastSeenPosition;
-                    print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
-                //}
-				//print (currentTarget + " << currentTarget chase 3");
+				if(currentTarget != player.transform)
+				{
+					lastTarget = currentTarget;
+				}
+					currentTarget = player.transform;
+				if(agent.SetDestination(currentTarget.position) != null)
+				{
+					agent.SetDestination(currentTarget.position);
+				}
+                print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+			
 			}
 			else{				//timer = defaultTimer;
 				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
@@ -276,14 +279,14 @@ public class enemyPathfinding : MonoBehaviour
 
 			//print (currentTarget + " <<  currentTarget Alert 1");
 //
-//			if(alertTimer == 0 || alertTimer < 0)
-//			{
-//				if(lastTarget != null)
-//				{
-//					currentTarget = lastTarget;
-//					stateManager(0);
-//				}
-//			}
+			if(alertTimer == 0 || alertTimer < 0)
+			{
+				if(lastTarget != null)
+				{
+					currentTarget = lastTarget;
+					stateManager(4);
+				}
+			}
 //			Physics.Linecast(transform.position, player.transform.position, out hit);
 //			if (hit.collider == player.GetComponent<Collider>())
 //			{
@@ -319,13 +322,14 @@ public class enemyPathfinding : MonoBehaviour
 							{
 								turnCounter = 0;
 							}
-							if(idleTimer != 30)
+							if(idleTimer != defaultIdleTimer)
 							{
-								idleTimer = 30;
+							idleTimer = defaultIdleTimer;
 							}
 							print ("state vaihdettu: 4");
-							stateManager(4);
 							tempcounters++;
+							stateManager(4);
+							
 						}
 					}
 					
@@ -364,12 +368,10 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				currentTargetDirection = directionDegrees[0];	
 				rotateEnemy(currentTargetDirection, rotationStep);
-				print ("enemy rotating!");
-				//turnCounter++;
 
 				if (rotationCompleted)
 				{	
-					print ("rotationCompleted !");
+					print ("rotationCompleted !>> " + directionDegrees[0]);
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
@@ -385,12 +387,12 @@ public class enemyPathfinding : MonoBehaviour
 					if(tempcounters > 5)
 					{
 						tempcounters = 0;
-						stateManager(0);
+						//stateManager(0);
 					}
 
 					if(tempcounters < 6)
 					{
-					print ("vaihtaa alertiin");
+						alertTimer = defaultAlertTimer;
 						stateManager(3);
 					}
 
@@ -625,7 +627,9 @@ public class enemyPathfinding : MonoBehaviour
 		directionDegrees.Add(firstDirection);
 		directionDegrees.Add(secondDirection);
 		directionDegrees.Add(thirdDirection);
-		
+//		for (int i = 0; i < directionDegrees.Count; i++) {
+//			print (directionDegrees[i]);
+//		}
 	}
 	
 	void setTargetWaypoints()
@@ -634,6 +638,10 @@ public class enemyPathfinding : MonoBehaviour
 		targets.Add(target1);
 		targets.Add(target2);
 		targets.Add(target3);
+		if(target4 != null)
+		{
+			targets.Add(target4);
+		}
 	}
 	
 	//==================================================//
@@ -665,13 +673,13 @@ public class enemyPathfinding : MonoBehaviour
 						//=============//
 						// First Sector//
 						//=============//
-						if (targetAngle <= 90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+						if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
 						{
 							
 							if (currentAngle <= targetAngle || currentAngle > targetAngle - 180)
 							{
 								print("entered the rotation loop");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
 								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
@@ -712,7 +720,7 @@ public class enemyPathfinding : MonoBehaviour
 						//Second Sector//
 						//=============//
 						
-						else if (targetAngle > 90 && turnTimer == 0)// decide which sector the target is
+						else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
 						{
 							if ( currentAngle > targetAngle || currentAngle <= targetAngle - 180 )
 							{
