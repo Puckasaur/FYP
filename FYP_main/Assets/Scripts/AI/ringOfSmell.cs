@@ -93,7 +93,7 @@ public class ringOfSmell : MonoBehaviour {
        // print(other.gameObject.tag);
         if (other.gameObject.tag == "player")
         {
-print("lol");
+            print("lol");
             detectionTimer--;
 
             if (detectionTimer <= 0)
@@ -112,8 +112,11 @@ print("lol");
             }
             if(hit.distance <= visualDistance)
             {
-                gameObject.AddComponent<ParticleSystem>();
-                visualCueActive = true;
+                if (!gameObject.GetComponent<ParticleSystem>())
+                {
+                    gameObject.AddComponent<ParticleSystem>();
+                    visualCueActive = true;
+                }
             }
             if(hit.distance <= detectionDistance)
             {
@@ -126,24 +129,26 @@ print("lol");
     {
         if(other.gameObject.tag == "player")
         {
-            
-            if (script.States != enumStates.chase && script.States != enumStates.alert)
-            {
+
+            //if (script.States != enumStates.chase && script.States != enumStates.alert)
+            //{
             detectionTimer = 60.0f;
-            if (script.States != enumStates.chase)
-            {
-                    script.areaCounter = 0;
-                }
-                script.stateManager(3);
-            }
-            if(visualCueActive)
+
+            if (visualCueActive)
             {
                 Destroy(GetComponent<ParticleSystem>());
             }
-			if(sniff.isPlaying)
-			{
-				sniff.Stop();
-			}
+            if (sniff.isPlaying)
+            {
+                sniff.Stop();
+            }
+            if (script.States != enumStates.chase)
+            {
+                script.areaCounter = 0;
+                script.alertTimer = script.defaultAlertTimer;
+                script.stateManager(3);
+            }
+            
         }
     }
 }

@@ -25,6 +25,7 @@ public class enemyPathfinding : MonoBehaviour
 	public Transform target2;
 	public Transform target3;
 	public Transform target4;
+
 	public Transform currentTarget;
 	public Transform lastTarget;
 	public Vector3 lastSeenPosition = new Vector3(0,0,0);
@@ -105,6 +106,8 @@ public class enemyPathfinding : MonoBehaviour
 	public float defaultTurnTimer;
 	public int defaultDetectSoundTimer;
 	int detectSoundTimer;
+    public float patrolSpeed;
+    public float chaseSpeed;
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -126,8 +129,9 @@ public class enemyPathfinding : MonoBehaviour
 		//print (targets [0] + "targets[0]");
 		lastTarget = currentTarget;
 		agent = GetComponent<NavMeshAgent>();
-		
+		        agent.speed = patrolSpeed;
 		agent.SetDestination(currentTarget.position);
+
 		//pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
 		
 		//Setting Timers
@@ -188,6 +192,7 @@ public class enemyPathfinding : MonoBehaviour
 				idleTimer = defaultIdleTimer;
 				targetCounter++;
 				if (targetCounter >= targets.Count)
+
 				{
 					targetCounter = 0;
 				}
@@ -234,6 +239,7 @@ public class enemyPathfinding : MonoBehaviour
             Debug.Log((player.GetComponent<Collider>()).Equals(hit.collider));
 			if (hit.collider.tag == player.GetComponent<Collider>().tag)
 			{
+				agent.speed = chaseSpeed;
 				if(currentTarget != player.transform)
 				{
 					lastTarget = currentTarget;
@@ -244,12 +250,12 @@ public class enemyPathfinding : MonoBehaviour
 					agent.SetDestination(currentTarget.position);
 				}
                 print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
-			
+
 			}
-			else{				//timer = defaultTimer;
-				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+			else if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 				{
 					//print("ImOuttaHere");
+                    agent.speed = patrolSpeed;
 					escapeTimer = defaultEscapeTimer;
 					playerOutOfSight = 2;
 					if(alertArea[areaCounter] != null)
@@ -263,9 +269,19 @@ public class enemyPathfinding : MonoBehaviour
 						areaCounter = 0;
 						//print (currentTarget + " << currentTarget chase 4");
 					}
+                    alertTimer = defaultAlertTimer;
 					stateManager(3);
 				}
-			}
+            else
+            {
+                    agent.speed = chaseSpeed;
+                    if (currentTarget != player.transform)
+                    {
+                        lastTarget = currentTarget;
+                    }
+                    currentTarget = player.transform;
+                    print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+            }
 			escapeTimer-= Time.deltaTime;
 		}
 			break;
@@ -392,7 +408,10 @@ public class enemyPathfinding : MonoBehaviour
 
 					if(tempcounters < 6)
 					{
-						alertTimer = defaultAlertTimer;
+
+					print ("vaihtaa alertiin");
+                    alertTimer = defaultAlertTimer;
+
 						stateManager(3);
 					}
 
@@ -430,7 +449,9 @@ public class enemyPathfinding : MonoBehaviour
 
 			//detectSoundTimer--;
 			//if(detectSoundTimer <= 0)
-			//{
+            currentTarget = soundSource.transform;
+            if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+                alertTimer = defaultAlertTimer;
 				stateManager(3);
 				//detectSoundTimer += defaultDetectSoundTimer;
 			//}
@@ -642,6 +663,7 @@ public class enemyPathfinding : MonoBehaviour
 		{
 			targets.Add(target4);
 		}
+
 	}
 	
 	//==================================================//

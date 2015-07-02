@@ -12,9 +12,13 @@ public class breakableObject: MonoBehaviour
     public GameObject Sphere;
     public GameObject brokenSphere;
     public GameObject brokenCube;
+    GameObject bone;
     bool makeSound = false;
     public float timer = 60.0f;
     public float expireTimer = 10;
+    public float boneRadius;
+    public float ballRadius;
+    public float cubeRadius;
     soundSphere sphereScript;
 	// Use this for initialization
 	void Start () 
@@ -42,15 +46,16 @@ public class breakableObject: MonoBehaviour
         {
             if(timer <=0)
             {
-            newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+            
             makeSound = false;
             timer += 60;
-            if (newSphere)
-            {
+                //brokenObject = (GameObject)Instantiate(bone, this.transform.position, Quaternion.identity);
+                newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+                newSphere.transform.parent = transform;
                 sphereScript = newSphere.GetComponent<soundSphere>();
                 sphereScript.setMaxDiameter(maxScale);
                 expireTimer--;
-            }
+            
             }
             timer--;
 
@@ -69,24 +74,32 @@ public class breakableObject: MonoBehaviour
         {
             if (this.transform.localPosition.y <= 1.0f)
             {
-                newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+               // newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
                 makeSound = false;
-                if (newSphere)
-                {
+                //if (newSphere)
+                //{
                     sphereScript = newSphere.GetComponent<soundSphere>();
                     sphereScript.setMaxDiameter(maxScale);
                     if (this.gameObject.tag == "ball")
                     {
-                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.localPosition, Quaternion.identity);
+                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+                        newSphere.transform.parent = brokenObject.transform;
+                        sphereScript = newSphere.GetComponent<soundSphere>();
+                        sphereScript.setMaxDiameter(maxScale);
                         Destroy(this.gameObject);
                     }
 
                     if (this.gameObject.tag == "cube")
                     {
                         brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
+                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+                        newSphere.transform.parent = brokenObject.transform;
+                        sphereScript = newSphere.GetComponent<soundSphere>();
+                        sphereScript.setMaxDiameter(maxScale);
                         Destroy(this.gameObject);
                     }
-                }
+                //}
             }
             
             
