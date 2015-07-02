@@ -12,9 +12,10 @@ GameObject:
   - 23: {fileID: 2390246}
   - 54: {fileID: 5493094}
   - 64: {fileID: 6496690}
+  - 114: {fileID: 11486818}
   m_Layer: 0
   m_Name: Des_Bottle
-  m_TagString: Untagged
+  m_TagString: ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -89,6 +90,22 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: d88d27f2a2ecab841ad910b895ea1b32, type: 3}
+--- !u!114 &11486818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d59ecef75c5bdb45b7ff7d37780ef3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  brokenSphere: {fileID: 100000, guid: d88d27f2a2ecab841ad910b895ea1b32, type: 3}
+  brokenCube: {fileID: 0}
+  timer: 60
+  expireTimer: 10
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
