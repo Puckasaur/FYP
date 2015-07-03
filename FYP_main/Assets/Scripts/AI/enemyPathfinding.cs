@@ -548,7 +548,7 @@ public class enemyPathfinding : MonoBehaviour
 						if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
 						{
 							
-							if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
+							if (currentAngle <= targetAngle || currentAngle > targetAngle - 180)
 							{
 								print("entered the rotation loop");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
@@ -590,7 +590,7 @@ public class enemyPathfinding : MonoBehaviour
 						
 						else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
 						{
-							if ( currentAngle > targetAngle && currentAngle <= targetAngle - 180 )
+							if ( currentAngle > targetAngle || currentAngle <= targetAngle - 180 )
 							{
 								print("entered the rotation loop 3");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
