@@ -6,14 +6,17 @@ public class TemporaryMovement : MonoBehaviour
 	public float movementSpeed;
 	public float jumpHeight;
 	Rigidbody rb;
+	CharacterController charControl;
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody> ();
+		//charControl = GetComponent<CharacterController> ();
 	}
 
 	void FixedUpdate() 
     {
+		charControl = GetComponent<CharacterController> ();
 		float horizontal = Input.GetAxis ("Horizontal"); //* movementSpeed * Time.deltaTime;
         //transform.Translate(horizontal, 0, 0);
 
@@ -31,11 +34,14 @@ public class TemporaryMovement : MonoBehaviour
 		rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
 		this.transform.LookAt (this.transform.position + horizontal + vertical);
         */
-
+		if (charControl.isGrounded)
+		{
+			Debug.Log("Grounded");
         // Jump
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
-        {
-            this.GetComponent<Rigidbody>().velocity += new Vector3(0.0f, jumpHeight, 0.0f);
-        }
+       		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
+        	{
+            	this.GetComponent<Rigidbody>().velocity += new Vector3(0.0f, jumpHeight, 0.0f);
+			}	
+		}
 	}
 }
