@@ -12,8 +12,6 @@ public class CheckPointSystem : MonoBehaviour
 {
     public GameObject checkPointPosition; // Position of the check point
     public bool checkPoint = false; // if the check point has been reached or not
-    enemyPathfinding enemyResp; // enemy script, to get the position where they have to respawn
-
 
     private string currentLevel; // the current level
     private GameObject[] allEnemies; // needed to reset enemies' positions
@@ -43,6 +41,8 @@ public class CheckPointSystem : MonoBehaviour
             {
                 Vector3 respawnPos = enemy.GetComponent<enemyPathfinding>().respawnPosition;
                 enemy.transform.position = respawnPos;
+
+                enemy.GetComponent<enemyPathfinding>().States = enumStates.patrol;
             }
 
             this.transform.position = checkPointPosition.transform.position;
