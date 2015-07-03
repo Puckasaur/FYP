@@ -36,6 +36,9 @@ public class coneOfVision : MonoBehaviour
 
             
         }
+        width = startWidth;
+        height = startHeight;
+        range = startRange;
         //else if (transform.parent.tag == "guard")
         //{
         //    guard = transform.parent.GetComponent<guardDog>();
@@ -69,11 +72,12 @@ public class coneOfVision : MonoBehaviour
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-
+            print(other);
             RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
+
                 if (script != null)
                 {
                     script.stateManager(2);
@@ -85,8 +89,8 @@ public class coneOfVision : MonoBehaviour
                 
                 Debug.Log(hit);
 
+
             }
-            //print (hit.collider);
         }
     }
     void OnTriggerExit(Collider other)

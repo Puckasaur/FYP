@@ -18,6 +18,7 @@ public class ringOfSmell : MonoBehaviour {
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
+    public float somethingElseDistance;
 	AudioSource sniff;
     
     void Start()
@@ -30,16 +31,10 @@ public class ringOfSmell : MonoBehaviour {
             scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
             script = this.transform.parent.GetComponent<enemyPathfinding>();
 			sniff = GetComponent<AudioSource>();
+		}
 
     }
-        //else if (transform.parent.tag == "guard")
-        //{
-        //    guard = transform.parent.GetComponent<guardDog>();
-        //}
-        //sniffDistance = radius;
-        //visualDistance = radius - (radius / 4);
-        //detectionDistance = radius / 4;
-    }
+
     void Update()
     {
         if (this.transform.localScale.x < radius)
@@ -149,6 +144,15 @@ public class ringOfSmell : MonoBehaviour {
                 }
 
             }
+            if(hit.distance <= somethingElseDistance)
+            {
+             Physics.Linecast(transform.parent.position, player.transform.position, out hit);
+            if (hit.collider == player.GetComponent<Collider>())
+			{             
+				transform.parent.LookAt(player.transform);
+
+            }
+            }
 
         }
     }
@@ -175,6 +179,7 @@ public class ringOfSmell : MonoBehaviour {
                 script.alertTimer = script.defaultAlertTimer;
                 script.stateManager(3);
             }
+            
             
         }
     }

@@ -51,10 +51,12 @@ public class TemporaryMovement : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.T) && bones > 0)
         {
+            print(boneSpawner.transform.parent);
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
 			// newBone.GetComponent<Rigidbody>().AddForce(this.transform.right * throwForce + this.transform.up * (throwForce / 2));
         }
+        
 
         /*
         rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
@@ -122,4 +124,11 @@ public class TemporaryMovement : MonoBehaviour
 			isGrounded = false;
 		}
 	}
+    void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube")
+        {
+            other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
+        }
+    }
 }

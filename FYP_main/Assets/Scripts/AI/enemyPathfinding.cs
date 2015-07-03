@@ -148,14 +148,11 @@ public class enemyPathfinding : MonoBehaviour
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
-				
 			}
 			
 		}
 			
 			break;
-			
-			
 		case enumStates.idle:
 		{
 			//--------------------------------------------------------//
