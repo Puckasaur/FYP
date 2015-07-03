@@ -517,214 +517,229 @@ public class enemyPathfinding : MonoBehaviour
 		}
 
 	}
-	
-	//==================================================//
-	//================rotate enemy======================//
-	//==================================================//
-	
-	
-	void rotateEnemy(float targetDegrees, float rotationStep)
-	{
-		float rotationDifference = 0;
-		
-		if (turnTimer <= 0)
-		{
-			if (rotationInProgress == false)
-			{
-				currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-				targetAngle = targetDegrees;
-				rotationInProgress = true;
-			}
-			
-			else if (rotationInProgress)
-			{
-				if (turnTimer == 0 && rotationDifference >= 0)
-				{
-					if (targetAngle <= 180 && targetAngle >= 0) //decide which side the target is. 0-180 left, 0 - (-180)
-					{	
-						//=============//
-						// First Sector//
-						//=============//
-						if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-						{
-							
-							if (currentAngle <= targetAngle || currentAngle > targetAngle - 180)
-							{
-								print("entered the rotation loop");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (rotationDifference < 0)
-								{
-									rotationDifference = rotationDifference * -1;
-								}
-								
-								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-							}
-							else
-							{
-								
-								print("entered the rotation loop 2");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-								
-							}
-							
-						}
-						
-						//=============//
-						//Second Sector//
-						//=============//
-						
-						else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
-						{
-							if ( currentAngle > targetAngle || currentAngle <= targetAngle - 180 )
-							{
-								print("entered the rotation loop 3");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (rotationDifference < 0)
-								{
-									rotationDifference = rotationDifference * -1;
-								}
-								
-								
-								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-							}
-							else
-							{
-								print("entered the rotation loop 4");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-							}
-						}
-					}
-					
-					else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
-					{
-						
-						//=============//
-						//Third Sector //
-						//=============//
-						if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-						{
-							if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
-							{
-								print("entered the rotation loop 5");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (rotationDifference < 0)
-								{
-									rotationDifference = rotationDifference * -1;
-								}
-								
-								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-							}
-							else
-							{
-								
-								print("entered the rotation loop 6");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-								
-							}
-						}
-						//=============//
-						//Fourth Sector//
-						//=============//
-						else if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
-						{
-							if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
-							{
-								print("entered the rotation loop 7");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (rotationDifference < 0)
-								{
-									rotationDifference = rotationDifference * -1;
-								}
-								
-								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-							}
-							else
-							{
-								
-								print("entered the rotation loop 8");
-								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-								rotationDifference = targetAngle - currentAngle;
-								if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
-								{
-									rotationCompleted = true;
-									rotationInProgress = false;
-									turnTimer += defaultTurnTimer * Time.deltaTime;
-								}
-								
-							}
-						}
-					}
-					
-				}
-				
-			}
-			
-			
-		}
-		else
-		{
-			turnTimer--;
-			if (turnTimer < 0)
-			{
-				turnTimer = 0;
-			}
 
-		}
-		
-	}
+    //==================================================//
+    //================Rotate Enemy======================//
+    //==================================================//
+
+
+    void rotateEnemy(float targetDegrees, float rotationStep)
+    {
+        float rotationDifference = 0;
+
+        if (turnTimer <= 0)
+        {
+            //print (turnTimer + "  << TurnTimer");
+            if (rotationInProgress == false)
+            {
+                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                targetAngle = targetDegrees;//currentAngle + targetDegrees;
+                rotationInProgress = true;
+                //print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
+            }
+
+            else if (rotationInProgress)
+            {
+                if (turnTimer == 0 && rotationDifference >= 0)
+                {
+                    if (targetAngle <= 180 && targetAngle >= 0) //decide which side the target is. 0-180 left, 0 - (-180)
+                    {
+                        //=============//
+                        // First Sector//
+                        //=============//
+                        if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+                        {
+
+                            if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
+                            {
+                                print("entered the rotation loop");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+
+                                if (rotationDifference < 0)
+                                {
+                                    rotationDifference = rotationDifference * -1;
+                                }
+
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    print("rotation loop Completed = " + rotationCompleted);
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer;
+                                }
+                            }
+                            else //if (currentAngle > targetAngle && turnTimer == 0)
+                            {
+
+                                print("entered the rotation loop 2");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+
+                            }
+
+                        }
+
+                        //=============//
+                        //Second Sector//
+                        //=============//
+
+                        else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
+                        {
+                            if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
+                            {
+                                print("entered the rotation loop 3");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                //print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+                                if (rotationDifference < 0)
+                                {
+                                    rotationDifference = rotationDifference * -1;
+                                }
+
+
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+                            }
+                            else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
+                            {
+                                print("entered the rotation loop 4");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+                            }
+                        }
+                    }
+
+                    else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
+                    {
+
+                        //=============//
+                        //Third Sector //
+                        //=============//
+                        if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+                        {
+                            if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
+                            {
+                                print("entered the rotation loop 5");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                //print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+                                if (rotationDifference < 0)
+                                {
+                                    rotationDifference = rotationDifference * -1;
+                                }
+
+                                //print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+                            }
+                            else //if (currentAngle < targetAngle && turnTimer == 0)
+                            {
+
+                                print("entered the rotation loop 6");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+
+                            }
+                        }
+                        //=============//
+                        //Fourth Sector//
+                        //=============//
+                        else if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
+                        {
+                            if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
+                            {
+                                print("entered the rotation loop 7");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                //print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
+                                if (rotationDifference < 0)
+                                {
+                                    rotationDifference = rotationDifference * -1;
+                                }
+
+                                //print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+                            }
+                            else //if (currentAngle < targetAngle && turnTimer == 0)
+                            {
+
+                                print("entered the rotation loop 8");
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                rotationDifference = targetAngle - currentAngle;
+                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                {
+                                    rotationCompleted = true;
+                                    rotationInProgress = false;
+                                    turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
+                                }
+
+                            }
+                        }
+                    }
+
+                }
+
+            }
+
+
+        }
+        else
+        {
+            turnTimer--;
+            if (turnTimer < 0)
+            {
+                turnTimer = 0;
+            }
+        }
+
+    }
 	//------------------------------------------------------------//
 	//Sets an area from a room the enemy is in for the alert-state//
 	//------------------------------------------------------------//
