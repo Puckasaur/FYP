@@ -68,6 +68,7 @@ public class coneOfVision : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        
         if (other.gameObject.tag == "player")
         {
             if (transform.parent.tag == "patrolDog")
