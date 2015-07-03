@@ -120,6 +120,7 @@ public class ringOfSmell : MonoBehaviour {
             }
             if(hit.distance <= detectionDistance)
             {
+                print("Detected by Ring of Smell");
                 script.stateManager(2);
             }
 

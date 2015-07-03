@@ -90,6 +90,7 @@ public class coneOfVision : MonoBehaviour
                     if (script.States != enumStates.chase)
                     {
                         script.areaCounter = 0;
+
                         script.stateManager(3);
                     }
                 }
@@ -97,5 +98,6 @@ public class coneOfVision : MonoBehaviour
         }
     }
 }
+
 
 

@@ -7,9 +7,17 @@ public class TemporaryMovement : MonoBehaviour
 	public float jumpHeight;
 	Rigidbody rb;
 	CharacterController charControl;
+    public GameObject bone;
+    GameObject boneSpawner;
+    GameObject newBone;
+    public float throwForce = 00.00010f;
+    public int bones = 2;
+
 
 	void Start()
 	{
+        boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
+
 		rb = GetComponent<Rigidbody> ();
 		//charControl = GetComponent<CharacterController> ();
 	}
@@ -38,10 +46,16 @@ public class TemporaryMovement : MonoBehaviour
 		{
 			Debug.Log("Grounded");
         // Jump
-       		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
-        	{
-            	this.GetComponent<Rigidbody>().velocity += new Vector3(0.0f, jumpHeight, 0.0f);
-			}	
-		}
+        if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
+        {
+            this.GetComponent<Rigidbody>().velocity += new Vector3(0.0f, jumpHeight, 0.0f);
+        }
+        if (Input.GetKeyDown(KeyCode.T) && bones > 0)
+        {
+            bones--;
+            newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+           // newBone.GetComponent<Rigidbody>().AddForce(this.transform.right * throwForce + this.transform.up * (throwForce / 2));
+        }
+
 	}
 }

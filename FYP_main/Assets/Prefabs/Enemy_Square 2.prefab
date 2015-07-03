@@ -405,7 +405,7 @@ MonoBehaviour:
   alarmBonus: 0
   sniffDistance: 15
   visualDistance: 7.5
-  detectionDistance: 2.5
+  detectionDistance: 5
 --- !u!114 &11484512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -433,6 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 0}
   target2: {fileID: 0}
   target3: {fileID: 0}
@@ -478,6 +479,7 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
+  chaseRange: 10
 --- !u!136 &13675194
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -110,6 +110,7 @@ public class enemyPathfinding : MonoBehaviour
 	int detectSoundTimer;
     public float patrolSpeed;
     public float chaseSpeed;
+    public float chaseRange;
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
@@ -239,41 +240,64 @@ public class enemyPathfinding : MonoBehaviour
             print(hit.collider.tag);
             print(player.GetComponent<Collider>().tag);
             Debug.Log((player.GetComponent<Collider>()).Equals(hit.collider));
-			if (hit.collider.tag == player.GetComponent<Collider>().tag)
+			if (hit.collider.tag != player.GetComponent<Collider>().tag)
 			{
-				agent.speed = chaseSpeed;
-				if(currentTarget != player.transform)
-				{
-					lastTarget = currentTarget;
-				}
-					currentTarget = player.transform;
-				if(agent.SetDestination(currentTarget.position) != null)
-				{
-					agent.SetDestination(currentTarget.position);
-				}
-                print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
-
-			}
-			else if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-				{
-					//print("ImOuttaHere");
+                print("Vectorx: " + vectorx + " Vectorz: " + vectorz);
+                if (vectorx >= chaseRange || vectorz >= chaseRange)
+                {
                     agent.speed = patrolSpeed;
-					escapeTimer = defaultEscapeTimer;
-					playerOutOfSight = 2;
-					if(alertArea[areaCounter] != null)
-					{
-					currentTarget = alertArea[areaCounter];
-					}
+                    escapeTimer = defaultEscapeTimer;
+                    playerOutOfSight = 2;
+                    if (alertArea[areaCounter] != null)
+                    {
+                        currentTarget = alertArea[areaCounter];
+                    }
 
-					areaCounter++;
-					if(areaCounter > 2)
-					{
-						areaCounter = 0;
-						//print (currentTarget + " << currentTarget chase 4");
-					}
+                    areaCounter++;
+                    if (areaCounter > 2)
+                    {
+                        areaCounter = 0;
+                        //print (currentTarget + " << currentTarget chase 4");
+                    }
                     alertTimer = defaultAlertTimer;
-					stateManager(3);
-				}
+                    stateManager(3);
+                }
+                //agent.speed = chaseSpeed;
+                //if(currentTarget != player.transform)
+                //{
+                //    lastTarget = currentTarget;
+                //}
+                //    currentTarget = player.transform;
+                //if(agent.SetDestination(currentTarget.position) != null)
+                //{
+                //    agent.SetDestination(currentTarget.position);
+                //}
+                //print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+                
+			}
+			//else if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+
+            //if(vectorx >= chaseRange || vectorz >= chaseRange)	
+            //{
+            //        //print("ImOuttaHere");
+            //        print("Vectorx: " + vectorx + " Vectorz: " + vectorz);
+            //        agent.speed = patrolSpeed;
+            //        escapeTimer = defaultEscapeTimer;
+            //        playerOutOfSight = 2;
+            //        if(alertArea[areaCounter] != null)
+            //        {
+            //        currentTarget = alertArea[areaCounter];
+            //        }
+
+            //        areaCounter++;
+            //        if(areaCounter > 2)
+            //        {
+            //            areaCounter = 0;
+            //            //print (currentTarget + " << currentTarget chase 4");
+            //        }
+            //        alertTimer = defaultAlertTimer;
+            //        stateManager(3);
+            //    }
             else
             {
                     agent.speed = chaseSpeed;
@@ -282,7 +306,7 @@ public class enemyPathfinding : MonoBehaviour
                         lastTarget = currentTarget;
                     }
                     currentTarget = player.transform;
-                    print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+                   // print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
             }
 			escapeTimer-= Time.deltaTime;
 			if(escapeTimer < 0)
@@ -565,6 +589,14 @@ public class enemyPathfinding : MonoBehaviour
 			
 			vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
 			vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+            if(vectorz <0)
+            {
+                vectorz *= -1;
+            }
+              if(vectorx <0)
+            {
+                vectorx *= -1;
+            }
 		}
 		
 		if(timer <= 0)
