@@ -54,6 +54,10 @@ public class TemporaryMovement : MonoBehaviour
         this.transform.LookAt (this.transform.position + horizontal + vertical);
         */
 
+	}
+
+	void Update()
+	{
 		//checks if character is grounded
 		if (isGrounded) 
 		{
@@ -61,9 +65,9 @@ public class TemporaryMovement : MonoBehaviour
 			if (Input.GetButtonDown ("Jump")) 
 			{
 				rb.velocity += new Vector3 (0.0f, jumpHeight, 0.0f);
+				Debug.Log(rb.velocity);
 			}	
 		}
-
 	}
 
 	void updateAnimator()
