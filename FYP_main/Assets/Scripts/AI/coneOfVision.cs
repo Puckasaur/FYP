@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class coneOfVision : MonoBehaviour 
+public class coneOfVision : MonoBehaviour
 {
 
     enemyPathfinding script;
@@ -19,8 +19,8 @@ public class coneOfVision : MonoBehaviour
     {
         if (transform.parent.tag == "enemy")
         {
-        script = this.transform.parent.GetComponent<enemyPathfinding>();
-    }
+            script = this.transform.parent.GetComponent<enemyPathfinding>();
+        }
         //else if (transform.parent.tag == "guard")
         //{
         //    guard = transform.parent.GetComponent<guardDog>();
@@ -34,14 +34,14 @@ public class coneOfVision : MonoBehaviour
 
             GetComponent<Rigidbody>().WakeUp();
 
-        if (transform.localScale.x < width)
-        {
+            if (transform.localScale.x < width)
+            {
                 transform.localScale = new Vector3(width, height, range);
-        }
+            }
             else if (transform.localScale.x > width)
             {
                 transform.localScale = new Vector3(width, height, range);
-    }
+            }
             if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
             {
                 width = startWidth + alarmBonus;
@@ -60,42 +60,44 @@ public class coneOfVision : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
 
-		//-----------------------------------------------------------------------//
-		//if player crosses the cone, informs the parent(Enemy) of visible player//
-		//-----------------------------------------------------------------------//
-		if (other.gameObject.tag == "player") 
-		{
+        //-----------------------------------------------------------------------//
+        //if player crosses the cone, informs the parent(Enemy) of visible player//
+        //-----------------------------------------------------------------------//
+        if (other.gameObject.tag == "player")
+        {
 
-			RaycastHit hit;
+            RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
-			if (hit.collider == other) 
-			{
-				script.escapeTimer = 0;
-                //script.transform.LookAt(other.transform);
-				script.stateManager (2);
-				Debug.Log (hit);
+            if (hit.collider == other)
+            {
+                script.escapeTimer = 0;
+                script.stateManager(2);
+                Debug.Log(hit);
 
-			}  
-			//print (hit.collider);
-		}
+            }
+            //print (hit.collider);
+        }
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "player")
+        if (other.gameObject.tag == "player")
         {
-            detectionTimer = 60.0f;
+            //detectionTimer = 60.0f;
             if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
             {
                 if (hit.collider == other)
+                {
                     if (script.States != enumStates.chase)
                     {
-                            script.areaCounter = 0;
-                        }
+                        script.areaCounter = 0;
+
                         script.stateManager(3);
                     }
+                }
             }
         }
     }
+}
 
 
 

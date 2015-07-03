@@ -32,7 +32,7 @@ public class soundSphere : MonoBehaviour
         {
 
 			script = other.GetComponent<enemyPathfinding>();
-            if (this.transform.parent != other.transform)
+            if (this.transform.parent != other.transform && script.States != enumStates.chase)
             {
                 script.escapeTimer = 0;
                 script.stateManager(6);

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class TemporaryMovement : MonoBehaviour 
+public class TemporaryMovement : MonoBehaviour
 {
 	public float movementSpeed;
 	public float jumpHeight;
@@ -9,8 +9,12 @@ public class TemporaryMovement : MonoBehaviour
 	float m_OrigGroundCheckDistance;
 	Rigidbody rb;
 	Animator catAnim;
-
-	bool isGrounded;
+	 public GameObject bone;
+    GameObject boneSpawner;
+    GameObject newBone;
+    public float throwForce = 00.00010f;
+    public int bones = 2;
+	private bool isGrounded;
 
 	void Start()
 	{
@@ -23,24 +27,31 @@ public class TemporaryMovement : MonoBehaviour
 	void FixedUpdate() 
     {
 		updateAnimator();
-		
+		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
 		checkGroundStatus ();
 		float horizontal = Input.GetAxis ("Horizontal"); //* movementSpeed * Time.deltaTime;
         //transform.Translate(horizontal, 0, 0);
 
-		float vertical = Input.GetAxis("Vertical"); //* movementSpeed * Time.deltaTime;
-		//transform.Translate(0, 0, vertical);
+        float vertical = Input.GetAxis("Vertical"); //* movementSpeed * Time.deltaTime;
+        //transform.Translate(0, 0, vertical);
 
-		Vector3 movement = new Vector3 (1, 0, 1) * vertical + new Vector3 (1, 0, -1) * horizontal;
-		Vector3 look = new Vector3 (-1, 0, 1) * vertical + new Vector3 (1, 0, 1) * horizontal;
+        Vector3 movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
+        Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
 
-		rb.MovePosition (transform.position + movement.normalized * movementSpeed * Time.deltaTime);
+        rb.MovePosition(transform.position + movement.normalized * movementSpeed * Time.deltaTime);
 
-		transform.LookAt (transform.position + look, Vector3.up);
+        transform.LookAt(transform.position + look, Vector3.up);
+		
+		if (Input.GetKeyDown(KeyCode.T) && bones > 0)
+        {
+			bones--;
+			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+			// newBone.GetComponent<Rigidbody>().AddForce(this.transform.right * throwForce + this.transform.up * (throwForce / 2));
+        }
 
-		/*
-		rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
-		this.transform.LookAt (this.transform.position + horizontal + vertical);
+        /*
+        rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
+        this.transform.LookAt (this.transform.position + horizontal + vertical);
         */
 
 		//checks if character is grounded
@@ -83,4 +94,3 @@ public class TemporaryMovement : MonoBehaviour
 			isGrounded = false;
 		}
 	}
-}
