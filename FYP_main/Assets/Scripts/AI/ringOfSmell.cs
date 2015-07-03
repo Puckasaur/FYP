@@ -6,7 +6,7 @@ public class ringOfSmell : MonoBehaviour {
     //guardDog guard;
     float radius;
     public float startRadius;
-    bool playerSeen = false;
+    public bool playerSeen = false;
     bool visualCueActive = false;
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     public float detectionTimer = 60.0f;

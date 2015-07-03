@@ -16,7 +16,8 @@ public enum enumStates
 
 public class enemyPathfinding : MonoBehaviour 
 {
-	
+	ringOfSmell ringOfSmellScript;
+	coneOfVision coneOfVisionScript;
 	soundSphere sphereScript;
 	RaycastHit hit;
 
@@ -122,6 +123,8 @@ public class enemyPathfinding : MonoBehaviour
 	void Start()
 	{
 
+        ringOfSmellScript = GetComponentInChildren<ringOfSmell>();
+        coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
 		setDirectionsForIdle();
@@ -197,6 +200,7 @@ public class enemyPathfinding : MonoBehaviour
 				{
 					targetCounter = 0;
 				}
+				agent.speed = patrolSpeed;
 				stateManager(0);
 			}
 			idleTimer--;
@@ -205,9 +209,6 @@ public class enemyPathfinding : MonoBehaviour
 
 		case enumStates.chase:
 		{
-			//print (currentTarget + " << currentTarget chase 1");
-
-			//currentTarget = lastTarget;
 			//----------------------------------------------------------------------------//
 			// chase the Player constantly searching for a waypoint at the Player position//
 			//----------------------------------------------------------------------------//
@@ -284,6 +285,10 @@ public class enemyPathfinding : MonoBehaviour
                     print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
             }
 			escapeTimer-= Time.deltaTime;
+			if(escapeTimer < 0)
+			{
+				escapeTimer = 0;
+			}
 		}
 			break;
 
@@ -368,6 +373,12 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
+            if (ringOfSmellScript.playerSeen == true)
+            {
+                stateManager(2);
+            }
+
+
 			if(alertTimer > 0)
 			{
 				alertTimer--;
@@ -379,6 +390,7 @@ public class enemyPathfinding : MonoBehaviour
 			}
             if(alertTimer <= 0)
             {
+				agent.speed = patrolSpeed;
 				turnCounter = 0;
                 stateManager(0);
             }
