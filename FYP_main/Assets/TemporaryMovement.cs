@@ -5,18 +5,26 @@ public class TemporaryMovement : MonoBehaviour
 {
 	public float movementSpeed;
 	public float jumpHeight;
+	float m_GroundCheckDistance;
+	float m_OrigGroundCheckDistance;
 	Rigidbody rb;
-	CharacterController charControl;
+	Animator catAnim;
+
+	bool isGrounded;
 
 	void Start()
 	{
+		m_GroundCheckDistance = 0.6f;
 		rb = GetComponent<Rigidbody> ();
-		//charControl = GetComponent<CharacterController> ();
+		catAnim = GetComponent<Animator> ();
 	}
+
 
 	void FixedUpdate() 
     {
-		charControl = GetComponent<CharacterController> ();
+		updateAnimator();
+		
+		checkGroundStatus ();
 		float horizontal = Input.GetAxis ("Horizontal"); //* movementSpeed * Time.deltaTime;
         //transform.Translate(horizontal, 0, 0);
 
@@ -34,14 +42,45 @@ public class TemporaryMovement : MonoBehaviour
 		rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
 		this.transform.LookAt (this.transform.position + horizontal + vertical);
         */
-		if (charControl.isGrounded)
+
+		//checks if character is grounded
+		if (isGrounded) 
 		{
-			Debug.Log("Grounded");
-        // Jump
-       		if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.Space))
-        	{
-            	this.GetComponent<Rigidbody>().velocity += new Vector3(0.0f, jumpHeight, 0.0f);
+			// Jump
+			if (Input.GetButtonDown ("Jump")) 
+			{
+				this.GetComponent<Rigidbody> ().velocity += new Vector3 (0.0f, jumpHeight, 0.0f);
 			}	
+		}
+
+	}
+
+	void updateAnimator()
+	{
+		float horizontal = Input.GetAxis ("Horizontal");
+		float vertical = Input.GetAxis("Vertical");
+
+		catAnim.SetFloat ("hSpeed", horizontal);
+		catAnim.SetFloat ("vSpeed", vertical);
+	}
+
+	//uses raycast to check if player is grounded
+	void checkGroundStatus()
+	{
+		RaycastHit hitInfo;
+		#if UNITY_EDITOR
+		// helper to visualise the ground check ray in the scene view
+		Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
+		#endif
+		// 0.1f is a small offset to start the ray from inside the character
+		// it is also good to note that the transform position in the sample assets is at the base of the character
+		if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+		{
+			isGrounded = true;
+		}
+		else
+		{
+			isGrounded = false;
 		}
 	}
 }
