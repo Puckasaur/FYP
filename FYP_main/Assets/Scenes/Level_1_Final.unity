@@ -2084,7 +2084,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 5
   jumpHeight: 6
-  bone: {fileID: 0}
+  bone: {fileID: 118874, guid: 3d19385449d28a44796a6fa5a2e6f01f, type: 2}
   throwForce: 9.99999975e-05
   bones: 2
 --- !u!54 &86076023
@@ -37719,6 +37719,33 @@ BoxCollider:
 Transform:
   m_PrefabParentObject: {fileID: 443590, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
   m_PrefabInternal: {fileID: 1848804099}
+--- !u!1 &2081270244
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2081270245}
+  m_Layer: 2
+  m_Name: Bone Spawner
+  m_TagString: boneSpawner
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2081270245
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2081270244}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.55000019, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 86076019}
+  m_RootOrder: 3
 --- !u!1001 &2081374152
 Prefab:
   m_ObjectHideFlags: 0
