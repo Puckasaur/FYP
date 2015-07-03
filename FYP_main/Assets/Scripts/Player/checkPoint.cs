@@ -8,7 +8,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CheckPointSystem : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
     public GameObject checkPointPosition; // Position of the check point
     public bool checkPoint = false; // if the check point has been reached or not
