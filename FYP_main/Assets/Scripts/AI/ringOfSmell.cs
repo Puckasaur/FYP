@@ -45,16 +45,8 @@ public class ringOfSmell : MonoBehaviour {
             {
                 transform.localScale -= scalingRate;
             }
-            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
-            {
-                radius = startRadius + alarmBonus;
 
-            }
-            else
-            {
-                radius = startRadius;
-
-            }
+           
         if (playerSeen)
         {
 

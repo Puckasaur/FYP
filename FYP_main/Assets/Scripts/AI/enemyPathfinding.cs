@@ -22,7 +22,6 @@ public class enemyPathfinding : MonoBehaviour
 	RaycastHit hit;
 
     public Vector3 respawnPosition;
-
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
@@ -30,9 +29,7 @@ public class enemyPathfinding : MonoBehaviour
 
 	public Transform currentTarget;
 	public Transform lastTarget;
-	public Vector3 lastSeenPosition = new Vector3(0,0,0);
-	
-	public enumStates States;
+    public enumStates States;
 	GameObject vision;
 	GameObject smell;
 	GameObject bone;
@@ -46,15 +43,8 @@ public class enemyPathfinding : MonoBehaviour
 	List<Transform> targets = new List<Transform>();
 	public List<Transform> alertArea = new List<Transform>();
 	
-	bool hasWaypointsLeft;
 	public bool eatBone = false;
 	public bool distracted = false;
-	
-	public float turnSpeed = 2.0f;
-	
-	public float speed = 2;
-	
-	float maxSpeed = 5;
 	float maxScale = 60;
 	float waypointOffsetMin = -2.05f;
 	float waypointOffsetMax = 2.05f;
@@ -64,7 +54,6 @@ public class enemyPathfinding : MonoBehaviour
 	float vectorCurrentTargetz = 0;
 	float vectorx;
 	float vectorz;
-	
 	
 	//Idle Suspicious values
 	public bool idleSuscpicious = false;
@@ -89,20 +78,18 @@ public class enemyPathfinding : MonoBehaviour
 
 	//So many timers
 	int tempcounters = 0;
-	public int timer;
-	public int idleTimer;    
-	public int barkTimer;
-	public float escapeTimer;
+	int timer;
+	int idleTimer;    
+	int barkTimer;
+	float escapeTimer;
 	public float alertTimer;
-	public float eatTimer;
+	float eatTimer;
 	public int defaultEatTimer;
 	public int defaultIdleTimer;
 	public int defaultBarkTimer;
 	public int defaultTimer;
 	public int defaultAlertTimer;
 	public int defaultEscapeTimer;
-	public int playerOutOfSight;
-	int targetIndex;
 	int targetCounter = 0;
 	public int areaCounter = 0;
 	public float defaultTurnTimer;
@@ -115,12 +102,7 @@ public class enemyPathfinding : MonoBehaviour
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
 	
-	//values if enemy doesn't receive a new waypoint to prevent them from being stuck
-	Vector3 worldPositionNow;
-	Vector3 worldPositionPast;
-	//int checkIfStuck = 100;
-	//bool isStuck = false;
-	
+	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
 
@@ -131,14 +113,11 @@ public class enemyPathfinding : MonoBehaviour
 		setDirectionsForIdle();
 		setTargetWaypoints();
 		currentTarget = targets[0];
-		//print (targets [0] + "targets[0]");
 		lastTarget = currentTarget;
 		agent = GetComponent<NavMeshAgent>();
-		        agent.speed = patrolSpeed;
+		agent.speed = patrolSpeed;
 		agent.SetDestination(currentTarget.position);
 
-		//pathRequestManager.requestPath (transform.position, currentTarget.position, onPathFound);        
-		
 		//Setting Timers
 		timer = defaultTimer;
 		eatTimer = defaultEatTimer;
@@ -213,13 +192,11 @@ public class enemyPathfinding : MonoBehaviour
 			//----------------------------------------------------------------------------//
 			// chase the Player constantly searching for a waypoint at the Player position//
 			//----------------------------------------------------------------------------//
-			//currentTarget = player.transform;
 			//------------------//
 			//Bark While chasing//
 			//------------------//
 			if (barkTimer < 0)
 			{
-				//print (currentTarget + " << currentTarget chase 2");
 				newSphere = (GameObject)Instantiate(sphere, this.transform.position, Quaternion.identity);
 				newSphere.transform.parent = transform;
 				barkTimer = defaultBarkTimer;
@@ -237,17 +214,11 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
-            print(hit.collider.tag);
-            print(player.GetComponent<Collider>().tag);
-            Debug.Log((player.GetComponent<Collider>()).Equals(hit.collider));
-			if (hit.collider.tag != player.GetComponent<Collider>().tag)
-			{
-                print("Vectorx: " + vectorx + " Vectorz: " + vectorz);
+            if (hit.collider.tag != player.GetComponent<Collider>().tag)
+            {
                 if (vectorx >= chaseRange || vectorz >= chaseRange)
                 {
                     agent.speed = patrolSpeed;
-                    escapeTimer = defaultEscapeTimer;
-                    playerOutOfSight = 2;
                     if (alertArea[areaCounter] != null)
                     {
                         currentTarget = alertArea[areaCounter];
@@ -257,62 +228,20 @@ public class enemyPathfinding : MonoBehaviour
                     if (areaCounter > 2)
                     {
                         areaCounter = 0;
-                        //print (currentTarget + " << currentTarget chase 4");
                     }
                     alertTimer = defaultAlertTimer;
                     stateManager(3);
                 }
-                //agent.speed = chaseSpeed;
-                //if(currentTarget != player.transform)
-                //{
-                //    lastTarget = currentTarget;
-                //}
-                //    currentTarget = player.transform;
-                //if(agent.SetDestination(currentTarget.position) != null)
-                //{
-                //    agent.SetDestination(currentTarget.position);
-                //}
-                //print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
-                
-			}
-			//else if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-
-            //if(vectorx >= chaseRange || vectorz >= chaseRange)	
-            //{
-            //        //print("ImOuttaHere");
-            //        print("Vectorx: " + vectorx + " Vectorz: " + vectorz);
-            //        agent.speed = patrolSpeed;
-            //        escapeTimer = defaultEscapeTimer;
-            //        playerOutOfSight = 2;
-            //        if(alertArea[areaCounter] != null)
-            //        {
-            //        currentTarget = alertArea[areaCounter];
-            //        }
-
-            //        areaCounter++;
-            //        if(areaCounter > 2)
-            //        {
-            //            areaCounter = 0;
-            //            //print (currentTarget + " << currentTarget chase 4");
-            //        }
-            //        alertTimer = defaultAlertTimer;
-            //        stateManager(3);
-            //    }
+            }
             else
             {
-                    agent.speed = chaseSpeed;
-                    if (currentTarget != player.transform)
-                    {
-                        lastTarget = currentTarget;
-                    }
-                    currentTarget = player.transform;
-                   // print("Current Target Position " + currentTarget.position.x + currentTarget.position.y + currentTarget.position.z);
+                agent.speed = chaseSpeed;
+                if (currentTarget != player.transform)
+                {
+                    lastTarget = currentTarget;
+                }
+                currentTarget = player.transform;
             }
-			escapeTimer-= Time.deltaTime;
-			if(escapeTimer < 0)
-			{
-				escapeTimer = 0;
-			}
 		}
 			break;
 
@@ -323,8 +252,6 @@ public class enemyPathfinding : MonoBehaviour
 			//Look around a room by moving from waypoint to waypoint//
 			//------------------------------------------------------//
 
-			//print (currentTarget + " <<  currentTarget Alert 1");
-//
 			if(alertTimer == 0 || alertTimer < 0)
 			{
 				if(lastTarget != null)
@@ -333,22 +260,9 @@ public class enemyPathfinding : MonoBehaviour
 					stateManager(4);
 				}
 			}
-//			Physics.Linecast(transform.position, player.transform.position, out hit);
-//			if (hit.collider == player.GetComponent<Collider>())
-//			{
-//				lastSeenPosition = player.transform.position;
-//				currentTarget.position = lastSeenPosition;
-//
-//				tempcounters = 0;
-//				stateManager(2);
-//			}
-//			else
-//			{
+            if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+			{
 
-				if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-				{
-
-					//print (vectorx + "  << vectorX  " + vectorz + "  << vectorz" + waypointOffsetMin + "  <<  waypointoffsetMin  " + waypointOffsetMax + "  << waypointoffsetmax  ");
 					if (timer <= 0 && (!distracted))
 					{	
 						lastTarget = currentTarget;
@@ -382,15 +296,6 @@ public class enemyPathfinding : MonoBehaviour
 					
 				}
 								
-				alertTimer--;
-				if(alertTimer <= 0)
-				{
-					alertTimer = 0;
-				}
-				
-
-//			}
-
 			break;
 		case enumStates.idleSuspicious:
 		{
@@ -437,26 +342,15 @@ public class enemyPathfinding : MonoBehaviour
 			
 			if (turnCounter > 2)
 			{
-					print (tempcounters + " << tempcounters");
-					if(tempcounters > 5)
-					{
-						tempcounters = 0;
-						//stateManager(0);
-					}
 
-					if(tempcounters < 6)
-					{
 
-					print ("vaihtaa alertiin");
                     alertTimer = defaultAlertTimer;
 					turnCounter = 0;
-						stateManager(3);
+                    stateManager(3);
 					}
 
 				idleTimer--;	
-			}
-			
-			
+
 			break;
 		}
 		case enumStates.distracted:
@@ -485,14 +379,11 @@ public class enemyPathfinding : MonoBehaviour
 		case enumStates.detectSound:
 		{
 
-			//detectSoundTimer--;
-			//if(detectSoundTimer <= 0)
             currentTarget = soundSource.transform;
             if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                 alertTimer = defaultAlertTimer;
 				stateManager(3);
-				//detectSoundTimer += defaultDetectSoundTimer;
-			//}
+
 			//---------------------------------------------//
 			// when sound is heard, move towards the source//
 			//---------------------------------------------//
@@ -518,7 +409,7 @@ public class enemyPathfinding : MonoBehaviour
 			if (eatTimer <= 0)
 				
 			{
-				eatTimer = defaultEatTimer;// 120;
+				eatTimer = defaultEatTimer;
 				distracted = false;
 				vision.SetActive(true);
 				smell.SetActive(true);
@@ -538,26 +429,6 @@ public class enemyPathfinding : MonoBehaviour
 		default:
 			break;
 		}
-        //if (speed > 4)
-        //{
-			
-        //    Vector3 velocity = transform.GetComponent<Rigidbody>().velocity;
-        //    if (velocity.x > maxSpeed)
-        //    {
-        //        float temp = velocity.x - maxSpeed;
-        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(-temp, 0, 0));
-        //    }
-        //    else if (velocity.y > maxSpeed)
-        //    {
-        //        float temp = velocity.y - maxSpeed;
-        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, -temp, 0));
-        //    }
-        //    else if (velocity.z > maxSpeed)
-        //    {
-        //        float temp = velocity.z - maxSpeed;
-        //        this.GetComponent<Rigidbody>().AddForce(new Vector3(0, 0, -temp));
-        //    }
-        //}
 		
 		if(currentTarget != null)
 		{
@@ -610,7 +481,6 @@ public class enemyPathfinding : MonoBehaviour
 				agent.SetDestination(currentTarget.position);
 			}
 			}
-			//pathRequestManager.requestPath(transform.position, currentTarget.position, onPathFound);
 		}
 		timer--;
 		//-------------//
@@ -625,78 +495,14 @@ public class enemyPathfinding : MonoBehaviour
 	{
 		States = (enumStates)value;
 	}
-	
-    //public void onPathFound(Vector3[] newPath, bool _pathSuccessful)
-    //{
-    //    if (_pathSuccessful) 
-    //    {
-			
-    //        path = newPath;
-    //        StopCoroutine("followPath");
-    //        StartCoroutine("followPath");
-    //    }
-		
-    //}
-	
-	//IEnumerator followPath()
-    //{
-    //    currentWaypoint = path [0];
-		
-    //    while (true) 
-    //    {
-    //        if(transform.position == currentWaypoint)
-    //        {
-    //            targetIndex ++;
-				
-    //            if(targetIndex >= path.Length)
-    //            {
-    //                targetIndex = 0;
-    //                path = new Vector3[0];
-    //                yield break;
-    //            }
-    //            currentWaypoint = path[targetIndex];
-				
-    //        }
-    //        if (currentTarget != null)
-    //        {
-    //            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentTarget.position - transform.position), turnSpeed * Time.deltaTime);
-    //            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-    //        }
-    //        yield return null;
-    //    }
-    //}
-	
-    //public void OnDrawGizmos()
-    //{
-    //    if (path != null) {
-    //        for (int i = targetIndex; i < path.Length; i++) 
-    //        {
-    //            Gizmos.color = Color.black;
-    //            Gizmos.DrawWireCube (path [i], Vector3.one);
-				
-    //            if (i == targetIndex) 
-    //            {
-    //                Gizmos.DrawLine (transform.position, path [i]);
-    //            } 
-    //            else 
-    //            {
-    //                Gizmos.DrawLine (path [i - 1], path [i]);
-					
-    //            }
-    //        }
-    //    } 
-		
-    //}
-	
+
 	void setDirectionsForIdle()
 	{
 		
 		directionDegrees.Add(firstDirection);
 		directionDegrees.Add(secondDirection);
 		directionDegrees.Add(thirdDirection);
-//		for (int i = 0; i < directionDegrees.Count; i++) {
-//			print (directionDegrees[i]);
-//		}
+
 	}
 	
 	void setTargetWaypoints()
@@ -723,13 +529,11 @@ public class enemyPathfinding : MonoBehaviour
 		
 		if (turnTimer <= 0)
 		{
-			//print (turnTimer + "  << TurnTimer");
 			if (rotationInProgress == false)
 			{
 				currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-				targetAngle = targetDegrees;//currentAngle + targetDegrees;
+				targetAngle = targetDegrees;
 				rotationInProgress = true;
-				//print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
 			}
 			
 			else if (rotationInProgress)
@@ -750,22 +554,19 @@ public class enemyPathfinding : MonoBehaviour
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else //if (currentAngle > targetAngle && turnTimer == 0)
+							else
 							{
 								
 								print("entered the rotation loop 2");
@@ -777,7 +578,6 @@ public class enemyPathfinding : MonoBehaviour
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
 							}
@@ -796,7 +596,6 @@ public class enemyPathfinding : MonoBehaviour
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								//print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
@@ -808,10 +607,9 @@ public class enemyPathfinding : MonoBehaviour
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
+							else
 							{
 								print("entered the rotation loop 4");
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
@@ -822,7 +620,6 @@ public class enemyPathfinding : MonoBehaviour
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
 						}
@@ -842,22 +639,19 @@ public class enemyPathfinding : MonoBehaviour
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else //if (currentAngle < targetAngle && turnTimer == 0)
+							else
 							{
 								
 								print("entered the rotation loop 6");
@@ -869,7 +663,6 @@ public class enemyPathfinding : MonoBehaviour
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
 							}
@@ -885,22 +678,19 @@ public class enemyPathfinding : MonoBehaviour
 								transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
 								currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 								rotationDifference = targetAngle - currentAngle;
-								//print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
 								if (rotationDifference < 0)
 								{
 									rotationDifference = rotationDifference * -1;
 								}
 								
-								//print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
 								if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
 								{
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 							}
-							else //if (currentAngle < targetAngle && turnTimer == 0)
+							else
 							{
 								
 								print("entered the rotation loop 8");
@@ -912,7 +702,6 @@ public class enemyPathfinding : MonoBehaviour
 									rotationCompleted = true;
 									rotationInProgress = false;
 									turnTimer += defaultTurnTimer * Time.deltaTime;
-									//print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
 								}
 								
 							}
@@ -932,9 +721,7 @@ public class enemyPathfinding : MonoBehaviour
 			{
 				turnTimer = 0;
 			}
-			
-			
-			//print ("turn timer  " + turnTimer);
+
 		}
 		
 	}

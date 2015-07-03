@@ -26,6 +26,8 @@ TagManager:
   - Waypoint
   - Unwalkable
   - Sphere
+  - ground
+  - patrolDog
   layers:
   - Default
   - TransparentFX

@@ -42,18 +42,7 @@ public class coneOfVision : MonoBehaviour
             {
                 transform.localScale = new Vector3(width, height, range);
             }
-            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious || script.States == enumStates.chase)
-            {
-                width = startWidth + alarmBonus;
-                height = startHeight + alarmBonus;
-                range = startRange + alarmBonus;
-            }
-            else
-            {
-                width = startWidth;
-                height = startHeight;
-                range = startRange;
-            }
+
         }
     }
 
@@ -70,7 +59,6 @@ public class coneOfVision : MonoBehaviour
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
-                script.escapeTimer = 0;
                 script.stateManager(2);
                 Debug.Log(hit);
 
@@ -82,16 +70,19 @@ public class coneOfVision : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-            //detectionTimer = 60.0f;
-            if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
+            if (transform.parent.tag == "patrolDog")
             {
-                if (hit.collider == other)
+                //detectionTimer = 60.0f;
+                if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
                 {
-                    if (script.States != enumStates.chase)
+                    if (hit.collider == other)
                     {
-                        script.areaCounter = 0;
+                        if (script.States != enumStates.chase)
+                        {
+                            script.areaCounter = 0;
 
-                        script.stateManager(3);
+                            script.stateManager(3);
+                        }
                     }
                 }
             }
