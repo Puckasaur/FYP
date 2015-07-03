@@ -94,3 +94,4 @@ public class TemporaryMovement : MonoBehaviour
 			isGrounded = false;
 		}
 	}
+}
