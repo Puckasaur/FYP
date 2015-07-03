@@ -4,6 +4,9 @@ using System.Collections;
 public class TemporaryMovement : MonoBehaviour
 {
 	public float movementSpeed;
+	public float sprintModifier;
+	private float sprintSpeed;
+	private float origMovementSpeed;
 	public float jumpHeight;
 	float m_GroundCheckDistance;
 	float m_OrigGroundCheckDistance;
@@ -21,11 +24,15 @@ public class TemporaryMovement : MonoBehaviour
 		m_GroundCheckDistance = 0.6f;
 		rb = GetComponent<Rigidbody> ();
 		catAnim = GetComponent<Animator> ();
+		origMovementSpeed = movementSpeed;
+		sprintSpeed = movementSpeed * sprintModifier;
 	}
 
 
 	void FixedUpdate() 
     {
+
+		sprint ();
 		updateAnimator();
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
 		checkGroundStatus ();
@@ -70,10 +77,29 @@ public class TemporaryMovement : MonoBehaviour
 		}
 	}
 
+	void sprint()
+	{
+		if (isGrounded)
+		{
+			if (Input.GetButton ("Sprint")) 
+			{
+				catAnim.SetBool("isSprinting", true);
+				movementSpeed = sprintSpeed;
+			}
+			else 
+			{
+				catAnim.SetBool("isSprinting", false);
+				movementSpeed = origMovementSpeed;
+			}
+		}
+	}
+
 	void updateAnimator()
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
+
+		Debug.Log (horizontal);
 
 		catAnim.SetFloat ("hSpeed", horizontal);
 		catAnim.SetFloat ("vSpeed", vertical);
