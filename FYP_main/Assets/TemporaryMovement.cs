@@ -60,7 +60,7 @@ public class TemporaryMovement : MonoBehaviour
 			// Jump
 			if (Input.GetButtonDown ("Jump")) 
 			{
-				this.GetComponent<Rigidbody> ().velocity += new Vector3 (0.0f, jumpHeight, 0.0f);
+				rb.velocity += new Vector3 (0.0f, jumpHeight, 0.0f);
 			}	
 		}
 
