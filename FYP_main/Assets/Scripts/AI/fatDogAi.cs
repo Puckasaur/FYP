@@ -15,7 +15,8 @@ public enum enumStatesFatDog
 }
 
 public class fatDogAi : MonoBehaviour {
-	
+
+    ringOfSmell ringOfSmellScript;
 	soundSphere sphereScript;
 	RaycastHit hit;
 	
@@ -27,7 +28,7 @@ public class fatDogAi : MonoBehaviour {
 	public Transform lastTarget;
 	public Vector3 lastSeenPosition = new Vector3(0,0,0);
 	
-	public enumStates States;
+	public enumStatesFatDog States;
 	GameObject vision;
 	GameObject smell;
 	GameObject bone;
@@ -114,7 +115,7 @@ public class fatDogAi : MonoBehaviour {
 	
 	void Start()
 	{
-		
+        ringOfSmellScript = GetComponentInChildren<ringOfSmell>();
 		//respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
 		setDirectionsForIdle();
@@ -165,8 +166,8 @@ public class fatDogAi : MonoBehaviour {
             {
                 vectorCurrentTargetz *= -1;
             }
-            print(vectorTransformPositionx + " <<  vectorTransformPositionx   " + vectorCurrentTargetx + " << vectorCurrentTargetx");
-            print(vectorTransformPositionz + " <<  vectorTransformPositionz   " + vectorCurrentTargetz + " << vectorCurrentTargetz");
+            //print(vectorTransformPositionx + " <<  vectorTransformPositionx   " + vectorCurrentTargetx + " << vectorCurrentTargetx");
+            //print(vectorTransformPositionz + " <<  vectorTransformPositionz   " + vectorCurrentTargetz + " << vectorCurrentTargetz");
             vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
         }
@@ -182,7 +183,7 @@ public class fatDogAi : MonoBehaviour {
 		switch(States)
 		{
 			
-		case enumStates.patrol:
+		case enumStatesFatDog.patrol:
 		{
 			//-----------------------------------------------------------------------------------------//
 			//patrol, moves from one waypoint to the next waiting for a second before advancing forward//
@@ -198,7 +199,7 @@ public class fatDogAi : MonoBehaviour {
 			break;
 			
 			
-		case enumStates.idle:
+		case enumStatesFatDog.idle:
 		{
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
@@ -232,16 +233,16 @@ public class fatDogAi : MonoBehaviour {
 			break;
 		}
 			
-		case enumStates.chase:
+		case enumStatesFatDog.chase:
 		{
                    
-            Physics.Linecast(transform.position, player.transform.position, out hit);
-            if (hit.collider.tag != player.GetComponent<Collider>().tag)
-            {
+            Physics.Linecast(transform.position, player.transform.position, out hit);          
+            if (hit.collider.tag == player.GetComponent<Collider>().tag)
+            {               
                 if (vectorx < chaseRange || vectorz < chaseRange)
-                {
+                {                   
                     if (barkTimer < 0)
-                    {
+                    {                        
                         bark();
                     }
                     barkTimer--;                    
@@ -253,16 +254,22 @@ public class fatDogAi : MonoBehaviour {
 			
 			
 			
-		case enumStates.alert:
+		case enumStatesFatDog.alert:
 		{
             stateManager(4);
 		}
 			break;
-		case enumStates.idleSuspicious:
+		case enumStatesFatDog.idleSuspicious:
 		{
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
+            print(ringOfSmellScript.playerSeen + "   ringOfSmellScript.playerSeen");
+            if (ringOfSmellScript.playerSeen == true)
+            {
+               stateManager(2);
+            }
+
 
             if (turnCounter < directionDegrees.Count)
 			{
@@ -298,7 +305,7 @@ public class fatDogAi : MonoBehaviour {
             }
 			break;
 		}
-		case enumStates.distracted:
+		case enumStatesFatDog.distracted:
 			
 		{
 			//-------------------------//
@@ -321,7 +328,7 @@ public class fatDogAi : MonoBehaviour {
 		}
 			
 			break;
-		case enumStates.detectSound:
+		case enumStatesFatDog.detectSound:
 		{
 			
 			//detectSoundTimer--;
@@ -338,7 +345,7 @@ public class fatDogAi : MonoBehaviour {
 			
 		}
 			break;
-		case enumStates.eatBone:
+		case enumStatesFatDog.eatBone:
 		{
 			//------------------------------------------------------------------//
 			// holds the enemy still for long enough for the distraction to pass//
@@ -382,7 +389,7 @@ public class fatDogAi : MonoBehaviour {
 		{
 			timer+=defaultTimer;
 			
-			if(States != enumStates.idleSuspicious)
+			if(States != enumStatesFatDog.idleSuspicious)
 			{
 				if(agent.SetDestination(currentTarget.position) != null)
 				{
@@ -401,7 +408,7 @@ public class fatDogAi : MonoBehaviour {
 	//-------------//
 	public void stateManager(int value)
 	{
-		States = (enumStates)value;
+		States = (enumStatesFatDog)value;
 	}
 	
 	void setDirectionsForIdle()

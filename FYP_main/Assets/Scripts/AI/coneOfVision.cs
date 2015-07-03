@@ -3,7 +3,7 @@ using System.Collections;
 
 public class coneOfVision : MonoBehaviour
 {
-
+    fatDogAi scriptFatDog;
     enemyPathfinding script;
     //guardDog guard;
     RaycastHit hit;
@@ -17,9 +17,24 @@ public class coneOfVision : MonoBehaviour
     public float detectionTimer = 60.0f;
     void Start()
     {
+        range = startRange;
+        width = startWidth;
+        height = startHeight;
+
+
         if (transform.parent.tag == "enemy")
         {
-            script = this.transform.parent.GetComponent<enemyPathfinding>();
+            if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
+            {
+                script = this.transform.parent.GetComponent<enemyPathfinding>();
+            }
+
+            if (this.transform.parent.GetComponent<fatDogAi>() != null)
+            {
+                scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
+            }
+
+            
         }
         //else if (transform.parent.tag == "guard")
         //{
@@ -59,7 +74,15 @@ public class coneOfVision : MonoBehaviour
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
-                script.stateManager(2);
+                if (script != null)
+                {
+                    script.stateManager(2);
+                }
+                else if (scriptFatDog != null)
+                {
+                    scriptFatDog.stateManager(2);
+                }
+                
                 Debug.Log(hit);
 
             }
@@ -82,6 +105,22 @@ public class coneOfVision : MonoBehaviour
                             script.areaCounter = 0;
 
                             script.stateManager(3);
+                        }
+                    }
+                }
+            }
+
+            else if (transform.parent.tag == "fatDog")
+            {
+                if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
+                {
+                    if (hit.collider == other)
+                    {
+                        if (scriptFatDog.States != enumStatesFatDog.chase)
+                        {
+                            scriptFatDog.areaCounter = 0;
+
+                            scriptFatDog.stateManager(3);
                         }
                     }
                 }
