@@ -98,9 +98,7 @@ public class TemporaryMovement : MonoBehaviour
 	{
 		float horizontal = Input.GetAxis ("Horizontal");
 		float vertical = Input.GetAxis("Vertical");
-
-		Debug.Log (horizontal);
-
+		
 		catAnim.SetFloat ("hSpeed", horizontal);
 		catAnim.SetFloat ("vSpeed", vertical);
 	}
