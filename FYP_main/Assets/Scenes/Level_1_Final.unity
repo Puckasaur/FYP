@@ -9682,6 +9682,10 @@ Prefab:
       propertyPath: bones
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 11451480, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: bone
+      value: 
+      objectReference: {fileID: 199134, guid: f4c2e241b8f80684880b060c30b3adda, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
   m_IsPrefabParent: 0
