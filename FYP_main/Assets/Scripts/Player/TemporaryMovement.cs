@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TemporaryMovement : MonoBehaviour
 {
+    public int numberOfKeys;
+    public int[] keyPossessed = new int[3];
+
 	public float movementSpeed;
 	public float sprintModifier;
 	private float sprintSpeed;
