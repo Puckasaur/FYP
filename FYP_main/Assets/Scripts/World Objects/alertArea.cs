@@ -18,13 +18,17 @@ public class alertArea : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Collider>().tag == "enemy")
-        
+        if (script != null)
         {
-            script = other.gameObject.GetComponent<enemyPathfinding>();
 
-            script.setAlertArea(this.gameObject); 
-        }
+            if (other.GetComponent<Collider>().tag == "enemy")
+            {
+                script = other.gameObject.GetComponent<enemyPathfinding>();
+
+                script.setAlertArea(this.gameObject);
+            }
+
+        }     
                
     }
 }

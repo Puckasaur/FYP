@@ -7,6 +7,7 @@ public class coneOfVision : MonoBehaviour
     enemyPathfinding script;
     //guardDog guard;
     RaycastHit hit;
+    public bool playerSeen;
     float width;
     public float startWidth;
     float height;
@@ -48,8 +49,6 @@ public class coneOfVision : MonoBehaviour
     {
         if (transform.parent.tag == "enemy")
         {
-
-
             GetComponent<Rigidbody>().WakeUp();
 
             if (transform.localScale.x < width)
@@ -72,18 +71,19 @@ public class coneOfVision : MonoBehaviour
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-            print(other);
+            //print(other);
             RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
 
                 if (script != null)
-                {
+                {                   
                     script.stateManager(2);
                 }
                 else if (scriptFatDog != null)
                 {
+                    playerSeen = true;
                     scriptFatDog.stateManager(2);
                 }
                 
@@ -121,9 +121,8 @@ public class coneOfVision : MonoBehaviour
                     if (hit.collider == other)
                     {
                         if (scriptFatDog.States != enumStatesFatDog.chase)
-                        {
-                            scriptFatDog.areaCounter = 0;
-
+                        {                         
+                            playerSeen = false;
                             scriptFatDog.stateManager(3);
                         }
                     }
@@ -132,6 +131,3 @@ public class coneOfVision : MonoBehaviour
         }
     }
 }
-
-
-
