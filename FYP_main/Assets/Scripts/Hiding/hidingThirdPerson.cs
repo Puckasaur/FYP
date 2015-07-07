@@ -27,19 +27,23 @@ public class hidingThirdPerson : MonoBehaviour {
 		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
 	}
 
-    void OnTriggerStay()
+    void OnTriggerStay(Collider catType)
     {	
-		checkToEnter.enabled = true;
+		if (catType.tag == "player") 
+		{
 
-        if (isHiding == false)
-        {
-			if (Input.GetButtonDown("Interact"))
+			checkToEnter.enabled = true;
+			
+			if (isHiding == false)
 			{
-				character.transform.position = hidingPosition.transform.position;
-
-				StartCoroutine(Wait());
-            }
-        }
+				if (Input.GetButtonDown("Interact"))
+				{
+					character.transform.position = hidingPosition.transform.position;
+					
+					StartCoroutine(Wait());
+				}
+			}
+		}
     }
 
 	void OnTriggerExit()
