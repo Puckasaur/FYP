@@ -14127,7 +14127,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11495306, guid: ac97834cc185d2c4ea8ef978f96eaef1, type: 2}
       propertyPath: defaultAlertTimer
-      value: 4000
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 19551152, guid: ac97834cc185d2c4ea8ef978f96eaef1, type: 2}
+      propertyPath: m_AngularSpeed
+      value: 720
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac97834cc185d2c4ea8ef978f96eaef1, type: 2}
@@ -35590,6 +35594,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38094ef1be0e15547921fd9c2259b696, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numberOfKeys: 0
+  keyPossessed: 000000000000000000000000
   movementSpeed: 5
   sprintModifier: 0
   origMovementSpeed: 0
