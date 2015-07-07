@@ -20,8 +20,8 @@ public class alertArea : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (script != null)
-        {
+        //if (script != null)
+        //{
 
 
             if (other.GetComponent<Collider>().tag == "enemy")
@@ -29,7 +29,7 @@ public class alertArea : MonoBehaviour
                 script = other.gameObject.GetComponent<enemyPathfinding>();
 				script.setAlertArea(this.gameObject); 
 			}
-        }
+        //}
         else if(other.GetComponent<Collider>().tag == "huntingDog")
         {
             scriptHunter = other.gameObject.GetComponent<huntingDog>();
