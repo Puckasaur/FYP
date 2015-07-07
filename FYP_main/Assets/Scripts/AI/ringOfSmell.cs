@@ -97,28 +97,28 @@ public class ringOfSmell : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        
+
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
 
         if (other.gameObject.tag == "player")
-        {            
+        {
             detectionTimer--;
 
             if (detectionTimer <= 0)
             {
-                detectionTimer = 60;                
+                detectionTimer = 60;
             }
             Physics.Raycast(transform.parent.position, player.transform.position, out hit);
-            if(hit.distance <= sniffDistance)
+            if (hit.distance <= sniffDistance)
             {
-				if(!sniff.isPlaying)
-				{
-					sniff.Play();
-				}
+                if (!sniff.isPlaying)
+                {
+                    sniff.Play();
+                }
             }
-            if(hit.distance <= visualDistance)
+            if (hit.distance <= visualDistance)
             {
                 if (!gameObject.GetComponent<ParticleSystem>())
                 {
@@ -129,7 +129,7 @@ public class ringOfSmell : MonoBehaviour {
 
             //print("hit distance: " + hit.distance + "   detection Distance: " + detectionDistance);
 
-            if(hit.distance <= detectionDistance)
+            if (hit.distance <= detectionDistance)
             {
                 if (script != null)
                 {
@@ -140,32 +140,33 @@ public class ringOfSmell : MonoBehaviour {
                     playerSeen = true;
                     scriptFatDog.stateManager(2);
                 }
-                else if(huntingDogScript != null)
+                else if (huntingDogScript != null)
                 {
                     huntingDogScript.stateManager(2);
                 }
-        //    if(hit.distance <= detectionDistance)
-        //    {
-        //        if (script != null)
-        //        {
-        //            script.stateManager(2);
-        //        }
-        //        else if (scriptFatDog != null)
-        //        {
-        //            playerSeen = true;
-        //            scriptFatDog.stateManager(2);
-        //        }
-        //    }
-        //    if (hit.distance <= somethingElseDistance)
-        //    {
-        //        Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-        //        if (hit.collider == player.GetComponent<Collider>())
-        //        {
-        //            transform.parent.LookAt(player.transform);
+                //    if(hit.distance <= detectionDistance)
+                //    {
+                //        if (script != null)
+                //        {
+                //            script.stateManager(2);
+                //        }
+                //        else if (scriptFatDog != null)
+                //        {
+                //            playerSeen = true;
+                //            scriptFatDog.stateManager(2);
+                //        }
+                //    }
+                //    if (hit.distance <= somethingElseDistance)
+                //    {
+                //        Physics.Linecast(transform.parent.position, player.transform.position, out hit);
+                //        if (hit.collider == player.GetComponent<Collider>())
+                //        {
+                //            transform.parent.LookAt(player.transform);
 
-        //        }
-        //    }
+                //        }
+                //    }
 
+            }
         }
     }
     void OnTriggerExit(Collider other)
