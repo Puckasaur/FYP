@@ -101,15 +101,25 @@ public class enemyPathfinding : MonoBehaviour
     public float chaseRange;
 	
 	Vector3[] path = new Vector3[0];
-	
+	Vector3 currentWaypoint;
+	//Leap values
+    public float leapRange;
+    float leapTimer;
+    public float defaultLeapTimer;
+    Vector3 leapPosition;
+    public float impulse;
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
-
+        
+        leapTimer = defaultLeapTimer;
         ringOfSmellScript = GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
+       
+        //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
+        
 		setDirectionsForIdle();
 		setTargetWaypoints();
 		currentTarget = targets[0];
@@ -189,9 +199,32 @@ public class enemyPathfinding : MonoBehaviour
 			//----------------------------------------------------------------------------//
 			// chase the Player constantly searching for a waypoint at the Player position//
 			//----------------------------------------------------------------------------//
+            //--------------------------//
+            //Leap Attack While Chasing //
+            //--------------------------//
+
+            //leapPosition = player.transform.position - transform.position;
+            //leapPosition.Normalize();
+
+
+            //if (leapTimer <= 0 && (leapPosition.x < leapRange || leapPosition.z < leapRange))
+            //{
+            //    currentTarget = null;
+            //    print("Ferocious leap activated, it should be very effective!");
+            //    GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
+            //    leapTimer = defaultLeapTimer;
+            //    currentTarget = lastTarget;
+
+            //}
+            //else 
+            //{
+            //    print("Kamehameha is loading, brace yourself!");
+            //    leapTimer--;
+            //}
+
 			//------------------//
 			//Bark While chasing//
-			//------------------//
+			//------------------// 
 			if (barkTimer < 0)
 			{
 				newSphere = (GameObject)Instantiate(sphere, this.transform.position, Quaternion.identity);
@@ -253,7 +286,7 @@ public class enemyPathfinding : MonoBehaviour
                 if (currentTarget != player.transform)
                 {
                     lastTarget = currentTarget;
-                }
+                }            
                 currentTarget = player.transform;
             }
 		}
@@ -531,6 +564,7 @@ public class enemyPathfinding : MonoBehaviour
 		}
 
 	}
+
 
     //==================================================//
     //================Rotate Enemy======================//
