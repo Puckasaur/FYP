@@ -4,30 +4,33 @@ using System.Collections;
 
 public class hidingThirdPerson : MonoBehaviour {
 
+	private TemporaryMovement tmpMovement;
+
     public Transform character;
     public Transform prevPosition;
     public Transform hidingPosition;
 
-    public Text onScreenInstruction;
-    public Text onScreenInstructionExit;
+   	public Text checkToEnter;
+    public Text checkToExit;
 
     private bool isHiding;
 	private bool isPaused;
 
-	// Use this for initialization
+	//public Text hidingText;
+
+	 //Use this for initialization
 	void Start () 
 	{
         isHiding = false;
         isPaused = false;
 
-        onScreenInstruction.enabled = false;
-        onScreenInstructionExit.enabled = false;
+		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
 	}
 
     void OnTriggerStay()
-    {
-	    onScreenInstruction.enabled = true;
-	
+    {	
+		checkToEnter.enabled = true;
+
         if (isHiding == false)
         {
 			if (Input.GetButtonDown("Interact"))
@@ -41,7 +44,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		onScreenInstruction.enabled = false;
+		checkToEnter.enabled = false;
 	}
 
 	void Update () 
@@ -53,36 +56,34 @@ public class hidingThirdPerson : MonoBehaviour {
 				StartCoroutine (Delayed ());
 
 				isHiding = false;
-				isPaused = false;;
-				
+				isPaused = false;
 			}
 		}
 
 		if (isPaused == true) 
 		{
 			//pause
-			character.GetComponent<Rigidbody> ().isKinematic = true;
+			character.GetComponent<Rigidbody>().isKinematic = true;
+			tmpMovement.movementSpeed = 0;
 
 		} 
 		else if (isPaused == false)
 		{
 			//unpause
 			character.GetComponent<Rigidbody>().isKinematic = false;
-
+			tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
 		}
-
 	}
-
-
     IEnumerator Wait()
-    {
+	{
+
         yield return new WaitForSeconds(0.1f);
 
 		isPaused = true;
         isHiding = true;
 
-      	onScreenInstruction.enabled = false;
-        onScreenInstructionExit.enabled = true;
+		//checkToEnter.enabled = false;
+		checkToExit.enabled = true;
 	}
 	
 	IEnumerator Delayed()
@@ -90,7 +91,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-        onScreenInstructionExit.enabled = false;
+		checkToExit.enabled = false;
    
 	}
 

@@ -41,9 +41,7 @@ public class CheckPoint: MonoBehaviour
             {
                 Vector3 respawnPos = enemy.GetComponent<enemyPathfinding>().respawnPosition;
                 enemy.transform.position = respawnPos;
-
                 this.transform.position = checkPointPosition.transform.position;
-
                 enemy.GetComponent<enemyPathfinding>().States = enumStates.patrol;
             }
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 namespace UnityStandardAssets.Characters.ThirdPerson
@@ -15,10 +16,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
 
-
 		public float speedHat = 2.0f;
 		public float jumpHat = 2.0f;
 
+		public Color hat1;
+		public Color hat2;
 
 		private bool speedHatOn = false;
 		private bool jumpHatOn = false;
@@ -50,16 +52,33 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
             }
 
-			if (Input.GetButtonDown ("Hat 1")) 
+			if (Input.GetAxis ("HatSpeed_Controller") > 0.001) 
 			{
 				speedHatOn = true;
 				jumpHatOn = false;
+
+				//hat1.color = Color.
+
+				Debug.Log ("Up");
 			}
 
-			if (Input.GetButtonDown ("Hat 2"))
+			if (Input.GetAxis ("HatSpeed_Controller") < 0) 
+			{
+				Debug.Log ("Down");
+			}
+
+			if (Input.GetAxis("HatJump_Controller") > 0.001)
 			{
 				jumpHatOn = true;
 				speedHatOn = false;
+				Debug.Log ("Right");
+				
+			}
+
+			if (Input.GetAxis("HatJump_Controller") < 0)
+			{
+				Debug.Log ("Left");
+				
 			}
 
 			if(Input.GetKeyDown(KeyCode.T)&& bones > 0)
@@ -144,3 +163,4 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 }
 
+	
