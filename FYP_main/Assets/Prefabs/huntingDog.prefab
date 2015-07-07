@@ -440,9 +440,10 @@ MonoBehaviour:
   defaultIdleTimer: 70
   defaultTimer: 20
   defaultTurnTimer: 0
+  defaultEscapeTimer: 400
   patrolSpeed: 3.5
   chaseSpeed: 13
-  chaseRange: 10
+  chaseRange: 5
 --- !u!114 &11465238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ab6f0a57e0e144fabc5e33010621ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSeen: 0
   startWidth: 3
   startHeight: 2
   startRange: 8

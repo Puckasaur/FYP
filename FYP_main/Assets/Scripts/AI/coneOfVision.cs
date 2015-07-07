@@ -6,7 +6,6 @@ public class coneOfVision : MonoBehaviour
     fatDogAi scriptFatDog;
     enemyPathfinding script;
     huntingDog scriptHuntingDog;
-    //guardDog guard;
     RaycastHit hit;
     public bool playerSeen;
     float width;
@@ -24,8 +23,8 @@ public class coneOfVision : MonoBehaviour
         height = startHeight;
 
 
-        if (transform.parent.tag == "enemy")
-        {
+        //if (transform.parent.tag == "enemy")
+        //{
             if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
             {
                 script = this.transform.parent.GetComponent<enemyPathfinding>();
@@ -41,7 +40,7 @@ public class coneOfVision : MonoBehaviour
             }
 
             
-        }
+        //}
         width = startWidth;
         height = startHeight;
         range = startRange;
@@ -52,8 +51,8 @@ public class coneOfVision : MonoBehaviour
     }
     void Update()
     {
-        if (transform.parent.tag == "enemy")
-        {
+        //if (transform.parent.tag == "enemy")
+        //{
             GetComponent<Rigidbody>().WakeUp();
 
             if (transform.localScale.x < width)
@@ -64,7 +63,7 @@ public class coneOfVision : MonoBehaviour
             {
                 transform.localScale = new Vector3(width, height, range);
             }
-        }
+        //}
     }
 
     void OnTriggerStay(Collider other)
@@ -75,7 +74,6 @@ public class coneOfVision : MonoBehaviour
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-            //print(other);
             RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
@@ -106,7 +104,6 @@ public class coneOfVision : MonoBehaviour
         {
             if (transform.parent.tag == "patrolDog")
             {
-                //detectionTimer = 60.0f;
                 if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
                 {
                     if (hit.collider == other)

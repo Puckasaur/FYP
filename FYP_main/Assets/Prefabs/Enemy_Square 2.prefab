@@ -401,11 +401,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startRadius: 10
+  playerSeen: 0
   detectionTimer: 45
   alarmBonus: 0
   sniffDistance: 15
   visualDistance: 7.5
   detectionDistance: 5
+  somethingElseDistance: 0
 --- !u!114 &11484512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -417,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ab6f0a57e0e144fabc5e33010621ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSeen: 0
   startWidth: 3
   startHeight: 2
   startRange: 8
@@ -440,7 +443,6 @@ MonoBehaviour:
   target4: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  lastSeenPosition: {x: 0, y: 0, z: 0}
   States: 0
   sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   soundSource: {fileID: 0}
@@ -448,8 +450,6 @@ MonoBehaviour:
   - {fileID: 0}
   eatBone: 0
   distracted: 0
-  turnSpeed: 2
-  speed: 7
   idleSuscpicious: 0
   firstDirection: 90
   secondDirection: -90
@@ -461,19 +461,13 @@ MonoBehaviour:
   angleOffsetMin: -10
   rotationCompleted: 0
   turnTimer: 100
-  timer: 20
-  idleTimer: 70
-  barkTimer: 120
-  escapeTimer: 0
   alertTimer: 0
-  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
   defaultTimer: 20
   defaultAlertTimer: 400
-  defaultEscapeTimer: 0
-  playerOutOfSight: 0
+  defaultEscapeTimer: 400
   areaCounter: 0
   defaultTurnTimer: 0
   defaultDetectSoundTimer: 0

@@ -13,7 +13,9 @@ public class huntingDog : MonoBehaviour {
     ringOfSmell hunterRingOfSmellScript;
     coneOfVision hunterConeOfVisionScript;
     soundSphere hunterSphereScript;
+    spawnHunter hunterSpawnScript;
     RaycastHit hit;
+    GameObject hunterSpawner;
     public Transform currentTarget;
     public enumStatesHunter statesHunter;
     GameObject player;
@@ -22,7 +24,7 @@ public class huntingDog : MonoBehaviour {
     NavMeshAgent agent;
     public List<Transform> alertArea = new List<Transform>();
 
-    float maxScale = 60;
+    float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
     float vectorTransformPositionx = 0;
@@ -60,9 +62,11 @@ public class huntingDog : MonoBehaviour {
     public int defaultIdleTimer;
     public int defaultTimer;
     public float defaultTurnTimer;
+    public float defaultEscapeTimer;
 
     float barkTimer;
     float alertTimer;
+    float escapeTimer;
     int timer;
     int idleTimer; 
 
@@ -89,6 +93,9 @@ public class huntingDog : MonoBehaviour {
         barkTimer = defaultBarkTimer;
         alertTimer = defaultAlertTimer;
         turnTimer = defaultTurnTimer;
+        escapeTimer = defaultEscapeTimer;
+        hunterSpawner = GameObject.FindGameObjectWithTag("hunterSpawner");
+        hunterSpawnScript = hunterSpawner.GetComponent<spawnHunter>();
 	}
 	
 	// Update is called once per frame
@@ -142,12 +149,30 @@ public class huntingDog : MonoBehaviour {
                             alertTimer = defaultAlertTimer;
                             stateManager(3);
                         }
+                        else if(escapeTimer <= 0)
+                        {
+                            agent.speed = patrolSpeed;
+                            if (alertArea[areaCounter] != null)
+                            {
+                                currentTarget = alertArea[areaCounter];
+                            }
+
+                            areaCounter++;
+                            if (areaCounter > 2)
+                            {
+                                areaCounter = 0;
+                            }
+                            alertTimer = defaultAlertTimer;
+                            stateManager(3);
+                        }
+                        escapeTimer--;
                     }
                     else
                     {
                         print("continuing Chase");
                         agent.speed = chaseSpeed;
                         currentTarget = player.transform;
+                        escapeTimer = defaultEscapeTimer;
                     }
                 }
                 break;
@@ -222,6 +247,7 @@ public class huntingDog : MonoBehaviour {
                     if (alertTimer <= 0)
                     {
                         print("endOfTheLine");
+                        hunterSpawnScript.spawnedHunters--;
                         Destroy(gameObject);
                         //agent.speed = patrolSpeed;
                         //turnCounter = 0;

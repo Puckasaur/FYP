@@ -46,7 +46,7 @@ public class enemyPathfinding : MonoBehaviour
 	
 	public bool eatBone = false;
 	public bool distracted = false;
-	float maxScale = 60;
+	float maxScale = 20;
 	float waypointOffsetMin = -2.05f;
 	float waypointOffsetMax = 2.05f;
 	float vectorTransformPositionx = 0;
@@ -229,6 +229,23 @@ public class enemyPathfinding : MonoBehaviour
                     alertTimer = defaultAlertTimer;
                     stateManager(3);
                 }
+                else if (escapeTimer <= 0)
+                {
+                    agent.speed = patrolSpeed;
+                    if (alertArea[areaCounter] != null)
+                    {
+                        currentTarget = alertArea[areaCounter];
+                    }
+
+                    areaCounter++;
+                    if (areaCounter > 2)
+                    {
+                        areaCounter = 0;
+                    }
+                    alertTimer = defaultAlertTimer;
+                    stateManager(3);
+                }
+                escapeTimer--;
             }
             else
             {

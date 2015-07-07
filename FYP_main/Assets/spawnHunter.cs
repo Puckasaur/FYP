@@ -4,6 +4,7 @@ using System.Collections;
 public class spawnHunter : MonoBehaviour {
     public GameObject huntingDog;
     GameObject newDog;
+    public int spawnedHunters;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,8 +18,11 @@ public class spawnHunter : MonoBehaviour {
 {
         if (other.gameObject.tag == "soundSphere")
         {
-            newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
-            
+            if (spawnedHunters <= 2)
+            {
+                newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
+                spawnedHunters++;
+            }
         }
 }
 }

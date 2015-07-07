@@ -26,13 +26,13 @@ public class ringOfSmell : MonoBehaviour {
         radius = startRadius;
 
 
-        if (transform.parent.tag == "enemy")
-        {
+        //if (transform.parent.tag == "enemy")
+        //{
             scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
             huntingDogScript = transform.parent.GetComponent<huntingDog>();
             script = this.transform.parent.GetComponent<enemyPathfinding>();
 			sniff = GetComponent<AudioSource>();
-		}
+		//}
 
     }
 
@@ -92,7 +92,7 @@ public class ringOfSmell : MonoBehaviour {
         {
             player = other.gameObject;
 
-                playerSeen = true;
+               // playerSeen = true;
             }
         }
 
