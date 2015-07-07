@@ -474,6 +474,10 @@ MonoBehaviour:
   patrolSpeed: 3.5
   chaseSpeed: 13
   chaseRange: 10
+  leapRange: 0
+  defaultLeapTimer: 60
+  impulse: 0
+  chargeRange: 5
 --- !u!136 &13675194
 CapsuleCollider:
   m_ObjectHideFlags: 1
