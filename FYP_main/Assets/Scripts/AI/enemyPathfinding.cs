@@ -108,6 +108,9 @@ public class enemyPathfinding : MonoBehaviour
     public float defaultLeapTimer;
     Vector3 leapPosition;
     public float impulse;
+    public float chargeRange;
+    Vector3 enemyRotation;
+
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
@@ -202,6 +205,31 @@ public class enemyPathfinding : MonoBehaviour
             //--------------------------//
             //Leap Attack While Chasing //
             //--------------------------//
+
+            if (vectorx < chargeRange || vectorz < chargeRange)
+            {
+                agent.autoBraking = false;
+                enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );
+                transform.LookAt(enemyRotation);
+                leapTimer--;
+                    if(leapTimer <= 0)
+                    {
+                       // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
+                        print("leap activated");
+                        agent.autoBraking = true;
+                        leapTimer = defaultLeapTimer;
+                    }
+            }
+            else
+            {
+                print("pilasi kaiken");
+                leapTimer--;
+                if (leapTimer <= 0)
+                {
+                    agent.autoBraking = true;
+                    leapTimer = defaultLeapTimer;
+                }
+            }
 
             //leapPosition = player.transform.position - transform.position;
             //leapPosition.Normalize();
