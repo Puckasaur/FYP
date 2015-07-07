@@ -88,7 +88,7 @@ public class enemyPathfinding : MonoBehaviour
 	public int defaultEatTimer;
 	public int defaultIdleTimer;
 	public int defaultBarkTimer;
-	public int defaultTimer;
+    public int defaultTimer;
 	public int defaultAlertTimer;
 	public int defaultEscapeTimer;
 	int targetCounter = 0;
@@ -101,7 +101,6 @@ public class enemyPathfinding : MonoBehaviour
     public float chaseRange;
 	
 	Vector3[] path = new Vector3[0];
-	Vector3 currentWaypoint;
 	
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()

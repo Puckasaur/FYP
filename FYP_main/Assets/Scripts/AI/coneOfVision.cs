@@ -5,6 +5,7 @@ public class coneOfVision : MonoBehaviour
 {
     fatDogAi scriptFatDog;
     enemyPathfinding script;
+    huntingDog scriptHuntingDog;
     //guardDog guard;
     RaycastHit hit;
     public bool playerSeen;
@@ -34,6 +35,10 @@ public class coneOfVision : MonoBehaviour
             {
                 scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
             }
+            if(transform.parent.GetComponent<huntingDog>() != null)
+            {
+                scriptHuntingDog = transform.parent.GetComponent<huntingDog>();
+            }
 
             
         }
@@ -59,7 +64,6 @@ public class coneOfVision : MonoBehaviour
             {
                 transform.localScale = new Vector3(width, height, range);
             }
-
         }
     }
 
@@ -86,7 +90,10 @@ public class coneOfVision : MonoBehaviour
                     playerSeen = true;
                     scriptFatDog.stateManager(2);
                 }
-                
+                else if (scriptHuntingDog != null)
+                {
+                    scriptHuntingDog.stateManager(2);
+                }
                 Debug.Log(hit);
 
 
@@ -124,6 +131,21 @@ public class coneOfVision : MonoBehaviour
                         {                         
                             playerSeen = false;
                             scriptFatDog.stateManager(3);
+                        }
+                    }
+                }
+            }
+            else if (transform.parent.tag == "huntingDog")
+            {
+                if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
+                {
+                    if (hit.collider == other)
+                    {
+                        if (scriptHuntingDog.statesHunter != enumStatesHunter.chase)
+                        {
+                            scriptHuntingDog.areaCounter = 0;
+
+                            scriptHuntingDog.stateManager(3);
                         }
                     }
                 }

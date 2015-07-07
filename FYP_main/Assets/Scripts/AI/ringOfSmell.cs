@@ -4,7 +4,7 @@ using System.Collections;
 public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
     fatDogAi scriptFatDog;
-    //guardDog guard;
+    huntingDog huntingDogScript;
     float radius;
     public float startRadius;
     public bool playerSeen = false;
@@ -29,6 +29,7 @@ public class ringOfSmell : MonoBehaviour {
         if (transform.parent.tag == "enemy")
         {
             scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
+            huntingDogScript = transform.parent.GetComponent<huntingDog>();
             script = this.transform.parent.GetComponent<enemyPathfinding>();
 			sniff = GetComponent<AudioSource>();
 		}
@@ -82,6 +83,7 @@ public class ringOfSmell : MonoBehaviour {
 
         //    }
         //}
+
     }
     
     void OnTriggerEnter(Collider other)
@@ -91,7 +93,6 @@ public class ringOfSmell : MonoBehaviour {
             player = other.gameObject;
 
                 playerSeen = true;
-                //transform.parent.LookAt(other.transform);
             }
         }
 
@@ -101,7 +102,7 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
-       // print(other.gameObject.tag);
+
         if (other.gameObject.tag == "player")
         {            
             detectionTimer--;
@@ -140,6 +141,10 @@ public class ringOfSmell : MonoBehaviour {
                     playerSeen = true;
                     scriptFatDog.stateManager(2);
                 }
+                else if(huntingDogScript != null)
+                {
+                    huntingDogScript.stateManager(2);
+                }
 
             }
             if (hit.distance <= somethingElseDistance)
@@ -159,8 +164,6 @@ public class ringOfSmell : MonoBehaviour {
         if(other.gameObject.tag == "player")
         {
 
-            //if (script.States != enumStates.chase && script.States != enumStates.alert)
-            //{
             detectionTimer = 60.0f;
 
             if (visualCueActive)
