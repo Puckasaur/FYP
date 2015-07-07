@@ -3,13 +3,13 @@ using System.Collections;
 
 public class TemporaryMovement : MonoBehaviour
 {
-    public int numberOfKeys;
-    public int[] keyPossessed = new int[3];
+	public int numberOfKeys;
+	public int[] keyPossessed = new int[3];
 
 	public float movementSpeed;
 	public float sprintModifier;
 	private float sprintSpeed;
-	private float origMovementSpeed;
+	public float origMovementSpeed;
 	public float jumpHeight;
 	float m_GroundCheckDistance;
 	float m_OrigGroundCheckDistance;
