@@ -8,7 +8,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class CheckPoint : MonoBehaviour
+public class CheckPoint: MonoBehaviour
 {
     public GameObject checkPointPosition; // Position of the check point
     public bool checkPoint = false; // if the check point has been reached or not
@@ -41,7 +41,7 @@ public class CheckPoint : MonoBehaviour
             {
                 Vector3 respawnPos = enemy.GetComponent<enemyPathfinding>().respawnPosition;
                 enemy.transform.position = respawnPos;
-
+                this.transform.position = checkPointPosition.transform.position;
                 enemy.GetComponent<enemyPathfinding>().States = enumStates.patrol;
             }
 

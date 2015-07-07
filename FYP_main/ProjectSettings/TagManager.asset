@@ -31,6 +31,9 @@ TagManager:
   - huntingDog
   - hunterDoor
   - hunterSpawner
+  - checkPoint
+  - particleArea
+  - boneSpawnerRoom
   layers:
   - Default
   - TransparentFX
