@@ -27,9 +27,9 @@ public class breakableObject: MonoBehaviour
         // set the volume of the sound sphere for this object//
         //---------------------------------------------------//
         if (this.gameObject.tag == "ball")
-            maxScale = 100.0f;
+            maxScale = 30.0f;
         else if (this.gameObject.tag == "cube")
-            maxScale = 50.0f;
+            maxScale = 40.0f;
         else if (this.gameObject.tag == "bone")
             maxScale = 25.0f;
         

@@ -5,8 +5,9 @@ public class coneOfVision : MonoBehaviour
 {
     fatDogAi scriptFatDog;
     enemyPathfinding script;
-    //guardDog guard;
+    huntingDog scriptHuntingDog;
     RaycastHit hit;
+    public bool playerSeen;
     float width;
     public float startWidth;
     float height;
@@ -22,8 +23,8 @@ public class coneOfVision : MonoBehaviour
         height = startHeight;
 
 
-        if (transform.parent.tag == "enemy")
-        {
+        //if (transform.parent.tag == "enemy")
+        //{
             if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
             {
                 script = this.transform.parent.GetComponent<enemyPathfinding>();
@@ -33,9 +34,13 @@ public class coneOfVision : MonoBehaviour
             {
                 scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
             }
+            if(transform.parent.GetComponent<huntingDog>() != null)
+            {
+                scriptHuntingDog = transform.parent.GetComponent<huntingDog>();
+            }
 
             
-        }
+        //}
         width = startWidth;
         height = startHeight;
         range = startRange;
@@ -46,10 +51,8 @@ public class coneOfVision : MonoBehaviour
     }
     void Update()
     {
-        if (transform.parent.tag == "enemy")
-        {
-
-
+        //if (transform.parent.tag == "enemy")
+        //{
             GetComponent<Rigidbody>().WakeUp();
 
             if (transform.localScale.x < width)
@@ -60,8 +63,7 @@ public class coneOfVision : MonoBehaviour
             {
                 transform.localScale = new Vector3(width, height, range);
             }
-
-        }
+        //}
     }
 
     void OnTriggerStay(Collider other)
@@ -72,21 +74,24 @@ public class coneOfVision : MonoBehaviour
         //-----------------------------------------------------------------------//
         if (other.gameObject.tag == "player")
         {
-            print(other);
             RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
 
                 if (script != null)
-                {
+                {                   
                     script.stateManager(2);
                 }
                 else if (scriptFatDog != null)
                 {
+                    playerSeen = true;
                     scriptFatDog.stateManager(2);
                 }
-                
+                else if (scriptHuntingDog != null)
+                {
+                    scriptHuntingDog.stateManager(2);
+                }
                 Debug.Log(hit);
 
 
@@ -99,7 +104,6 @@ public class coneOfVision : MonoBehaviour
         {
             if (transform.parent.tag == "patrolDog")
             {
-                //detectionTimer = 60.0f;
                 if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
                 {
                     if (hit.collider == other)
@@ -121,10 +125,24 @@ public class coneOfVision : MonoBehaviour
                     if (hit.collider == other)
                     {
                         if (scriptFatDog.States != enumStatesFatDog.chase)
-                        {
-                            scriptFatDog.areaCounter = 0;
-
+                        {                         
+                            playerSeen = false;
                             scriptFatDog.stateManager(3);
+                        }
+                    }
+                }
+            }
+            else if (transform.parent.tag == "huntingDog")
+            {
+                if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
+                {
+                    if (hit.collider == other)
+                    {
+                        if (scriptHuntingDog.statesHunter != enumStatesHunter.chase)
+                        {
+                            scriptHuntingDog.areaCounter = 0;
+
+                            scriptHuntingDog.stateManager(3);
                         }
                     }
                 }
@@ -132,6 +150,3 @@ public class coneOfVision : MonoBehaviour
         }
     }
 }
-
-
-

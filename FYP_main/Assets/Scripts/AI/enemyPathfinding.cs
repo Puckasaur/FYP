@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public enum enumStates
 {
 	
@@ -45,7 +46,7 @@ public class enemyPathfinding : MonoBehaviour
 	
 	public bool eatBone = false;
 	public bool distracted = false;
-	float maxScale = 60;
+	float maxScale = 20;
 	float waypointOffsetMin = -2.05f;
 	float waypointOffsetMax = 2.05f;
 	float vectorTransformPositionx = 0;
@@ -87,7 +88,7 @@ public class enemyPathfinding : MonoBehaviour
 	public int defaultEatTimer;
 	public int defaultIdleTimer;
 	public int defaultBarkTimer;
-	public int defaultTimer;
+    public int defaultTimer;
 	public int defaultAlertTimer;
 	public int defaultEscapeTimer;
 	int targetCounter = 0;
@@ -101,15 +102,27 @@ public class enemyPathfinding : MonoBehaviour
 	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
-	
+	//Leap values
+    public float leapRange;
+    float leapTimer;
+    public float defaultLeapTimer;
+    Vector3 leapPosition;
+    public float impulse;
+    public float chargeRange;
+    Vector3 enemyRotation;
+
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
-
+        
+        leapTimer = defaultLeapTimer;
         ringOfSmellScript = GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
+       
+        //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
+        
 		setDirectionsForIdle();
 		setTargetWaypoints();
 		currentTarget = targets[0];
@@ -189,9 +202,57 @@ public class enemyPathfinding : MonoBehaviour
 			//----------------------------------------------------------------------------//
 			// chase the Player constantly searching for a waypoint at the Player position//
 			//----------------------------------------------------------------------------//
+            //--------------------------//
+            //Leap Attack While Chasing //
+            //--------------------------//
+
+            if (vectorx < chargeRange || vectorz < chargeRange)
+            {
+                agent.autoBraking = false;
+                enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );
+                transform.LookAt(enemyRotation);
+                leapTimer--;
+                    if(leapTimer <= 0)
+                    {
+                       // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
+                        print("leap activated");
+                        agent.autoBraking = true;
+                        leapTimer = defaultLeapTimer;
+                    }
+            }
+            else
+            {
+                print("pilasi kaiken");
+                leapTimer--;
+                if (leapTimer <= 0)
+                {
+                    agent.autoBraking = true;
+                    leapTimer = defaultLeapTimer;
+                }
+            }
+
+            //leapPosition = player.transform.position - transform.position;
+            //leapPosition.Normalize();
+
+
+            //if (leapTimer <= 0 && (leapPosition.x < leapRange || leapPosition.z < leapRange))
+            //{
+            //    currentTarget = null;
+            //    print("Ferocious leap activated, it should be very effective!");
+            //    GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
+            //    leapTimer = defaultLeapTimer;
+            //    currentTarget = lastTarget;
+
+            //}
+            //else 
+            //{
+            //    print("Kamehameha is loading, brace yourself!");
+            //    leapTimer--;
+            //}
+
 			//------------------//
 			//Bark While chasing//
-			//------------------//
+			//------------------// 
 			if (barkTimer < 0)
 			{
 				newSphere = (GameObject)Instantiate(sphere, this.transform.position, Quaternion.identity);
@@ -229,6 +290,23 @@ public class enemyPathfinding : MonoBehaviour
                     alertTimer = defaultAlertTimer;
                     stateManager(3);
                 }
+                else if (escapeTimer <= 0)
+                {
+                    agent.speed = patrolSpeed;
+                    if (alertArea[areaCounter] != null)
+                    {
+                        currentTarget = alertArea[areaCounter];
+                    }
+
+                    areaCounter++;
+                    if (areaCounter > 2)
+                    {
+                        areaCounter = 0;
+                    }
+                    alertTimer = defaultAlertTimer;
+                    stateManager(3);
+                }
+                escapeTimer--;
             }
             else
             {
@@ -236,7 +314,7 @@ public class enemyPathfinding : MonoBehaviour
                 if (currentTarget != player.transform)
                 {
                     lastTarget = currentTarget;
-                }
+                }            
                 currentTarget = player.transform;
             }
 		}
@@ -514,6 +592,7 @@ public class enemyPathfinding : MonoBehaviour
 		}
 
 	}
+
 
     //==================================================//
     //================Rotate Enemy======================//

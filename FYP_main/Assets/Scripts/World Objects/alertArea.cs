@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class alertArea : MonoBehaviour {
+public class alertArea : MonoBehaviour 
+{
     enemyPathfinding script;
+    huntingDog scriptHunter;
 	// Use this for initialization
 	void Start () 
 	{
@@ -18,13 +20,22 @@ public class alertArea : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Collider>().tag == "enemy")
-        
-        {
-            script = other.gameObject.GetComponent<enemyPathfinding>();
+        //if (script != null)
+        //{
 
-            script.setAlertArea(this.gameObject); 
+
+            if (other.GetComponent<Collider>().tag == "enemy")
+            {
+                script = other.gameObject.GetComponent<enemyPathfinding>();
+				script.setAlertArea(this.gameObject); 
+			}
+        //}
+        else if(other.GetComponent<Collider>().tag == "huntingDog")
+        {
+            scriptHunter = other.gameObject.GetComponent<huntingDog>();
+            scriptHunter.setAlertArea(this.gameObject);
         }
+
                
     }
 }
