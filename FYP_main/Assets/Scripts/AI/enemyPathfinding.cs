@@ -347,40 +347,48 @@ public class enemyPathfinding : MonoBehaviour
 				}
 			}
             if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-			{
+            {
 
-					if (timer <= 0 && (!distracted))
-					{	
-						lastTarget = currentTarget;
-						if(alertArea[areaCounter] != null)
-						{
-						currentTarget = alertArea[areaCounter];
-						}
+                if (timer <= 0 && (!distracted))
+                {
+                    lastTarget = currentTarget;
+                    if (alertArea[areaCounter] != null)
+                    {
+                        currentTarget = alertArea[areaCounter];
+                    }
 
-						areaCounter++;
-						if (areaCounter > 2)
-						{
-							areaCounter = 0;
-						}
-						if(tempcounters < 6)
-						{
-							if(turnCounter != 0)
-							{
-								turnCounter = 0;
-							}
-							if(idleTimer != defaultIdleTimer)
-							{
-							idleTimer = defaultIdleTimer;
-							}
-							//print ("state vaihdettu: 4");
-							tempcounters++;
-							stateManager(4);
-							
-						}
-					}
-					
-					
-				}
+                    areaCounter++;
+                    if (areaCounter > 2)
+                    {
+                        areaCounter = 0;
+                    }
+                    if (tempcounters < 6)
+                    {
+                        if (turnCounter != 0)
+                        {
+                            turnCounter = 0;
+                        }
+                        if (idleTimer != defaultIdleTimer)
+                        {
+                            idleTimer = defaultIdleTimer;
+                        }
+                        //print ("state vaihdettu: 4");
+                        tempcounters++;
+                        stateManager(4);
+
+                    }
+                }
+
+
+            }
+            else
+            {
+                alertTimer--;
+                if (alertTimer <= 0)
+                {
+                    alertTimer = 0;
+                }
+            }
 								
 			break;
 		case enumStates.idleSuspicious:
@@ -388,8 +396,11 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
+            agent.Stop();
+
             if (ringOfSmellScript.playerSeen == true)
             {
+                agent.Resume();
                 stateManager(2);
             }
 
@@ -407,6 +418,7 @@ public class enemyPathfinding : MonoBehaviour
             {
 				agent.speed = patrolSpeed;
 				turnCounter = 0;
+                agent.Resume();
                 stateManager(0);
             }
 			if(turnCounter < 3)
@@ -421,7 +433,7 @@ public class enemyPathfinding : MonoBehaviour
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
 					turnCounter++;
-					turnTimer += defaultTurnTimer * Time.deltaTime;
+                    turnTimer += defaultTurnTimer * Time.deltaTime;
 				} 
 				
 			}			
@@ -432,8 +444,9 @@ public class enemyPathfinding : MonoBehaviour
 
                     alertTimer = defaultAlertTimer;
 					turnCounter = 0;
+                    agent.Resume();
                     stateManager(3);
-					}
+			}
 
 				idleTimer--;	
 
@@ -640,7 +653,7 @@ public class enemyPathfinding : MonoBehaviour
                             if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                             {
                                 //print("entered the rotation loop");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1); // Vector3.up * Time.deltaTime * rotationStep * -1
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
 
@@ -661,7 +674,7 @@ public class enemyPathfinding : MonoBehaviour
                             {
 
                                // print("entered the rotation loop 2");
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1); //Vector3.up * Time.deltaTime * rotationStep * 1
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
