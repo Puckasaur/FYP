@@ -92,7 +92,7 @@ public class coneOfVision : MonoBehaviour
                 {
                     scriptHuntingDog.stateManager(2);
                 }
-                Debug.Log(hit);
+               // Debug.Log(hit);
 
 
             }

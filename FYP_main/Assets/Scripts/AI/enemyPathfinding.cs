@@ -110,6 +110,7 @@ public class enemyPathfinding : MonoBehaviour
     public float impulse;
     public float chargeRange;
     Vector3 enemyRotation;
+    Vector3 fromEnemyToPlayerVector;
 
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
@@ -144,7 +145,7 @@ public class enemyPathfinding : MonoBehaviour
 	
 	void Update()
 	{
-		
+        fromEnemyToPlayerVector = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
 
 		GetComponent<Rigidbody>().WakeUp();
 		//------------------//
@@ -208,21 +209,28 @@ public class enemyPathfinding : MonoBehaviour
 
             if (vectorx < chargeRange || vectorz < chargeRange)
             {
+
+                //if (agent.velocity != fromEnemyToPlayerVector)
+                //{
+                //    //agent.velocity = fromEnemyToPlayerVector * chaseSpeed / 5;
+                //    //agent.Stop();
+                //}
+                //agent.velocity = new Vector3();
                 agent.autoBraking = false;
                 enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );
-                transform.LookAt(enemyRotation);
+                transform.LookAt(enemyRotation);                
                 leapTimer--;
                     if(leapTimer <= 0)
                     {
                        // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
-                        print("leap activated");
+                        //print("leap activated");
                         agent.autoBraking = true;
                         leapTimer = defaultLeapTimer;
                     }
             }
             else
             {
-                print("pilasi kaiken");
+                //print("pilasi kaiken");
                 leapTimer--;
                 if (leapTimer <= 0)
                 {
@@ -361,7 +369,7 @@ public class enemyPathfinding : MonoBehaviour
 							{
 							idleTimer = defaultIdleTimer;
 							}
-							print ("state vaihdettu: 4");
+							//print ("state vaihdettu: 4");
 							tempcounters++;
 							stateManager(4);
 							
@@ -405,7 +413,7 @@ public class enemyPathfinding : MonoBehaviour
 
 				if (rotationCompleted)
 				{	
-					print ("rotationCompleted !>> " + directionDegrees[0]);
+					//print ("rotationCompleted !>> " + directionDegrees[0]);
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;
@@ -628,7 +636,7 @@ public class enemyPathfinding : MonoBehaviour
 
                             if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                             {
-                                print("entered the rotation loop");
+                                //print("entered the rotation loop");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -640,7 +648,7 @@ public class enemyPathfinding : MonoBehaviour
 
                                 if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
-                                    print("rotation loop Completed = " + rotationCompleted);
+                                   // print("rotation loop Completed = " + rotationCompleted);
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
@@ -649,7 +657,7 @@ public class enemyPathfinding : MonoBehaviour
                             else //if (currentAngle > targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 2");
+                               // print("entered the rotation loop 2");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -673,7 +681,7 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
                             {
-                                print("entered the rotation loop 3");
+                               // print("entered the rotation loop 3");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -694,7 +702,7 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
                             {
-                                print("entered the rotation loop 4");
+                               // print("entered the rotation loop 4");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -719,7 +727,7 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                             {
-                                print("entered the rotation loop 5");
+                               // print("entered the rotation loop 5");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -741,7 +749,7 @@ public class enemyPathfinding : MonoBehaviour
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 6");
+                               // print("entered the rotation loop 6");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -762,7 +770,7 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                             {
-                                print("entered the rotation loop 7");
+                               // print("entered the rotation loop 7");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -784,7 +792,7 @@ public class enemyPathfinding : MonoBehaviour
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 8");
+                               // print("entered the rotation loop 8");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -814,7 +822,6 @@ public class enemyPathfinding : MonoBehaviour
                 turnTimer = 0;
             }
         }
-
     }
 	//------------------------------------------------------------//
 	//Sets an area from a room the enemy is in for the alert-state//

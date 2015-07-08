@@ -20,7 +20,7 @@ public class smelling : MonoBehaviour {
 	
 	IEnumerator particleStartTimer()
 	{
-		Debug.Log ("Before Timer Start");
+		//Debug.Log ("Before Timer Start");
 
 		yield return new WaitForSeconds (1);
 
@@ -34,7 +34,7 @@ public class smelling : MonoBehaviour {
 
 		newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
 	
-		Debug.Log ("After Timer End"); 
+		//Debug.Log ("After Timer End"); 
 
 		yield return new WaitForSeconds (4);
 
@@ -68,8 +68,8 @@ public class smelling : MonoBehaviour {
 	{	
 
 		
-		Debug.Log ("isEnter :" + isEnter);
-		Debug.Log ("smallArea :" + smellArea);
+		//Debug.Log ("isEnter :" + isEnter);
+		//Debug.Log ("smallArea :" + smellArea);
 
 
 		if (isEnter == false)
