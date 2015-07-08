@@ -30,8 +30,10 @@ public class breakableObject: MonoBehaviour
             maxScale = 30.0f;
         else if (this.gameObject.tag == "cube")
             maxScale = 40.0f;
+            /*
         else if (this.gameObject.tag == "bone")
             maxScale = 25.0f;
+             * */
         
 	}
 	
@@ -53,7 +55,7 @@ public class breakableObject: MonoBehaviour
                 newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
                 newSphere.transform.parent = transform;
                 sphereScript = newSphere.GetComponent<soundSphere>();
-                sphereScript.setMaxDiameter(maxScale);
+                sphereScript.setMaxDiameter(boneRadius);
                 expireTimer--;
             
             }

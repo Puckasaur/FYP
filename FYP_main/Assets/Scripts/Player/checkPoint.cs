@@ -8,10 +8,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class CheckPoint: MonoBehaviour
+public class checkPoint: MonoBehaviour
 {
     public GameObject checkPointPosition; // Position of the check point
-    public bool checkPoint = false; // if the check point has been reached or not
+    public bool checkPointActivated = false; // if the check point has been reached or not
 
     private string currentLevel; // the current level
     private GameObject[] allEnemies; // needed to reset enemies' positions
@@ -23,17 +23,17 @@ public class CheckPoint: MonoBehaviour
 
     void OnTriggerEnter(Collider other) // turns the check point on
     {
-        if (other.gameObject.tag == "checkPoint") this.checkPoint = true;
+        if (other.gameObject.tag == "checkPoint") this.checkPointActivated = true;
     }
 
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
-        if (other.gameObject.tag == "enemy" && checkPoint == false) // if check point has not been reached
+        if (other.gameObject.tag == "enemy" && checkPointActivated == false) // if check point has not been reached
         {
             Application.LoadLevel(currentLevel);
         }
 
-        else if (other.gameObject.tag == "enemy" && checkPoint == true) // if check point has been reached
+        else if (other.gameObject.tag == "enemy" && checkPointActivated == true) // if check point has been reached
         {
             allEnemies = GameObject.FindGameObjectsWithTag("enemy");
 
