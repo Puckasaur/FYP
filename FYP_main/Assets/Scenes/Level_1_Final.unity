@@ -1674,6 +1674,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 24
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -1912,6 +1924,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 13
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -1960,7 +1984,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -3364,6 +3396,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -3480,6 +3524,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Lamp 2
       objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
   m_IsPrefabParent: 0
@@ -3538,7 +3590,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3921,6 +3973,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 12
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -4232,7 +4292,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -4274,6 +4334,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 405694, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -4747,6 +4815,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 17
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -5077,6 +5157,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -5262,6 +5350,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 1
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -5435,6 +5535,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -6366,6 +6474,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 3
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -6415,6 +6531,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -6469,6 +6597,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -6669,6 +6809,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -6930,6 +7082,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 7
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -6983,6 +7147,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -7169,7 +7341,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -7259,6 +7431,18 @@ Prefab:
     - target: {fileID: 433698, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_LocalScale.z
       value: 1.24854672
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -7762,6 +7946,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Lamp 1
       objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
   m_IsPrefabParent: 0
@@ -8181,6 +8373,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -9325,6 +9525,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 30
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -9436,6 +9648,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -9660,6 +9884,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -10354,6 +10586,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 38
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -10403,6 +10647,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -10908,6 +11164,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 8
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -11247,6 +11511,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 31
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -11572,6 +11848,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -11760,6 +12044,18 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -12130,7 +12426,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -12483,6 +12779,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 7
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -12617,6 +12921,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -12928,6 +13244,14 @@ Prefab:
     - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
       propertyPath: m_Shadows.m_Type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
@@ -13293,6 +13617,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 29
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -13434,6 +13770,18 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.0558579
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -13555,6 +13903,14 @@ Prefab:
     - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
       propertyPath: m_BounceIntensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
@@ -14321,6 +14677,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 10
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -14370,6 +14734,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -14483,6 +14859,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 4
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -14578,6 +14966,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -14710,6 +15106,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -14759,6 +15163,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -14916,7 +15332,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -15851,6 +16267,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 12
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -16086,6 +16514,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -16690,6 +17130,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 8262378, guid: ac97834cc185d2c4ea8ef978f96eaef1, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac97834cc185d2c4ea8ef978f96eaef1, type: 2}
   m_IsPrefabParent: 0
@@ -17347,6 +17791,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 15
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -17661,6 +18117,14 @@ Prefab:
     - target: {fileID: 158582, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
       propertyPath: m_Name
       value: Props_Lamp 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
@@ -18195,6 +18659,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -18272,6 +18744,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -18824,6 +19308,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 37
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -19104,6 +19600,18 @@ Prefab:
     - target: {fileID: 433698, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_LocalScale.z
       value: .72454524
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -19457,6 +19965,18 @@ Prefab:
     - target: {fileID: 433698, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_LocalScale.z
       value: .577848673
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -19846,6 +20366,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -20149,6 +20677,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -22843,6 +23383,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 14
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -22908,6 +23460,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -23021,7 +23585,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -23254,6 +23818,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -23794,6 +24366,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 9
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -23843,6 +24427,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -23990,6 +24586,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 34
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -24043,6 +24651,14 @@ Prefab:
     - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
       propertyPath: m_BounceIntensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
@@ -24152,6 +24768,18 @@ Prefab:
       propertyPath: hat2
       value: 
       objectReference: {fileID: 1768032405}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -24369,6 +24997,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 6
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -24503,6 +25143,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -24959,6 +25611,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Lamp 3
       objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
   m_IsPrefabParent: 0
@@ -25276,6 +25936,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 11
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -25522,7 +26194,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -25875,7 +26547,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -25922,6 +26594,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -26505,7 +27189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b4c4c4cdde365449bbed9f7c371e03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparenColor: {r: 0, g: 0, b: 0, a: 0}
+  transparenColor: {r: 1, g: 1, b: 1, a: .486274511}
 --- !u!4 &1380257301 stripped
 Transform:
   m_PrefabParentObject: {fileID: 429518, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -28798,6 +29482,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 2
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -29056,6 +29752,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -29294,6 +29998,14 @@ Prefab:
     - target: {fileID: 109122, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
       propertyPath: m_Name
       value: Props_Gem 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
@@ -29593,7 +30305,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -29757,7 +30469,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -30201,6 +30913,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 9
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -30319,6 +31043,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -30449,7 +31185,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -30901,6 +31637,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Lamp 4
       objectReference: {fileID: 0}
+    - target: {fileID: 124050, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10830034, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
   m_IsPrefabParent: 0
@@ -30950,6 +31694,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -31270,6 +32026,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -32076,6 +32844,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -32549,6 +33329,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -32823,6 +33611,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -33743,6 +34543,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 21
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -34239,6 +35051,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 32
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -34480,7 +35304,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -34855,6 +35679,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 12
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -34968,6 +35804,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -35475,6 +36323,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 8
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -35882,6 +36742,30 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 153612, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 171496, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 131948, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 110166, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10867950, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 10860040, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e5668f2fcf3a1f44a7bbaabaa5f26a0, type: 2}
   m_IsPrefabParent: 0
@@ -35955,6 +36839,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -36401,6 +37297,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 16
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -36573,6 +37481,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -36655,6 +37571,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 4
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -36700,6 +37628,18 @@ Prefab:
     - target: {fileID: 194940, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
       propertyPath: m_Name
       value: Props_Pillar 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -36867,6 +37807,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 39
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -37006,6 +37958,14 @@ Prefab:
     - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
       propertyPath: m_BounceIntensity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
@@ -38335,6 +39295,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -39652,6 +40620,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Pillar 5
       objectReference: {fileID: 0}
+    - target: {fileID: 186342, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 134916, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10828310, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
   m_IsPrefabParent: 0
@@ -40021,6 +41001,14 @@ Prefab:
       propertyPath: m_BounceIntensity
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 175224, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10885486, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_IsPrefabParent: 0
@@ -40070,6 +41058,18 @@ Prefab:
     - target: {fileID: 109970, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
       propertyPath: m_Name
       value: Props_Candle 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -40483,6 +41483,18 @@ Prefab:
       propertyPath: m_Name
       value: Props_Candle 6
       objectReference: {fileID: 0}
+    - target: {fileID: 136776, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 161282, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10895298, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
   m_IsPrefabParent: 0
@@ -40827,6 +41839,14 @@ Prefab:
       propertyPath: m_Name
       value: Props_Gem 6
       objectReference: {fileID: 0}
+    - target: {fileID: 127870, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10817720, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
+      propertyPath: m_Lightmapping
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d1fe5a25b6577924eaa23eb06ca740a1, type: 2}
   m_IsPrefabParent: 0
@@ -40949,7 +41969,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
