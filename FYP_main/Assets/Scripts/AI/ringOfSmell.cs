@@ -118,14 +118,14 @@ public class ringOfSmell : MonoBehaviour {
                     sniff.Play();
                 }
             }
-            if (hit.distance <= visualDistance)
-            {
-                if (!gameObject.GetComponent<ParticleSystem>())
-                {
-                    gameObject.AddComponent<ParticleSystem>();
-                    visualCueActive = true;
-                }
-            }
+//            if (hit.distance <= visualDistance)
+//            {
+//                if (!gameObject.GetComponent<ParticleSystem>())
+//                {
+//                    gameObject.AddComponent<ParticleSystem>();
+//                    visualCueActive = true;
+//                }
+//            }
 
             //print("hit distance: " + hit.distance + "   detection Distance: " + detectionDistance);
 
