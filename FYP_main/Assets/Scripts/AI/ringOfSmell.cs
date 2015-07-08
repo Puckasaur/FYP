@@ -27,10 +27,10 @@ public class ringOfSmell : MonoBehaviour {
 
         //if (transform.parent.tag == "enemy")
         //{
-            scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
-            huntingDogScript = transform.parent.GetComponent<huntingDog>();          
-            script = this.transform.parent.GetComponent<enemyPathfinding>();
-			sniff = GetComponent<AudioSource>();
+            //scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
+            //huntingDogScript = transform.parent.GetComponent<huntingDog>();          
+            //script = this.transform.parent.GetComponent<enemyPathfinding>();
+            sniff = GetComponent<AudioSource>();
 		//}
 
     }
@@ -87,13 +87,20 @@ public class ringOfSmell : MonoBehaviour {
     
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "player")
+        if (other.gameObject.tag == "enemy")
         {
-            player = other.gameObject;
+            script = other.GetComponent<enemyPathfinding>();
 
-               // playerSeen = true;
-            }
         }
+        else if(other.gameObject.tag == "huntingDog")
+        {
+            huntingDogScript = other.GetComponent<huntingDog>();
+        }
+        else if(other.gameObject.tag == "fatDog")
+        {
+            scriptFatDog = other.GetComponent<fatDogAi>();
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -102,7 +109,7 @@ public class ringOfSmell : MonoBehaviour {
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
 
-        if (other.gameObject.tag == "player")
+        if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
             detectionTimer--;
 
@@ -110,7 +117,7 @@ public class ringOfSmell : MonoBehaviour {
             {
                 detectionTimer = 60;
             }
-            Physics.Raycast(transform.parent.position, player.transform.position, out hit);
+            Physics.Raycast(transform.parent.position, other.transform.position, out hit);
             if (hit.distance <= sniffDistance)
             {
                 if (!sniff.isPlaying)
@@ -171,7 +178,7 @@ public class ringOfSmell : MonoBehaviour {
     }
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "player")
+        if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
 
             detectionTimer = 60.0f;
