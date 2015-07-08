@@ -112,6 +112,8 @@ public class enemyPathfinding : MonoBehaviour
     Vector3 enemyRotation;
     Vector3 fromEnemyToPlayerVector;
 
+    Collider playerCollider;
+
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
@@ -141,6 +143,7 @@ public class enemyPathfinding : MonoBehaviour
 		escapeTimer = defaultEscapeTimer;
 		turnTimer = defaultTurnTimer;
 		detectSoundTimer = defaultDetectSoundTimer;
+        playerCollider = player.GetComponent<Collider>();
 	}
 	
 	void Update()
@@ -283,7 +286,7 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
-            if (hit.collider.tag != player.GetComponent<Collider>().tag)
+            if (hit.collider.tag != playerCollider.tag)
             {
                 if (vectorx >= chaseRange || vectorz >= chaseRange)
                 {
