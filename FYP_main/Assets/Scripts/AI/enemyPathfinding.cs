@@ -216,9 +216,12 @@ public class enemyPathfinding : MonoBehaviour
                 //    //agent.Stop();
                 //}
                 //agent.velocity = new Vector3();
+               
                 agent.autoBraking = false;
-                enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );
-                transform.LookAt(enemyRotation);                
+                enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );                
+                transform.LookAt(enemyRotation);
+                transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed/2 * Time.deltaTime);
+                
                 leapTimer--;
                     if(leapTimer <= 0)
                     {
