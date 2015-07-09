@@ -24,15 +24,7 @@ public class ringOfSmell : MonoBehaviour {
     void Start()
     {
         radius = startRadius;
-
-        //if (transform.parent.tag == "enemy")
-        //{
-            //scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
-            //huntingDogScript = transform.parent.GetComponent<huntingDog>();          
-            //script = this.transform.parent.GetComponent<enemyPathfinding>();
-            sniff = GetComponent<AudioSource>();
-		//}
-
+        sniff = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -41,47 +33,11 @@ public class ringOfSmell : MonoBehaviour {
         {
             this.transform.localScale += scalingRate;
         }
-            else if (transform.localScale.x > radius)
-            {
-                transform.localScale -= scalingRate;
-            }
 
-
-        //if (playerSeen)
-        //{
-
-        //    Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-        //    // print(hit.collider);
-        //    if (hit.collider == player.GetComponent<Collider>())
-        //    {
-
-        //        if (script != null)
-        //        {
-        //            if (script.States != enumStates.alert)
-        //            {
-        //                transform.parent.LookAt(player.transform);
-        //            }
-        //            if (script.States == enumStates.alert || script.States == enumStates.idleSuspicious)
-        //            {
-        //                playerSeen = false;
-        //            }
-        //        }
-        //        else if (scriptFatDog != null)
-        //        {
-        //            if (scriptFatDog.States != enumStatesFatDog.alert)
-        //            {
-
-        //                transform.parent.LookAt(player.transform);
-        //            }
-        //            if (scriptFatDog.States == enumStatesFatDog.alert || scriptFatDog.States == enumStatesFatDog.idleSuspicious)
-        //            {
-        //                playerSeen = false;
-        //            }
-        //        }
-
-
-        //    }
-        //}
+        else if (transform.localScale.x > radius)
+        {
+            transform.localScale -= scalingRate;
+        }
 
     }
     
@@ -125,16 +81,6 @@ public class ringOfSmell : MonoBehaviour {
                     sniff.Play();
                 }
             }
-//            if (hit.distance <= visualDistance)
-//            {
-//                if (!gameObject.GetComponent<ParticleSystem>())
-//                {
-//                    gameObject.AddComponent<ParticleSystem>();
-//                    visualCueActive = true;
-//                }
-//            }
-
-            //print("hit distance: " + hit.distance + "   detection Distance: " + detectionDistance);
 
             if (hit.distance <= detectionDistance)
             {
@@ -151,28 +97,6 @@ public class ringOfSmell : MonoBehaviour {
                 {
                     huntingDogScript.stateManager(2);
                 }
-                //    if(hit.distance <= detectionDistance)
-                //    {
-                //        if (script != null)
-                //        {
-                //            script.stateManager(2);
-                //        }
-                //        else if (scriptFatDog != null)
-                //        {
-                //            playerSeen = true;
-                //            scriptFatDog.stateManager(2);
-                //        }
-                //    }
-                //    if (hit.distance <= somethingElseDistance)
-                //    {
-                //        Physics.Linecast(transform.parent.position, player.transform.position, out hit);
-                //        if (hit.collider == player.GetComponent<Collider>())
-                //        {
-                //            transform.parent.LookAt(player.transform);
-
-                //        }
-                //    }
-
             }
         }
     }

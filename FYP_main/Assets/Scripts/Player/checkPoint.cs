@@ -15,7 +15,9 @@ public class checkPoint: MonoBehaviour
 
     private string currentLevel; // the current level
     private GameObject[] allEnemies; // needed to reset enemies' positions
+    private GameObject[] allHunters; // Hunters need to be destroyed on player death
 
+    enemyPathfinding script;
     void Start()
     {
         currentLevel = Application.loadedLevelName; // get current level name
@@ -28,24 +30,31 @@ public class checkPoint: MonoBehaviour
 
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
-        if (other.gameObject.tag == "enemy" && checkPointActivated == false) // if check point has not been reached
+        if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog") && checkPointActivated == false) // if check point has not been reached
         {
             Application.LoadLevel(currentLevel);
         }
 
-        else if (other.gameObject.tag == "enemy" && checkPointActivated == true) // if check point has been reached
-        {
-            allEnemies = GameObject.FindGameObjectsWithTag("enemy");
+        else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
+        {            
+            this.transform.position = checkPointPosition.transform.position;
 
+            allEnemies = GameObject.FindGameObjectsWithTag("enemy");
+            allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
+            foreach(GameObject hunter in allHunters)
+            {
+                hunter.GetComponent<huntingDog>().statesHunter = enumStatesHunter.idleSuspicious;
+                Destroy(hunter);
+                print("EXTERMINATE");
+            }
             foreach (GameObject enemy in allEnemies)
             {
-                Vector3 respawnPos = enemy.GetComponent<enemyPathfinding>().respawnPosition;
-                enemy.transform.position = respawnPos;
-                this.transform.position = checkPointPosition.transform.position;
-                enemy.GetComponent<enemyPathfinding>().States = enumStates.patrol;
+                script = enemy.GetComponent<enemyPathfinding>();
+                //Vector3 respawnPos = script.respawnPosition;
+                enemy.transform.position = script.respawnPosition;
+                script.States = enumStates.patrol;
             }
 
-            this.transform.position = checkPointPosition.transform.position;
         }
     }
 }

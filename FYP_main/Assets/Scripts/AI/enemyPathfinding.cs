@@ -85,6 +85,7 @@ public class enemyPathfinding : MonoBehaviour
 	float escapeTimer;
 	public float alertTimer;
 	float eatTimer;
+    float failTimer;
 	public int defaultEatTimer;
 	public int defaultIdleTimer;
 	public int defaultBarkTimer;
@@ -211,15 +212,7 @@ public class enemyPathfinding : MonoBehaviour
             //--------------------------//
 
             if (vectorx < chargeRange || vectorz < chargeRange)
-            {
-
-                //if (agent.velocity != fromEnemyToPlayerVector)
-                //{
-                //    //agent.velocity = fromEnemyToPlayerVector * chaseSpeed / 5;
-                //    //agent.Stop();
-                //}
-                //agent.velocity = new Vector3();
-               
+            {    
                 agent.autoBraking = false;
                 enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z );                
                 transform.LookAt(enemyRotation);
@@ -244,25 +237,6 @@ public class enemyPathfinding : MonoBehaviour
                     leapTimer = defaultLeapTimer;
                 }
             }
-
-            //leapPosition = player.transform.position - transform.position;
-            //leapPosition.Normalize();
-
-
-            //if (leapTimer <= 0 && (leapPosition.x < leapRange || leapPosition.z < leapRange))
-            //{
-            //    currentTarget = null;
-            //    print("Ferocious leap activated, it should be very effective!");
-            //    GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
-            //    leapTimer = defaultLeapTimer;
-            //    currentTarget = lastTarget;
-
-            //}
-            //else 
-            //{
-            //    print("Kamehameha is loading, brace yourself!");
-            //    leapTimer--;
-            //}
 
 			//------------------//
 			//Bark While chasing//
@@ -401,7 +375,7 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
             agent.Stop();
 
-            if (ringOfSmellScript.playerSeen == true)
+            if (coneOfVisionScript.playerSeen == true)
             {
                 agent.Resume();
                 stateManager(2);
@@ -431,7 +405,6 @@ public class enemyPathfinding : MonoBehaviour
 
 				if (rotationCompleted)
 				{	
-					//print ("rotationCompleted !>> " + directionDegrees[0]);
 					directionDegrees.Add(directionDegrees[0]);
 					directionDegrees.Remove(directionDegrees[0]);							
 					rotationCompleted = false;

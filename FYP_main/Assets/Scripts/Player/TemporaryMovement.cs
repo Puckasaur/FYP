@@ -40,10 +40,8 @@ public class TemporaryMovement : MonoBehaviour
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
 		checkGroundStatus ();
 		float horizontal = Input.GetAxis ("Horizontal"); //* movementSpeed * Time.deltaTime;
-        //transform.Translate(horizontal, 0, 0);
 
         float vertical = Input.GetAxis("Vertical"); //* movementSpeed * Time.deltaTime;
-        //transform.Translate(0, 0, vertical);
 
         Vector3 movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
         Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
@@ -57,15 +55,7 @@ public class TemporaryMovement : MonoBehaviour
             print(boneSpawner.transform.parent);
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
-			// newBone.GetComponent<Rigidbody>().AddForce(this.transform.right * throwForce + this.transform.up * (throwForce / 2));
         }
-        
-
-        /*
-        rb.MovePosition (new Vector3 (1, 0, 1) + new Vector3(hor) + vertical);
-        this.transform.LookAt (this.transform.position + horizontal + vertical);
-        */
-
 	}
 
 	void Update()

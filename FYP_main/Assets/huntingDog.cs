@@ -169,7 +169,6 @@ public class huntingDog : MonoBehaviour {
                     }
                     else
                     {
-                        print("continuing Chase");
                         agent.speed = chaseSpeed;
                         currentTarget = player.transform;
                         escapeTimer = defaultEscapeTimer;
@@ -213,7 +212,6 @@ public class huntingDog : MonoBehaviour {
                             {
                                 idleTimer = defaultIdleTimer;
                             }
-                            print("state vaihdettu: 4");
                             tempcounters++;
                             stateManager(4);
 
@@ -246,12 +244,8 @@ public class huntingDog : MonoBehaviour {
                     }
                     if (alertTimer <= 0)
                     {
-                        print("endOfTheLine");
                         hunterSpawnScript.spawnedHunters--;
                         Destroy(gameObject);
-                        //agent.speed = patrolSpeed;
-                        //turnCounter = 0;
-                        //stateManager(0);
                     }
                     if (turnCounter < 3)
                     {
@@ -260,7 +254,6 @@ public class huntingDog : MonoBehaviour {
 
                         if (rotationCompleted)
                         {
-                            print("rotationCompleted !>> " + directionDegrees[0]);
                             directionDegrees.Add(directionDegrees[0]);
                             directionDegrees.Remove(directionDegrees[0]);
                             rotationCompleted = false;
@@ -308,13 +301,11 @@ public class huntingDog : MonoBehaviour {
 
         if (turnTimer <= 0)
         {
-            //print (turnTimer + "  << TurnTimer");
             if (rotationInProgress == false)
             {
                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                 targetAngle = targetDegrees;//currentAngle + targetDegrees;
                 rotationInProgress = true;
-                //print("current angle:  " + currentAngle + "target angle:  " + targetAngle);
             }
 
             else if (rotationInProgress)
@@ -331,7 +322,6 @@ public class huntingDog : MonoBehaviour {
 
                             if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                             {
-                                print("entered the rotation loop");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -343,7 +333,6 @@ public class huntingDog : MonoBehaviour {
 
                                 if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
-                                    print("rotation loop Completed = " + rotationCompleted);
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
@@ -352,7 +341,6 @@ public class huntingDog : MonoBehaviour {
                             else //if (currentAngle > targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 2");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -361,7 +349,6 @@ public class huntingDog : MonoBehaviour {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
 
                             }
@@ -376,11 +363,9 @@ public class huntingDog : MonoBehaviour {
                         {
                             if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
                             {
-                                print("entered the rotation loop 3");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                //print(rotationDifference + " << rotation difference   " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
                                 if (rotationDifference < 0)
                                 {
                                     rotationDifference = rotationDifference * -1;
@@ -392,12 +377,10 @@ public class huntingDog : MonoBehaviour {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
                             }
                             else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
                             {
-                                print("entered the rotation loop 4");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -406,7 +389,6 @@ public class huntingDog : MonoBehaviour {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
                             }
                         }
@@ -422,29 +404,24 @@ public class huntingDog : MonoBehaviour {
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                             {
-                                print("entered the rotation loop 5");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                //print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
                                 if (rotationDifference < 0)
                                 {
                                     rotationDifference = rotationDifference * -1;
                                 }
 
-                                //print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
                                 if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
                             }
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 6");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -453,7 +430,6 @@ public class huntingDog : MonoBehaviour {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
 
                             }
@@ -465,29 +441,24 @@ public class huntingDog : MonoBehaviour {
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                             {
-                                print("entered the rotation loop 7");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                //print(rotationDifference + " << rotation    " + targetAngle + " <<  target Angle    " + currentAngle + " << current Angle");
                                 if (rotationDifference < 0)
                                 {
                                     rotationDifference = rotationDifference * -1;
                                 }
 
-                                //print(currentAngle + "  << current Angle  " + angleOffsetMin + "  <<angleOffsetMin    " + angleOffsetMax + "  <<angleOffsetMax   " + rotationDifference + "  << rotationDifference");
                                 if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
                             }
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
 
-                                print("entered the rotation loop 8");
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
@@ -496,7 +467,6 @@ public class huntingDog : MonoBehaviour {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
-                                    //print(rotationCompleted + " rotationCompleted" + rotationInProgress + "  rotation in progress  " + turnTimer + " <<  turnTimer");
                                 }
 
                             }
