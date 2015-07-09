@@ -39072,6 +39072,10 @@ Prefab:
       propertyPath: checkPointActivated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 199200, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
   m_IsPrefabParent: 0
@@ -39089,7 +39093,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1833345431
 Transform:
   m_ObjectHideFlags: 0

@@ -554,10 +554,11 @@ public class enemyPathfinding : MonoBehaviour
 
 			if(States != enumStates.idleSuspicious)
 			{
-			if(agent.SetDestination(currentTarget.position) != null)
-			{
-				agent.SetDestination(currentTarget.position);
-			}
+                Vector3 tempVector = currentTarget.position;
+                if (agent.SetDestination(tempVector) != null)
+                {
+                        agent.SetDestination(tempVector);
+                }
 			}
 		}
 		timer--;
