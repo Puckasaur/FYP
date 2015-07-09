@@ -227,10 +227,10 @@ public class huntingDog : MonoBehaviour {
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
-                    if (hunterRingOfSmellScript.playerSeen == true)
-                    {
-                        stateManager(2);
-                    }
+                    //if (hunterRingOfSmellScript.playerSeen == true)
+                    //{
+                    //    stateManager(2);
+                    //}
 
 
                     if (alertTimer > 0)

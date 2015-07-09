@@ -503,10 +503,10 @@ public class fatDogAi : MonoBehaviour {
 		{
 			
 			currentTarget = soundSource.transform;
-//<<<<<<< Updated upstream
+
 			if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
 			stateManager(3);
-//=======
+
             if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
             {
                 if (turnCounter != 0)
@@ -519,7 +519,7 @@ public class fatDogAi : MonoBehaviour {
                 //alertTimer = defaultAlertTimer;
 			
 			//detectSoundTimer += defaultDetectSoundTimer;
-//>>>>>>> Stashed changes
+
 			//}
 			//---------------------------------------------//
 			// when sound is heard, move towards the source//
@@ -538,14 +538,11 @@ public class fatDogAi : MonoBehaviour {
 			{
 				vision.SetActive(true);
 				smell.SetActive(true);
-//<<<<<<< Updated upstream
-//=======
 				//alertTimer += defaultAlertTimer;
                 if (turnCounter != 0)
                 {
                     turnCounter = 0;
                 }
-//>>>>>>> Stashed changes
 				stateManager(3);
 			}
 			
@@ -559,6 +556,10 @@ public class fatDogAi : MonoBehaviour {
 				eatBone = false;
 				
 				Destroy(bone);
+                if (turnCounter != 0)
+                {
+                    turnCounter = 0;
+                }
 				stateManager(3);
 				
 			}

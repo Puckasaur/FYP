@@ -262,6 +262,7 @@ public class enemyPathfinding : MonoBehaviour
 			
 
 			Physics.Linecast(transform.position, player.transform.position, out hit);
+            Debug.DrawLine(transform.position, player.transform.position);
             if (hit.collider.tag != playerCollider.tag)
             {
                 if (vectorx >= chaseRange || vectorz >= chaseRange)
