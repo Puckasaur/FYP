@@ -111,7 +111,6 @@ public class enemyPathfinding : MonoBehaviour
     public float impulse;
     public float chargeRange;
     Vector3 enemyRotation;
-    Vector3 fromEnemyToPlayerVector;
 
     Collider playerCollider;
 
@@ -149,7 +148,7 @@ public class enemyPathfinding : MonoBehaviour
 	
 	void Update()
 	{
-        fromEnemyToPlayerVector = new Vector3(player.transform.position.x - transform.position.x, 0, player.transform.position.z - transform.position.z);
+
 
 		GetComponent<Rigidbody>().WakeUp();
 		//------------------//
