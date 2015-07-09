@@ -1891,7 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!1001 &78935267
 Prefab:
@@ -11587,7 +11587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!114 &531750643
 MonoBehaviour:
@@ -11921,6 +11921,16 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &541833454
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12656,6 +12666,11 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &588843313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12667,6 +12682,16 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
 --- !u!223 &588843314
 Canvas:
   m_ObjectHideFlags: 0
@@ -13297,7 +13322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!4 &623732013 stripped
 Transform:
@@ -15618,6 +15643,16 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &728737392
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17053,7 +17088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!114 &800108721
 MonoBehaviour:
@@ -18119,7 +18154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!114 &845975401
 MonoBehaviour:
@@ -19400,7 +19435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!114 &919654676
 MonoBehaviour:
@@ -21498,6 +21533,21 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!222 &1034053008
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -23461,6 +23511,21 @@ MonoBehaviour:
   m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FontData:
+    m_Font: {fileID: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
 --- !u!224 &1148266017
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26026,6 +26091,11 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!114 &1243726896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26037,6 +26107,16 @@ MonoBehaviour:
   m_Script: {fileID: 1980459831, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
 --- !u!223 &1243726897
 Canvas:
   m_ObjectHideFlags: 0
@@ -35016,7 +35096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!114 &1616112143
 MonoBehaviour:
@@ -37508,6 +37588,16 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &1757243881
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -37559,6 +37649,16 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
 --- !u!222 &1768032408
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43860,7 +43960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deba55f2e2781ee4e8494f9009ca7edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  texture: {fileID: 0}
+  texture: {fileID: 2800000, guid: 7534ede5edbeecb4d864ca48a94d02c1, type: 3}
   textureToMeshZ: 2
 --- !u!1001 &2055403822
 Prefab:
