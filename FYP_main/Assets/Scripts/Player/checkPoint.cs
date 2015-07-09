@@ -52,7 +52,9 @@ public class checkPoint: MonoBehaviour
                 script = enemy.GetComponent<enemyPathfinding>();
                 //Vector3 respawnPos = script.respawnPosition;
                 enemy.transform.position = script.respawnPosition;
-                script.States = enumStates.patrol;
+                script.currentTarget = script.lastTarget;
+                script.agent.speed = script.patrolSpeed;
+                script.stateManager(0);
             }
 
         }

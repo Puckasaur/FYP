@@ -40,7 +40,7 @@ public class enemyPathfinding : MonoBehaviour
 	public GameObject soundSource;
 	GameObject brokenObject;
 
-	NavMeshAgent agent;
+	public NavMeshAgent agent;
 	List<Transform> targets = new List<Transform>();
 	public List<Transform> alertArea = new List<Transform>();
 	
@@ -163,6 +163,7 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------------------------------------------------//
 			//patrol, moves from one waypoint to the next waiting for a second before advancing forward//
 			//-----------------------------------------------------------------------------------------//
+            agent.Resume();
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
@@ -176,7 +177,7 @@ public class enemyPathfinding : MonoBehaviour
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
-			
+            agent.Stop();
 			if (idleTimer <= 0)
 			{
 				lastTarget = currentTarget;
@@ -184,6 +185,7 @@ public class enemyPathfinding : MonoBehaviour
 
 				if(agent.SetDestination(currentTarget.position) != null)
 				{
+
 					agent.SetDestination(currentTarget.position);
 				}
 						
