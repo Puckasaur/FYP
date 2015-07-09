@@ -3,46 +3,42 @@ using UnityEngine;
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
-namespace UnityStandardAssets.Characters.ThirdPerson
+public class ladderClimbing : MonoBehaviour
 {
-	public class ladderClimbing : MonoBehaviour
+	private TemporaryMovement climbMovement;
+
+	public Transform characterController;
+	public bool inside = false;
+	public float heightFactor = 3.2f;
+		
+	void Start()
 	{
+		climbMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
+	}
 		
-		public Transform characterController;
-		public bool inside = false;
-		public float heightFactor = 3.2f;
-		
-		private ThirdPersonUserControl tpsInput;
-		
-		void Start()
+	void OnTriggerEnter(Collider ladder)
+	{
+		if (ladder.gameObject.tag == "player")
 		{
-			tpsInput = GetComponent<ThirdPersonUserControl>();
+			climbMovement.enabled = false;
+			inside = !inside;
 		}
+	}
 		
-		void OnTriggerEnter(Collider ladder)
+	void OnTriggerExit(Collider ladder)
+	{
+		if (ladder.gameObject.tag == "player")
 		{
-			if (ladder.gameObject.tag == "ladder")
-			{
-				tpsInput.enabled = false;
-				inside = !inside;
-			}
+			climbMovement.enabled = true;
+			inside = !inside;
 		}
+	}
 		
-		void OnTriggerExit(Collider ladder)
+	void Update()
+	{
+		if (inside == true && Input.GetKey("w"))
 		{
-			if (ladder.gameObject.tag == "ladder")
-			{
-				tpsInput.enabled = true;
-				inside = !inside;
-			}
-		}
-		
-		void Update()
-		{
-			if (inside == true && Input.GetKey("w"))
-			{
-				characterController.transform.position += Vector3.up / heightFactor;
-			}
+			characterController.transform.position += Vector3.up / heightFactor;
 		}
 	}
 }
