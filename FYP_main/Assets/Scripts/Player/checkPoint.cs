@@ -14,10 +14,10 @@ public class checkPoint: MonoBehaviour
     public bool checkPointActivated = false; // if the check point has been reached or not
 
     private string currentLevel; // the current level
-    private GameObject[] allEnemies; // needed to reset enemies' positions
+    public  GameObject[] allEnemies; // needed to reset enemies' positions
     private GameObject[] allHunters; // Hunters need to be destroyed on player death
 
-    enemyPathfinding script;
+    public enemyPathfinding script;
     void Start()
     {
         currentLevel = Application.loadedLevelName; // get current level name
@@ -43,20 +43,29 @@ public class checkPoint: MonoBehaviour
             allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
             foreach(GameObject hunter in allHunters)
             {
-                hunter.GetComponent<huntingDog>().statesHunter = enumStatesHunter.idleSuspicious;
+                //hunter.GetComponent<huntingDog>().statesHunter = enumStatesHunter.idleSuspicious;
                 Destroy(hunter);
-                print("EXTERMINATE");
             }
             foreach (GameObject enemy in allEnemies)
             {
-                script = enemy.GetComponent<enemyPathfinding>();
+                script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();
                 //Vector3 respawnPos = script.respawnPosition;
-                enemy.transform.position = script.respawnPosition;
-                script.currentTarget = script.lastTarget;
+                if (script.respawnPosition != null)
+                {
+                    enemy.transform.position = script.respawnPosition;
+                }
+                if(script.targets[0] != null)
+                {
+                    script.currentTarget = script.targets[0];
+                }
                 script.agent.speed = script.patrolSpeed;
                 script.stateManager(0);
             }
 
         }
+    }
+    public static bool isNull(System.Object aObj)
+    {
+        return aObj == null || aObj.Equals(null);
     }
 }

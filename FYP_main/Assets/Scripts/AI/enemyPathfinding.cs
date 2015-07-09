@@ -41,7 +41,7 @@ public class enemyPathfinding : MonoBehaviour
 	GameObject brokenObject;
 
 	public NavMeshAgent agent;
-	List<Transform> targets = new List<Transform>();
+	public List<Transform> targets = new List<Transform>();
 	public List<Transform> alertArea = new List<Transform>();
 	
 	public bool eatBone = false;
@@ -547,24 +547,28 @@ public class enemyPathfinding : MonoBehaviour
             }
 		}
 		
-		if(timer <= 0)
-		{
-			timer+=defaultTimer;
 
-			if(States != enumStates.idleSuspicious)
-			{
-                Vector3 tempVector = currentTarget.position;
-                if (agent.SetDestination(tempVector) != null)
-                {
-                        agent.SetDestination(tempVector);
-                }
-			}
-		}
-		timer--;
 		//-------------//
 		//End of Update//
 		//-------------//
 	}
+    void LateUpdate()
+    {
+        if (timer <= 0)
+        {
+            timer += defaultTimer;
+
+            if (States != enumStates.idleSuspicious)
+            {
+             //   Vector3 tempVector = currentTarget.position;
+                if (agent.SetDestination(currentTarget.position) != null)
+                {
+                    agent.SetDestination(currentTarget.position);
+                }
+            }
+        }
+        timer--;
+    }
 	
 	//-------------//
 	//State Manager//

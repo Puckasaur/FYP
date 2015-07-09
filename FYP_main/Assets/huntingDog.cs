@@ -74,6 +74,14 @@ public class huntingDog : MonoBehaviour {
     public float chaseSpeed;
     public float chaseRange;
 
+    //Leap values
+    public float leapRange;
+    float leapTimer;
+    public float defaultLeapTimer;
+    Vector3 leapPosition;
+    public float impulse;
+    public float chargeRange;
+    Vector3 enemyRotation;
 
     Vector3[] path = new Vector3[0];
 
@@ -109,6 +117,36 @@ public class huntingDog : MonoBehaviour {
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
+                    //--------------------------//
+                    //Leap Attack While Chasing //
+                    //--------------------------//
+
+                    //if (vectorx < chargeRange || vectorz < chargeRange)
+                    //{
+                    //    agent.autoBraking = false;
+                    //    enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                    //    transform.LookAt(enemyRotation);
+                    //    transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed / 2 * Time.deltaTime);
+
+                    //    leapTimer--;
+                    //    if (leapTimer <= 0)
+                    //    {
+                    //        // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
+                    //        //print("leap activated");
+                    //        agent.autoBraking = true;
+                    //        leapTimer = defaultLeapTimer;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    //print("pilasi kaiken");
+                    //    leapTimer--;
+                    //    if (leapTimer <= 0)
+                    //    {
+                    //        agent.autoBraking = true;
+                    //        leapTimer = defaultLeapTimer;
+                    //    }
+                    //}
                     //------------------//
                     //Bark While chasing//
                     //------------------//
