@@ -455,7 +455,6 @@ public class enemyPathfinding : MonoBehaviour
 			break;
 		case enumStates.detectSound:
 		{
-
             currentTarget = soundSource.transform;
             if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                 alertTimer = defaultAlertTimer;

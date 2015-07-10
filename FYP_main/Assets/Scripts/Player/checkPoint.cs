@@ -18,6 +18,7 @@ public class checkPoint: MonoBehaviour
     private GameObject[] allHunters; // Hunters need to be destroyed on player death
 
     public enemyPathfinding script;
+    public huntingDog hunterScript;
     void Start()
     {
         currentLevel = Application.loadedLevelName; // get current level name
@@ -43,13 +44,13 @@ public class checkPoint: MonoBehaviour
             allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
             foreach(GameObject hunter in allHunters)
             {
-                //hunter.GetComponent<huntingDog>().statesHunter = enumStatesHunter.idleSuspicious;
-                Destroy(hunter);
+                hunterScript = (huntingDog)hunter.GetComponent<huntingDog>();
+                hunterScript.selfDestruct();
+                //Destroy(hunter);
             }
             foreach (GameObject enemy in allEnemies)
             {
                 script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();
-                //Vector3 respawnPos = script.respawnPosition;
                 if (script.respawnPosition != null)
                 {
                     enemy.transform.position = script.respawnPosition;
@@ -61,7 +62,6 @@ public class checkPoint: MonoBehaviour
                 script.agent.speed = script.patrolSpeed;
                 script.stateManager(0);
             }
-
         }
     }
     public static bool isNull(System.Object aObj)

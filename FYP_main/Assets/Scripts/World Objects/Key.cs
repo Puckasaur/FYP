@@ -19,8 +19,9 @@ public class Key : MonoBehaviour
             i = other.GetComponent<TemporaryMovement>().numberOfKeys;
             other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
             other.GetComponent<TemporaryMovement>().keyPossessed[i] = keyNumber;
+            Destroy(this.gameObject, 0.1f);
         }
 
-        Destroy(this.gameObject, 0.1f);
+
     }
 }
