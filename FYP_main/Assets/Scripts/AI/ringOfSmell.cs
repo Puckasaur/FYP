@@ -76,10 +76,10 @@ public class ringOfSmell : MonoBehaviour {
             Physics.Raycast(transform.parent.position, other.transform.position, out hit);
             if (hit.distance <= sniffDistance)
             {
-                if (!sniff.isPlaying)
-                {
-                    sniff.Play();
-                }
+//                if (!sniff.isPlaying)
+//                {
+//                    sniff.Play();
+//                }
             }
 
             if (hit.distance <= detectionDistance)
@@ -113,7 +113,7 @@ public class ringOfSmell : MonoBehaviour {
             }
             if (sniff.isPlaying)
             {
-                sniff.Stop();
+               // sniff.Stop();
             }
             if (script != null)
             {
