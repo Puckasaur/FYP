@@ -7,8 +7,6 @@ public class hidingThirdPerson : MonoBehaviour {
 	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
 
-	public GameObject smellOff;
-
     public Transform character;
     public Transform prevPosition;
     public Transform hidingPosition;
@@ -35,7 +33,6 @@ public class hidingThirdPerson : MonoBehaviour {
     {	
 		if (catType.tag == "player") 
 		{
-
 			checkToEnter.enabled = true;
 			
 			if (isHiding == false)
@@ -74,6 +71,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = true;
 			//tmpMovement.movementSpeed = 0;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
+			ros.radius = 4.0f;
 			ros.setToOff = true;
 
 		} 
@@ -82,6 +80,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			//unpause
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
+			ros.radius = 5.0f;
 			ros.setToOff = false;
 			
 			
