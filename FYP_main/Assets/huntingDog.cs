@@ -10,12 +10,9 @@ public enum enumStatesHunter
 }
 public class huntingDog : MonoBehaviour {
 
-    ringOfSmell hunterRingOfSmellScript;
-    coneOfVision hunterConeOfVisionScript;
     soundSphere hunterSphereScript;
-    spawnHunter hunterSpawnScript;
+    public spawnHunter hunterSpawnScript;
     RaycastHit hit;
-    GameObject hunterSpawner;
     public Transform currentTarget;
     public enumStatesHunter statesHunter;
     GameObject player;
@@ -27,10 +24,6 @@ public class huntingDog : MonoBehaviour {
     float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
-    float vectorTransformPositionx = 0;
-    float vectorTransformPositionz = 0;
-    float vectorCurrentTargetx = 0;
-    float vectorCurrentTargetz = 0;
     float vectorx;
     float vectorz;
 
@@ -41,7 +34,6 @@ public class huntingDog : MonoBehaviour {
     List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
 
-    bool rotating = false;
     float rotationStep = 65.0f;
     public float rotationDegrees = 90;
     public float currentAngle = 0;
@@ -74,22 +66,21 @@ public class huntingDog : MonoBehaviour {
     public float chaseSpeed;
     public float chaseRange;
 
+    float vectorTransformPositionx = 0;
+    float vectorTransformPositionz = 0;
+    float vectorCurrentTargetx = 0;
+    float vectorCurrentTargetz = 0;
+
     //Leap values
     public float leapRange;
     float leapTimer;
     public float defaultLeapTimer;
-    Vector3 leapPosition;
-    public float impulse;
     public float chargeRange;
     Vector3 enemyRotation;
-
-    Vector3[] path = new Vector3[0];
 
 	// Use this for initialization
 	void Start () 
     {
-        hunterRingOfSmellScript = GetComponentInChildren<ringOfSmell>();
-        hunterConeOfVisionScript = GetComponentInChildren<coneOfVision>();
         player = GameObject.FindGameObjectWithTag("player");
         currentTarget = player.transform;
         agent = GetComponent<NavMeshAgent>();
@@ -102,8 +93,7 @@ public class huntingDog : MonoBehaviour {
         alertTimer = defaultAlertTimer;
         turnTimer = defaultTurnTimer;
         escapeTimer = defaultEscapeTimer;
-        hunterSpawner = GameObject.FindGameObjectWithTag("hunterSpawner");
-        hunterSpawnScript = hunterSpawner.GetComponent<spawnHunter>();
+        hunterSpawnScript = transform.GetComponentInParent<spawnHunter>();
 	}
 	
 	// Update is called once per frame
@@ -121,32 +111,30 @@ public class huntingDog : MonoBehaviour {
                     //Leap Attack While Chasing //
                     //--------------------------//
 
-                    //if (vectorx < chargeRange || vectorz < chargeRange)
-                    //{
-                    //    agent.autoBraking = false;
-                    //    enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
-                    //    transform.LookAt(enemyRotation);
-                    //    transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed / 2 * Time.deltaTime);
+                    if (vectorx < chargeRange || vectorz < chargeRange)
+                    {
+                        agent.autoBraking = false;
+                        enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                        transform.LookAt(enemyRotation);
+                        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, 5*chaseSpeed /6 * Time.deltaTime);
 
-                    //    leapTimer--;
-                    //    if (leapTimer <= 0)
-                    //    {
-                    //        // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
-                    //        //print("leap activated");
-                    //        agent.autoBraking = true;
-                    //        leapTimer = defaultLeapTimer;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    //print("pilasi kaiken");
-                    //    leapTimer--;
-                    //    if (leapTimer <= 0)
-                    //    {
-                    //        agent.autoBraking = true;
-                    //        leapTimer = defaultLeapTimer;
-                    //    }
-                    //}
+                        leapTimer--;
+                        if (leapTimer <= 0)
+                        {
+                            agent.autoBraking = true;
+                            leapTimer = defaultLeapTimer;
+                        }
+                    }
+                    else
+                    {
+                        //print("pilasi kaiken");
+                        leapTimer--;
+                        if (leapTimer <= 0)
+                        {
+                            agent.autoBraking = true;
+                            leapTimer = defaultLeapTimer;
+                        }
+                    }
                     //------------------//
                     //Bark While chasing//
                     //------------------//
@@ -265,10 +253,6 @@ public class huntingDog : MonoBehaviour {
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
-                    //if (hunterRingOfSmellScript.playerSeen == true)
-                    //{
-                    //    stateManager(2);
-                    //}
 
 
                     if (alertTimer > 0)
@@ -282,8 +266,7 @@ public class huntingDog : MonoBehaviour {
                     }
                     if (alertTimer <= 0)
                     {
-                        hunterSpawnScript.spawnedHunters--;
-                        Destroy(gameObject);
+                        selfDestruct();
                     }
                     if (turnCounter < 3)
                     {
@@ -314,6 +297,45 @@ public class huntingDog : MonoBehaviour {
 
                     break;
                 }
+        }
+        if (currentTarget != null)
+        {
+            vectorTransformPositionx = transform.position.x;
+            vectorTransformPositionz = transform.position.z;
+
+            vectorCurrentTargetx = currentTarget.position.x;
+            vectorCurrentTargetz = currentTarget.position.z;
+
+            if (vectorTransformPositionx < 0)
+            {
+                vectorTransformPositionx *= -1;
+            }
+
+            if (vectorTransformPositionz < 0)
+            {
+                vectorTransformPositionz *= -1;
+            }
+
+            if (vectorCurrentTargetx < 0)
+            {
+                vectorCurrentTargetx *= -1;
+            }
+
+            if (vectorCurrentTargetz < 0)
+            {
+                vectorCurrentTargetz *= -1;
+            }
+
+            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
+            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+            if (vectorz < 0)
+            {
+                vectorz *= -1;
+            }
+            if (vectorx < 0)
+            {
+                vectorx *= -1;
+            }
         }
         if (timer <= 0)
         {
@@ -541,5 +563,10 @@ public class huntingDog : MonoBehaviour {
             }
 
         }
+    }
+    public void selfDestruct()
+    {
+        hunterSpawnScript.spawnedHunters--;
+        Destroy(gameObject);
     }
 }

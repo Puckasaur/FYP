@@ -30,11 +30,8 @@ public class TemporaryMovement : MonoBehaviour
 		origMovementSpeed = movementSpeed;
 		sprintSpeed = movementSpeed * sprintModifier;
 	}
-
-
 	void FixedUpdate() 
     {
-
 		sprint ();
 		updateAnimator();
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
@@ -118,18 +115,17 @@ public class TemporaryMovement : MonoBehaviour
 		}
 	}
 
-//    void OnTriggerStay(Collider other)
-//    {
-//        if (other.transform.parent != null)
-//        {
-//                if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
-//                {
-//                    if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
-//                    {
-//                        other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
-//                    }
-//                }
-//            
-//        }
-//    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.transform.parent != null)
+        {
+            if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
+            {
+                if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
+                {
+                    other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
+                }
+            }
+        }
+    }
 }

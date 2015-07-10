@@ -3,6 +3,8 @@ using System.Collections;
 
 public class smelling : MonoBehaviour {
 
+
+
 	public ParticleSystem enterPoint;
 	public ParticleSystem exitPoint;
 
@@ -20,8 +22,6 @@ public class smelling : MonoBehaviour {
 	
 	IEnumerator particleStartTimer()
 	{
-		//Debug.Log ("Before Timer Start");
-
 		yield return new WaitForSeconds (1);
 
 		enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
@@ -34,11 +34,12 @@ public class smelling : MonoBehaviour {
 
 		newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
 	
-		//Debug.Log ("After Timer End"); 
-
 		yield return new WaitForSeconds (4);
 
 		isEnter = false;
+
+		yield return new WaitForSeconds (25);
+
 		smellArea = false;
 	}
 
@@ -57,6 +58,10 @@ public class smelling : MonoBehaviour {
 		{
 			isEnter = true;
 		}
+        if(boneTrigger.tag == "player")
+        {
+            isEnter = true;
+        }
 
 		if (isEnter == true || Input.GetKey (KeyCode.E)) 
 		{
@@ -82,12 +87,13 @@ public class smelling : MonoBehaviour {
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = true;
 
-		
+			Debug.Log ("Area Trigger");
 		}
 
 		else if (smellArea == false) 
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = false;
+			Debug.Log ("Area Untrigger");
 			
 		}
 			
