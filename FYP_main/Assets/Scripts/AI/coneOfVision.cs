@@ -75,6 +75,7 @@ public class coneOfVision : MonoBehaviour
             if (hit.collider == other)
             {
 				chaseTransScript.chaseTrans();
+
                 if (script != null)
                 {                   
                     script.stateManager(2);
@@ -112,8 +113,7 @@ public class coneOfVision : MonoBehaviour
                     else if (transform.parent.tag == "fatDog")
                     {
                         if (scriptFatDog.States != enumStatesFatDog.chase)
-                        {                         
-                            playerSeen = false;
+                        {                       
                             scriptFatDog.stateManager(3);
                         }
                     }
@@ -127,6 +127,8 @@ public class coneOfVision : MonoBehaviour
                     }
                 }
             }
-        }
+            playerSeen = false;
+           
+        }        
     }
 }
