@@ -58,6 +58,10 @@ public class smelling : MonoBehaviour {
 		{
 			isEnter = true;
 		}
+        if(boneTrigger.tag == "player")
+        {
+            isEnter = true;
+        }
 
 		if (isEnter == true || Input.GetKey (KeyCode.E)) 
 		{

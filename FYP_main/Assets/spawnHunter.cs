@@ -21,6 +21,7 @@ public class spawnHunter : MonoBehaviour {
             if (spawnedHunters <= 2)
             {
                 newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
+                newDog.transform.parent = transform;
                 spawnedHunters++;
             }
         }
