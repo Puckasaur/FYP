@@ -6,6 +6,8 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	private TemporaryMovement tmpMovement;
 
+	public GameObject smellOff;
+
     public Transform character;
     public Transform prevPosition;
     public Transform hidingPosition;
@@ -67,15 +69,19 @@ public class hidingThirdPerson : MonoBehaviour {
 		if (isPaused == true) 
 		{
 			//pause
-			character.GetComponent<Rigidbody>().isKinematic = true;
-			tmpMovement.movementSpeed = 0;
+			//character.GetComponent<Rigidbody>().isKinematic = true;
+			//tmpMovement.movementSpeed = 0;
+			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
+			smellOff.gameObject.SetActive(false);
 
 		} 
 		else if (isPaused == false)
 		{
 			//unpause
-			character.GetComponent<Rigidbody>().isKinematic = false;
-			tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
+			//character.GetComponent<Rigidbody>().isKinematic = false;
+			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
+			smellOff.gameObject.SetActive(true);
+			
 		}
 	}
     IEnumerator Wait()
