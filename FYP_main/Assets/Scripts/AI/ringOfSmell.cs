@@ -20,6 +20,8 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionDistance;
     public float somethingElseDistance;
 	AudioSource sniff;
+
+	public bool setToOff;
     
     void Start()
     {
@@ -64,41 +66,33 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
+		if (setToOff == false) {
+			if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") {
+				detectionTimer--;
 
-        if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
-        {
-            detectionTimer--;
+				if (detectionTimer <= 0) {
+					detectionTimer = 60;
+				}
+				Physics.Raycast (transform.parent.position, other.transform.position, out hit);
+				if (hit.distance <= sniffDistance) {
+					//                if (!sniff.isPlaying)
+					//                {
+					//                    sniff.Play();
+					//                }
+				}
 
-            if (detectionTimer <= 0)
-            {
-                detectionTimer = 60;
-            }
-            Physics.Raycast(transform.parent.position, other.transform.position, out hit);
-            if (hit.distance <= sniffDistance)
-            {
-//                if (!sniff.isPlaying)
-//                {
-//                    sniff.Play();
-//                }
-            }
-
-            if (hit.distance <= detectionDistance)
-            {
-                if (script != null)
-                {
-                    script.stateManager(2);
-                }
-                else if (scriptFatDog != null)
-                {
-                    playerSeen = true;
-                    scriptFatDog.stateManager(2);
-                }
-                else if (huntingDogScript != null)
-                {
-                    huntingDogScript.stateManager(2);
-                }
-            }
-        }
+				if (hit.distance <= detectionDistance) {
+					if (script != null) {
+						script.stateManager (2);
+					} else if (scriptFatDog != null) {
+						playerSeen = true;
+						scriptFatDog.stateManager (2);
+					} else if (huntingDogScript != null) {
+						huntingDogScript.stateManager (2);
+					}
+				}
+			}
+		}
     }
     void OnTriggerExit(Collider other)
     {

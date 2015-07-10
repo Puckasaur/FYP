@@ -5,6 +5,7 @@ using System.Collections;
 public class hidingThirdPerson : MonoBehaviour {
 
 	private TemporaryMovement tmpMovement;
+	private ringOfSmell ros;
 
 	public GameObject smellOff;
 
@@ -27,6 +28,7 @@ public class hidingThirdPerson : MonoBehaviour {
         isPaused = false;
 
 		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
+		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
 	}
 
     void OnTriggerStay(Collider catType)
@@ -72,7 +74,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = true;
 			//tmpMovement.movementSpeed = 0;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			smellOff.gameObject.SetActive(false);
+			ros.setToOff = true;
 
 		} 
 		else if (isPaused == false)
@@ -80,7 +82,8 @@ public class hidingThirdPerson : MonoBehaviour {
 			//unpause
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			smellOff.gameObject.SetActive(true);
+			ros.setToOff = false;
+			
 			
 		}
 	}
