@@ -6,6 +6,7 @@ public class coneOfVision : MonoBehaviour
     fatDogAi scriptFatDog;
     enemyPathfinding script;
     huntingDog scriptHuntingDog;
+	chaseTransition chaseTransScript;
     RaycastHit hit;
     public bool playerSeen;
     float width;
@@ -18,6 +19,8 @@ public class coneOfVision : MonoBehaviour
     public float detectionTimer = 60.0f;
     void Start()
     {
+		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
+
         range = startRange;
         width = startWidth;
         height = startHeight;
@@ -71,7 +74,7 @@ public class coneOfVision : MonoBehaviour
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
-
+				chaseTransScript.chaseTrans();
                 if (script != null)
                 {                   
                     script.stateManager(2);
@@ -96,6 +99,7 @@ public class coneOfVision : MonoBehaviour
             {
                 if (hit.collider == other)
                 {
+					chaseTransScript.outChaseTrans();
                     if (transform.parent.tag == "patrolDog")
                     {
                         if (script.States != enumStates.chase)

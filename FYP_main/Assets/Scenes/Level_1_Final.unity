@@ -12963,7 +12963,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a21c3dab5ea6e43b211d370d353fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smellOff: {fileID: 0}
   character: {fileID: 294686519}
   prevPosition: {fileID: 1667586033}
   hidingPosition: {fileID: 2016082543}
@@ -18719,6 +18718,10 @@ Prefab:
     - target: {fileID: 11434624, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: startRadius
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 118392, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8289848, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
@@ -24632,6 +24635,7 @@ GameObject:
   - 4: {fileID: 1195894680}
   - 82: {fileID: 1195894682}
   - 82: {fileID: 1195894681}
+  - 114: {fileID: 1195894683}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -24791,6 +24795,23 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &1195894683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1195894679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b565ac3f962e11547845401f3b183a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chase: 0
+  inChase: {fileID: 24518178, guid: 05d5f004d32a408479820b7e10288ae3, type: 2}
+  outOfChase: {fileID: 24500003, guid: 05d5f004d32a408479820b7e10288ae3, type: 2}
+  stings: []
+  stingSource: {fileID: 0}
+  bpm: 80
 --- !u!1001 &1197070582
 Prefab:
   m_ObjectHideFlags: 0
@@ -42954,7 +42975,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a21c3dab5ea6e43b211d370d353fa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smellOff: {fileID: 0}
   character: {fileID: 294686519}
   prevPosition: {fileID: 1813752022}
   hidingPosition: {fileID: 395927795}
