@@ -5,6 +5,7 @@ public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
     fatDogAi scriptFatDog;
     huntingDog huntingDogScript;
+	chaseTransition chaseTransScript;
     public float radius;
     public float startRadius;
     public bool playerSeen = false;
@@ -25,6 +26,7 @@ public class ringOfSmell : MonoBehaviour {
     
     void Start()
     {
+		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
         radius = startRadius;
         sniff = GetComponent<AudioSource>();
     }
@@ -45,6 +47,7 @@ public class ringOfSmell : MonoBehaviour {
     
     void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.tag == "enemy")
         {
             script = other.GetComponent<enemyPathfinding>();
@@ -62,7 +65,6 @@ public class ringOfSmell : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
@@ -75,10 +77,7 @@ public class ringOfSmell : MonoBehaviour {
 				}
 				Physics.Raycast (transform.parent.position, other.transform.position, out hit);
 				if (hit.distance <= sniffDistance) {
-					//                if (!sniff.isPlaying)
-					//                {
-					//                    sniff.Play();
-					//                }
+					chaseTransScript.chaseTrans();
 				}
 
 				if (hit.distance <= detectionDistance) {
@@ -100,14 +99,10 @@ public class ringOfSmell : MonoBehaviour {
         {
 
             detectionTimer = 60.0f;
-
+			chaseTransScript.outChaseTrans();
             if (visualCueActive)
             {
                 Destroy(GetComponent<ParticleSystem>());
-            }
-            if (sniff.isPlaying)
-            {
-               // sniff.Stop();
             }
             if (script != null)
             {
