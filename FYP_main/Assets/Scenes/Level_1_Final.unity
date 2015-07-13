@@ -11022,6 +11022,104 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 2.22044605e-16, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &495308898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495308899}
+  - 82: {fileID: 495308900}
+  m_Layer: 0
+  m_Name: Sting player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495308899
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495308898}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1195894680}
+  m_RootOrder: 0
+--- !u!82 &495308900
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 495308898}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24393642, guid: 05d5f004d32a408479820b7e10288ae3,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: .999705791
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!1001 &499591528
 Prefab:
   m_ObjectHideFlags: 0
@@ -24652,7 +24750,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 495308899}
   m_Father: {fileID: 1318461659}
   m_RootOrder: 0
 --- !u!82 &1195894681
@@ -24689,7 +24788,7 @@ AudioSource:
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: .994974911
+      value: 1.00144553
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -24759,7 +24858,7 @@ AudioSource:
       outSlope: 0
       tangentMode: 0
     - time: 1
-      value: .994974792
+      value: 1.00144541
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -24809,8 +24908,9 @@ MonoBehaviour:
   chase: 0
   inChase: {fileID: 24518178, guid: 05d5f004d32a408479820b7e10288ae3, type: 2}
   outOfChase: {fileID: 24500003, guid: 05d5f004d32a408479820b7e10288ae3, type: 2}
-  stings: []
-  stingSource: {fileID: 0}
+  stings:
+  - {fileID: 8300000, guid: 34079f2f3f67e2e4a944cfe502ff40b2, type: 3}
+  stingSource: {fileID: 495308900}
   bpm: 80
 --- !u!1001 &1197070582
 Prefab:
@@ -28195,7 +28295,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 767ce4d92f1f03248a703785b5fe7e1b, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 767ce4d92f1f03248a703785b5fe7e1b, type: 3}
       propertyPath: m_Name
