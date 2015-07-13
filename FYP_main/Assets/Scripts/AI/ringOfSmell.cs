@@ -18,7 +18,9 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionTimer;
     public float defaultDetectionRange;
     public float alarmBonus;
-  	public bool smellDetected = false;
+
+    public bool smellDetected = false;
+
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;

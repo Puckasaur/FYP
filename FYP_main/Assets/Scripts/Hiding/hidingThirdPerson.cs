@@ -71,7 +71,6 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = true;
 			//tmpMovement.movementSpeed = 0;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			ros.radius = 4.0f;
 			ros.setToOff = true;
 
 		} 
@@ -80,7 +79,6 @@ public class hidingThirdPerson : MonoBehaviour {
 			//unpause
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			ros.radius = 5.0f;
 			ros.setToOff = false;
 			
 			

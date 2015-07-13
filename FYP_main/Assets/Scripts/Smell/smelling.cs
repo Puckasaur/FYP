@@ -38,7 +38,7 @@ public class smelling : MonoBehaviour {
 
 		isEnter = false;
 
-		yield return new WaitForSeconds (25);
+		yield return new WaitForSeconds (15);
 
 		smellArea = false;
 	}
