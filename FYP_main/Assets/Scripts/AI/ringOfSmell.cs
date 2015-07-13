@@ -19,7 +19,7 @@ public class ringOfSmell : MonoBehaviour {
     GameObject player;
     RaycastHit hit;
 
-   public bool smellDetected = false;
+    public bool smellDetected = false;
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
@@ -92,10 +92,10 @@ public class ringOfSmell : MonoBehaviour {
             if (hit.distance <= sniffDistance)
             {
                 
-                if (!sniff.isPlaying)
-                {
-                    sniff.Play();
-                }
+//                if (!sniff.isPlaying)
+//                {
+//                    sniff.Play();
+//                }
             }
 
             if (hit.distance <= detectionDistance)
@@ -149,10 +149,10 @@ public class ringOfSmell : MonoBehaviour {
             {
                 Destroy(GetComponent<ParticleSystem>());
             }
-            if (sniff.isPlaying)
-            {
-                sniff.Stop();
-            }
+//            if (sniff.isPlaying)
+//            {
+//                sniff.Stop();
+//            }
             if (script != null)
             {
                 if (script.States != enumStates.chase)
