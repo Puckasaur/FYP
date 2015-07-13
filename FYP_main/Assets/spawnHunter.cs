@@ -18,11 +18,14 @@ public class spawnHunter : MonoBehaviour {
 {
         if (other.gameObject.tag == "soundSphere")
         {
-            if (spawnedHunters <= 2)
+            if (other.transform.parent.tag != "bone")
             {
-                newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
-                newDog.transform.parent = transform;
-                spawnedHunters++;
+                if (spawnedHunters <= 2)
+                {
+                    newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
+                    newDog.transform.parent = transform;
+                    spawnedHunters++;
+                }
             }
         }
 }
