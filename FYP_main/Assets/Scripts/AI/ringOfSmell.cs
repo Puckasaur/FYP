@@ -64,23 +64,27 @@ public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
     fatDogAi scriptFatDog;
     huntingDog huntingDogScript;
-    float radius;
-    public float startRadius;
+    Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
+    GameObject player;
+    RaycastHit hit;
+	AudioSource sniff;
+
+	public bool setToOff;
     public bool playerSeen = false;
     bool visualCueActive = false;
-    Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
+    public float startRadius;
     public float detectionTimer = 60.0f;
     public float alarmBonus;
     GameObject player;
     RaycastHit hit;
-
    public bool smellDetected = false;
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
     public float somethingElseDistance;
 	AudioSource sniff;
-    
+    public float radius;
+
     void Start()
     {
         radius = startRadius;
@@ -188,7 +192,6 @@ public class ringOfSmell : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//
@@ -250,9 +253,7 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
-            print("laski tunnistettu 2");
             detectionTimer = 60.0f;
-
             if (visualCueActive)
             {
                 Destroy(GetComponent<ParticleSystem>());
@@ -274,13 +275,9 @@ public class ringOfSmell : MonoBehaviour {
             {
                 if (scriptFatDog.States != enumStatesFatDog.chase)
                 {                    
-
                     scriptFatDog.stateManager(3);
                 }
             }
-
-            
-            
         }
         smellDetected = false;
     }
