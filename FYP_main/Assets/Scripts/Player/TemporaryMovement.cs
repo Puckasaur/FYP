@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TemporaryMovement : MonoBehaviour
 {
@@ -27,6 +28,11 @@ public class TemporaryMovement : MonoBehaviour
     public int bags = 2;
 
 	private bool isGrounded;
+    public List<GameObject> enemies = new List<GameObject>();
+    ringOfSmell ring;
+    bool smellHidden;
+    bool disguisedAsDog;
+
 
 	void Start()
 	{
@@ -35,6 +41,7 @@ public class TemporaryMovement : MonoBehaviour
 		catAnim = GetComponent<Animator> ();
 		origMovementSpeed = movementSpeed;
 		sprintSpeed = movementSpeed * sprintModifier;
+        ring = GetComponentInChildren<ringOfSmell>();
 	}
 	void FixedUpdate() 
     {
@@ -60,13 +67,39 @@ public class TemporaryMovement : MonoBehaviour
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 
-		
 		if (Input.GetKeyDown(KeyCode.Y) && bags > 0)
 		{
 			print(boneSpawner.transform.parent);
 			bags--;
 			newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
 		}
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            if(!disguisedAsDog)
+            {
+                disguisedAsDog = true;
+                disGuiseAsDog();
+            }
+            else if(disguisedAsDog)
+            {
+                disguisedAsDog = false;
+                disGuiseAsDog();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.H))
+        {
+            if (smellHidden)
+            {
+                smellHidden = false;
+                ring.isNotDisguised();
+            }
+            else if(!smellHidden)
+            {
+                smellHidden = true;
+                ring.isDisguised();
+            }
+        }
 	}
 
 	void Update()
@@ -139,6 +172,38 @@ public class TemporaryMovement : MonoBehaviour
                 {
                     other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
                 }
+            }
+        }
+    }
+    void disGuiseAsDog()
+    {
+        GameObject[] patrolEnemy;
+        GameObject[] hunterEnemy;
+        enemies.Clear();
+        patrolEnemy = GameObject.FindGameObjectsWithTag("enemy");
+        hunterEnemy = GameObject.FindGameObjectsWithTag("huntingDog");
+        foreach (GameObject enemy in patrolEnemy)
+        {
+            enemies.Add(enemy);
+        }
+        foreach (GameObject enemy in hunterEnemy)
+        {
+            enemies.Add(enemy);
+        }
+        if (disguisedAsDog)
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                coneOfVision cone = enemy.GetComponentInChildren<coneOfVision>();
+                cone.isDisguised();
+            }
+        }
+        else if (!disguisedAsDog)
+        {
+            foreach (GameObject enemy in enemies)
+            {
+                coneOfVision cone = enemy.GetComponentInChildren<coneOfVision>();
+                cone.isNotDisguised();
             }
         }
     }

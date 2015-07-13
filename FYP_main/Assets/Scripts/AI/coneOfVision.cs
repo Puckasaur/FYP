@@ -8,6 +8,7 @@ public class coneOfVision : MonoBehaviour
     huntingDog scriptHuntingDog;
 	chaseTransition chaseTransScript;
     RaycastHit hit;
+    public bool disguised;
     public bool playerSeen;
     float width;
     public float startWidth;
@@ -20,11 +21,6 @@ public class coneOfVision : MonoBehaviour
     void Start()
     {
 		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
-
-        range = startRange;
-        width = startWidth;
-        height = startHeight;
-
 
         //if (transform.parent.tag == "enemy")
         //{
@@ -51,7 +47,7 @@ public class coneOfVision : MonoBehaviour
     void Update()
     {
             GetComponent<Rigidbody>().WakeUp();
-
+            
             if (transform.localScale.x < width)
             {
                 transform.localScale = new Vector3(width, height, range);
@@ -61,14 +57,6 @@ public class coneOfVision : MonoBehaviour
                 transform.localScale = new Vector3(width, height, range);
             }
     }
-
-	void OnTriggerEnter(Collider other)
-	{
-		if (other.gameObject.tag == "player") 
-		{
-			chaseTransScript.playSting ();
-		}
-	}
 
     void OnTriggerStay(Collider other)
     {
@@ -116,7 +104,6 @@ public class coneOfVision : MonoBehaviour
                         if (script.States != enumStates.chase)
                         {
                             script.areaCounter = 0;
-
                             script.stateManager(3);
                         }
                     }
@@ -141,4 +128,17 @@ public class coneOfVision : MonoBehaviour
            
         }        
     }
+    public void isDisguised()
+    {
+        width = 0;
+        height = 0;
+        range = 0;
+    }
+    public void isNotDisguised()
+    {
+        width = startWidth;
+        height = startHeight;
+        range = startRange;
+    }
 }
+
