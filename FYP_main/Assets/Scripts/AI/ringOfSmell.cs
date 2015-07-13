@@ -12,26 +12,29 @@ public class ringOfSmell : MonoBehaviour {
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
     RaycastHit hit;
-	AudioSource sniff;
-	public bool setToOff;
+
     public bool playerSeen = false;
     bool visualCueActive = false;
     public float detectionTimer;
     public float defaultDetectionRange;
     public float alarmBonus;
+
     public bool smellDetected = false;
+
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
     public float somethingElseDistance;
 
+	//AudioSource sniff;
+    public bool setToOff;
+    
     void Start()
     {
         radius = startRadius;
-        sniff = GetComponent<AudioSource>();
-         chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
-         detectionTimer = defaultDetectionRange;
-
+		//sniff = GetComponent<AudioSource>();
+        chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
+        detectionTimer = defaultDetectionRange;
     }
 
     void Update()
@@ -87,10 +90,10 @@ public class ringOfSmell : MonoBehaviour {
             if (hit.distance <= sniffDistance)
             {
                 
-                if (!sniff.isPlaying)
-                {
-                    sniff.Play();
-                }
+//                if (!sniff.isPlaying)
+//                {
+//                    sniff.Play();
+//                }
             }
 
             if (hit.distance <= detectionDistance)
@@ -99,7 +102,8 @@ public class ringOfSmell : MonoBehaviour {
 
                 if (script != null)
                 {
-                    //smellDetected = true;
+                   // script.stateManager(2);
+                    smellDetected = true;
                    // scriptFatDog.RotateDogWhileSmelling();
                 }
                 if (scriptFatDog != null)
@@ -109,6 +113,7 @@ public class ringOfSmell : MonoBehaviour {
                 }
                 if (huntingDogScript != null)
                 {
+                    huntingDogScript.stateManager(2);
                    // smellDetected = true;
                   //  scriptFatDog.RotateDogWhileSmelling();
                 }
@@ -144,10 +149,10 @@ public class ringOfSmell : MonoBehaviour {
             {
                 Destroy(GetComponent<ParticleSystem>());
             }
-            if (sniff.isPlaying)
-            {
-                sniff.Stop();
-            }
+//            if (sniff.isPlaying)
+//            {
+//                sniff.Stop();
+//            }
             if (script != null)
             {
                 if (script.States != enumStates.chase)

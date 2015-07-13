@@ -1,12 +1,9 @@
-﻿/*
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class hunterDoorOpener : MonoBehaviour 
-{
+public class hunterDoorOpener : MonoBehaviour {
     hunterDoor script;
     public GameObject door;
-
 	// Use this for initialization
 	void Start () {
         script = door.GetComponent<hunterDoor>();
@@ -24,4 +21,3 @@ public class hunterDoorOpener : MonoBehaviour
         }
     }
 }
-*/

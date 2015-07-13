@@ -26,9 +26,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool jumpHatOn = false;
 
 		public GameObject bone;
+		public GameObject bagOfAir;
 
 		GameObject boneSpawner;
 		GameObject newBone;
+
+		GameObject newBagOfAir;
 
 		bool crouch = false;
 
@@ -83,8 +86,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			if(Input.GetKeyDown(KeyCode.T)&& bones > 0)
 			{				
+
 				newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
 				newBone.GetComponent<Rigidbody>().AddForce(this.transform.forward * throwForce + this.transform.up * (throwForce / 2));
+			}
+
+			if(Input.GetKeyDown(KeyCode.Y)&& bones > 0)
+			{				
+				newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
+				newBagOfAir.GetComponent<Rigidbody>().AddForce(this.transform.forward * throwForce + this.transform.up * (throwForce / 2));
 			}
 
 			speedHatMod ();
@@ -141,7 +151,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
 
-			
 
 			if (Input.GetButtonDown ("Crouch"))
 			{
