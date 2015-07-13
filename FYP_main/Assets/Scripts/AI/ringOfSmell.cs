@@ -58,6 +58,7 @@ public class ringOfSmell : MonoBehaviour {
     {
         if (other.gameObject.tag == "enemy")
         {
+            print("enemy detected player");
             script = other.GetComponent<enemyPathfinding>();
             smellDetected = true;
         }
@@ -81,7 +82,8 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//  
 
         if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
-        {           
+        {
+           
             detectionTimer--;
 
             if (detectionTimer <= 0)
@@ -92,10 +94,10 @@ public class ringOfSmell : MonoBehaviour {
             if (hit.distance <= sniffDistance)
             {
                 
-                if (!sniff.isPlaying)
-                {
-                    sniff.Play();
-                }
+                //if (!sniff.isPlaying)
+               // {
+                  //  sniff.Play();
+               // }
             }
 
             if (hit.distance <= detectionDistance)
@@ -103,8 +105,9 @@ public class ringOfSmell : MonoBehaviour {
                 chaseTransScript.chaseTrans();
 
                 if (script != null)
-                {
-                    //smellDetected = true;
+                {                    
+                    smellDetected = true;
+                    script.stateManager(2);
                    // scriptFatDog.RotateDogWhileSmelling();
                 }
                 if (scriptFatDog != null)
@@ -114,6 +117,7 @@ public class ringOfSmell : MonoBehaviour {
                 }
                 if (huntingDogScript != null)
                 {
+                    huntingDogScript.stateManager(2);
                    // smellDetected = true;
                   //  scriptFatDog.RotateDogWhileSmelling();
                 }
@@ -122,6 +126,8 @@ public class ringOfSmell : MonoBehaviour {
             {
                 if (script != null)
                 {
+                    print("enemy detected 3");
+                    script.stateManager(2);
                     //script.stateManager(2);
                 }
                 if (scriptFatDog != null)
@@ -131,7 +137,7 @@ public class ringOfSmell : MonoBehaviour {
                 }
                 if (huntingDogScript != null)
                 {
-                   // huntingDogScript.stateManager(2);
+                   huntingDogScript.stateManager(2);
                 }
             }
         }
@@ -149,10 +155,10 @@ public class ringOfSmell : MonoBehaviour {
             {
                 Destroy(GetComponent<ParticleSystem>());
             }
-            if (sniff.isPlaying)
-            {
-                sniff.Stop();
-            }
+           // if (sniff.isPlaying)
+          //  {
+           //     sniff.Stop();
+          //  }
             if (script != null)
             {
                 if (script.States != enumStates.chase)
