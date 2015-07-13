@@ -23,7 +23,7 @@ public class smellArea : MonoBehaviour {
 		if (enemyCheck.tag == "player")
 		{
 			ringOfSmell.SetActive(false);
-			checkInArea.radius = 15.0f;
+			checkInArea.radius = 10.0f;
 		}
 	}
 

@@ -54,6 +54,24 @@ public class breakableObject: MonoBehaviour
             timer--;
 
         }
+
+		if (this.gameObject.tag == "bagOfAir")
+		{
+			if(timer <=0)
+			{
+				
+				makeSound = false;
+				timer += 60;
+				newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
+				newSphere.transform.parent = transform;
+				sphereScript = newSphere.GetComponent<soundSphere>();
+				sphereScript.setMaxDiameter(boneRadius);
+				expireTimer--;
+				
+			}
+			timer--;
+			
+		}
         if (expireTimer <= 0)
         {
             Destroy(gameObject);

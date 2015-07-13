@@ -15,11 +15,17 @@ public class TemporaryMovement : MonoBehaviour
 	float m_OrigGroundCheckDistance;
 	Rigidbody rb;
 	Animator catAnim;
-	 public GameObject bone;
+	public GameObject bone;
+	public GameObject bagOfAir;
+
     GameObject boneSpawner;
     GameObject newBone;
+    GameObject newBagOfAir;
+
     public float throwForce = 00.00010f;
     public int bones = 2;
+    public int bags = 2;
+
 	private bool isGrounded;
 
 	void Start()
@@ -53,6 +59,14 @@ public class TemporaryMovement : MonoBehaviour
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
+
+		
+		if (Input.GetKeyDown(KeyCode.Y) && bags > 0)
+		{
+			print(boneSpawner.transform.parent);
+			bags--;
+			newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
+		}
 	}
 
 	void Update()
