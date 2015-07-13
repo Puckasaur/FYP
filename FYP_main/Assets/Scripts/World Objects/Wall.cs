@@ -122,8 +122,6 @@ public class Wall : MonoBehaviour {
 	
 	public void SetToNormal()
 	{
-
-
 		for (int i = 0; i <m_RenderersChildren.Length; i++){
 			m_RenderersChildren[i].material = m_InitialMaterialChildren[i];
 		}
@@ -131,9 +129,6 @@ public class Wall : MonoBehaviour {
 		for (int j = 0; j <m_RenderersParent.Length; j++){
 			m_RenderersParent[j].material = m_InitialMaterialParent[j];
 		}
-
 		//StopCoroutine (timerDelay());
-		
 	}
-	
 }
