@@ -82,6 +82,7 @@ public class fatDogAi : MonoBehaviour {
 	public bool rotationCompleted = false;
     public float turnTimer;
 	int turnCounter = 0;
+    float rotationDifference = 0;
 
     // Alert Values for FatDog
     public float firstDirectionAlert;
@@ -412,6 +413,7 @@ public class fatDogAi : MonoBehaviour {
 
         case enumStatesFatDog.alert:
             {
+                
                 if (ringOfSmellScript.smellDetected == false)
                 {
                     
@@ -683,7 +685,7 @@ public class fatDogAi : MonoBehaviour {
         if (ringOfSmellScript.smellDetected == false)
         {
 
-            float rotationDifference = 0;
+            rotationDifference = 0;
 
             if (turnTimer <= 0)
             {

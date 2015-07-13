@@ -198,6 +198,11 @@ public class ringOfSmell : MonoBehaviour {
                     script.areaCounter = 0;
                     script.alertTimer = script.defaultAlertTimer;
                     script.stateManager(3);
+                    if (script.agentStopped == true)
+                    {
+                        script.agentStopped = false;
+                        script.agent.Resume();
+                    }
                 }
             }
             else if (scriptFatDog != null)
@@ -209,9 +214,10 @@ public class ringOfSmell : MonoBehaviour {
             }
 
             
-            
+            smellDetected = false;
+            print(smellDetected + " << Smell detected");
         }
-        smellDetected = false;
+        
     }
     public void isDisguised()
     {

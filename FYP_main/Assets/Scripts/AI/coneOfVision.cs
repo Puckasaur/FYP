@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class coneOfVision : MonoBehaviour
@@ -6,7 +6,7 @@ public class coneOfVision : MonoBehaviour
     fatDogAi scriptFatDog;
     enemyPathfinding script;
     huntingDog scriptHuntingDog;
-	chaseTransition chaseTransScript;
+    chaseTransition chaseTransScript;
     RaycastHit hit;
     public bool disguised;
     public bool playerSeen;
@@ -20,25 +20,30 @@ public class coneOfVision : MonoBehaviour
     public float detectionTimer = 60.0f;
     void Start()
     {
-		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
+        chaseTransScript = GameObject.Find("BGM").GetComponent<chaseTransition>();
+
+        range = startRange;
+        width = startWidth;
+        height = startHeight;
+
 
         //if (transform.parent.tag == "enemy")
         //{
-            if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
-            {
-                script = this.transform.parent.GetComponent<enemyPathfinding>();
-            }
+        if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
+        {
+            script = this.transform.parent.GetComponent<enemyPathfinding>();
+        }
 
-            if (this.transform.parent.GetComponent<fatDogAi>() != null)
-            {
-                scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
-            }
-            if(transform.parent.GetComponent<huntingDog>() != null)
-            {
-                scriptHuntingDog = transform.parent.GetComponent<huntingDog>();
-            }
+        if (this.transform.parent.GetComponent<fatDogAi>() != null)
+        {
+            scriptFatDog = this.transform.parent.GetComponent<fatDogAi>();
+        }
+        if (transform.parent.GetComponent<huntingDog>() != null)
+        {
+            scriptHuntingDog = transform.parent.GetComponent<huntingDog>();
+        }
 
-            
+
         //}
         width = startWidth;
         height = startHeight;
@@ -46,16 +51,16 @@ public class coneOfVision : MonoBehaviour
     }
     void Update()
     {
-            GetComponent<Rigidbody>().WakeUp();
-            
-            if (transform.localScale.x < width)
-            {
-                transform.localScale = new Vector3(width, height, range);
-            }
-            else if (transform.localScale.x > width)
-            {
-                transform.localScale = new Vector3(width, height, range);
-            }
+        GetComponent<Rigidbody>().WakeUp();
+
+        if (transform.localScale.x < width)
+        {
+            transform.localScale = new Vector3(width, height, range);
+        }
+        else if (transform.localScale.x > width)
+        {
+            transform.localScale = new Vector3(width, height, range);
+        }
     }
 
     void OnTriggerStay(Collider other)
@@ -70,10 +75,10 @@ public class coneOfVision : MonoBehaviour
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             if (hit.collider == other)
             {
-				chaseTransScript.chaseTrans();
+                chaseTransScript.chaseTrans();
 
                 if (script != null)
-                {                   
+                {
                     script.stateManager(2);
                 }
                 else if (scriptFatDog != null)
@@ -98,7 +103,7 @@ public class coneOfVision : MonoBehaviour
             {
                 if (hit.collider == other)
                 {
-					chaseTransScript.outChaseTrans();
+                    chaseTransScript.outChaseTrans();
                     if (transform.parent.tag == "patrolDog")
                     {
                         if (script.States != enumStates.chase)
@@ -110,7 +115,7 @@ public class coneOfVision : MonoBehaviour
                     else if (transform.parent.tag == "fatDog")
                     {
                         if (scriptFatDog.States != enumStatesFatDog.chase)
-                        {                       
+                        {
                             scriptFatDog.stateManager(3);
                         }
                     }
@@ -125,8 +130,8 @@ public class coneOfVision : MonoBehaviour
                 }
             }
             playerSeen = false;
-           
-        }        
+
+        }
     }
     public void isDisguised()
     {
@@ -141,4 +146,3 @@ public class coneOfVision : MonoBehaviour
         range = startRange;
     }
 }
-

@@ -132,12 +132,12 @@ public class smelling : MonoBehaviour {
 		if (smellArea == true) 
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = true;
-			Debug.Log ("Area Trigger");
+			//Debug.Log ("Area Trigger");
 		}
 		else if (smellArea == false) 
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = false;
-			Debug.Log ("Area Untrigger");
+			//Debug.Log ("Area Untrigger");
 		}
 	}
 }
