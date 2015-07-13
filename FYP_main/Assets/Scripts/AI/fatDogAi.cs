@@ -232,6 +232,7 @@ public class fatDogAi : MonoBehaviour {
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
+            agent.Stop();
             if (ringOfSmellScript.smellDetected == false)
             {
                 if (idleTimer <= 0)
@@ -924,18 +925,10 @@ public class fatDogAi : MonoBehaviour {
 
     public void RotateDogWhileSmelling()
     {
-
         // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-
         Vector3 relative = transform.InverseTransformPoint(player.transform.position);
         float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
         print("kaantaa koiran kohti kissaa");
         transform.Rotate(0, angle * Time.deltaTime * 2, 0);
-
-       
-        //rotateEnemy(targetAngle, rotationStep);
-
-
-
     }
 }

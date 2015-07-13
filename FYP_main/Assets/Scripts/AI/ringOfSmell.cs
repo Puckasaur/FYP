@@ -100,8 +100,8 @@ public class ringOfSmell : MonoBehaviour {
 
                 if (script != null)
                 {
-                    script.stateManager(2);
-                    //smellDetected = true;
+                   // script.stateManager(2);
+                    smellDetected = true;
                    // scriptFatDog.RotateDogWhileSmelling();
                 }
                 if (scriptFatDog != null)

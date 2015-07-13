@@ -119,10 +119,11 @@ public class enemyPathfinding : MonoBehaviour
 	{
         
         leapTimer = defaultLeapTimer;
-        ringOfSmellScript = GetComponentInChildren<ringOfSmell>();
-        coneOfVisionScript = GetComponentInChildren<coneOfVision>();
+
         respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
+        ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();//player.GetComponent<ringOfSmell>();
+        coneOfVisionScript = GetComponentInChildren<coneOfVision>();
        
         //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
         
@@ -177,29 +178,43 @@ public class enemyPathfinding : MonoBehaviour
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
             agent.Stop();
-			if (idleTimer <= 0)
-			{
-				lastTarget = currentTarget;
-				currentTarget = targets[targetCounter];
 
-				if(agent.SetDestination(currentTarget.position) != null)
-				{
+                if (ringOfSmellScript.smellDetected == false)
+                {
 
-					agent.SetDestination(currentTarget.position);
-				}
-						
+                    if (idleTimer <= 0)
+                    {
+                        lastTarget = currentTarget;
+                        currentTarget = targets[targetCounter];
 
-				idleTimer = defaultIdleTimer;
-				targetCounter++;
-				if (targetCounter >= targets.Count)
+                        if (agent.SetDestination(currentTarget.position) != null)
+                        {
 
-				{
-					targetCounter = 0;
-				}
-				agent.speed = patrolSpeed;
-				stateManager(0);
-			}
-			idleTimer--;
+                            agent.SetDestination(currentTarget.position);
+                        }
+
+
+                        idleTimer = defaultIdleTimer;
+                        targetCounter++;
+                        if (targetCounter >= targets.Count)
+                        {
+                            targetCounter = 0;
+                        }
+                        agent.speed = patrolSpeed;
+                        stateManager(0);
+                    }
+                    idleTimer--;
+                    if (idleTimer <= 0)
+                    {
+                        idleTimer = 0;
+                    }
+
+                }
+                else
+                {
+                    RotateDogWhileSmelling();
+                }
+            
 			break;
 		}
 
@@ -316,57 +331,63 @@ public class enemyPathfinding : MonoBehaviour
 			//------------------------------------------------------//
 			//Look around a room by moving from waypoint to waypoint//
 			//------------------------------------------------------//
-
-			if(alertTimer == 0 || alertTimer < 0)
-			{
-				if(lastTarget != null)
-				{
-					currentTarget = lastTarget;
-					stateManager(4);
-				}
-			}
-            if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+            if (ringOfSmellScript.smellDetected == false)
             {
-
-                if (timer <= 0 && (!distracted))
+                if (alertTimer == 0 || alertTimer < 0)
                 {
-                    lastTarget = currentTarget;
-                    if (alertArea[areaCounter] != null)
+                    if (lastTarget != null)
                     {
-                        currentTarget = alertArea[areaCounter];
-                    }
-
-                    areaCounter++;
-                    if (areaCounter > 2)
-                    {
-                        areaCounter = 0;
-                    }
-                    if (tempcounters < 6)
-                    {
-                        if (turnCounter != 0)
-                        {
-                            turnCounter = 0;
-                        }
-                        if (idleTimer != defaultIdleTimer)
-                        {
-                            idleTimer = defaultIdleTimer;
-                        }
-                        //print ("state vaihdettu: 4");
-                        tempcounters++;
+                        currentTarget = lastTarget;
                         stateManager(4);
-
                     }
                 }
-
-
-            }
-            else
-            {
-                alertTimer--;
-                if (alertTimer <= 0)
+                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                 {
-                    alertTimer = 0;
+
+                    if (timer <= 0 && (!distracted))
+                    {
+                        lastTarget = currentTarget;
+                        if (alertArea[areaCounter] != null)
+                        {
+                            currentTarget = alertArea[areaCounter];
+                        }
+
+                        areaCounter++;
+                        if (areaCounter > 2)
+                        {
+                            areaCounter = 0;
+                        }
+                        if (tempcounters < 6)
+                        {
+                            if (turnCounter != 0)
+                            {
+                                turnCounter = 0;
+                            }
+                            if (idleTimer != defaultIdleTimer)
+                            {
+                                idleTimer = defaultIdleTimer;
+                            }
+                            //print ("state vaihdettu: 4");
+                            tempcounters++;
+                            stateManager(4);
+
+                        }
+                    }
+
+
                 }
+                else
+                {
+                    alertTimer--;
+                    if (alertTimer <= 0)
+                    {
+                        alertTimer = 0;
+                    }
+                }
+            }
+            else if (ringOfSmellScript.smellDetected == true)
+            {
+                RotateDogWhileSmelling();
             }
 								
 			break;
@@ -377,57 +398,65 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
             agent.Stop();
 
-            if (coneOfVisionScript.playerSeen == true)
+            if (ringOfSmellScript.smellDetected == false)
             {
-                agent.Resume();
-                stateManager(2);
-            }
+
+                if (coneOfVisionScript.playerSeen == true)
+                {
+                    agent.Resume();
+                    stateManager(2);
+                }
 
 
-			if(alertTimer > 0)
-			{
-				alertTimer--;
-			}
+                if (alertTimer > 0)
+                {
+                    alertTimer--;
+                }
 
-			if(alertTimer < 0)
-			{
-				alertTimer= 0;
-			}
-            if(alertTimer <= 0)
-            {
-				agent.speed = patrolSpeed;
-				turnCounter = 0;
-                agent.Resume();
-                stateManager(0);
-            }
-			if(turnCounter < 3)
-			{
-				currentTargetDirection = directionDegrees[0];	
-				rotateEnemy(currentTargetDirection, rotationStep);
+                if (alertTimer < 0)
+                {
+                    alertTimer = 0;
+                }
+                if (alertTimer <= 0)
+                {
+                    agent.speed = patrolSpeed;
+                    turnCounter = 0;
+                    agent.Resume();
+                    stateManager(0);
+                }
+                if (turnCounter < 3)
+                {
+                    currentTargetDirection = directionDegrees[0];
+                    rotateEnemy(currentTargetDirection, rotationStep);
 
-				if (rotationCompleted)
-				{	
-					directionDegrees.Add(directionDegrees[0]);
-					directionDegrees.Remove(directionDegrees[0]);							
-					rotationCompleted = false;
-					turnCounter++;
-                    turnTimer += defaultTurnTimer * Time.deltaTime;
-				} 
-				
-			}			
-			
-			if (turnCounter > 2)
-			{
+                    if (rotationCompleted)
+                    {
+                        directionDegrees.Add(directionDegrees[0]);
+                        directionDegrees.Remove(directionDegrees[0]);
+                        rotationCompleted = false;
+                        turnCounter++;
+                        turnTimer += defaultTurnTimer * Time.deltaTime;
+                    }
+
+                }
+
+                if (turnCounter > 2)
+                {
 
 
                     alertTimer = defaultAlertTimer;
-					turnCounter = 0;
+                    turnCounter = 0;
                     agent.Resume();
                     stateManager(3);
-			}
+                }
 
-				idleTimer--;	
+                idleTimer--;
+            }
 
+            else if (ringOfSmellScript.smellDetected == true)
+            {
+                RotateDogWhileSmelling();
+            }
 			break;
 		}
 		case enumStates.distracted:
@@ -840,4 +869,13 @@ public class enemyPathfinding : MonoBehaviour
 			
 		}
 	}
+
+    public void RotateDogWhileSmelling()
+    {
+        // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+        Vector3 relative = transform.InverseTransformPoint(player.transform.position);
+        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+        print("kaantaa koiran kohti kissaa");
+        transform.Rotate(0, angle * Time.deltaTime * 2.5f, 0);
+    }
 }
