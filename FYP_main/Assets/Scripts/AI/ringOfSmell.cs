@@ -12,16 +12,12 @@ public class ringOfSmell : MonoBehaviour {
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
     RaycastHit hit;
-	AudioSource sniff;
-	public bool setToOff;
+
     public bool playerSeen = false;
     bool visualCueActive = false;
     public float detectionTimer;
     public float defaultDetectionRange;
     public float alarmBonus;
-    GameObject player;
-    RaycastHit hit;
-
   	public bool smellDetected = false;
     public float sniffDistance;
     public float visualDistance;
