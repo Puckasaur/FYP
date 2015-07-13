@@ -62,6 +62,14 @@ public class coneOfVision : MonoBehaviour
             }
     }
 
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "player") 
+		{
+			chaseTransScript.playSting ();
+		}
+	}
+
     void OnTriggerStay(Collider other)
     {
 
@@ -96,6 +104,8 @@ public class coneOfVision : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
+            chaseTransScript.outChaseTrans();
+
             if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
             {
                 if (hit.collider == other)

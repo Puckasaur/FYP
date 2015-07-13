@@ -162,8 +162,8 @@ public class fatDogAi : MonoBehaviour {
 	
 	void Update()
 	{
-        darnYouGandalf = coneOfVisionScript.playerSeen;
-        /// Calcumalationen for ze vector difference///
+        //darnYouGandalf = coneOfVisionScript.playerSeen;
+        /// Calcumalationen for ze vector differences///
         if (currentTarget != null)
         {
             vectorTransformPositionx = transform.position.x;
@@ -232,6 +232,7 @@ public class fatDogAi : MonoBehaviour {
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
+            agent.Stop();
             if (ringOfSmellScript.smellDetected == false)
             {
                 if (idleTimer <= 0)
@@ -272,28 +273,29 @@ public class fatDogAi : MonoBehaviour {
             Vector3 direction = (player.transform.position - transform.position).normalized;
             Physics.Raycast(transform.position, direction, out hit, raycastRange);
             Debug.DrawRay(transform.position, direction * 8.75f, Color.yellow);
-            print(coneOfVisionScript.playerSeen + " < player seen");
-            if (escapeTimer > 0 &&  coneOfVisionScript.playerSeen == true)
-            {
-
+            if (escapeTimer > 0)
+            {                
                 if (hit.collider != null)
                 {                    
                     if (hit.collider.tag == player.GetComponent<Collider>().tag )
-                    {
-                        //if (coneOfVisionScript.playerSeen == true)
-                        if (darnYouGandalf == true)
+                    {                       
+                        if (coneOfVisionScript.playerSeen == true)
                         {
                             if (currentTarget != player.transform)
                             {
                                 lastTarget = currentTarget;
                             }
                             currentTarget = player.transform;
-                            print("kylla tama kusettaa, se on seleva");
+                            
                             transform.LookAt(currentTarget);
                         }
                         else 
                         {
-                           RotateDogWhileSmelling();                              
+                            if (ringOfSmellScript.smellDetected == true)
+                            {
+                                RotateDogWhileSmelling();  
+                            }
+                                                       
                         }
 
                         if (barkTimer < 0)
@@ -303,7 +305,7 @@ public class fatDogAi : MonoBehaviour {
                         barkTimer--;
                     }
                     else
-                    {                      
+                    {                        
                         escapeTimer--;
                         if (escapeTimer <= 0)
                         {                         
@@ -326,7 +328,7 @@ public class fatDogAi : MonoBehaviour {
 
 
                 else
-                {                 
+                {                   
                     escapeTimer--;
                     if (escapeTimer <= 0)
                     {
@@ -348,10 +350,10 @@ public class fatDogAi : MonoBehaviour {
             }
 
             else if (escapeTimer > 0 && hit.collider != null)
-            {
+            {               
                 if (hit.collider.tag == player.GetComponent<Collider>().tag)
                 {
-                    if (darnYouGandalf == true)
+                    if (coneOfVisionScript.playerSeen == true)
                     {
                         if (currentTarget != player.transform)
                         {
@@ -377,6 +379,7 @@ public class fatDogAi : MonoBehaviour {
             else
             {
                 escapeTimer--;
+               // coneOfVisionScript.playerSeen = false;
             }
 
 
@@ -922,18 +925,10 @@ public class fatDogAi : MonoBehaviour {
 
     public void RotateDogWhileSmelling()
     {
-
         // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-
         Vector3 relative = transform.InverseTransformPoint(player.transform.position);
         float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
         print("kaantaa koiran kohti kissaa");
         transform.Rotate(0, angle * Time.deltaTime * 2, 0);
-
-       
-        //rotateEnemy(targetAngle, rotationStep);
-
-
-
     }
 }
