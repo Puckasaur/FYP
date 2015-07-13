@@ -30,9 +30,7 @@ public class ringOfSmell : MonoBehaviour {
     public float visualDistance;
     public float detectionDistance;
     public float somethingElseDistance;
-
 	//AudioSource sniff;
-    public bool setToOff;
     
     void Start()
     {
