@@ -1,4 +1,3 @@
-
 ﻿using UnityEngine;
 using System.Collections;
 
@@ -10,9 +9,13 @@ public class ringOfSmell : MonoBehaviour {
     huntingDog huntingDogScript;
     public float radius;
     public float startRadius;
+    Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
+    GameObject player;
+    RaycastHit hit;
+	AudioSource sniff;
+	public bool setToOff;
     public bool playerSeen = false;
     bool visualCueActive = false;
-    Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     public float detectionTimer;
     public float defaultDetectionRange;
     public float alarmBonus;
@@ -50,10 +53,7 @@ public class ringOfSmell : MonoBehaviour {
     }
 
 
-        //-----------------------------------------------------------------------//
-        //if player crosses the cone, informs the parent(Enemy) of visible player//
-        //-----------------------------------------------------------------------//
-
+   
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "enemy")
@@ -122,7 +122,7 @@ public class ringOfSmell : MonoBehaviour {
             {
                 if (script != null)
                 {
-                    //script.stateManager(2);
+                    script.stateManager(2);
                 }
                 if (scriptFatDog != null)
                 {
@@ -131,7 +131,7 @@ public class ringOfSmell : MonoBehaviour {
                 }
                 if (huntingDogScript != null)
                 {
-                   // huntingDogScript.stateManager(2);
+                   huntingDogScript.stateManager(2);
                 }
             }
         }
@@ -141,7 +141,7 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
-            
+
             detectionTimer = 60.0f;
             chaseTransScript.outChaseTrans();
 
