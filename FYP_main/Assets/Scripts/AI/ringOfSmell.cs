@@ -8,7 +8,7 @@ public class ringOfSmell : MonoBehaviour {
     enemyPathfinding script;
     fatDogAi scriptFatDog;
     huntingDog huntingDogScript;
-    float radius;
+    public float radius;
     public float startRadius;
     public bool playerSeen = false;
     bool visualCueActive = false;
