@@ -179,7 +179,6 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
-
             detectionTimer = 60.0f;
             chaseTransScript.outChaseTrans();
 
