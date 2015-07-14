@@ -63,6 +63,14 @@ public class coneOfVision : MonoBehaviour
         }
     }
 
+	void OnTriggerEnter (Collider other)
+	{
+		if (other.gameObject.tag == "player") 
+		{
+			chaseTransScript.playSting();
+		}
+	}
+
     void OnTriggerStay(Collider other)
     {
 
