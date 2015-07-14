@@ -8,8 +8,8 @@ public class smelling : MonoBehaviour {
 
 	public BoxCollider colliderCheck;
 
-	GameObject boneSpawnerComo;
 	public GameObject newBoneComo;
+	public GameObject boneSpawnerComo;
 	public GameObject boneComo;
 	
 	public bool isEnterBone = false;
@@ -43,14 +43,14 @@ public class smelling : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (1);
 		
-		enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
+		enterPoint.GetComponent<ParticleSystem> ().enableEmission = true;
 		enterPoint.GetComponent<ParticleSystem> ().startColor = new Color (1, 0, 1, 0.5f);
 		
 		yield return new WaitForSeconds (4);
 
 		smellArea = true;
 		
-		exitPoint.GetComponent<ParticleSystem>().enableEmission = true;	
+		exitPoint.GetComponent<ParticleSystem> ().enableEmission = true;	
 		exitPoint.GetComponent<ParticleSystem> ().startColor = new Color (1, 0, 1, 0.5f);
 
 		yield return new WaitForSeconds (4);
@@ -61,29 +61,6 @@ public class smelling : MonoBehaviour {
 
 		smellArea = false;
 	}
-
-//	IEnumerator bagSmell()
-//	{
-//		yield return new WaitForSeconds (1);
-//		
-//		enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
-//		
-//		yield return new WaitForSeconds (4);
-//		
-//		smellArea = true;
-//		
-//		exitPoint.GetComponent<ParticleSystem>().enableEmission = true;	
-//		
-//		//newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
-//		
-//		yield return new WaitForSeconds (4);
-//		
-//		isEnterBag = false;
-//		
-//		yield return new WaitForSeconds (15);
-//		
-//		smellArea = false;
-//	}
 
 	void Start()
 	{
