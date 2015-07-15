@@ -36,7 +36,7 @@ public class ladderClimbing : MonoBehaviour
 		
 	void Update()
 	{
-		if (inside == true && Input.GetKey("w"))
+		if (inside == true && Input.GetKey(KeyCode.W))
 		{
 			characterController.transform.position += Vector3.up / heightFactor;
 		}

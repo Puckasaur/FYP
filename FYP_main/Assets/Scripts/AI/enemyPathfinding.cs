@@ -654,15 +654,33 @@ public class enemyPathfinding : MonoBehaviour
 	
 	void setTargetWaypoints()
 	{
-		
+		/*
 		targets.Add(target1);
 		targets.Add(target2);
 		targets.Add(target3);
+        */
+
+        // Marc's tests
+        if (target1 != null)
+        {
+            targets.Add(target1);
+        }
+
+        if (target2 != null)
+        {
+            targets.Add(target2);
+        }
+
+        if (target3 != null)
+        {
+            targets.Add(target3);
+        }
+
 		if(target4 != null)
 		{
 			targets.Add(target4);
 		}
-
+        // End of Marc's tests
 	}
 
 

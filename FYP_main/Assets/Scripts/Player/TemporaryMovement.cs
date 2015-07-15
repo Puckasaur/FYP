@@ -43,6 +43,7 @@ public class TemporaryMovement : MonoBehaviour
 		sprintSpeed = movementSpeed * sprintModifier;
         ring = GetComponentInChildren<ringOfSmell>();
 	}
+
 	void FixedUpdate() 
     {
 		sprint ();
