@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 415610}
   - 33: {fileID: 3320810}
   - 23: {fileID: 2373604}
-  - 64: {fileID: 6446306}
+  - 65: {fileID: 6542254}
   m_Layer: 0
   m_Name: Props_Barrel
   m_TagString: Untagged
@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119654}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.3899994, y: .600000024, z: 14.1900005}
+  m_LocalPosition: {x: -5.03999996, y: .602999985, z: 3.6400001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -61,8 +61,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119654}
   m_Mesh: {fileID: 4300000, guid: b03a5b747ab4ca943be5b6e98028b585, type: 3}
---- !u!64 &6446306
-MeshCollider:
+--- !u!65 &6542254
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -71,8 +71,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300000, guid: b03a5b747ab4ca943be5b6e98028b585, type: 3}
+  m_Size: {x: .860000014, y: 1.23304629, z: .899999976}
+  m_Center: {x: 0, y: 2.98023224e-08, z: -5.96046448e-08}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

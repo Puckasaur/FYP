@@ -26,6 +26,7 @@ GameObject:
   - 4: {fileID: 405694}
   - 33: {fileID: 3363686}
   - 23: {fileID: 2393742}
+  - 65: {fileID: 6501776}
   m_Layer: 0
   m_Name: Props_Lamp
   m_TagString: Untagged
@@ -40,7 +41,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.2799997, y: .409999996, z: 14.6000004}
+  m_LocalPosition: {x: -1.72054231, y: -1.84513539e-07, z: 6.69854116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 438134}
@@ -89,6 +90,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158582}
   m_Mesh: {fileID: 4300000, guid: fc50df9ebca3fae4abafdeb9745a57ff, type: 3}
+--- !u!65 &6501776
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 158582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .37852478, y: .699999988, z: .398875713}
+  m_Center: {x: .022427246, y: .349999994, z: .00399918854}
 --- !u!108 &10830034
 Light:
   m_ObjectHideFlags: 1

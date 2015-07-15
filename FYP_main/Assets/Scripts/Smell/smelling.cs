@@ -65,7 +65,7 @@ public class smelling : MonoBehaviour {
 	void Start()
 	{
         // If we add this line the game will throw no error but works without so, I don't know. Bisous cordial.
-        //colliderCheck = GetComponent<BoxCollider>();
+        colliderCheck = GetComponent<BoxCollider>();
 
 		enterPoint.GetComponent<ParticleSystem>().enableEmission = false;
 		exitPoint.GetComponent<ParticleSystem>().enableEmission = false;

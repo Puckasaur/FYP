@@ -9,7 +9,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 453858}
   - 33: {fileID: 3385578}
-  - 64: {fileID: 6427068}
   - 23: {fileID: 2337370}
   m_Layer: 0
   m_Name: Props_Window
@@ -53,8 +52,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 94.0699997, y: 2.79999995, z: 16.2999992}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_LocalPosition: {x: 4.55700016, y: 1.74800003, z: 7.39300013}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 442698}
   m_Father: {fileID: 0}
@@ -90,18 +89,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168598}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6427068
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 168598}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!108 &10885486
 Light:
   m_ObjectHideFlags: 1
@@ -130,7 +117,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_Lightmapping: 4
-  m_BounceIntensity: 1
+  m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
