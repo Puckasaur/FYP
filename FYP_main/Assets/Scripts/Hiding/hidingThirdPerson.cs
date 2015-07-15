@@ -72,6 +72,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			//tmpMovement.movementSpeed = 0;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
 			ros.setToOff = true;
+            ros.isDisguised();
 
 		} 
 		else if (isPaused == false)
@@ -80,6 +81,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
 			ros.setToOff = false;
+            ros.isNotDisguised();
 			
 			
 		}

@@ -32,10 +32,12 @@ TagManager:
   - particleArea
   - boneSpawnerRoom
   - huntingDog
-  - hunterDoor
+  - trap
   - hunterSpawner
   - ladder
   - bagOfAir
+  - Smell
+  - Vision
   layers:
   - Default
   - TransparentFX
