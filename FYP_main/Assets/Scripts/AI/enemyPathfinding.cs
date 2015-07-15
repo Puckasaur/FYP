@@ -146,7 +146,7 @@ public class enemyPathfinding : MonoBehaviour
 		//Setting Timers
 		timer = defaultTimer;
 		eatTimer = defaultEatTimer;
-		idleTimer = defaultIdleTimer;
+		//idleTimer = defaultIdleTimer;
 		barkTimer = defaultBarkTimer;
 		alertTimer = defaultAlertTimer;
 		escapeTimer = defaultEscapeTimer;
@@ -179,6 +179,11 @@ public class enemyPathfinding : MonoBehaviour
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
+                if (agentStopped == false)
+                {
+                    agentStopped = true;
+                    agent.Stop();
+                }
 			}
 			
 		}
@@ -207,7 +212,7 @@ public class enemyPathfinding : MonoBehaviour
                         if (agent.SetDestination(currentTarget.position) != null)
                         {
 
-                            agent.SetDestination(currentTarget.position);
+                           // agent.SetDestination(currentTarget.position);
                         }
 
 
@@ -414,9 +419,11 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------//
 			//Stand on the spot and look at preset directions//
 			//-----------------------------------------------//
-            agentStopped = true;
-            agent.Stop();
-
+            if (agentStopped == false)
+            {
+                agentStopped = true;
+                agent.Stop();
+            }
             if (ringOfSmellScript.smellDetected == false)
             {
 
@@ -628,7 +635,7 @@ public class enemyPathfinding : MonoBehaviour
                 agentNotMovingTimer = defaultAgentNotMovingTimer;
             }
         }
-        else if(agentStopped == false)
+        else if (agentStopped == false)
         {
             agentNotMovingTimer = defaultAgentNotMovingTimer;
         }

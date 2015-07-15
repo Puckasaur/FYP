@@ -400,10 +400,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd48bd43e63b92c49b67b33161c92244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 0
   startRadius: 10
+  setToOff: 0
   playerSeen: 0
+  disguised: 0
   detectionTimer: 45
+  defaultDetectionRange: 0
   alarmBonus: 0
+  smellDetected: 0
   sniffDistance: 15
   visualDistance: 7.5
   detectionDistance: 5
@@ -419,6 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ab6f0a57e0e144fabc5e33010621ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disguised: 0
   playerSeen: 0
   startWidth: 3
   startHeight: 2
@@ -446,6 +452,8 @@ MonoBehaviour:
   States: 0
   sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   soundSource: {fileID: 0}
+  agent: {fileID: 0}
+  targets: []
   alertArea:
   - {fileID: 0}
   eatBone: 0
@@ -461,6 +469,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   rotationCompleted: 0
   turnTimer: 100
+  agentStopped: 0
   alertTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
@@ -471,9 +480,13 @@ MonoBehaviour:
   areaCounter: 0
   defaultTurnTimer: 0
   defaultDetectSoundTimer: 0
+  turnTowardsSmellTimer: 0
+  defaultTurnTowardsSmellTimer: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
   chaseRange: 10
+  agentNotMovingTimer: 0
+  defaultAgentNotMovingTimer: 120.010002
   leapRange: 0
   defaultLeapTimer: 60
   impulse: 0

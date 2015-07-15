@@ -169,11 +169,23 @@ public class TemporaryMovement : MonoBehaviour
         {
             if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
             {
-                if ((Input.GetKeyDown(KeyCode.Return) && other.transform.parent.tag == "ball" || other.transform.parent.tag == "cube"))
-                {
-                    other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
-                }
+                other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
+                other.transform.GetComponentInParent<breakableObject>().ObjectFalling();
             }
+            if (other.transform.parent.tag == "trap")
+            {
+
+            }
+        }
+    }
+    void OnCollisionEnter(Collision col)
+    {
+
+        if(col.collider.tag == "trap")
+        {        print(col.collider);
+            breakableObject trap = col.collider.transform.GetComponent<breakableObject>();
+                trap.makeSound = true;
+                print(trap.makeSound);
         }
     }
     void disGuiseAsDog()

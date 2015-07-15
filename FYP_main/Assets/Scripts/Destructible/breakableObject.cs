@@ -12,7 +12,7 @@ public class breakableObject: MonoBehaviour
     public GameObject brokenSphere;
     public GameObject brokenCube;
     GameObject bone;
-    bool makeSound = false;
+    public bool makeSound = false;
     public float timer = 60.0f;
     public float expireTimer = 10;
     public float boneRadius;
@@ -28,6 +28,10 @@ public class breakableObject: MonoBehaviour
             maxScale = 30.0f;
         else if (this.gameObject.tag == "cube")
             maxScale = 40.0f;
+        else if(this.gameObject.tag == "trap")
+        {
+            maxScale = 50.0f;
+        }
 	}
 	
 	// Update is called once per frame
@@ -84,9 +88,10 @@ public class breakableObject: MonoBehaviour
         //----------------------------------------------------------//
         //if(makeSound)
         {
-            if (this.transform.localPosition.y <= 0.5f)
+            if (this.transform.localPosition.y <= 0.5f && makeSound == true)
             {
-                makeSound = false;
+                //makeSound = false;
+                {
                     if (this.gameObject.tag == "ball")
                     {
                         brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
@@ -106,10 +111,20 @@ public class breakableObject: MonoBehaviour
                         sphereScript.setMaxDiameter(maxScale);
                         Destroy(this.gameObject);
                     }
+                    if (this.gameObject.tag == "trap")
+                    {
+                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+                        newSphere.transform.parent = brokenObject.transform;
+                        sphereScript = newSphere.GetComponent<soundSphere>();
+                        sphereScript.setMaxDiameter(maxScale);
+                        Destroy(this.gameObject);
+                    }
+                }
             }
         }
     }
-    void ObjectFalling()
+    public void ObjectFalling()
     {
         
         makeSound = true;
