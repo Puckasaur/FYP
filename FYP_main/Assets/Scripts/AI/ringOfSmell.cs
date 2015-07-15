@@ -100,7 +100,7 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//  
         if(other.gameObject.tag == "looker")
         {
-            print("hitting enemy ring");
+            //print("hitting enemy ring");
             if(script != null)
             {
                 script.stateManager(2);
@@ -216,22 +216,30 @@ public class ringOfSmell : MonoBehaviour {
         }
         
     }
-    public void isDisguised()
+    public void isDisguised(string script)
     {
+        //print(script);
+        //print("1");
         radius = 0;
+        disguised = true;
 
     }
-    public void isNotDisguised()
+    public void isNotDisguised(string script)
     {
+        //print(script);
+        //print("2");
         radius = startRadius;
+        disguised = false;
     }
     public void increaseSmell(float value)
     {
+        //print("3");
         radius = startRadius;
         radius += value;
     }
     public void decreaseSmell(float value)
     {
+        //print("4");
         radius = startRadius;
         radius -= value;
     }

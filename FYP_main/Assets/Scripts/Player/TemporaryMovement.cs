@@ -93,12 +93,12 @@ public class TemporaryMovement : MonoBehaviour
             if (smellHidden)
             {
                 smellHidden = false;
-                ring.isNotDisguised();
+                ring.isNotDisguised("tempMove");
             }
             else if(!smellHidden)
             {
                 smellHidden = true;
-                ring.isDisguised();
+                ring.isDisguised("tempMove");
             }
         }
 	}

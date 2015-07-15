@@ -61,7 +61,9 @@ public class hidingThirdPerson : MonoBehaviour {
 				StartCoroutine (Delayed ());
 
 				isHiding = false;
-				isPaused = false;
+				isPaused = false;            
+                if(ros.disguised == true)
+            ros.isNotDisguised("htp");
 			}
 		}
 
@@ -71,8 +73,8 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = true;
 			//tmpMovement.movementSpeed = 0;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			ros.setToOff = true;
-            ros.isDisguised();
+			//ros.setToOff = true;
+
 
 		} 
 		else if (isPaused == false)
@@ -80,8 +82,8 @@ public class hidingThirdPerson : MonoBehaviour {
 			//unpause
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			ros.setToOff = false;
-            ros.isNotDisguised();
+			//ros.setToOff = false;
+
 			
 			
 		}
@@ -93,7 +95,8 @@ public class hidingThirdPerson : MonoBehaviour {
 
 		isPaused = true;
         isHiding = true;
-
+            if(ros.disguised == false)
+                ros.isDisguised("htp");
 		//checkToEnter.enabled = false;
 		checkToExit.enabled = true;
 	}
