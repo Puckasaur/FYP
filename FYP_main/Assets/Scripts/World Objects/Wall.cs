@@ -111,10 +111,12 @@ public class Wall : MonoBehaviour {
 	
 	public void SetTransparent()
 	{
+		if (m_RenderersChildren != null)
 		for (int i = 0; i < m_RenderersChildren.Length; i++){
 			m_RenderersChildren[i].material = transparentMaterialChildren[i];
 		}
 
+		if (m_RenderersParent != null)
 		for (int j = 0; j < m_RenderersParent.Length; j++){
 			m_RenderersParent[j].material = transparentMaterialParent[j];
 		}
@@ -122,10 +124,12 @@ public class Wall : MonoBehaviour {
 	
 	public void SetToNormal()
 	{
+		if (m_RenderersChildren != null)
 		for (int i = 0; i <m_RenderersChildren.Length; i++){
 			m_RenderersChildren[i].material = m_InitialMaterialChildren[i];
 		}
 
+		if (m_RenderersParent != null)
 		for (int j = 0; j <m_RenderersParent.Length; j++){
 			m_RenderersParent[j].material = m_InitialMaterialParent[j];
 		}
