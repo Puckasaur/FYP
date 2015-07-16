@@ -22,7 +22,7 @@ public class Key : MonoBehaviour
     {
         if (other.gameObject.tag == "player")
         {
-			Inventory.inventoryArray[1]++;
+			inventory.inventoryArray[1]++;
             i = other.GetComponent<TemporaryMovement>().numberOfKeys;
             other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
             other.GetComponent<TemporaryMovement>().keyPossessed[i] = keyNumber;

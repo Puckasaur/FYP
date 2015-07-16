@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickUpItem : MonoBehaviour {
+public class pickUpItems : MonoBehaviour {
 
 	void Update()
 	{
@@ -12,7 +12,7 @@ public class PickUpItem : MonoBehaviour {
 	{
 		if (pickUpObject.tag == "player")
 		{
-			Inventory.inventoryArray[0]++;
+			inventory.inventoryArray[0]++;
 
 			Destroy (this.gameObject);
 		}

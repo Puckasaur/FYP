@@ -51,7 +51,7 @@ public class TemporaryMovement : MonoBehaviour
 
 	void FixedUpdate() 
     {
-		bags = Inventory.inventoryArray [0];
+		bags = inventory.inventoryArray [0];
 		sprint ();
 		updateAnimator();
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
