@@ -957,10 +957,10 @@ public class enemyPathfinding : MonoBehaviour
 
 
             //Run the check if it's really the closest waypoint we're looking for
-            for (int i = 0; i < waypointLocations.Count; i++)
+            for (int y = 0; y < waypointLocations.Count; y++)
             {
 
-                waypointLocations[i] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[i].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].z, 2.0f)));
+                waypointLocations[y] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[y].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].z, 2.0f)));
 
                 float waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
 
@@ -971,14 +971,14 @@ public class enemyPathfinding : MonoBehaviour
             }
 
             //set the closest waypoint to be the firstone on the list
-            for (int i = 0; i < waypointLocations.Count; i++)
+            for (int y = 0; y < waypointLocations.Count; y++)
             {
-                if (tempAlertWaypoints[i].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[i]))
+                if (tempAlertWaypoints[y].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[y]))
                 {
-                    alertArea.Add(tempAlertWaypoints[i]);
-                    currentWaypointIndex = i;
+                    alertArea.Add(tempAlertWaypoints[y]);
+                    currentWaypointIndex = y;
                     //set waypoint into a used waypoints list to prevent the AI from using it multiple times
-                    usedWaypoints.Add(tempAlertWaypoints[i]);
+                    usedWaypoints.Add(tempAlertWaypoints[y]);
                 }
             }
         }
