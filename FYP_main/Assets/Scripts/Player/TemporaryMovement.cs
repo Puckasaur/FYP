@@ -25,7 +25,7 @@ public class TemporaryMovement : MonoBehaviour
 
     public float throwForce = 00.00010f;
     public int bones = 2;
-    public int bags = 2;
+    public int bags;
 
 	private bool isGrounded;
     public List<GameObject> enemies = new List<GameObject>();
@@ -51,6 +51,7 @@ public class TemporaryMovement : MonoBehaviour
 
 	void FixedUpdate() 
     {
+		bags = Inventory.inventoryArray [0];
 		sprint ();
 		updateAnimator();
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");

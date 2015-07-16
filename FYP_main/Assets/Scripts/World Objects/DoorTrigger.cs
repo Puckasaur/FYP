@@ -20,7 +20,9 @@ public class DoorTrigger : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "player")
-        {
+        {	
+			Inventory.inventoryArray[1]--;
+
             for (var j = 0; j < other.GetComponent<TemporaryMovement>().numberOfKeys; j++) // checks all the keys possessed by the player and if one corresponds with the door he wants to open
             {
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
