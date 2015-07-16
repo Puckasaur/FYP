@@ -9,8 +9,14 @@ using System.Collections;
 public class Key : MonoBehaviour
 {
     public int keyNumber; // the number of the key (will open the door with the same number)
+	sfxPlayer SFX;
 
     private int i;  // used to add a key in the good array
+
+	void Start()
+	{
+		SFX = GameObject.Find("SFX").GetComponent<sfxPlayer>();
+	}
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,6 +25,7 @@ public class Key : MonoBehaviour
             i = other.GetComponent<TemporaryMovement>().numberOfKeys;
             other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
             other.GetComponent<TemporaryMovement>().keyPossessed[i] = keyNumber;
+			SFX.playKey();
 			Destroy(this.gameObject, 0.1f);
         }
 

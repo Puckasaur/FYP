@@ -18,6 +18,7 @@ AudioMixerController:
   - guids:
     - d4daa76c7c737604ca95c2fed98dab99
     - 5bd2c53891b2af84f8ece1eff1773e96
+    - 7ca96fa1d9cf9ec4292ed0ebc791bb16
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500003}
@@ -31,6 +32,7 @@ AudioMixerGroupController:
   m_GroupID: d4daa76c7c737604ca95c2fed98dab99
   m_Children:
   - {fileID: 24362872}
+  - {fileID: 24388758}
   m_Volume: fd7e7922cbaae5542bf6cd5d255219ab
   m_Pitch: b66eabecf8ec5914c9e40e4f3e5f92e5
   m_Effects:
@@ -52,6 +54,23 @@ AudioMixerGroupController:
   m_Pitch: ec4a5db87bff8e94d82978818ad6b06a
   m_Effects:
   - {fileID: 24481770}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!243 &24388758
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Door Unlock
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 7ca96fa1d9cf9ec4292ed0ebc791bb16
+  m_Children: []
+  m_Volume: 5480059c2b4436b409cfd7830242840a
+  m_Pitch: 0479f8d1405bf6d45ad7a9d081508cb0
+  m_Effects:
+  - {fileID: 24495302}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -78,6 +97,19 @@ AudioMixerEffectController:
   m_EffectID: 2df4f95e0a055214fa609a8c2ce8576e
   m_EffectName: Attenuation
   m_MixLevel: 84086262dc0804d4ab0af7ceaae6a3b6
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &24495302
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0ce26461a222cc94d820ea2b7f3f0ae2
+  m_EffectName: Attenuation
+  m_MixLevel: f9308c8a9be937448b088d2e51e17ce2
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
