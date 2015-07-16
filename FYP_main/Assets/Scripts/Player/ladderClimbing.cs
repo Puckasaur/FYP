@@ -21,7 +21,8 @@ public class ladderClimbing : MonoBehaviour
 		if (ladder.gameObject.tag == "player")
 		{
 			climbMovement.enabled = false;
-			inside = !inside;
+			//inside = !inside;
+            inside = true;
 		}
 	}
 		
@@ -30,15 +31,20 @@ public class ladderClimbing : MonoBehaviour
 		if (ladder.gameObject.tag == "player")
 		{
 			climbMovement.enabled = true;
-			inside = !inside;
+			//inside = !inside;
+            inside = false;
 		}
 	}
 		
 	void Update()
 	{
-		if (inside == true && Input.GetKey(KeyCode.W))
+		if (inside == true && 
+            characterController.GetComponent<TemporaryMovement>().movement.magnitude > 0.01f /*||
+            characterController.GetComponent<TemporaryMovement>().movement.magnitude < 0.1f*/)
 		{
 			characterController.transform.position += Vector3.up / heightFactor;
 		}
+
+        print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
 	}
 }
