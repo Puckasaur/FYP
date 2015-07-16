@@ -18721,7 +18721,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 428058, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.79999995
+      value: 47.5999985
       objectReference: {fileID: 0}
     - target: {fileID: 428058, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: m_LocalPosition.y
@@ -18729,7 +18729,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 428058, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .600000024
+      value: 22.6000004
       objectReference: {fileID: 0}
     - target: {fileID: 428058, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: m_LocalRotation.x
@@ -44903,6 +44903,28 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 478516, guid: 8ab0435394d82b54ba985a73e281011b, type: 2}
   m_PrefabInternal: {fileID: 2097092290}
+--- !u!1 &2102303862 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 175220, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+  m_PrefabInternal: {fileID: 888076628}
+--- !u!114 &2102303871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2102303862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76cfcedf28958b143a5076d7fc5c293b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hatDisguiseAsDog: 0
+  hatHideSmell: 0
+  enemies: []
+  defaultDisguiseTimer: 5
+  defaultDisguiseCooldown: 5
+  defaultHiddenSmellTimer: 5
+  defaultHiddenSmellCooldown: 5
 --- !u!1 &2103423819 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 146806, guid: 8ab0435394d82b54ba985a73e281011b, type: 2}

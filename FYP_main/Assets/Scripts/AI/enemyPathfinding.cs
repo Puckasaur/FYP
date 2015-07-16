@@ -211,9 +211,14 @@ public class enemyPathfinding : MonoBehaviour
 
                     if (idleTimer <= 0)
                     {
-                        lastTarget = currentTarget;
-                        currentTarget = targets[targetCounter];
-
+                        if (currentTarget.gameObject.tag != "bone")
+                        {
+                            
+                            lastTarget = currentTarget;
+                            print(lastTarget + "idle");
+                        }
+                            currentTarget = targets[targetCounter];
+                        
                         if (agent.SetDestination(currentTarget.position) != null)
                         {
 
@@ -346,9 +351,11 @@ public class enemyPathfinding : MonoBehaviour
             else
             {
                 agent.speed = chaseSpeed;
-                if (currentTarget != player.transform)
+                if (currentTarget != player.transform && currentTarget.tag!="bone")
                 {
+                    
                     lastTarget = currentTarget;
+                    print(lastTarget + "chase");
                 }            
                 currentTarget = player.transform;
             }
@@ -367,6 +374,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     if (lastTarget != null)
                     {
+                        print(lastTarget + "alert,pseudo");
                         currentTarget = lastTarget;
                         stateManager(4);
                     }
@@ -375,7 +383,12 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     if (timer <= 0 && (!distracted))
                     {
-                        lastTarget = currentTarget;
+                        if (currentTarget.gameObject.tag != "bone")
+                        {
+                            
+                            lastTarget = currentTarget;
+                            print(lastTarget + "alert");
+                        }
                         if (alertArea[areaCounter] != null)
                         {
                             currentTarget = alertArea[areaCounter];

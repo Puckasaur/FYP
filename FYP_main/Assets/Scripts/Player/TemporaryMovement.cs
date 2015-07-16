@@ -75,32 +75,32 @@ public class TemporaryMovement : MonoBehaviour
 			newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
 		}
 
-        if(Input.GetKeyDown(KeyCode.G))
-        {
-            if(!disguisedAsDog)
-            {
-                disguisedAsDog = true;
-                disGuiseAsDog();
-            }
-            else if(disguisedAsDog)
-            {
-                disguisedAsDog = false;
-                disGuiseAsDog();
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.H))
-        {
-            if (smellHidden)
-            {
-                smellHidden = false;
-                ring.isNotDisguised("tempMove");
-            }
-            else if(!smellHidden)
-            {
-                smellHidden = true;
-                ring.isDisguised("tempMove");
-            }
-        }
+        //if(Input.GetKeyDown(KeyCode.G))
+        //{
+        //    if(!disguisedAsDog)
+        //    {
+        //        disguisedAsDog = true;
+        //        disGuiseAsDog();
+        //    }
+        //    else if(disguisedAsDog)
+        //    {
+        //        disguisedAsDog = false;
+        //        disGuiseAsDog();
+        //    }
+        //}
+        //if(Input.GetKeyDown(KeyCode.H))
+        //{
+        //    if (smellHidden)
+        //    {
+        //        smellHidden = false;
+        //        ring.isNotDisguised("tempMove");
+        //    }
+        //    else if(!smellHidden)
+        //    {
+        //        smellHidden = true;
+        //        ring.isDisguised("tempMove");
+        //    }
+        //}
 	}
 
 	void Update()
