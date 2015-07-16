@@ -63,7 +63,7 @@ public class TemporaryMovement : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.T) && bones > 0)
         {
-            print(boneSpawner.transform.parent);
+           // print(boneSpawner.transform.parent);
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
