@@ -25,13 +25,18 @@ public class TemporaryMovement : MonoBehaviour
 
     public float throwForce = 00.00010f;
     public int bones = 2;
-    public int bags = 2;
+    public int bags;
 
 	private bool isGrounded;
     public List<GameObject> enemies = new List<GameObject>();
     ringOfSmell ring;
     bool smellHidden;
     bool disguisedAsDog;
+
+    public float horizontal;
+    public float vertical;
+
+    public Vector3 movement;
 
 
 	void Start()
@@ -46,15 +51,16 @@ public class TemporaryMovement : MonoBehaviour
 
 	void FixedUpdate() 
     {
+		bags = inventory.inventoryArray [0];
 		sprint ();
 		updateAnimator();
 		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
 		checkGroundStatus ();
-		float horizontal = Input.GetAxis ("Horizontal"); //* movementSpeed * Time.deltaTime;
 
-        float vertical = Input.GetAxis("Vertical"); //* movementSpeed * Time.deltaTime;
+		horizontal = Input.GetAxis ("Horizontal"); 
+        vertical = Input.GetAxis("Vertical"); 
 
-        Vector3 movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
+        movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
         Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
 
         rb.MovePosition(transform.position + movement.normalized * movementSpeed * Time.deltaTime);
@@ -88,6 +94,7 @@ public class TemporaryMovement : MonoBehaviour
                 disGuiseAsDog();
             }
         }
+
         if(Input.GetKeyDown(KeyCode.H))
         {
             if (smellHidden)
@@ -172,22 +179,25 @@ public class TemporaryMovement : MonoBehaviour
                 other.transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * throwForce, ForceMode.Force);
                 other.transform.GetComponentInParent<breakableObject>().ObjectFalling();
             }
+
             if (other.transform.parent.tag == "trap")
             {
 
             }
         }
     }
+
     void OnCollisionEnter(Collision col)
     {
-
         if(col.collider.tag == "trap")
-        {        print(col.collider);
+        {        
+            print(col.collider);
             breakableObject trap = col.collider.transform.GetComponent<breakableObject>();
-                trap.makeSound = true;
-                print(trap.makeSound);
+            trap.makeSound = true;
+            print(trap.makeSound);
         }
     }
+
     void disGuiseAsDog()
     {
         GameObject[] patrolEnemy;
@@ -195,14 +205,17 @@ public class TemporaryMovement : MonoBehaviour
         enemies.Clear();
         patrolEnemy = GameObject.FindGameObjectsWithTag("enemy");
         hunterEnemy = GameObject.FindGameObjectsWithTag("huntingDog");
+
         foreach (GameObject enemy in patrolEnemy)
         {
             enemies.Add(enemy);
         }
+
         foreach (GameObject enemy in hunterEnemy)
         {
             enemies.Add(enemy);
         }
+
         if (disguisedAsDog)
         {
             foreach (GameObject enemy in enemies)
@@ -211,6 +224,7 @@ public class TemporaryMovement : MonoBehaviour
                 cone.isDisguised();
             }
         }
+
         else if (!disguisedAsDog)
         {
             foreach (GameObject enemy in enemies)
