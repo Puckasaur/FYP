@@ -120,6 +120,11 @@ public class enemyPathfinding : MonoBehaviour
     public float chargeRange;
     Vector3 enemyRotation;
 
+    List<Transform> usedWaypoints = new List<Transform>();
+    List<Vector3> waypointLocations = new List<Vector3>();
+    List<Transform> tempAlertWaypoints = new List<Transform>();
+    Vector3 waypointDifference;
+
     Collider playerCollider;
 
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
@@ -206,9 +211,14 @@ public class enemyPathfinding : MonoBehaviour
 
                     if (idleTimer <= 0)
                     {
-                        lastTarget = currentTarget;
-                        currentTarget = targets[targetCounter];
-
+                        if (currentTarget.gameObject.tag != "bone")
+                        {
+                            
+                            lastTarget = currentTarget;
+                            print(lastTarget + "idle");
+                        }
+                            currentTarget = targets[targetCounter];
+                        
                         if (agent.SetDestination(currentTarget.position) != null)
                         {
 
@@ -341,9 +351,11 @@ public class enemyPathfinding : MonoBehaviour
             else
             {
                 agent.speed = chaseSpeed;
-                if (currentTarget != player.transform)
+                if (currentTarget != player.transform && currentTarget.tag!="bone")
                 {
+                    
                     lastTarget = currentTarget;
+                    print(lastTarget + "chase");
                 }            
                 currentTarget = player.transform;
             }
@@ -362,6 +374,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     if (lastTarget != null)
                     {
+                        print(lastTarget + "alert,pseudo");
                         currentTarget = lastTarget;
                         stateManager(4);
                     }
@@ -370,7 +383,12 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     if (timer <= 0 && (!distracted))
                     {
-                        lastTarget = currentTarget;
+                        if (currentTarget.gameObject.tag != "bone")
+                        {
+                            
+                            lastTarget = currentTarget;
+                            print(lastTarget + "alert");
+                        }
                         if (alertArea[areaCounter] != null)
                         {
                             currentTarget = alertArea[areaCounter];
@@ -410,7 +428,8 @@ public class enemyPathfinding : MonoBehaviour
             }
             else if (ringOfSmellScript.smellDetected == true)
             {
-                RotateDogWhileSmelling();
+                checkContinuousSmelling();
+                //RotateDogWhileSmelling();
             }
 								
 			break;
@@ -887,8 +906,116 @@ public class enemyPathfinding : MonoBehaviour
 	//------------------------------------------------------------//
 	//Sets an area from a room the enemy is in for the alert-state//
 	//------------------------------------------------------------//
-	
-	public void setAlertArea(GameObject area)
+
+    void organizeAlertWaypoints()
+    {
+
+        int currentWaypointIndex = 0;
+        tempAlertWaypoints.Clear();
+
+        for(int i = 0; i < alertArea.Count; i ++)
+        {
+            tempAlertWaypoints[i] = alertArea[i];
+            waypointLocations.Add(tempAlertWaypoints[i].position);
+        }
+
+        Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
+        closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
+        closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
+        closestWaypoint.z =  Mathf.Sqrt(waypointLocations[0].z);
+
+        //Choose one of the waypoints to be the closest
+        float closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
+
+
+        //Run the check if it's really the closest waypoint we're looking for
+        for (int i = 0; i < waypointLocations.Count; i++)
+        {
+
+            waypointLocations[i] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[i].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].z, 2.0f)));
+
+            float waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
+
+            if (waypointLocationValue < closestWaypointValue)
+            {
+                closestWaypoint = waypointLocations[i];
+            }
+        }
+        //set the closest waypoint to be the firstone on the list
+        for (int i = 0; i < waypointLocations.Count; i++)
+        {
+            if (tempAlertWaypoints[i].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[i]))
+            {
+                alertArea.Add(tempAlertWaypoints[i]);
+                currentWaypointIndex = i;
+                //set waypoint into a used waypoints list to prevent the AI from using it multiple times
+                usedWaypoints.Add(tempAlertWaypoints[i]);
+            }
+        }
+
+        // search the closest waypoint from the current waypoint
+
+        for (int i = 0; i < waypointLocations.Count; i++)
+        { 
+           // closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].y - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].z - waypointLocations[currentWaypointIndex].z), 2.0f));
+            closestWaypoint.x = Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f);
+            closestWaypoint.y = Mathf.Pow((waypointLocations[i].y - waypointLocations[currentWaypointIndex].y), 2.0f);
+            closestWaypoint.z = Mathf.Pow((waypointLocations[i].z - waypointLocations[currentWaypointIndex].z), 2.0f);
+
+            closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
+            closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
+            closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
+
+            closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
+
+
+            //Run the check if it's really the closest waypoint we're looking for
+            for (int y = 0; y < waypointLocations.Count; y++)
+            {
+
+                waypointLocations[y] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[y].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].z, 2.0f)));
+
+                float waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
+
+                if (waypointLocationValue < closestWaypointValue)
+                {
+                    closestWaypoint = waypointLocations[i];
+                }
+            }
+
+            //set the closest waypoint to be the firstone on the list
+            for (int y = 0; y < waypointLocations.Count; y++)
+            {
+                if (tempAlertWaypoints[y].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[y]))
+                {
+                    alertArea.Add(tempAlertWaypoints[y]);
+                    currentWaypointIndex = y;
+                    //set waypoint into a used waypoints list to prevent the AI from using it multiple times
+                    usedWaypoints.Add(tempAlertWaypoints[y]);
+                }
+            }
+        }
+        
+
+            //for(int y = 0; y < waypointLocations.Count ; y++)
+            //{
+            //    for (int x = 0; x < waypointLocations.Count; x++)
+            //    {
+            //        if (tempAlertWaypoints[y].position == closestWaypoint)
+            //        {
+            //            alertArea.Add(tempAlertWaypoints[y]);
+            //            usedWaypoints.Add(tempAlertWaypoints[y]);
+            //        }
+            //    }
+            //}
+
+
+            
+            
+       // } 
+    }
+
+    public void setAlertArea(GameObject area)
 	{
 		Component[] transforms;
 		alertArea.Clear();
@@ -902,6 +1029,16 @@ public class enemyPathfinding : MonoBehaviour
 			}
 			
 		}
+
+        //foreach (Transform alert in transforms)
+        //{
+        //    if (alert.tag == "Waypoint")
+        //    {
+        //        waypointLocations.Add(alert.position);
+        //    }
+
+        //}
+       
 	}
 
     public void RotateDogWhileSmelling()
@@ -910,7 +1047,7 @@ public class enemyPathfinding : MonoBehaviour
         agent.Stop();
         Vector3 relative = transform.InverseTransformPoint(player.transform.position);
         float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-        transform.Rotate(0, angle * Time.deltaTime * 1.0f, 0);      
+        transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);      
     }
 
     void checkContinuousSmelling()
