@@ -33,7 +33,7 @@ public class hidingThirdPerson : MonoBehaviour {
     {	
 		if (catType.tag == "player") 
 		{
-			checkToEnter.enabled = true;
+			//checkToEnter.enabled = true;
 			
 			if (isHiding == false)
 			{
@@ -49,7 +49,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		checkToEnter.enabled = false;
+		//checkToEnter.enabled = false;
 	}
 
 	void Update () 
@@ -106,7 +106,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-		checkToExit.enabled = false;
+		//checkToExit.enabled = false;
    
 	}
 

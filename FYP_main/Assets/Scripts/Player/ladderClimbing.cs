@@ -13,7 +13,7 @@ public class ladderClimbing : MonoBehaviour
 		
 	void Start()
 	{
-		climbMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
+		climbMovement = GameObject.Find("Char_Cat").GetComponent<TemporaryMovement>();
 	}
 		
 	void OnTriggerEnter(Collider ladder)
@@ -38,13 +38,11 @@ public class ladderClimbing : MonoBehaviour
 		
 	void Update()
 	{
-		if (inside == true && 
-            characterController.GetComponent<TemporaryMovement>().movement.magnitude > 0.01f /*||
-            characterController.GetComponent<TemporaryMovement>().movement.magnitude < 0.1f*/)
+		if (inside == true && characterController.GetComponent<TemporaryMovement>().movement.magnitude > 0.01f)
 		{
 			characterController.transform.position += Vector3.up / heightFactor;
 		}
 
-        print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
+        //print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
 	}
 }
