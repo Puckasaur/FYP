@@ -193,8 +193,8 @@ MonoBehaviour:
   character: {fileID: 0}
   prevPosition: {fileID: 453936}
   hidingPosition: {fileID: 495398}
-  checkToEnter: {fileID: 0}
-  checkToExit: {fileID: 0}
+  checkToEnter: {fileID: 11461232, guid: 1eea005689e42f34dba29e1b1906e44d, type: 2}
+  checkToExit: {fileID: 11461576, guid: edbbc13886f809844bb7319db3937b05, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

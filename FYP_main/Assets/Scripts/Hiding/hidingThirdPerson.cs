@@ -33,7 +33,7 @@ public class hidingThirdPerson : MonoBehaviour {
     {	
 		if (catType.tag == "player") 
 		{
-			//checkToEnter.enabled = true;
+			checkToEnter.enabled = true;
 			
 			if (isHiding == false)
 			{
@@ -83,11 +83,9 @@ public class hidingThirdPerson : MonoBehaviour {
 			//character.GetComponent<Rigidbody>().isKinematic = false;
 			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
 			//ros.setToOff = false;
-
-			
-			
 		}
 	}
+
     IEnumerator Wait()
 	{
 
@@ -97,7 +95,7 @@ public class hidingThirdPerson : MonoBehaviour {
         isHiding = true;
             if(ros.disguised == false)
                 ros.isDisguised("htp");
-		//checkToEnter.enabled = false;
+		checkToEnter.enabled = false;
 		checkToExit.enabled = true;
 	}
 	
@@ -106,7 +104,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-		//checkToExit.enabled = false;
+		checkToExit.enabled = false;
    
 	}
 
