@@ -109,15 +109,18 @@ public class smelling : MonoBehaviour {
 			exitPoint.GetComponent<ParticleSystem>().startColor = new Color (1, 1, 1, 0.5f);
 		}
 
+        /*
 		if (smellArea == true) 
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = true;
 			//Debug.Log ("Area Trigger");
 		}
+
 		else if (smellArea == false) 
 		{
 			colliderCheck.GetComponent<BoxCollider> ().enabled = false;
 			//Debug.Log ("Area Untrigger");
 		}
+        */
 	}
 }

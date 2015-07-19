@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 441714}
   - 33: {fileID: 3382196}
   - 23: {fileID: 2390246}
-  - 54: {fileID: 5493094}
   - 64: {fileID: 6496690}
   - 114: {fileID: 11486818}
   m_Layer: 0
@@ -63,21 +62,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145296}
   m_Mesh: {fileID: 4300000, guid: d88d27f2a2ecab841ad910b895ea1b32, type: 3}
---- !u!54 &5493094
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 145296}
-  serializedVersion: 2
-  m_Mass: .5
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &6496690
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -85,7 +69,7 @@ MeshCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 145296}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Convex: 1
@@ -104,8 +88,12 @@ MonoBehaviour:
   Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   brokenSphere: {fileID: 100000, guid: d88d27f2a2ecab841ad910b895ea1b32, type: 3}
   brokenCube: {fileID: 0}
+  makeSound: 0
   timer: 60
   expireTimer: 10
+  boneRadius: 0
+  ballRadius: 0
+  cubeRadius: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

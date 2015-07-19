@@ -81,6 +81,7 @@ public class breakableObject: MonoBehaviour
             Destroy(gameObject);
         }
 	}
+
     void OnCollisionEnter(Collision Other)
     {
         //----------------------------------------------------------//
@@ -124,9 +125,9 @@ public class breakableObject: MonoBehaviour
             }
         }
     }
+
     public void ObjectFalling()
-    {
-        
+    {    
         makeSound = true;
     }
 }
