@@ -10,12 +10,12 @@ public class zoomInAndOut : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetAxis ("Mouse ScrollWheel") > 0.001) {
-			Debug.Log ("asd");
+			//Debug.Log ("asd");
 			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,zoom,Time.deltaTime*smooth);
 		}
 
 		if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
-			Debug.Log ("dsa");
+		//	Debug.Log ("dsa");
 			Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView,normal,Time.deltaTime*smooth);
 			
 		}

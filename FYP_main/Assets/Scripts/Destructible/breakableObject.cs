@@ -93,34 +93,7 @@ public class breakableObject: MonoBehaviour
             {
                 //makeSound = false;
                 {
-                    if (this.gameObject.tag == "ball")
-                    {
-                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
-                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
-                        newSphere.transform.parent = brokenObject.transform;
-                        sphereScript = newSphere.GetComponent<soundSphere>();
-                        sphereScript.setMaxDiameter(maxScale);
-                        Destroy(this.gameObject);
-                    }
-
-                    if (this.gameObject.tag == "cube")
-                    {
-                        brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
-                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
-                        newSphere.transform.parent = brokenObject.transform;
-                        sphereScript = newSphere.GetComponent<soundSphere>();
-                        sphereScript.setMaxDiameter(maxScale);
-                        Destroy(this.gameObject);
-                    }
-                    if (this.gameObject.tag == "trap")
-                    {
-                        brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
-                        newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
-                        newSphere.transform.parent = brokenObject.transform;
-                        sphereScript = newSphere.GetComponent<soundSphere>();
-                        sphereScript.setMaxDiameter(maxScale);
-                        Destroy(this.gameObject);
-                    }
+                    objectBreaking();
                 }
             }
         }
@@ -130,5 +103,37 @@ public class breakableObject: MonoBehaviour
     {    
         makeSound = true;
     }
-}
 
+    public void objectBreaking()
+    {
+        if (this.gameObject.tag == "ball")
+        {
+            brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+            newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+            newSphere.transform.parent = brokenObject.transform;
+            sphereScript = newSphere.GetComponent<soundSphere>();
+            sphereScript.setMaxDiameter(maxScale);
+            Destroy(this.gameObject);
+        }
+
+        if (this.gameObject.tag == "cube")
+        {
+            brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
+            newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+            newSphere.transform.parent = brokenObject.transform;
+            sphereScript = newSphere.GetComponent<soundSphere>();
+            sphereScript.setMaxDiameter(maxScale);
+            Destroy(this.gameObject);
+        }
+
+        if (this.gameObject.tag == "trap")
+        {
+            brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+            newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
+            newSphere.transform.parent = brokenObject.transform;
+            sphereScript = newSphere.GetComponent<soundSphere>();
+            sphereScript.setMaxDiameter(maxScale);
+            Destroy(this.gameObject);
+        }
+    }
+}

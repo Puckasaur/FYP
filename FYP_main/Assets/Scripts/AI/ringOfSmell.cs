@@ -123,6 +123,7 @@ public class ringOfSmell : MonoBehaviour {
             //    detectionTimer = 60;
             //}
             Physics.Raycast(transform.parent.position, other.transform.position, out hit);
+            Debug.DrawLine(transform.parent.position, other.transform.position, Color.cyan);
             if (hit.distance <= sniffDistance)
             {
                 
@@ -199,6 +200,8 @@ public class ringOfSmell : MonoBehaviour {
                     {
                         script.agentStopped = false;
                         script.agent.Resume();
+                        //script.SeekForSmellSource = false;
+                        script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
                     }
                 }
             }
@@ -212,8 +215,10 @@ public class ringOfSmell : MonoBehaviour {
 
             
             smellDetected = false;
-            print(smellDetected + " << Smell detected");
+            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
+
+        
         
     }
     public void isDisguised(string script)

@@ -140,7 +140,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -447,6 +447,7 @@ MonoBehaviour:
   target2: {fileID: 0}
   target3: {fileID: 0}
   target4: {fileID: 0}
+  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   States: 0
@@ -469,6 +470,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   rotationCompleted: 0
   turnTimer: 100
+  SeekForSmellSource: 0
   agentStopped: 0
   alertTimer: 0
   defaultEatTimer: 120
