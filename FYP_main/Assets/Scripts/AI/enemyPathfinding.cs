@@ -21,13 +21,13 @@ public class enemyPathfinding : MonoBehaviour
 	coneOfVision coneOfVisionScript;
 	soundSphere sphereScript;
 	RaycastHit hit;
-
     public Vector3 respawnPosition;
 	public Transform target1;
 	public Transform target2;
 	public Transform target3;
 	public Transform target4;
 
+    public GameObject visionRotator;
 	public Transform currentTarget;
 	public Transform lastTarget;
     public enumStates States;
@@ -78,7 +78,7 @@ public class enemyPathfinding : MonoBehaviour
 	public float turnTimer = 100.0f;
 	float currentTargetDirection;
 	int turnCounter = 0;
-    bool SeekForSmellSource = false;
+    public bool SeekForSmellSource = false;
     public bool agentStopped = false;
 
 	//So many timers
@@ -135,7 +135,7 @@ public class enemyPathfinding : MonoBehaviour
 	{
         
         leapTimer = defaultLeapTimer;
-
+        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");
         respawnPosition = this.transform.position;
 		player = GameObject.FindGameObjectWithTag("player");
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
@@ -193,7 +193,11 @@ public class enemyPathfinding : MonoBehaviour
                     agent.Stop();
                 }
 			}
-			
+            //print(SeekForSmellSource);
+            if (!SeekForSmellSource)
+            {
+                visionRotator.transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
 		}
 			
 			break;
@@ -218,7 +222,6 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             
                             lastTarget = currentTarget;
-                            print(lastTarget + "idle");
                         }
                             currentTarget = targets[targetCounter];
                         
@@ -250,10 +253,10 @@ public class enemyPathfinding : MonoBehaviour
                     }
 
                 }
-                else
-                {
-                    RotateDogWhileSmelling();
-                }
+                //else
+                //{
+                //    //RotateDogWhileSmelling();
+                //}
             
 			break;
 		}
@@ -358,7 +361,6 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     
                     lastTarget = currentTarget;
-                    print(lastTarget + "chase");
                 }            
                 currentTarget = player.transform;
             }
@@ -377,7 +379,6 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     if (lastTarget != null)
                     {
-                        print(lastTarget + "alert,pseudo");
                         currentTarget = lastTarget;
                         stateManager(4);
                     }
@@ -388,9 +389,7 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         if (currentTarget.gameObject.tag != "bone")
                         {
-                            
                             lastTarget = currentTarget;
-                            print(lastTarget + "alert");
                         }
                         if (alertArea[areaCounter] != null)
                         {
@@ -429,11 +428,11 @@ public class enemyPathfinding : MonoBehaviour
                     }
                 }
             }
-            else if (ringOfSmellScript.smellDetected == true)
-            {
-                checkContinuousSmelling();
-                //RotateDogWhileSmelling();
-            }
+            //else if (ringOfSmellScript.smellDetected == true)
+            //{
+            //    checkContinuousSmelling();
+            //    //RotateDogWhileSmelling();
+            //}
 								
 			break;
 		case enumStates.idleSuspicious:
@@ -448,15 +447,12 @@ public class enemyPathfinding : MonoBehaviour
             }
             if (ringOfSmellScript.smellDetected == false)
             {
-
                 if (coneOfVisionScript.playerSeen == true)
                 {
                     agentStopped = false;
                     agent.Resume();
                     stateManager(2);
                 }
-
-
                 if (alertTimer > 0)
                 {
                     alertTimer--;
@@ -492,8 +488,6 @@ public class enemyPathfinding : MonoBehaviour
 
                 if (turnCounter > 2)
                 {
-
-
                     alertTimer = defaultAlertTimer;
                     turnCounter = 0;
                     agentStopped = false;
@@ -504,10 +498,10 @@ public class enemyPathfinding : MonoBehaviour
                 idleTimer--;
             }
 
-            else if (ringOfSmellScript.smellDetected == true)
-            {
-                RotateDogWhileSmelling();
-            }
+            //else if (ringOfSmellScript.smellDetected == true)
+            //{
+            //    RotateDogWhileSmelling();
+            //}
 			break;
 		}
 		case enumStates.distracted:
@@ -535,13 +529,16 @@ public class enemyPathfinding : MonoBehaviour
 			break;
 		case enumStates.detectSound:
 		{
-            currentTarget = soundSource.transform;
+            if (soundSource)
+            {
+                currentTarget = soundSource.transform;
+            }
             if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
             {
                 alertTimer = defaultAlertTimer;
             }
             print("organization Inbound!");
-            //organizeAlertWaypoints();
+            organizeAlertWaypoints();
 				stateManager(3);
 
 			//---------------------------------------------//
@@ -629,7 +626,11 @@ public class enemyPathfinding : MonoBehaviour
                 vectorx *= -1;
             }
 		}
-		
+        if (ringOfSmellScript.smellDetected == true)
+        {
+            checkContinuousSmelling();
+            //RotateDogWhileSmelling();
+        }
 
 		//-------------//
 		//End of Update//
@@ -730,7 +731,7 @@ public class enemyPathfinding : MonoBehaviour
         {
             if (rotationInProgress == false)
             {
-                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                 targetAngle = targetDegrees;
                 rotationInProgress = true;
             }
@@ -749,8 +750,8 @@ public class enemyPathfinding : MonoBehaviour
 
                             if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1); // Vector3.up * Time.deltaTime * rotationStep * -1
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1); // Vector3.up * Time.deltaTime * rotationStep * -1
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
 
                                 if (rotationDifference < 0)
@@ -767,8 +768,8 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             else //if (currentAngle > targetAngle && turnTimer == 0)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1); //Vector3.up * Time.deltaTime * rotationStep * 1
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1); //Vector3.up * Time.deltaTime * rotationStep * 1
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
@@ -789,8 +790,8 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (rotationDifference < 0)
                                 {
@@ -807,8 +808,8 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             else
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
@@ -830,8 +831,8 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (rotationDifference < 0)
                                 {
@@ -846,8 +847,8 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
@@ -864,9 +865,9 @@ public class enemyPathfinding : MonoBehaviour
                         else if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
                         {
                             if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
-                            {                              
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                            {
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (rotationDifference < 0)
                                 {
@@ -881,8 +882,8 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             else //if (currentAngle < targetAngle && turnTimer == 0)
                             {
-                                transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
-                                currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+                                visionRotator.transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                currentAngle = Mathf.Atan2(visionRotator.transform.right.z, visionRotator.transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
                                 if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
@@ -918,12 +919,22 @@ public class enemyPathfinding : MonoBehaviour
     {
         print("breach on the first deck!" + "  alertArea.Count " + alertArea.Count);
         //tempAlertWaypoints.Clear();
-
+        //foreach (Transform alert in alertArea)
+        //{
+        //    tempAlertWaypoints.Add(alert);
+        //    waypointLocations.Add(alert.position);
+        //}
         for(int i = 0; i < alertArea.Count; i ++)
         {
-            if (alertArea[i] != null && tempAlertWaypoints[i] != null)
+            print(alertArea[i] + "alert area at 'i'");
+            //if (tempAlertWaypoints[i] != null)
+            //{
+                
+            //}
+            if (alertArea[i] != null || tempAlertWaypoints[i] != null)
             {
-                tempAlertWaypoints[i] = alertArea[i];
+                tempAlertWaypoints.Add(alertArea[i]);
+                print(tempAlertWaypoints[i] + "tempalertwaypoints at 'i'");
                 print("temp alert waypoints [" + i + "] > " + tempAlertWaypoints[i] + "   alertArea[" + i + "] >> " + alertArea[i]);
                 waypointLocations.Add(tempAlertWaypoints[i].position);
             }
@@ -935,7 +946,10 @@ public class enemyPathfinding : MonoBehaviour
         }
 
         print("reinforced hull penetrated");
-        Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
+        //if (soundSource)
+        //{
+            Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
+        //}
         closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
         closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
         closestWaypoint.z =  Mathf.Sqrt(waypointLocations[0].z);
@@ -1076,35 +1090,52 @@ public class enemyPathfinding : MonoBehaviour
 
     public void RotateDogWhileSmelling()
     {
+        SeekForSmellSource = true;
         agentStopped = true;
         agent.Stop();
-        Vector3 relative = transform.InverseTransformPoint(player.transform.position);
+        Vector3 relative = visionRotator.transform.InverseTransformPoint(player.transform.position);
         float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-        transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);      
+        visionRotator.transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);  
+        
     }
 
     void checkContinuousSmelling()
     {
-        minusSmellTimer();
-        if (turnTowardsSmellTimer == 0)
-        {
-            SeekForSmellSource = true;
-        }
-        if (SeekForSmellSource == true)
-        {
-            agentStopped = true;
-            agent.Stop();
-            RotateDogWhileSmelling();
-        }
+        
+            //minusSmellTimer();
+            turnTowardsSmellTimer -= 1;
+            print(turnTowardsSmellTimer);
+            if(turnTowardsSmellTimer <= 0)
+            {
+                SeekForSmellSource = true;
+                print(SeekForSmellSource);
+                agentStopped = true;
+                agent.Stop();
+                RotateDogWhileSmelling();
+                //turnTowardsSmellTimer = 0;
+            }
+    
+        //if (turnTowardsSmellTimer == 0)
+        //{
+        //    print(SeekForSmellSource);
+        //    SeekForSmellSource = true;
+        //}
+        //if (SeekForSmellSource == true)
+        //{
+        //    agentStopped = true;
+        //    agent.Stop();
+        //    RotateDogWhileSmelling();
+        //}
 
     }
 
-    void minusSmellTimer()
-    {
-        turnTowardsSmellTimer--;
-    if(turnTowardsSmellTimer <= 0)
-    {
-        turnTowardsSmellTimer = 0;
-    }
-    }
+    //void minusSmellTimer()
+    //{
+    //    turnTowardsSmellTimer--;
+    //    print(turnTowardsSmellTimer);
+    //if(turnTowardsSmellTimer <= 0)
+    //{
+    //    turnTowardsSmellTimer = 0;
+    //}
+    //}
 }
