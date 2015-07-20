@@ -222,6 +222,7 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             
                             lastTarget = currentTarget;
+
                         }
                             currentTarget = targets[targetCounter];
                         
@@ -428,11 +429,7 @@ public class enemyPathfinding : MonoBehaviour
                     }
                 }
             }
-            //else if (ringOfSmellScript.smellDetected == true)
-            //{
-            //    checkContinuousSmelling();
-            //    //RotateDogWhileSmelling();
-            //}
+
 								
 			break;
 		case enumStates.idleSuspicious:
@@ -626,6 +623,7 @@ public class enemyPathfinding : MonoBehaviour
                 vectorx *= -1;
             }
 		}
+
         if (ringOfSmellScript.smellDetected == true)
         {
             checkContinuousSmelling();
@@ -943,7 +941,36 @@ public class enemyPathfinding : MonoBehaviour
                 print("alertArea oli null" + alertArea[i]);
             }
 
+
+        //tempAlertWaypoints[0] = alertArea[0];
+        //'print(tempAlertWaypoints[0] + " temppiin tallennettua Tengen Toppaa");
+
+
+        //foreach(Transform alert in alertArea)
+        //{
+        //    tempAlertWaypoints.Add(alert);
+        //    waypointLocations.Add(alert.position);
+        //    foreach (Transform _alert in tempAlertWaypoints)
+        //    { 
+        //        print(tempAlertWaypoints )
+        //    }
+        //}
+
+        for (int i = 0; i < alertArea.Count; i++)
+        {
+            //if (alertArea[i] != null && tempAlertWaypoints[i] != null)
+            // {
+            tempAlertWaypoints.Add(alertArea[i]); //[i] = alertArea[i];
+            print("temp alert waypoints [" + i + "] > " + tempAlertWaypoints[i] + "   alertArea[" + i + "] >> " + alertArea[i]);
+            waypointLocations.Add(tempAlertWaypoints[i].position);
+            //}
+            // else
+            // {
+            //   print("alertArea oli null" + alertArea[i]);
+            //}
+            print("Ship is being overrun by aliens");
         }
+
 
         print("reinforced hull penetrated");
         //if (soundSource)
@@ -953,10 +980,23 @@ public class enemyPathfinding : MonoBehaviour
         closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
         closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
         closestWaypoint.z =  Mathf.Sqrt(waypointLocations[0].z);
+        //print("reinforced hull penetrated");
+
+
+        print(waypointLocations[0] + "  waypointLocations[0]" + "  sound source > " + soundSource.transform.position);
+       
+        Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
+        print("closest Waypoint " + closestWaypoint);
+
+        closestWaypoint.x = Mathf.Sqrt(closestWaypoint.x);
+        closestWaypoint.y = Mathf.Sqrt(closestWaypoint.y);
+        closestWaypoint.z = Mathf.Sqrt(closestWaypoint.z);
+
+        print("closest Waypoint 2.0 " + closestWaypoint);
 
         //Choose one of the waypoints to be the closest
         closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
-
+        print(closestWaypointValue + "  Closest Waypoint Value " + closestWaypoint + " < closest Waypoint");
 
         //Run the check if it's really the closest waypoint we're looking for
         for (int i = 0; i < waypointLocations.Count; i++)
@@ -966,16 +1006,21 @@ public class enemyPathfinding : MonoBehaviour
 
             waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
 
+            print("second Deck perished in flames " + waypointLocations[i] + " < waypointLocations [" + i + "]");
+
             if (waypointLocationValue < closestWaypointValue)
             {
                 closestWaypoint = waypointLocations[i];
+                print("closest Waypoint aquired");
             }
         }
         //set the closest waypoint to be the firstone on the list
         for (int i = 0; i < waypointLocations.Count; i++)
         {
+            print("10 seamen drowned during a rescue mission");
             if (tempAlertWaypoints[i].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[i]))
             {
+                print("Ship took a hit from enemy shell!");
                 alertArea.Add(tempAlertWaypoints[i]);
                 currentWaypointIndex = i;
                 //set waypoint into a used waypoints list to prevent the AI from using it multiple times
@@ -987,23 +1032,24 @@ public class enemyPathfinding : MonoBehaviour
         // search the closest waypoint from the current waypoint//
         //-----------------------------------------------------//
         for (int i = 0; i < waypointLocations.Count; i++)
-        { 
+        {
+            print("ship is being consumed by the Kraken!");
            // closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].y - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].z - waypointLocations[currentWaypointIndex].z), 2.0f));
 
             //set closest waypoint to a random, not used waypoint
             for (int y = 0; y < waypointLocations.Count; y++)
             {
-
+                print("Ship is on it's way to Davy Jones' locker");
                 if (!usedWaypoints.Contains(tempAlertWaypoints[y]))
                 {
-
+                    print("Ship is being pulled out of the Davy Jones' locker");
                     closestWaypoint.x = Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f);
                     closestWaypoint.y = Mathf.Pow((waypointLocations[i].y - waypointLocations[currentWaypointIndex].y), 2.0f);
                     closestWaypoint.z = Mathf.Pow((waypointLocations[i].z - waypointLocations[currentWaypointIndex].z), 2.0f);
 
-                    closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
-                    closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
-                    closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
+                    closestWaypoint.x = Mathf.Sqrt(closestWaypoint.x);
+                    closestWaypoint.y = Mathf.Sqrt(closestWaypoint.y);
+                    closestWaypoint.z = Mathf.Sqrt(closestWaypoint.z);
 
                     closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
 
@@ -1018,7 +1064,7 @@ public class enemyPathfinding : MonoBehaviour
             //Run the check if it's really the closest waypoint we're looking for
             for (int y = 0; y < waypointLocations.Count; y++)
             {
-
+                print("Ship is transforming into a Gurren Lagan");
                 waypointLocations[y] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[y].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].z, 2.0f)));
 
                 waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
@@ -1032,11 +1078,12 @@ public class enemyPathfinding : MonoBehaviour
             //add the closest waypoint to the list
             for (int y = 0; y < waypointLocations.Count; y++)
             {
+                print("ship turned into a Gurren Lagan");
                 if (tempAlertWaypoints[y].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[y]))
                 {
                     alertArea.Add(tempAlertWaypoints[y]);
                     currentWaypointIndex = y;
-
+                    print("Tengen Toppa Gurren Lagan uses Giga Drill Break!");
                     //set waypoint into a used waypoints list to prevent the AI from using it multiple times//
                     usedWaypoints.Add(tempAlertWaypoints[y]);
                 }
@@ -1101,6 +1148,7 @@ public class enemyPathfinding : MonoBehaviour
 
     void checkContinuousSmelling()
     {
+
         
             //minusSmellTimer();
             turnTowardsSmellTimer -= 1;
@@ -1115,6 +1163,14 @@ public class enemyPathfinding : MonoBehaviour
                 //turnTowardsSmellTimer = 0;
             }
     
+	 // turnTowardsSmellTimer--;
+        // if (turnTowardsSmellTimer <= 0)
+        // {
+            // turnTowardsSmellTimer = 0;
+            // agentStopped = true;
+            // agent.Stop();
+            // RotateDogWhileSmelling();
+        // }
         //if (turnTowardsSmellTimer == 0)
         //{
         //    print(SeekForSmellSource);
@@ -1138,4 +1194,7 @@ public class enemyPathfinding : MonoBehaviour
     //    turnTowardsSmellTimer = 0;
     //}
     //}
+
+       
+     }
 }

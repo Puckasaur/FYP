@@ -214,7 +214,12 @@ public class ringOfSmell : MonoBehaviour {
 
             
             smellDetected = false;
+            print(smellDetected + " << Smell detected");
+
+            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
+
+        
         
     }
     public void isDisguised(string script)
