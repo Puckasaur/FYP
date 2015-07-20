@@ -78,7 +78,7 @@ public class enemyPathfinding : MonoBehaviour
 	public float turnTimer = 100.0f;
 	float currentTargetDirection;
 	int turnCounter = 0;
-    bool SeekForSmellSource = false;
+  	public bool SeekForSmellSource = false;
     public bool agentStopped = false;
 
 	//So many timers
