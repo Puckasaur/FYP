@@ -4279,11 +4279,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 176263694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.8499999, y: 1, z: 6.21999979}
+  m_LocalPosition: {x: 64.6500015, y: 1, z: 12.3199997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1279471114}
+  m_RootOrder: 18
 --- !u!65 &176263696
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12796,11 +12796,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 585962457}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.5609226, y: 6.57976151, z: 2.78609872}
+  m_LocalPosition: {x: 49.2390747, y: 6.57976151, z: 8.88609886}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1279471114}
+  m_RootOrder: 17
 --- !u!4 &587301182 stripped
 Transform:
   m_PrefabParentObject: {fileID: 405694, guid: f77dfaa215a319142927b424a6d591fd, type: 2}
@@ -19261,6 +19261,30 @@ Prefab:
     - target: {fileID: 11476564, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
       propertyPath: throwForce
       value: 3.02999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_Radius
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_SampleCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_OcclusionIntensity
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_SSAOShader
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 11427118, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
+      propertyPath: m_RandomTexture
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8289848, guid: c037b54f92d6f6049b5814aeecc3de92, type: 2}
@@ -28148,6 +28172,8 @@ Transform:
   - {fileID: 364616616}
   - {fileID: 634417578}
   - {fileID: 1318461659}
+  - {fileID: 585962458}
+  - {fileID: 176263695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!1001 &1280572795
