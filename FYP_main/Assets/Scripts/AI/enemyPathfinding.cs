@@ -327,8 +327,8 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------//
 			
 
-			Physics.Linecast(transform.position, player.transform.position, out hit);
-            Debug.DrawLine(transform.position, player.transform.position);
+			Physics.Linecast(this.transform.position, player.transform.position, out hit);
+            Debug.DrawLine(this.transform.position, player.transform.position);
             if (hit.collider.tag != playerCollider.tag)
             {
                 if (vectorx >= chaseRange || vectorz >= chaseRange)
@@ -548,7 +548,6 @@ public class enemyPathfinding : MonoBehaviour
             {
                 alertTimer = defaultAlertTimer;
             }
-            print("organization Inbound!");
             organizeAlertWaypoints();
 				stateManager(3);
 
@@ -605,22 +604,22 @@ public class enemyPathfinding : MonoBehaviour
 			
 			vectorCurrentTargetx = currentTarget.position.x;
 			vectorCurrentTargetz = currentTarget.position.z;
-			
+
             //if (vectorTransformPositionx < 0)
             //{
             //    vectorTransformPositionx *= -1;
-            //}  
-			
+            //}
+
             //if (vectorTransformPositionz < 0)
             //{
             //    vectorTransformPositionz *= -1;
             //}
-			
+
             //if (vectorCurrentTargetx < 0)
             //{
             //    vectorCurrentTargetx *= -1;
             //}
-			
+
             //if (vectorCurrentTargetz < 0)
             //{
             //    vectorCurrentTargetz *= -1;
@@ -929,7 +928,6 @@ public class enemyPathfinding : MonoBehaviour
 
     void organizeAlertWaypoints()
     {
-        print("breach on the first deck!" + "  alertArea.Count " + alertArea.Count);
         //tempAlertWaypoints.Clear();
         //foreach (Transform alert in alertArea)
         //{
@@ -938,7 +936,6 @@ public class enemyPathfinding : MonoBehaviour
         //}
         for(int i = 0; i < alertArea.Count; i ++)
         {
-            print(alertArea[i] + "alert area at 'i'");
             //if (tempAlertWaypoints[i] != null)
             //{
                 
@@ -946,18 +943,14 @@ public class enemyPathfinding : MonoBehaviour
             if (alertArea[i] != null || tempAlertWaypoints[i] != null)
             {
                 tempAlertWaypoints.Add(alertArea[i]);
-                print(tempAlertWaypoints[i] + "tempalertwaypoints at 'i'");
-                print("temp alert waypoints [" + i + "] > " + tempAlertWaypoints[i] + "   alertArea[" + i + "] >> " + alertArea[i]);
                 waypointLocations.Add(tempAlertWaypoints[i].position);
             }
             else
             {
-                print("alertArea oli null" + alertArea[i]);
             }
 
         }
 
-        print("reinforced hull penetrated");
         //if (soundSource)
         //{
             Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
@@ -983,7 +976,7 @@ public class enemyPathfinding : MonoBehaviour
                 closestWaypoint = waypointLocations[i];
             }
         }
-        //set the closest waypoint to be the firstone on the list
+        //set the closest waypoint to be the first  one on the list
         for (int i = 0; i < waypointLocations.Count; i++)
         {
             if (tempAlertWaypoints[i].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[i]))

@@ -123,6 +123,7 @@ public class ringOfSmell : MonoBehaviour {
             //    detectionTimer = 60;
             //}
             Physics.Raycast(transform.parent.position, other.transform.position, out hit);
+            Debug.DrawLine(transform.parent.position, other.transform.position, Color.cyan);
             if (hit.distance <= sniffDistance)
             {
                 
