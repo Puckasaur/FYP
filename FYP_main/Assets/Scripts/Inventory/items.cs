@@ -22,4 +22,8 @@ public class items
 		itemType = type;
 
 	}
+
+	public items()
+	{
+	}
 }
