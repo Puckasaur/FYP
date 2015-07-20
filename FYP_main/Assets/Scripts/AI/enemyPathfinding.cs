@@ -130,6 +130,9 @@ public class enemyPathfinding : MonoBehaviour
 
     Collider playerCollider;
 
+	GameObject patrolModel;
+	Animator patrolAnim;
+
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck	
 	void Start()
 	{
@@ -164,6 +167,8 @@ public class enemyPathfinding : MonoBehaviour
         agentNotMovingTimer = defaultAgentNotMovingTimer;
 
         playerCollider = player.GetComponent<Collider>();
+
+		patrolAnim = GetComponentInChildren<Animator>();
 	}
 	
 	void Update()
@@ -184,6 +189,8 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------------------------------------------------//
             agentStopped = false;
             agent.Resume();
+			patrolAnim.SetBool("patrolWalk", true);
+			patrolAnim.SetBool("patrolRun", false);
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
@@ -191,6 +198,8 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     agentStopped = true;
                     agent.Stop();
+					patrolAnim.SetBool("patrolWalk", false);
+					patrolAnim.SetBool("patrolRun", false);
                 }
 			}
 			
@@ -206,6 +215,7 @@ public class enemyPathfinding : MonoBehaviour
             {
                 agentStopped = true;
                 agent.Stop();
+
             }
             
 
@@ -218,6 +228,8 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             
                             lastTarget = currentTarget;
+							patrolAnim.SetBool("patrolWalk", false);
+							patrolAnim.SetBool("patrolRun", false);
                             print(lastTarget + "idle");
                         }
                             currentTarget = targets[targetCounter];
@@ -266,6 +278,9 @@ public class enemyPathfinding : MonoBehaviour
             //--------------------------//
             //Leap Attack While Chasing //
             //--------------------------//
+
+			patrolAnim.SetBool("patrolWalk", false);
+			patrolAnim.SetBool("patrolRun", true);
 
             if (vectorx < chargeRange || vectorz < chargeRange)
             {    
