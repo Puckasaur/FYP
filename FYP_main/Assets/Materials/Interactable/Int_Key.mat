@@ -84,11 +84,40 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ShadowTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _FalloffTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DetailTex
+        second:
+          m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
           name: _Cutoff
         second: .5
+      data:
+        first:
+          name: _Shininess
+        second: 1
+      data:
+        first:
+          name: _WindQuality
+        second: 0
       data:
         first:
           name: _SrcBlend
@@ -140,7 +169,19 @@ Material:
       data:
         first:
           name: _Outline
-        second: .00200000009
+        second: .0120999999
+      data:
+        first:
+          name: _DiffuseThreshold
+        second: .100000001
+      data:
+        first:
+          name: _OutlineThickness
+        second: .100000001
+      data:
+        first:
+          name: _Cull
+        second: 2
     m_Colors:
       data:
         first:
@@ -149,7 +190,11 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: .788986981, g: .845588207, b: .435229242, a: 1}
+      data:
+        first:
+          name: _SpecColor
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _EmissionColorUI
@@ -157,4 +202,12 @@ Material:
       data:
         first:
           name: _OutlineColor
-        second: {r: .889705896, g: .845040023, b: .242052361, a: 1}
+        second: {r: .264705896, g: .256115019, b: .140138417, a: 1}
+      data:
+        first:
+          name: _UnlitColor
+        second: {r: .5, g: .5, b: .5, a: 1}
+      data:
+        first:
+          name: _HueVariation
+        second: {r: 1, g: .5, b: 0, a: .100000001}
