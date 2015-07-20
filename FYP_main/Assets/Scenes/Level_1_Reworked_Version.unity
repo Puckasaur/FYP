@@ -39062,6 +39062,10 @@ Transform:
   - {fileID: 1658501235}
   m_Father: {fileID: 0}
   m_RootOrder: 57
+--- !u!4 &1063482452 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 481600, guid: 71fc95325b914224fa21ba2e67875c1e, type: 2}
+  m_PrefabInternal: {fileID: 1754585866}
 --- !u!4 &1064706255 stripped
 Transform:
   m_PrefabParentObject: {fileID: 429518, guid: dbfdf4ec999112a4b8248c2627348629, type: 2}
@@ -62507,6 +62511,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 199200, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11438058, guid: ba6011b71f850964a88a001872fa5889, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
@@ -81530,7 +81538,7 @@ Transform:
   - {fileID: 1452769092}
   - {fileID: 1474412102}
   - {fileID: 1759959256}
-  - {fileID: 807257380}
+  - {fileID: 1063482452}
   m_Father: {fileID: 403350413}
   m_RootOrder: 0
 --- !u!4 &2126221745 stripped

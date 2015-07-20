@@ -164,7 +164,7 @@ public class enemyPathfinding : MonoBehaviour
         agentNotMovingTimer = defaultAgentNotMovingTimer;
 
         playerCollider = player.GetComponent<Collider>();
-		patrolAnim = GetComponentInChildren<Animator>();
+        //patrolAnim = GetComponentInChildren<Animator>();
 	}
 	
 	void Update()
@@ -185,8 +185,8 @@ public class enemyPathfinding : MonoBehaviour
 			//-----------------------------------------------------------------------------------------//
             //agentStopped = false;
             //agent.Resume();
-			patrolAnim.SetBool("patrolWalk", true);
-			patrolAnim.SetBool("patrolRun", false);
+            //patrolAnim.SetBool("patrolWalk", true);
+            //patrolAnim.SetBool("patrolRun", false);
 			if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
 			{
 				stateManager(1);
@@ -194,8 +194,8 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     agentStopped = true;
                     agent.Stop();
-					patrolAnim.SetBool("patrolWalk", false);
-					patrolAnim.SetBool("patrolRun", false);
+                    //patrolAnim.SetBool("patrolWalk", false);
+                    //patrolAnim.SetBool("patrolRun", false);
                 }
 			}
             //print(SeekForSmellSource);
@@ -227,8 +227,8 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             
                             lastTarget = currentTarget;
-							patrolAnim.SetBool("patrolWalk", false);
-							patrolAnim.SetBool("patrolRun", false);
+                            //patrolAnim.SetBool("patrolWalk", false);
+                            //patrolAnim.SetBool("patrolRun", false);
                         }
                             currentTarget = targets[targetCounter];
 
@@ -278,8 +278,8 @@ public class enemyPathfinding : MonoBehaviour
             //Leap Attack While Chasing //
             //--------------------------//
 
-			patrolAnim.SetBool("patrolWalk", false);
-			patrolAnim.SetBool("patrolRun", true);
+            //patrolAnim.SetBool("patrolWalk", false);
+            //patrolAnim.SetBool("patrolRun", true);
 			
             if (vectorx < chargeRange || vectorz < chargeRange)
             {    
@@ -1116,11 +1116,9 @@ public class enemyPathfinding : MonoBehaviour
         
             //minusSmellTimer();
             turnTowardsSmellTimer -= 1;
-            print(turnTowardsSmellTimer);
             if(turnTowardsSmellTimer <= 0)
             {
                 SeekForSmellSource = true;
-                print(SeekForSmellSource);
                 agentStopped = true;
                 agent.Stop();
                 RotateDogWhileSmelling();
