@@ -72,7 +72,8 @@ namespace UnityStandardAssets.ImageEffects
 
             Vector3 v = Vector3.one * 0.5f;
             if (sunTransform)
-                v = GetComponent<Camera>().WorldToViewportPoint (sunTransform.position);
+                v = GetComponent<Camera>().WorldToViewportPoint (sunTransform
+                    );
             else
                 v = new Vector3(0.5f, 0.5f, 0.0f);
 

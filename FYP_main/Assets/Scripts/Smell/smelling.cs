@@ -31,7 +31,8 @@ public class smelling : MonoBehaviour {
 		
 		exitPoint.GetComponent<ParticleSystem>().enableEmission = true;	
 		
-		newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
+		newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform
+            , Quaternion.identity);
 		
 		yield return new WaitForSeconds (4);
 		

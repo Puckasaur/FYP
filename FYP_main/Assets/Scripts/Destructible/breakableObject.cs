@@ -108,7 +108,8 @@ public class breakableObject: MonoBehaviour
     {
         if (this.gameObject.tag == "ball")
         {
-            brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
+            brokenObject = (GameObject)Instantiate(brokenSphere, this.transform
+                , Quaternion.identity);
             newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
             newSphere.transform.parent = brokenObject.transform;
             sphereScript = newSphere.GetComponent<soundSphere>();

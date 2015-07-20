@@ -8,6 +8,7 @@ public class coneOfVision : MonoBehaviour
     huntingDog scriptHuntingDog;
     chaseTransition chaseTransScript;
     RaycastHit hit;
+    Transform parent;
     public bool disguised;
     public bool playerSeen;
     float width;
@@ -42,7 +43,7 @@ public class coneOfVision : MonoBehaviour
         {
             scriptHuntingDog = transform.parent.GetComponent<huntingDog>();
         }
-
+        parent = this.transform.parent;
 
         //}
         width = startWidth;
@@ -80,14 +81,19 @@ public class coneOfVision : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             RaycastHit hit;
-            Physics.Linecast(transform.parent.position, other.transform.position, out hit);
-            Debug.DrawLine(transform.parent.position, other.transform.position, Color.green);
+            if(parent.position.y <= 1)
+            {
+                //parent.transform.;
+            }
+            Physics.Linecast(parent.position, other.transform.position, out hit);
+            Debug.DrawLine(parent.position, other.transform.position, Color.green);
             if (hit.collider.tag == other.tag)
             {
                 chaseTransScript.chaseTrans();
 
                 if (script != null)
                 {
+                    playerSeen = true;
                     script.stateManager(2);
                 }
                 else if (scriptFatDog != null)
@@ -97,6 +103,7 @@ public class coneOfVision : MonoBehaviour
                 }
                 else if (scriptHuntingDog != null)
                 {
+                    playerSeen = true;
                     scriptHuntingDog.stateManager(2);
                 }
             }
@@ -104,42 +111,45 @@ public class coneOfVision : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "player")
+        if (playerSeen)
         {
-            chaseTransScript.outChaseTrans();
-
-            if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
+            if (other.gameObject.tag == "player")
             {
-                if (hit.collider == other)
+                chaseTransScript.outChaseTrans();
+
+                if (Physics.Linecast(transform.parent.position, other.transform.position, out hit))
                 {
-                    chaseTransScript.outChaseTrans();
-                    if (transform.parent.tag == "patrolDog")
+                    if (hit.collider == other)
                     {
-                        if (script.States != enumStates.chase)
+                        chaseTransScript.outChaseTrans();
+                        if (transform.parent.tag == "patrolDog")
                         {
-                            script.areaCounter = 0;
-                            script.stateManager(3);
+                            if (script.States != enumStates.chase)
+                            {
+                                script.areaCounter = 0;
+                                script.stateManager(3);
+                            }
                         }
-                    }
-                    else if (transform.parent.tag == "fatDog")
-                    {
-                        if (scriptFatDog.States != enumStatesFatDog.chase)
+                        else if (transform.parent.tag == "fatDog")
                         {
-                            scriptFatDog.stateManager(3);
+                            if (scriptFatDog.States != enumStatesFatDog.chase)
+                            {
+                                scriptFatDog.stateManager(3);
+                            }
                         }
-                    }
-                    else if (transform.parent.tag == "huntingDog")
-                    {
-                        if (scriptHuntingDog.statesHunter != enumStatesHunter.chase)
+                        else if (transform.parent.tag == "huntingDog")
                         {
-                            scriptHuntingDog.areaCounter = 0;
-                            scriptHuntingDog.stateManager(3);
+                            if (scriptHuntingDog.statesHunter != enumStatesHunter.chase)
+                            {
+                                scriptHuntingDog.areaCounter = 0;
+                                scriptHuntingDog.stateManager(3);
+                            }
                         }
                     }
                 }
-            }
-            playerSeen = false;
+                playerSeen = false;
 
+            }
         }
     }
     public void isDisguised()
