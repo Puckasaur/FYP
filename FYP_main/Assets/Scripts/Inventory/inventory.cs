@@ -17,18 +17,22 @@ public class inventory : MonoBehaviour
 
 	public bool inventoryActive = false;
 
-	void Start()
+	void Awake()
 	{
 		for (int i = 0; i < (slotsX * slotsY); i++) 
 		{
 			slots.Add(new items());
+			inventoryItem.Add (new items());
 		}
 
 		database = GameObject.FindGameObjectWithTag ("itemDatabase").GetComponent<itemDatabase> ();
-		Debug.Log ("Number of Item: " + inventoryItem.Count);
-		inventoryItem.Add (database.item [0]);
-		Debug.Log ("Number of Item: " + inventoryItem.Count);
-		
+
+		//inventoryItem[0] = database.item[0];
+		//inventoryItem[1] = database.item[1];
+
+		//Debug.Log ("Number of Item: " + inventoryItem.Count);
+		//inventoryItem.Add (database.item [0]);
+		//Debug.Log ("Number of Item: " + inventoryItem.Count);
 	}
 	void Update()
 	{
@@ -58,22 +62,29 @@ public class inventory : MonoBehaviour
 		{
 			DrawInventory(); 
 		}
-
-//		for (int i = 0; i < inventoryItem.Count; i++)
-//		{
-//			GUI.Label (new Rect (10, i, 200, 50), inventoryItem[i].itemName);
-//		}
 	}
 	
 	void DrawInventory()
 	{
+		int i = 0;
 		//amount of slot on x-axixs
-		for (int x = 0; x < slotsX; x++) 
+		for (int y = 0; y < slotsY; y++)
 		{
-			for (int y = 0; y < slotsY; y++)
+			for (int x = 0; x < slotsX; x++)
 			{
-				GUI.Box (new Rect(x * 60, y * 60, 50, 50), y.ToString(), skin.GetStyle("slot"));
+				Rect slotRect = new Rect(x * 70, y * 70, 60, 50);
+				GUI.Box (slotRect, y.ToString(), skin.GetStyle("slot"));
+
+				slots[i] = inventoryItem[i];
+
+				if (slots[i].itemName != null)
+				{
+					GUI.DrawTexture(slotRect, slots[i].itemIcon);
+				}
+
+				i++;
 			}
 		}
 	}
+	
 }

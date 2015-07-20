@@ -16,11 +16,11 @@ public class items
 
 	public items (string name, int id, ItemType type)
 	{
+
 		itemName = name;
 		itemID = id;
-		itemIcon = Resources.Load<Texture2D> ("Item Icon/" + name);
+		itemIcon = Resources.Load<Texture2D> (name);
 		itemType = type;
-
 	}
 
 	public items()

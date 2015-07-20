@@ -189,14 +189,15 @@ public class TemporaryMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if(col.collider.tag == "trap")
-        {        
-            print(col.collider);
-            breakableObject trap = col.collider.transform.GetComponent<breakableObject>();
-            trap.makeSound = true;
-            print(trap.makeSound);
-        }
+        if (col.collider.tag == "trap") {        
+			print (col.collider);
+			breakableObject trap = col.collider.transform.GetComponent<breakableObject> ();
+			trap.makeSound = true;
+			print (trap.makeSound);
+
+		}
     }
+	
 
     void disGuiseAsDog()
     {
