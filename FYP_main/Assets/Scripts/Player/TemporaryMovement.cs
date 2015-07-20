@@ -194,6 +194,15 @@ public class TemporaryMovement : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other) // BREAKABLE OBJECT
+    {
+        if (other.gameObject.tag == "breakableObject")
+        {
+            print("Je test un truc en français, mouahahaha.");
+            other.GetComponent<breakableObject>().objectBreaking();
+        }
+    }
+
     void OnCollisionEnter(Collision col)
     {
         if(col.collider.tag == "trap")

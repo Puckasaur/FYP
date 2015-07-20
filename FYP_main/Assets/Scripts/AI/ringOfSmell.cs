@@ -199,7 +199,7 @@ public class ringOfSmell : MonoBehaviour {
                     {
                         script.agentStopped = false;
                         script.agent.Resume();
-                        script.SeekForSmellSource = false;
+                        //script.SeekForSmellSource = false;
                         script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
                     }
                 }
