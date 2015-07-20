@@ -32,7 +32,6 @@ public class coneOfVision : MonoBehaviour
         if (this.transform.parent.parent.GetComponent<enemyPathfinding>() != null)
         {
             script = this.transform.parent.parent.GetComponent<enemyPathfinding>();
-            print(script.gameObject);
         }
 
         if (this.transform.parent.GetComponent<fatDogAi>() != null)

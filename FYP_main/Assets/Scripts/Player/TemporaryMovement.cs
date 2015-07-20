@@ -198,7 +198,7 @@ public class TemporaryMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "breakableObject")
         {
-            print("Je test un truc en français, mouahahaha.");
+
             other.GetComponent<breakableObject>().objectBreaking();
         }
     }
@@ -207,7 +207,6 @@ public class TemporaryMovement : MonoBehaviour
     {
         if(col.collider.tag == "trap")
         {        
-            print(col.collider);
             breakableObject trap = col.collider.transform.GetComponent<breakableObject>();
             trap.makeSound = true;
             print(trap.makeSound);
