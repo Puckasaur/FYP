@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3322640}
   - 23: {fileID: 2371306}
   - 64: {fileID: 6476252}
+  - 114: {fileID: 11455248}
   m_Layer: 0
   m_Name: Des_JarC
   m_TagString: Untagged
@@ -73,6 +74,26 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_Mesh: {fileID: 4300000, guid: 3692cbe67b47ac14486c9ce26836d63f, type: 3}
+--- !u!114 &11455248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d59ecef75c5bdb45b7ff7d37780ef3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  brokenSphere: {fileID: 0}
+  brokenCube: {fileID: 0}
+  makeSound: 0
+  timer: 60
+  expireTimer: 10
+  boneRadius: 0
+  ballRadius: 0
+  cubeRadius: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

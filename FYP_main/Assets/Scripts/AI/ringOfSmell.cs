@@ -199,6 +199,8 @@ public class ringOfSmell : MonoBehaviour {
                     {
                         script.agentStopped = false;
                         script.agent.Resume();
+                        script.SeekForSmellSource = false;
+                        script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
                     }
                 }
             }
@@ -213,7 +215,11 @@ public class ringOfSmell : MonoBehaviour {
             
             smellDetected = false;
             print(smellDetected + " << Smell detected");
+
+            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
+
+        
         
     }
     public void isDisguised(string script)

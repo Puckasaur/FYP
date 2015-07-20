@@ -29,9 +29,10 @@ public class coneOfVision : MonoBehaviour
 
         //if (transform.parent.tag == "enemy")
         //{
-        if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
+        if (this.transform.parent.parent.GetComponent<enemyPathfinding>() != null)
         {
-            script = this.transform.parent.GetComponent<enemyPathfinding>();
+            script = this.transform.parent.parent.GetComponent<enemyPathfinding>();
+            print(script.gameObject);
         }
 
         if (this.transform.parent.GetComponent<fatDogAi>() != null)
@@ -81,6 +82,7 @@ public class coneOfVision : MonoBehaviour
         {
             RaycastHit hit;
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
+            Debug.DrawLine(transform.parent.position, other.transform.position, Color.green);
             if (hit.collider == other)
             {
                 chaseTransScript.chaseTrans();
