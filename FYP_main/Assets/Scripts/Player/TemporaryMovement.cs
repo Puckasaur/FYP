@@ -133,18 +133,25 @@ public class TemporaryMovement : MonoBehaviour
 				catAnim.SetBool("isSprinting", true);
 				movementSpeed = sprintSpeed;
 			}
-			else 
+
+			else
 			{
 				catAnim.SetBool("isSprinting", false);
 				movementSpeed = origMovementSpeed;
 			}
+
+            if (movement.magnitude < 0.25f)
+            {
+                catAnim.SetBool("isSprinting", false);
+                movementSpeed = origMovementSpeed;
+            }
 		}
 	}
 
 	void updateAnimator()
 	{
-		float horizontal = Input.GetAxis ("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
+		horizontal = Input.GetAxis ("Horizontal");
+		vertical = Input.GetAxis("Vertical");
 		
 		catAnim.SetFloat ("hSpeed", horizontal);
 		catAnim.SetFloat ("vSpeed", vertical);

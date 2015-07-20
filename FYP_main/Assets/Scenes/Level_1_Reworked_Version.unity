@@ -65934,6 +65934,18 @@ Prefab:
       propertyPath: m_Name
       value: Des_Bottle 6
       objectReference: {fileID: 0}
+    - target: {fileID: 11486818, guid: 2897806229aa3864dad7ef8479274773, type: 2}
+      propertyPath: boneRadius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 11486818, guid: 2897806229aa3864dad7ef8479274773, type: 2}
+      propertyPath: ballRadius
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11486818, guid: 2897806229aa3864dad7ef8479274773, type: 2}
+      propertyPath: cubeRadius
+      value: 60
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2897806229aa3864dad7ef8479274773, type: 2}
   m_IsPrefabParent: 0
