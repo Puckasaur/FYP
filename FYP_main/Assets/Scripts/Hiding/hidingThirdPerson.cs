@@ -52,7 +52,7 @@ public class hidingThirdPerson : MonoBehaviour {
 		checkToEnter.enabled = false;
 	}
 
-	void Update () 
+	void Update (){ 
 
         if (isHiding == true) 
 		{
