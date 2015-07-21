@@ -64,15 +64,20 @@ public class Wall : MonoBehaviour {
 	void Start () 
 	{
 		//Get all the renderers
-		m_RenderersChildren = GetComponentsInChildren<Renderer> ();
-		m_RenderersParent = GetComponentsInParent<Renderer> ();
+
+        if (transform.parent.tag == "Folder")
+            m_RenderersChildren = GetComponentsInChildren<Renderer>();
+            
+        else
+            m_RenderersChildren = transform.parent.GetComponentsInChildren<Renderer>();
+		//m_RenderersParent = GetComponentsInParent<Renderer> ();
 
 		//Update length of the array to match with the number of renderer
 		m_InitialMaterialChildren = new Material[m_RenderersChildren.Length];
-		m_InitialMaterialParent = new Material[m_RenderersParent.Length];
+		//m_InitialMaterialParent = new Material[m_RenderersParent.Length];
 
 		transparentMaterialChildren = new Material[m_RenderersChildren.Length];
-		transparentMaterialParent = new Material[m_RenderersParent.Length];
+		//transparentMaterialParent = new Material[m_RenderersParent.Length];
 		
 		
 		for (int i = 0; i < m_RenderersChildren.Length; i++){
@@ -92,7 +97,7 @@ public class Wall : MonoBehaviour {
 			transparentMaterialChildren[i].SetColor ("_Color", transparenColor);
 		}
 
-		for (int j = 0; j < m_RenderersParent.Length; j++){
+		/*for (int j = 0; j < m_RenderersParent.Length; j++){
 			//store the initial material
 			m_InitialMaterialParent[j] = m_RenderersParent[j].material;
 
@@ -106,7 +111,7 @@ public class Wall : MonoBehaviour {
 			transparentMaterialParent[j].DisableKeyword("_ALPHAPREMULTIPLY_ON");
 			transparentMaterialParent[j].renderQueue = 3000;
 			transparentMaterialParent[j].SetColor ("_Color", transparenColor);
-		}
+		}*/
 	}
 	
 	public void SetTransparent()

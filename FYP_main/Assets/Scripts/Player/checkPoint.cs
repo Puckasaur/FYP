@@ -45,6 +45,7 @@ public class checkPoint: MonoBehaviour
 
         else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
         {     
+
 			sendBack = true;
 
             this.transform.position = checkPointPosition.transform.position;

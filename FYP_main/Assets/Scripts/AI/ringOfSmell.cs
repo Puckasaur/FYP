@@ -181,49 +181,51 @@ public class ringOfSmell : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
+        if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
-            smellingPlayer = false;
-            detectionTimer = 60.0f;
-            chaseTransScript.outChaseTrans();
+            if (smellingPlayer)
+            {
+                smellingPlayer = false;
+                detectionTimer = 60.0f;
+                chaseTransScript.outChaseTrans();
 
-            if (visualCueActive)
-            {
-                Destroy(GetComponent<ParticleSystem>());
-            }
-//            if (sniff.isPlaying)
-//            {
-//                sniff.Stop();
-//            }
-            if (script != null)
-            {
-                if (script.States != enumStates.chase)
+                if (visualCueActive)
                 {
-                    script.areaCounter = 0;
-                    script.alertTimer = script.defaultAlertTimer;
-                    script.stateManager(3);
-                    if (script.agentStopped == true)
+                    Destroy(GetComponent<ParticleSystem>());
+                }
+                //            if (sniff.isPlaying)
+                //            {
+                //                sniff.Stop();
+                //            }
+                if (script != null)
+                {
+                    if (script.States != enumStates.chase)
                     {
-                        script.agentStopped = false;
-                        script.agent.Resume();
-                        //script.SeekForSmellSource = false;
-                        script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
+                        script.areaCounter = 0;
+                        script.alertTimer = script.defaultAlertTimer;
+                        script.stateManager(3);
+                        if (script.agentStopped == true)
+                        {
+                            script.agentStopped = false;
+                            script.agent.Resume();
+                            //script.SeekForSmellSource = false;
+                            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
+                        }
                     }
                 }
-            }
-            else if (scriptFatDog != null)
-            {
-                if (scriptFatDog.States != enumStatesFatDog.chase)
-                {                    
-                    scriptFatDog.stateManager(3);
+                else if (scriptFatDog != null)
+                {
+                    if (scriptFatDog.States != enumStatesFatDog.chase)
+                    {
+                        scriptFatDog.stateManager(3);
+                    }
                 }
+
+
+                smellDetected = false;
+                script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
             }
-
-            
-            smellDetected = false;
-            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
-
         
         
     }

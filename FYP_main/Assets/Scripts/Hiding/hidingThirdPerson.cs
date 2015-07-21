@@ -53,7 +53,6 @@ public class hidingThirdPerson : MonoBehaviour {
 	}
 
 	void Update () 
-	{
 
         if (isHiding == true) 
 		{
@@ -66,13 +65,15 @@ public class hidingThirdPerson : MonoBehaviour {
                 if(ros.disguised == true)
             	ros.isNotDisguised("htp");
 			}
-		}
+		} 
 
 		if (cp.sendBack == true) {
 			isHiding = false;
-			isPaused = false;            
-			checkToEnter.enabled = false;
-			checkToExit.enabled = false;
+			isPaused = false;    
+			
+			//checkToEnter.enabled = false;
+			//checkToExit.enabled = false;
+
 			cp.sendBack = false;
 		}
 	}
