@@ -11,12 +11,14 @@ public class DoorTrigger : MonoBehaviour
 
     private bool opening = false; // checks if the door is opened or not
 
-    /*
+    private Animator m_Animator;
+
+    
 	void Start ()
 	{
-		SFX = GameObject.Find("SFX").GetComponent<sfxPlayer>();
+        m_Animator = GetComponent<Animator>();
 	}
-    */
+    
      
     void OnTriggerEnter(Collider other)
     {
@@ -29,8 +31,9 @@ public class DoorTrigger : MonoBehaviour
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
                 {
                     opening = true;
+                    m_Animator.SetBool("DoorOpen", true);
 					//SFX.playUnlock();
-                    Destroy(this.gameObject, 0.1f);
+                    //Destroy(this.gameObject, 0.1f);
                     //this.transform.Rotate(new Vector3(0.0f, 0.0f, zRotation), angle, Space.Self);
                 }
             }

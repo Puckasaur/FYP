@@ -8,13 +8,11 @@ public class pushButtonOpening : MonoBehaviour
 {
     public GameObject[] triggerButtons;
 
-    private Renderer rend;
-    private Collider coll;
+    private Animator m_Animator;
 
     void Start ()
     {
-        rend = this.GetComponent<Renderer>();
-        coll = this.GetComponent<Collider>();
+        m_Animator = GetComponent<Animator>();
 
         foreach (GameObject buttons in triggerButtons)
         {
@@ -30,22 +28,19 @@ public class pushButtonOpening : MonoBehaviour
             {
                 if (triggerButtons[1].GetComponent<pushButton>().buttonActivated == true)
                 {
-                    this.rend.enabled = false;
-                    this.coll.enabled = false;
+                    m_Animator.SetBool("DoorOpen", true);
                 }
             }
 
             else
             {
-                this.rend.enabled = false;
-                this.coll.enabled = false;
+                m_Animator.SetBool("DoorOpen", true);
             }
         }
 
         else
         {
-            this.rend.enabled = true;
-            this.coll.enabled = true;
+            m_Animator.SetBool("DoorOpen", false);
         }
 	}
 }
