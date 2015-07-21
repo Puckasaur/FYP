@@ -6,6 +6,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
+	private checkPoint cp;
 
     public Transform character;
     public Transform prevPosition;
@@ -14,18 +15,16 @@ public class hidingThirdPerson : MonoBehaviour {
    	public Text checkToEnter;
     public Text checkToExit;
 
-    private bool isHiding;
-	private bool isPaused;
+    public bool isHiding;
+	public bool isPaused;
 
-	//public Text hidingText;
-
-	 //Use this for initialization
 	void Start () 
 	{
-        isHiding = false;
-        isPaused = false;
+        //isHiding = false;
+        //isPaused = false;
 
 		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
+		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
 		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
 	}
 
@@ -49,11 +48,17 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		//checkToEnter.enabled = false;
+		checkToEnter.enabled = false;
 	}
 
 	void Update () 
     {
+		Debug.Log ("isHiding: " + isHiding);
+		Debug.Log ("isPaused: " + isPaused);
+		Debug.Log ("checkToEnter: " + checkToEnter.enabled);
+		Debug.Log ("checkToExit: " + checkToEnter.enabled);
+
+
         if (isHiding == true) 
 		{
 			if (Input.GetButtonDown("Interact") || Input.GetKeyDown (KeyCode.E))
@@ -63,26 +68,15 @@ public class hidingThirdPerson : MonoBehaviour {
 				isHiding = false;
 				isPaused = false;            
                 if(ros.disguised == true)
-            ros.isNotDisguised("htp");
+            	ros.isNotDisguised("htp");
 			}
 		}
 
-		if (isPaused == true) 
-		{
-			//pause
-			//character.GetComponent<Rigidbody>().isKinematic = true;
-			//tmpMovement.movementSpeed = 0;
-			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			//ros.setToOff = true;
-
-
-		} 
-		else if (isPaused == false)
-		{
-			//unpause
-			//character.GetComponent<Rigidbody>().isKinematic = false;
-			//tmpMovement.movementSpeed = tmpMovement.origMovementSpeed;
-			//ros.setToOff = false;
+		if (cp.sendBack == true) {
+			isHiding = false;
+			isPaused = false;            
+			checkToEnter.enabled = false;
+			checkToExit.enabled = false;
 		}
 	}
 
@@ -93,8 +87,10 @@ public class hidingThirdPerson : MonoBehaviour {
 
 		isPaused = true;
         isHiding = true;
-            if(ros.disguised == false)
-                ros.isDisguised("htp");
+
+        if(ros.disguised == false)
+        	ros.isDisguised("htp");
+
 		checkToEnter.enabled = false;
 		checkToExit.enabled = true;
 	}

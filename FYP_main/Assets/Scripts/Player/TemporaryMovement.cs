@@ -194,7 +194,6 @@ public class TemporaryMovement : MonoBehaviour
 			breakableObject trap = col.collider.transform.GetComponent<breakableObject> ();
 			trap.makeSound = true;
 			print (trap.makeSound);
-
 		}
     }
 	

@@ -19,8 +19,13 @@ public class checkPoint: MonoBehaviour
 
     public enemyPathfinding script;
     public huntingDog hunterScript;
+
+	public bool sendBack;
+
     void Start()
-    {
+    {	
+		sendBack = false;
+
         currentLevel = Application.loadedLevelName; // get current level name
     }
 
@@ -31,13 +36,18 @@ public class checkPoint: MonoBehaviour
 
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
+
         if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog") && checkPointActivated == false) // if check point has not been reached
         {
             Application.LoadLevel(currentLevel);
         }
 
         else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
-        {            
+        {     
+			Debug.Log("sendBack");
+			
+			sendBack = true;
+
             this.transform.position = checkPointPosition.transform.position;
 
             allEnemies = GameObject.FindGameObjectsWithTag("enemy");
@@ -50,6 +60,7 @@ public class checkPoint: MonoBehaviour
             }
             foreach (GameObject enemy in allEnemies)
             {
+
                 script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();
                 if (script.respawnPosition != null)
                 {
@@ -61,6 +72,7 @@ public class checkPoint: MonoBehaviour
                 }
                 script.agent.speed = script.patrolSpeed;
                 script.stateManager(0);
+
             }
         }
     }

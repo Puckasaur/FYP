@@ -7,6 +7,6 @@ public class itemDatabase : MonoBehaviour {
 
 	void Start()
 	{	
-		//item.Add (new items ("Trophy", 0, items.ItemType.Collectables));
+	
 	}
 }
