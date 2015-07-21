@@ -19,6 +19,7 @@ public class ringOfSmell : MonoBehaviour {
 	public bool setToOff;
     public bool playerSeen = false;
     public bool disguised = false;
+    public bool smellingPlayer = false;
     bool visualCueActive = false;
     public float detectionTimer;
     public float defaultDetectionRange;
@@ -122,53 +123,57 @@ public class ringOfSmell : MonoBehaviour {
             //{
             //    detectionTimer = 60;
             //}
-            Physics.Raycast(transform.parent.position, other.transform.position, out hit);
+            Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             Debug.DrawLine(transform.parent.position, other.transform.position, Color.cyan);
-            if (hit.distance <= sniffDistance)
+            if (hit.collider == other)
             {
-                
-//                if (!sniff.isPlaying)
-//                {
-//                    sniff.Play();
-//                }
-            }
+                smellingPlayer = true;
+                if (hit.distance <= sniffDistance)
+                {
 
-            if (hit.distance <= detectionDistance)
-            {
-                chaseTransScript.chaseTrans();
+                    //                if (!sniff.isPlaying)
+                    //                {
+                    //                    sniff.Play();
+                    //                }
+                }
 
-                if (script != null)
+                if (hit.distance <= detectionDistance)
                 {
-                   // script.stateManager(2);
-                    smellDetected = true;
-                   // scriptFatDog.RotateDogWhileSmelling();
+                    chaseTransScript.chaseTrans();
+
+                    if (script != null)
+                    {
+                        // script.stateManager(2);
+                        smellDetected = true;
+                        // scriptFatDog.RotateDogWhileSmelling();
+                    }
+                    if (scriptFatDog != null)
+                    {
+                        smellDetected = true;
+                        //scriptFatDog.RotateDogWhileSmelling();
+                    }
+                    if (huntingDogScript != null)
+                    {
+                        huntingDogScript.stateManager(2);
+                        // smellDetected = true;
+                        //  scriptFatDog.RotateDogWhileSmelling();
+                    }
                 }
-                if (scriptFatDog != null)
+                if (hit.distance <= somethingElseDistance)
                 {
-                    smellDetected = true;
-                    //scriptFatDog.RotateDogWhileSmelling();
-                }
-                if (huntingDogScript != null)
-                {
-                    huntingDogScript.stateManager(2);
-                   // smellDetected = true;
-                  //  scriptFatDog.RotateDogWhileSmelling();
-                }
-            }
-            if (hit.distance <= somethingElseDistance)
-            {
-                if (script != null)
-                {
-                    script.stateManager(2);
-                }
-                if (scriptFatDog != null)
-                {
-                    playerSeen = true;
-                    scriptFatDog.stateManager(2);
-                }
-                if (huntingDogScript != null)
-                {
-                   huntingDogScript.stateManager(2);
+                    if (script != null)
+                    {
+                        script.stateManager(2);
+                    }
+                    if (scriptFatDog != null)
+                    {
+                        playerSeen = true;
+                        scriptFatDog.stateManager(2);
+                    }
+                    if (huntingDogScript != null)
+                    {
+                        huntingDogScript.stateManager(2);
+                    }
                 }
             }
         }
@@ -178,6 +183,7 @@ public class ringOfSmell : MonoBehaviour {
     {
         if(other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
+            smellingPlayer = false;
             detectionTimer = 60.0f;
             chaseTransScript.outChaseTrans();
 
