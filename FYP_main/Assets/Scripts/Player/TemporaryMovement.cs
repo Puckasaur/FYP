@@ -67,7 +67,7 @@ public class TemporaryMovement : MonoBehaviour
 
         transform.LookAt(transform.position + look, Vector3.up);
 		
-		if (Input.GetKeyDown(KeyCode.T) && bones > 0)
+		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
         {
             print(boneSpawner.transform.parent);
 			bones--;

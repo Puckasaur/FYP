@@ -44,7 +44,6 @@ public class checkPoint: MonoBehaviour
 
         else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
         {     
-			Debug.Log("sendBack");
 			
 			sendBack = true;
 

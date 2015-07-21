@@ -54,10 +54,8 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void Update () 
     {
-		Debug.Log ("isHiding: " + isHiding);
-		Debug.Log ("isPaused: " + isPaused);
-		Debug.Log ("checkToEnter: " + checkToEnter.enabled);
-		Debug.Log ("checkToExit: " + checkToEnter.enabled);
+
+		//Debug.Log ("checkToExit: " + checkToEnter.enabled);
 
 
         if (isHiding == true) 
@@ -71,13 +69,14 @@ public class hidingThirdPerson : MonoBehaviour {
                 if(ros.disguised == true)
             	ros.isNotDisguised("htp");
 			}
-		}
+		} 
 
 		if (cp.sendBack == true) {
 			isHiding = false;
 			isPaused = false;            
-			checkToEnter.enabled = false;
-			checkToExit.enabled = false;
+			//checkToEnter.enabled = false;
+			//checkToExit.enabled = false;
+			cp.sendBack = false;
 		}
 	}
 
