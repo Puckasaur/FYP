@@ -10,6 +10,7 @@ using System.Collections;
 
 public class checkPoint: MonoBehaviour
 {
+
     public GameObject checkPointPosition; // Position of the check point
     public bool checkPointActivated = false; // if the check point has been reached or not
 
@@ -44,8 +45,6 @@ public class checkPoint: MonoBehaviour
 
         else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
         {     
-			Debug.Log("sendBack");
-			
 			sendBack = true;
 
             this.transform.position = checkPointPosition.transform.position;
