@@ -6,6 +6,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
+
 	private checkPoint cp;
 
     public Transform character;
@@ -93,6 +94,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 		checkToEnter.enabled = false;
 		checkToExit.enabled = true;
+        
 	}
 	
 	IEnumerator Delayed()

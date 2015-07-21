@@ -11,14 +11,12 @@ public class pushButton : MonoBehaviour
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
         {
-            print("Colliding ?");
             buttonActivated = true;
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        print("Not colliding.");
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
         {
             buttonActivated = false;
