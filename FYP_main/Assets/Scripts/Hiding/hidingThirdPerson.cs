@@ -6,7 +6,6 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
-
     public Transform character;
     public Transform prevPosition;
     public Transform hidingPosition;
@@ -97,6 +96,7 @@ public class hidingThirdPerson : MonoBehaviour {
                 ros.isDisguised("htp");
 		checkToEnter.enabled = false;
 		checkToExit.enabled = true;
+        
 	}
 	
 	IEnumerator Delayed()
