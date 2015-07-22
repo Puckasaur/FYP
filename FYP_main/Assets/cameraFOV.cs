@@ -19,8 +19,8 @@ public class cameraFOV : MonoBehaviour
 
     void Update()
     {
-        //mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, newFov, speed * Time.deltaTime);
-        mainCam.transform.position += Vector3.Lerp(mainCam.transform.position, mainCam.transform.position + new Vector3(0.0f, 10.0f, 0.0f), speed * Time.deltaTime);
+        mainCam.fieldOfView = Mathf.Lerp(mainCam.fieldOfView, newFov, speed * Time.deltaTime);
+        //mainCam.transform.position += Vector3.Lerp(mainCam.transform.position, mainCam.transform.position + new Vector3(0.0f, 10.0f, 0.0f), speed * Time.deltaTime);
     }
 
     void OnTriggerEnter(Collider other)

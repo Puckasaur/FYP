@@ -9,7 +9,7 @@ public class ladderClimbing : MonoBehaviour
 
 	public Transform characterController;
 	public bool inside = false;
-	public float heightFactor = 3.2f;
+	public float heightFactor;
 		
 	void Start()
 	{
@@ -20,7 +20,17 @@ public class ladderClimbing : MonoBehaviour
 	{
 		if (ladder.gameObject.tag == "player")
 		{
-			climbMovement.enabled = false;
+            if (climbMovement.movement.magnitude > 0.1)
+            {
+                climbMovement.rb.useGravity = false;
+                climbMovement.enabled = false;
+            }
+            
+            else
+            {
+                climbMovement.rb.useGravity = true;
+                climbMovement.enabled = true;
+            }
 			//inside = !inside;
             inside = true;
 		}
@@ -31,6 +41,7 @@ public class ladderClimbing : MonoBehaviour
 		if (ladder.gameObject.tag == "player")
 		{
 			climbMovement.enabled = true;
+            climbMovement.rb.useGravity = true;
 			//inside = !inside;
             inside = false;
 		}

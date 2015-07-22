@@ -6,8 +6,6 @@ public class DoorTrigger : MonoBehaviour
 	sfxPlayer SFX;
 
     public int doorNumber; // number of the door (opened by a key with the same number)
-    public float zRotation; // Vector 3 rotation 
-    public float angle; // angle, well, tbh I'm not sure of the difference between "zRotation" and "angle" but...
 
     private bool opening = false; // checks if the door is opened or not
 

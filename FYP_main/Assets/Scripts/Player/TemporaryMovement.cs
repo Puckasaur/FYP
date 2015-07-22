@@ -14,7 +14,7 @@ public class TemporaryMovement : MonoBehaviour
 	public float jumpHeight;
 	float m_GroundCheckDistance;
 	float m_OrigGroundCheckDistance;
-	Rigidbody rb;
+	public Rigidbody rb;
 	Animator catAnim;
 	public GameObject bone;
 	public GameObject bagOfAir;
@@ -113,6 +113,9 @@ public class TemporaryMovement : MonoBehaviour
 	void Update()
 	{
 		//checks if character is grounded
+        print(movement + " :MOV");
+        print(movement.magnitude + " :MAGN");
+
 		if (isGrounded) 
 		{
 			// Jump
@@ -128,11 +131,12 @@ public class TemporaryMovement : MonoBehaviour
 	{
 		if (isGrounded)
 		{
-			if (Input.GetButton ("Sprint")) 
+			if (Input.GetButton ("Sprint") && movement.magnitude > 0.1) 
 			{
 				catAnim.SetBool("isSprinting", true);
 				movementSpeed = sprintSpeed;
 			}
+
 			else 
 			{
 				catAnim.SetBool("isSprinting", false);
