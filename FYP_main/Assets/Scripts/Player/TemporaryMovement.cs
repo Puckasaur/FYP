@@ -113,9 +113,6 @@ public class TemporaryMovement : MonoBehaviour
 	void Update()
 	{
 		//checks if character is grounded
-        print(movement + " :MOV");
-        print(movement.magnitude + " :MAGN");
-
 		if (isGrounded) 
 		{
 			// Jump
