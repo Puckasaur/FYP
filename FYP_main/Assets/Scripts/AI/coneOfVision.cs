@@ -85,8 +85,8 @@ public class coneOfVision : MonoBehaviour
             {
                 //parent.transform.;
             }
-            Physics.Linecast(parent.position, other.transform.position, out hit);
-            Debug.DrawLine(parent.position, other.transform.position, Color.green);
+            Physics.Linecast(transform.position, other.transform.position, out hit);
+            Debug.DrawLine(transform.position, other.transform.position, Color.green);
             if (hit.collider.tag == "player")//other.tag)
             {
                 chaseTransScript.chaseTrans();
