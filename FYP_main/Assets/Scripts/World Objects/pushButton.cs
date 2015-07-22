@@ -6,20 +6,46 @@ using System.Collections;
 public class pushButton : MonoBehaviour
 {
     public bool buttonActivated = false;
+    float timer;
+    public float defaultTimer;
 
-    void OnTriggerStay(Collider other)
+    void Start()
+    {
+        timer = defaultTimer;
+    }
+    void Update()
+    {
+        if(buttonActivated == true)
+        {
+            timer--;
+            if(timer <= 0)
+            {
+                buttonActivated = false;
+                timer = defaultTimer;
+            }
+        }
+    }
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
         {
             buttonActivated = true;
         }
     }
-
-    void OnTriggerExit(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
         {
-            buttonActivated = false;
+            //buttonActivated = true;
+            timer = defaultTimer;
         }
     }
+
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
+    //    {
+    //        buttonActivated = false;
+    //    }
+    //}
 }

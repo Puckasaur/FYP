@@ -76,27 +76,32 @@ public class breakableObject: MonoBehaviour
 			timer--;
 			
 		}
+
+	}
+    void LateUpdate()
+    {
         if (expireTimer <= 0)
         {
             Destroy(gameObject);
         }
-	}
-
+    }
     void OnCollisionEnter(Collision Other)
     {
         //----------------------------------------------------------//
         // When object falls to the ground it creates a sound sphere//
         //----------------------------------------------------------//
         //if(makeSound)
+        if(Other.gameObject.tag == "player")
         {
-            if (this.transform.localPosition.y <= 0.5f && makeSound == true)
+            makeSound = true;
+        }
+        if (this.transform.position.y <= 0.5f && makeSound == true)
             {
                 //makeSound = false;
                 {
                     objectBreaking();
                 }
             }
-        }
     }
 
     public void ObjectFalling()

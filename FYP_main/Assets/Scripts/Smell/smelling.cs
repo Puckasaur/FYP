@@ -15,28 +15,43 @@ public class smelling : MonoBehaviour {
 	public bool isEnterBone = false;
 	public bool isEnterBag = false;
 	public bool smellArea = false;
-
+    bool hasSpawnedBone = false;
+    float cooldown;
+    public float defautCooldown;
 	public float boneLimit = 1;
 	public float boneCount;
 
 
 	//Bone
-	IEnumerator boneSmell()
-	{
-		yield return new WaitForSeconds (1);
-		
-		enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
+    IEnumerator boneSmell()
+    {
+        if (hasSpawnedBone == false)
+        {
+            hasSpawnedBone = true;
+            yield return new WaitForSeconds(1);
 
-		yield return new WaitForSeconds (4);
-		
-		exitPoint.GetComponent<ParticleSystem>().enableEmission = true;	
-		
-		newBoneComo = (GameObject)Instantiate (boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
-		
-		yield return new WaitForSeconds (4);
-		
-		isEnterBone = false;
-	}
+            enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
+
+            yield return new WaitForSeconds(4);
+
+            exitPoint.GetComponent<ParticleSystem>().enableEmission = true;
+
+            newBoneComo = (GameObject)Instantiate(boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
+
+            yield return new WaitForSeconds(4);
+
+            isEnterBone = false;
+        }
+        if(hasSpawnedBone == true)
+        {
+            cooldown--;
+            if(cooldown <=0)
+            {
+                hasSpawnedBone = false;
+                cooldown = defautCooldown;
+            }
+        }
+    }
 
 	//Bag
 	IEnumerator bagSmell()
@@ -70,7 +85,7 @@ public class smelling : MonoBehaviour {
 		enterPoint.GetComponent<ParticleSystem>().enableEmission = false;
 		exitPoint.GetComponent<ParticleSystem>().enableEmission = false;
 		//colliderCheck.GetComponent<BoxCollider> ().enabled = false;
-
+        cooldown = defautCooldown;
 		boneSpawnerComo = GameObject.FindGameObjectWithTag("boneSpawnerRoom");
 	}
 
@@ -108,6 +123,16 @@ public class smelling : MonoBehaviour {
 			enterPoint.GetComponent<ParticleSystem>().startColor = new Color (1, 1, 1, 0.5f);
 			exitPoint.GetComponent<ParticleSystem>().startColor = new Color (1, 1, 1, 0.5f);
 		}
+
+        if (hasSpawnedBone == true)
+        {
+            cooldown--;
+            if (cooldown <= 0)
+            {
+                hasSpawnedBone = false;
+                cooldown = defautCooldown;
+            }
+        }
 
         /*
 		if (smellArea == true) 

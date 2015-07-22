@@ -39,10 +39,12 @@ public class enemyPathfinding : MonoBehaviour
     public GameObject soundSource;
     GameObject brokenObject;
 
+    public bool isOnWaypoint = false;
     public NavMeshAgent agent;
     public List<Transform> targets = new List<Transform>();
     public List<Transform> alertArea = new List<Transform>();
 
+    public bool isPaired = false;
     public bool eatBone = false;
     public bool distracted = false;
     float maxScale = 20;
@@ -95,7 +97,7 @@ public class enemyPathfinding : MonoBehaviour
     public int defaultTimer;
     public int defaultAlertTimer;
     public int defaultEscapeTimer;
-    int targetCounter = 0;
+    public int targetCounter = 0;
     public int areaCounter = 0;
     public float defaultTurnTimer;
     public int defaultDetectSoundTimer;
@@ -135,12 +137,12 @@ public class enemyPathfinding : MonoBehaviour
     {
 
         leapTimer = defaultLeapTimer;
-        //visionRotator = GameObject.FindGameObjectWithTag("visionRotator");
+        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");
         respawnPosition = this.transform.position;
         player = GameObject.FindGameObjectWithTag("player");
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
-
+        patrolAnim = gameObject.GetComponent<Animator>();
         //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
 
         setDirectionsForIdle();
@@ -170,7 +172,7 @@ public class enemyPathfinding : MonoBehaviour
     void Update()
     {
 
-
+        
         GetComponent<Rigidbody>().WakeUp();
         //------------------//
         //Code of the states//
@@ -183,10 +185,15 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
-                    //agentStopped = false;
-                    //agent.Resume();
-                    //patrolAnim.SetBool("patrolWalk", true);
-                    //patrolAnim.SetBool("patrolRun", false);
+                    if (agentStopped == true && isPaired)
+                    {
+                        agentStopped = false;
+                        agent.Resume();
+                    }
+                    patrolAnim.SetBool("patrolWalk", true);
+                    patrolAnim.SetBool("patrolRun", false);
+                    //patrolAnim.SetBool("patrolIdle", false);
+
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
                         stateManager(1);
@@ -194,14 +201,15 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             agentStopped = true;
                             agent.Stop();
-                            //patrolAnim.SetBool("patrolWalk", false);
-                            //patrolAnim.SetBool("patrolRun", false);
+                            patrolAnim.SetBool("patrolWalk", false);
+                            patrolAnim.SetBool("patrolRun", false);
+                            //patrolAnim.SetBool("patrolIdle", true);
                         }
                     }
                     //print(SeekForSmellSource);
                     //if (!SeekForSmellSource)
                     //{
-                    //    visionRotator.transform.rotation = new Quaternion(0, 0, 0, 0);
+                    //    transform.rotation = new Quaternion(0, 0, 0, 0);
                     //}
                 }
 
@@ -216,7 +224,7 @@ public class enemyPathfinding : MonoBehaviour
                     //agentStopped = true;
                     //agent.Stop();
                     //}
-
+                    
 
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
@@ -229,10 +237,16 @@ public class enemyPathfinding : MonoBehaviour
                                 lastTarget = currentTarget;
                                 //patrolAnim.SetBool("patrolWalk", false);
                                 //patrolAnim.SetBool("patrolRun", false);
+                                //patrolAnim.SetBool("patrolIdle", true);
+
+                            }                            
+                            if( isPaired == true)
+                            {
+                                idleTimer = defaultIdleTimer;
+                            isOnWaypoint = true;
                             }
-                            currentTarget = targets[targetCounter];
-
-
+                            //if (isPaired == true && idleTimer <= 0)
+                            //{ stateManager(4); }
                             if (agent.SetDestination(currentTarget.position) != null)
                             {
 
@@ -240,11 +254,15 @@ public class enemyPathfinding : MonoBehaviour
                             }
 
                             idleTimer = defaultIdleTimer;
-                            stateManager(0);
-                            targetCounter++;
-                            if (targetCounter >= targets.Count)
+                            if (isPaired == false)
                             {
-                                targetCounter = 0;
+                                currentTarget = targets[targetCounter];
+                                stateManager(0);
+                                targetCounter++;
+                                if (targetCounter >= targets.Count)
+                                {
+                                    targetCounter = 0;
+                                }
                             }
                             agent.speed = patrolSpeed;
                             //if (agentStopped == true)
@@ -263,6 +281,8 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else
                     {
+                        patrolAnim.SetBool("patrolWalk", false);
+                        patrolAnim.SetBool("patrolRun", false);
                         stateManager(0);
                     }
 
@@ -278,8 +298,9 @@ public class enemyPathfinding : MonoBehaviour
                     //Leap Attack While Chasing //
                     //--------------------------//
 
-                    //patrolAnim.SetBool("patrolWalk", false);
-                    //patrolAnim.SetBool("patrolRun", true);
+                    patrolAnim.SetBool("patrolWalk", false);
+                    patrolAnim.SetBool("patrolRun", true);
+                    //patrolAnim.SetBool("patrolIdle", false);
 
                     if (vectorx < chargeRange || vectorz < chargeRange)
                     {
@@ -398,7 +419,7 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         if (timer <= 0 && (!distracted))
                         {
-                            if (currentTarget.gameObject.tag != "bone")
+                            if (currentTarget != null && currentTarget.gameObject.tag != "bone")
                             {
                                 lastTarget = currentTarget;
                             }
@@ -547,7 +568,7 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         alertTimer = defaultAlertTimer;
                     }
-                    organizeAlertWaypoints();
+                    //organizeAlertWaypoints();
                     stateManager(3);
 
                     //---------------------------------------------//
@@ -653,11 +674,16 @@ public class enemyPathfinding : MonoBehaviour
             if (States != enumStates.idleSuspicious)
             {
                 //   Vector3 tempVector = currentTarget.position;
-                if (agent.SetDestination(currentTarget.position) != null)
+                if (/*agent.SetDestination(currentTarget.position)*/ currentTarget != null && !currentTarget.Equals(null))
                 {
                     agent.SetDestination(currentTarget.position);
                 }
+                else
+                {
+                    currentTarget = lastTarget;
+                }
             }
+            
         }
         timer--;
 

@@ -69,7 +69,6 @@ public class TemporaryMovement : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
         {
-            print(boneSpawner.transform.parent);
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
@@ -191,10 +190,8 @@ public class TemporaryMovement : MonoBehaviour
     void OnCollisionEnter(Collision col)
     {
         if (col.collider.tag == "trap") {        
-			print (col.collider);
 			breakableObject trap = col.collider.transform.GetComponent<breakableObject> ();
 			trap.makeSound = true;
-			print (trap.makeSound);
 		}
     }
 	
