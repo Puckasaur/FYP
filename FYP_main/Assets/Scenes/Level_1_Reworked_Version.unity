@@ -58166,7 +58166,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: movementSpeed
-      value: 3.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 463896, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
@@ -58190,7 +58190,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: sprintModifier
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 199200, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_IsActive
@@ -58347,6 +58347,22 @@ Prefab:
     - target: {fileID: 2045924, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_BackGroundColor.a
       value: .0196078438
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: origMovementSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: temp
+      value: .850000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: joystickPressure
+      value: .850000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 11493966, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: magnMultiplier
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11438058, guid: ba6011b71f850964a88a001872fa5889, type: 2}
