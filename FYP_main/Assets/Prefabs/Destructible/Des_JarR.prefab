@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  brokenSphere: {fileID: 141278}
+  brokenSphere: {fileID: 100000, guid: 3692cbe67b47ac14486c9ce26836d63f, type: 3}
   brokenCube: {fileID: 0}
   makeSound: 0
   timer: 60

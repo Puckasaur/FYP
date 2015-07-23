@@ -417,6 +417,11 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
+                if (distracted)
+                {
+                    stateManager(5);
+                }
+                
                 if (agentStopped == true)
                 {
                     agentStopped = false;
@@ -590,14 +595,19 @@ public class enemyPathfinding : MonoBehaviour
                     Vector3 soundSourcePos;
                     Vector3 tempWaypointPos = currentTarget.position;
 
-                    if (soundSource)
-                    {                       
+                    if (soundSource && soundSource.tag != "bone")
+                    {
+                        print(" It came through");
                         if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
                         {
                             Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
                             tempWaypointPos = currentTarget.position;
                             currentTarget.position = soundSourcePos;
-                        }        
+                        }
+                    }
+                    else 
+                    {
+                        currentTarget = soundSource.transform;
                     }
                     if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                     {
@@ -1207,7 +1217,7 @@ public class enemyPathfinding : MonoBehaviour
 
   bool RandomPoint(Vector3 center, float range, out Vector3 result)
   {
-      for (int i = 0; i < 30; i++)
+      for (int i = 0; i < 6; i++)
       {
           Vector3 randomPoint = center + Random.insideUnitSphere * range;
           NavMeshHit hit;
