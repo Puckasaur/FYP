@@ -198,8 +198,7 @@ public class enemyPathfinding : MonoBehaviour
                         agentStopped = false;
                         agent.Resume();
                     }
-                    patrolAnim.SetBool("patrolWalk", true);
-                    patrolAnim.SetBool("patrolRun", false);
+                    
                     //patrolAnim.SetBool("patrolIdle", false);
 
                     //agentStopped = false;
@@ -211,7 +210,8 @@ public class enemyPathfinding : MonoBehaviour
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     { 
                         stateManager(1);
-                        if (agentStopped == false)
+						
+						if (agentStopped == false)
                         {
                             //print("agent stopped");
                             agentStopped = true;

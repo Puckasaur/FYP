@@ -4,7 +4,7 @@ using UnityEngine.Audio;
 
 public class patrolDogAudio : MonoBehaviour {
 
-	AudioSource patrolSource;
+	public AudioSource patrolSource;
 
 	// Use this for initialization
 	void Start () {
