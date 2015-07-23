@@ -233,14 +233,10 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.idle:
                 {
+                    print("Hippoja hupussa");
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
-                    //if (agentStopped == false)
-                    //{
-                    //agentStopped = true;
-                    //agent.Stop();
-                    //}
                     if (agentStopped == false)
                     {
                         agentStopped = true;
@@ -254,12 +250,10 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             if (currentTarget.gameObject.tag != "bone")
                             {
-
                                 lastTarget = currentTarget;
                                 //patrolAnim.SetBool("patrolWalk", false);
                                 //patrolAnim.SetBool("patrolRun", false);
                                 //patrolAnim.SetBool("patrolIdle", true);
-
                             }                            
                             if( isPaired == true)
                             {
@@ -268,11 +262,11 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             //if (isPaired == true && idleTimer <= 0)
                             //{ stateManager(4); }
-                            if (agent.SetDestination(currentTarget.position) != null)
-                            {
+                            //if (agent.SetDestination(currentTarget.position) != null)
+                            //{
 
-                                // agent.SetDestination(currentTarget.position);
-                            }
+                            //    // agent.SetDestination(currentTarget.position);
+                            //}
 
                             idleTimer = defaultIdleTimer;
                             if (isPaired == false)
@@ -298,7 +292,6 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             idleTimer = 0;
                         }
-
                     }
                     else
                     {
@@ -312,6 +305,7 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.chase:
                 {
+                    print("karvaa taskussa");
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
@@ -427,33 +421,44 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-
-                if (ringOfSmellScript.smellDetected == false)
+                if (agentStopped == true)
                 {
+                    agentStopped = false;
+                    agent.Resume();
+                }
+                //if (ringOfSmellScript.smellDetected == false)
+               // {
                     if (alertTimer == 0 || alertTimer < 0)
                     {
                         if (lastTarget != null)
                         {
+                            print("kasvaimia taskussa");
                             currentTarget = lastTarget;
                             stateManager(4);
                         }
                     }
+
+                    print(currentTarget + " << current Target " + vectorx + " << vectorx " + vectorz + "vectorz");
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
+                        print("karvaisten kamujen kemut");
                         if (timer <= 0 && (!distracted))
                         {
                             if (currentTarget != null && currentTarget.gameObject.tag != "bone")
                             {
+                                print("muumeja talossa");
                                 lastTarget = currentTarget;
                             }
                             if (alertArea[areaCounter] != null)
                             {
+                                print("tekee juttuja mutta mitaan ei tapahdu");
                                 currentTarget = alertArea[areaCounter];
                             }
 
                             areaCounter++;
                             if (areaCounter > 2)
                             {
+                                print("kissoja korissa");
                                 areaCounter = 0;
                             }
                             if (tempcounters < 6)
@@ -467,6 +472,7 @@ public class enemyPathfinding : MonoBehaviour
                                     idleTimer = defaultIdleTimer;
                                 }
                                 tempcounters++;
+                                print("state manager 4 aktivoitu");
                                 stateManager(4);
 
                             }
@@ -476,17 +482,21 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else
                     {
+                        print("huonoa tuuria hississa");
                         alertTimer--;
                         if (alertTimer <= 0)
                         {
                             alertTimer = 0;
                         }
                     }
-                }
-                //else if (ringOfSmellScript.smellDetected == true)
+                //}
+                //else 
                 //{
-                //    checkContinuousSmelling();
-                //    //RotateDogWhileSmelling();
+                //    alertTimer--;
+                //    if (alertTimer <= 0)
+                //    {
+                //        alertTimer = 0;
+                //    }
                 //}
 
                 break;
@@ -497,13 +507,12 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------//
 
                     if (agentStopped == false)
-                    {
-                        print("agent Stopped");
+                    {                        
                         agentStopped = true;
                         agent.Stop();
                     }
-                    if (ringOfSmellScript.smellDetected == false)
-                    {
+                   // if (ringOfSmellScript.smellDetected == false)
+                   // {
                         if (coneOfVisionScript.playerSeen == true)
                         {
                             agentStopped = false;
@@ -553,7 +562,11 @@ public class enemyPathfinding : MonoBehaviour
                         }
 
                         idleTimer--;
-                    }
+                        if (idleTimer < 0)
+                        {
+                            idleTimer = 0;
+                        }
+                    //}
 
                     //else if (ringOfSmellScript.smellDetected == true)
                     //{
@@ -585,14 +598,23 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
+                    float maxRange = 1.5f;
+                    Vector3 soundSourcePos;
+                    Vector3 tempWaypointPos = currentTarget.position;
 
                     if (soundSource)
-                    {
-                        currentTarget = soundSource.transform;
+                    {                       
+                        if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
+                        {
+                            Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
+                            tempWaypointPos = currentTarget.position;
+                            currentTarget.position = soundSourcePos;
+                        }        
                     }
                     if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                     {
                         alertTimer = defaultAlertTimer;
+                        currentTarget.position = tempWaypointPos;
                     }
                     //organizeAlertWaypoints();
                     stateManager(3);
@@ -646,7 +668,6 @@ public class enemyPathfinding : MonoBehaviour
                     Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);//player.transform.position);
                     float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                     transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
-                    print(angle + " Angle");
                     if (angle < 5.0f && angle > -5.0f)
                     {
                         stateManager(1);
@@ -1195,4 +1216,20 @@ public class enemyPathfinding : MonoBehaviour
             rotateDogWhileSmelling(targetTransformPosition);
         }       
     }
+
+  bool RandomPoint(Vector3 center, float range, out Vector3 result)
+  {
+      for (int i = 0; i < 30; i++)
+      {
+          Vector3 randomPoint = center + Random.insideUnitSphere * range;
+          NavMeshHit hit;
+          if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+          {
+              result = hit.position;
+              return true;
+          }
+      }
+      result = Vector3.zero;
+      return false;
+  }
 }
