@@ -32,6 +32,10 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionDistance;
     public float somethingElseDistance;
 	//AudioSource sniff;
+
+    //Vector3 to make sure the enemy does not smell the player when the player exits the ring of smell
+    Vector3 exitrange;
+    float maximumDistance;
     
     void Start()
     {
@@ -176,6 +180,16 @@ public class ringOfSmell : MonoBehaviour {
                     }
                 }
             }
+            else
+            {                 
+                exitrange = other.transform.position - transform.parent.position;
+
+                if(exitrange.x > maximumDistance || exitrange.y > maximumDistance  || exitrange.z > maximumDistance )
+                {
+                playerSeen = false;
+                }
+                // transform.parent.position, other.transform.position
+            }
         }
     }
 
@@ -201,16 +215,17 @@ public class ringOfSmell : MonoBehaviour {
                 {
                     if (script.States != enumStates.chase)
                     {
-                        script.areaCounter = 0;
-                        script.alertTimer = script.defaultAlertTimer;
-                        script.stateManager(3);
-                        if (script.agentStopped == true)
+                        if (script.turnTowardsSmellTimer <= 0)
                         {
-                            script.agentStopped = false;
-                            script.agent.Resume();
-                            //script.SeekForSmellSource = false;
-                            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
+                            script.tempSmellPosition = script.player.transform.position;
+                            script.continueRotation = true;
+                            script.stateManager(8);
                         }
+                        else
+                        {
+                            return;
+                        }
+                        
                     }
                 }
                 else if (scriptFatDog != null)
@@ -219,12 +234,10 @@ public class ringOfSmell : MonoBehaviour {
                     {
                         scriptFatDog.stateManager(3);
                     }
-                }
-
-
-                smellDetected = false;
-                script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
+                }               
             }
+            smellDetected = false;
+            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
         
         
