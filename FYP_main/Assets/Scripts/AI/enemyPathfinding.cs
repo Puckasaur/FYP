@@ -209,9 +209,7 @@ public class enemyPathfinding : MonoBehaviour
 
 
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {
-                       // print(vectorx + " < vectorX" + vectorz + "vectorZ" + waypointOffsetMin + "waypointOffsetMin" + waypointOffsetMax + "waypointOffsetMax");
-                        
+                    { 
                         stateManager(1);
                         if (agentStopped == false)
                         {
@@ -232,8 +230,7 @@ public class enemyPathfinding : MonoBehaviour
 
                 break;
             case enumStates.idle:
-                {
-                    print("Hippoja hupussa");
+                {                    
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
@@ -304,8 +301,7 @@ public class enemyPathfinding : MonoBehaviour
                 }
 
             case enumStates.chase:
-                {
-                    print("karvaa taskussa");
+                {                   
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
@@ -431,34 +427,28 @@ public class enemyPathfinding : MonoBehaviour
                     if (alertTimer == 0 || alertTimer < 0)
                     {
                         if (lastTarget != null)
-                        {
-                            print("kasvaimia taskussa");
+                        {                           
                             currentTarget = lastTarget;
                             stateManager(4);
                         }
                     }
 
-                    print(currentTarget + " << current Target " + vectorx + " << vectorx " + vectorz + "vectorz");
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {
-                        print("karvaisten kamujen kemut");
+                    {                       
                         if (timer <= 0 && (!distracted))
                         {
                             if (currentTarget != null && currentTarget.gameObject.tag != "bone")
-                            {
-                                print("muumeja talossa");
+                            {                              
                                 lastTarget = currentTarget;
                             }
                             if (alertArea[areaCounter] != null)
                             {
-                                print("tekee juttuja mutta mitaan ei tapahdu");
                                 currentTarget = alertArea[areaCounter];
                             }
 
                             areaCounter++;
                             if (areaCounter > 2)
                             {
-                                print("kissoja korissa");
                                 areaCounter = 0;
                             }
                             if (tempcounters < 6)
@@ -471,8 +461,7 @@ public class enemyPathfinding : MonoBehaviour
                                 {
                                     idleTimer = defaultIdleTimer;
                                 }
-                                tempcounters++;
-                                print("state manager 4 aktivoitu");
+                                tempcounters++;                                
                                 stateManager(4);
 
                             }
@@ -481,8 +470,7 @@ public class enemyPathfinding : MonoBehaviour
 
                     }
                     else
-                    {
-                        print("huonoa tuuria hississa");
+                    {                       
                         alertTimer--;
                         if (alertTimer <= 0)
                         {
