@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Hide
   - OD
-  - ball
+  - bottle
   - enemy
   - soundSphere
   - brokenObject
@@ -26,7 +26,7 @@ TagManager:
   - Waypoint
   - Unwalkable
   - Sphere
-  - ground
+  - jar
   - patrolDog
   - checkPoint
   - particleArea
@@ -36,12 +36,15 @@ TagManager:
   - hunterSpawner
   - ladder
   - bagOfAir
-  - Smell
+  - glass
   - visionRotator
   - itemDatabase
   - collect
   - breakableObject
   - Folder
+  - door
+  - key
+  - destructible
   layers:
   - Default
   - TransparentFX

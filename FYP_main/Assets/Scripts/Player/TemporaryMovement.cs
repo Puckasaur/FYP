@@ -262,4 +262,9 @@ public class TemporaryMovement : MonoBehaviour
             }
         }
     }
+    public void resetKeys()
+    {
+        
+        keyPossessed = new int[3];
+    }
 }

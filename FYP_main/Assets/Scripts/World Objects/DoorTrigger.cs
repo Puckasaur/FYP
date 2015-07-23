@@ -37,4 +37,9 @@ public class DoorTrigger : MonoBehaviour
             }
         }
     }
+    public void checkpoint()
+    {
+        m_Animator.SetBool("DoorOpen", false);
+        opening = false;
+    }
 }

@@ -17,9 +17,14 @@ public class checkPoint: MonoBehaviour
     private string currentLevel; // the current level
     public  GameObject[] allEnemies; // needed to reset enemies' positions
     private GameObject[] allHunters; // Hunters need to be destroyed on player death
+    public GameObject[] allKeys;
+    public GameObject[] allDoors;
+    public GameObject[] allDestructibles;
 
     public enemyPathfinding script;
     public huntingDog hunterScript;
+    public TemporaryMovement playerScript;
+    public GameObject player;
 
 	public bool sendBack;
 
@@ -49,9 +54,14 @@ public class checkPoint: MonoBehaviour
 			sendBack = true;
 
             this.transform.position = checkPointPosition.transform.position;
-
+            playerScript = player.GetComponent<TemporaryMovement>();
+            playerScript.resetKeys();
             allEnemies = GameObject.FindGameObjectsWithTag("enemy");
             allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
+            allKeys = GameObject.FindGameObjectsWithTag("key");
+            allDoors = GameObject.FindGameObjectsWithTag("door");
+            allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
+
             foreach(GameObject hunter in allHunters)
             {
                 hunterScript = (huntingDog)hunter.GetComponent<huntingDog>();
@@ -73,6 +83,22 @@ public class checkPoint: MonoBehaviour
                 script.agent.speed = script.patrolSpeed;
                 script.stateManager(0);
 
+            }
+            foreach(GameObject key in allKeys)
+            {
+                instantiateKey Key = key.GetComponent<instantiateKey>();
+                Key.checkpoint();
+            }
+            foreach (GameObject destructible in allDestructibles)
+            {
+
+                instantiateDestructible DES = destructible.GetComponent<instantiateDestructible>();
+                DES.checkpoint();
+            }
+            foreach (GameObject door in allDoors)
+            {
+                DoorTrigger dt = door.GetComponent<DoorTrigger>();
+                dt.checkpoint();
             }
         }
     }

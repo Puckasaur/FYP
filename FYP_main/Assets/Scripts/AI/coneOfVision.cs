@@ -66,10 +66,15 @@ public class coneOfVision : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.gameObject.tag == "player") 
-		{
-			chaseTransScript.playSting();
-		}
+        if (other.gameObject.tag == "player")
+        {
+            Physics.Linecast(transform.position, other.transform.position, out hit);
+            Debug.DrawLine(transform.position, other.transform.position, Color.green);
+            if (hit.collider.tag == "player")//other.tag)
+            {
+                chaseTransScript.playSting();
+            }
+        }
 	}
 
     void OnTriggerStay(Collider other)

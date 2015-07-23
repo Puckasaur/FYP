@@ -24,11 +24,11 @@ public class breakableObject: MonoBehaviour
         //---------------------------------------------------//
         // set the volume of the sound sphere for this object//
         //---------------------------------------------------//
-        if (this.gameObject.tag == "ball")
+        if (this.gameObject.tag == "bottle")
             maxScale = 30.0f;
-        else if (this.gameObject.tag == "cube")
+        else if (this.gameObject.tag == "glass")
             maxScale = 40.0f;
-        else if(this.gameObject.tag == "trap")
+        else if(this.gameObject.tag == "jar")
         {
             maxScale = 50.0f;
         }
@@ -111,7 +111,7 @@ public class breakableObject: MonoBehaviour
 
     public void objectBreaking()
     {
-        if (this.gameObject.tag == "ball")
+        if (this.gameObject.tag == "bottle")
         {
             brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
             newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
@@ -121,7 +121,7 @@ public class breakableObject: MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (this.gameObject.tag == "cube")
+        if (this.gameObject.tag == "glass")
         {
             brokenObject = (GameObject)Instantiate(brokenCube, this.transform.localPosition, Quaternion.identity);
             newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);
@@ -131,7 +131,7 @@ public class breakableObject: MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        if (this.gameObject.tag == "trap")
+        if (this.gameObject.tag == "jar")
         {
             brokenObject = (GameObject)Instantiate(brokenSphere, this.transform.position, Quaternion.identity);
             newSphere = (GameObject)Instantiate(Sphere, this.transform.position, Quaternion.identity);

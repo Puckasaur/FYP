@@ -12,9 +12,10 @@ GameObject:
   - 23: {fileID: 2390246}
   - 64: {fileID: 6496690}
   - 114: {fileID: 11486818}
+  - 136: {fileID: 13683024}
   m_Layer: 0
   m_Name: Des_Bottle
-  m_TagString: breakableObject
+  m_TagString: bottle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,6 +95,19 @@ MonoBehaviour:
   boneRadius: 0
   ballRadius: 0
   cubeRadius: 0
+--- !u!136 &13683024
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 145296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .0858154297
+  m_Height: .349744081
+  m_Direction: 1
+  m_Center: {x: 0, y: .176176965, z: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
