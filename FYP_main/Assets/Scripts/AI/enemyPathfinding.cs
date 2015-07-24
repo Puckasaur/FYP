@@ -18,36 +18,49 @@ public enum enumStates
 
 public class enemyPathfinding : MonoBehaviour
 {
+    //Detection variables//
+
+    //smell detection
+
     ringOfSmell ringOfSmellScript;
-    coneOfVision coneOfVisionScript;
-    soundSphere sphereScript;
-    RaycastHit hit;
-    public Vector3 respawnPosition;
-    public Transform target1;
-    public Transform target2;
-    public Transform target3;
-    public Transform target4;
-    public GameObject visionRotator;
-    public Transform currentTarget;
-    public Transform lastTarget;
-    public enumStates States;
-    GameObject vision;
-    GameObject smell;
     GameObject bone;
-    public GameObject player;
+    
+    //rotation after smelling values
+    public Vector3 tempSmellPosition;
+    public bool continueRotation = false;
+
+    //These variables are for the enemies to use when they smell a bone
+    float maxRange = 1.5f;
+    Vector3 soundSourcePos;
+    Transform tempWaypointPos;
+
+    //end of rotation after smelling values
+
+    //sound detection
+    soundSphere sphereScript;
     GameObject newSphere;
     public GameObject sphere;
     public GameObject soundSource;
     GameObject brokenObject;
 
-    public bool isOnWaypoint = false;
-    public NavMeshAgent agent;
-    public List<Transform> targets = new List<Transform>();
-    public List<Transform> alertArea = new List<Transform>();
+    //vision detection
+    coneOfVision coneOfVisionScript;
 
-    public bool isPaired = false;
-    public bool eatBone = false;
-    public bool distracted = false;
+
+    //end of Detection variables
+
+    RaycastHit hit;
+    public Vector3 respawnPosition;
+
+    //Pathfinding variables
+    public Transform target1;
+    public Transform target2;
+    public Transform target3;
+    public Transform target4;
+
+    public Transform currentTarget;
+    public Transform lastTarget;
+
     float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
@@ -57,33 +70,56 @@ public class enemyPathfinding : MonoBehaviour
     float vectorCurrentTargetz = 0;
     float vectorx;
     float vectorz;
+	
+	  Vector3[] path = new Vector3[0];
+    Vector3 currentWaypoint;
+    //End of Pathfinding variables
 
-    //Idle Suspicious values
+    public GameObject visionRotator;
+    public GameObject player;
+    public enumStates States;
+    
+    public float patrolSpeed;
+    public float chaseSpeed;
+    public float chaseRange;
+  
+    public NavMeshAgent agent;
+    public List<Transform> targets = new List<Transform>();
+    public List<Transform> alertArea = new List<Transform>();
 
+    public bool isOnWaypoint = false;
+    public bool isPaired = false;
+    public bool eatBone = false;
+    public bool distracted = false;
+
+
+    //Idle Suspicious variables
     float rotationDifference = 0;
     public bool idleSuscpicious = false;
-    public float firstDirection; //= 33;
-    public float secondDirection; // = 66;
-    public float thirdDirection; // = 78;
+    public float firstDirection;    //-These are used to determine where the opponen will look when it
+    public float secondDirection;   // reaches the waypoint.
+    public float thirdDirection;    //Insert integer to set the angle between -180 and 180. 
     List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
 
-    bool rotating = false;
-    float rotationStep = 65.0f;
+    
+    float rotationStep = 65.0f;             //-Enemies turning speed
     public float rotationDegrees = 90;
     public float currentAngle = 0;
     public float targetAngle = 0;
-    public float angleOffsetMax = 10.0f;
-    public float angleOffsetMin = -10.0f;
+    public float angleOffsetMax = 10.0f;    // -These values are used to prevent the Unity from missing
+    public float angleOffsetMin = -10.0f;   // the right angle during updates.
+    public float turnTimer = 100.0f;        // -This is used to determine how long the enemy will sit idling between turning from a single angle to another.
+    float currentTargetDirection;           
+    int turnCounter = 0;
+    bool rotating = false;
     bool rotationInProgress = false;
     public bool rotationCompleted = false;
-    public float turnTimer = 100.0f;
-    float currentTargetDirection;
-    int turnCounter = 0;
     public bool SeekForSmellSource = false;
     public bool agentStopped = false;
+    // end of Idle Suspicious variables
 
-    //So many timers
+    //Timers
     int tempcounters = 0;
     int timer;
     public int idleTimer;
@@ -105,28 +141,26 @@ public class enemyPathfinding : MonoBehaviour
     int detectSoundTimer;
     public float turnTowardsSmellTimer;
     public float defaultTurnTowardsSmellTimer;
-    public float patrolSpeed;
-    public float chaseSpeed;
-    public float chaseRange;
     public float agentNotMovingTimer;
     public float defaultAgentNotMovingTimer;
+    //end of Timers
 
-    Vector3[] path = new Vector3[0];
-    Vector3 currentWaypoint;
-    //Leap values
-    public float leapRange;
-    float leapTimer;
-    public float defaultLeapTimer;
-    Vector3 leapPosition;
-    public float impulse;
+  
+
+    //Charge variables
+    float chargeTimer;
+    public float defaultChargeTimer;
     public float chargeRange;
     Vector3 enemyRotation;
+    //end of Charge variables
 
-    //Stuck thingies
+    //If enemies get stuck variables
     float tempPosX = 0;
     float tempPosZ = 0;
     bool visited = false;
-    //end of stuck thingies
+    //end of If enemies get stuck variables
+
+    //Alert waypoint organization variables
     List<Transform> usedWaypoints = new List<Transform>();
     List<Vector3> waypointLocations = new List<Vector3>();
     List<Transform> tempAlertWaypoints = new List<Transform>();
@@ -134,38 +168,31 @@ public class enemyPathfinding : MonoBehaviour
     int currentWaypointIndex = 0;
     float waypointLocationValue = 0;
     Vector3 waypointDifference;
-    //for smart rotation
-    public Vector3 tempSmellPosition;
-    public bool continueRotation = false;
+    //end of Alert waypoint organization variables
 
+    //Misc variables
     Collider playerCollider;
     Animator patrolAnim;
 
-    //These variables are for the enemies to use when they smell a bone
-    float maxRange = 1.5f;
-    Vector3 soundSourcePos;
-    Transform tempWaypointPos;
-
-
-    //This is for Animator to see enemies actual speeds, it uses normal update atm.
+    //This is for Animator guy to see enemies actual speeds, it uses normal update atm.
     //It can be changed to FixedUpdate if it gives better results
     Vector3 previousPosition;
     Vector3 currentPosition;
     public float currentSpeed;
+    //end of Misc variables
 
 
-    //values if enemy doesn't receive a new waypoint to prevent them from being stuck	
     void Start()
     {
-        
-        leapTimer = defaultLeapTimer;
-        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");
         respawnPosition = this.transform.position;
+
+        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");        
         player = GameObject.FindGameObjectWithTag("player");
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         patrolAnim = gameObject.GetComponent<Animator>();
 
+        //Setting waypoints and Navigation Mesh agent
         setDirectionsForIdle();
         setTargetWaypoints();
         currentTarget = targets[0];
@@ -173,8 +200,10 @@ public class enemyPathfinding : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = patrolSpeed;
         agent.SetDestination(currentTarget.position);
+        //end of Setting waypoints and Navigation Mesh agent
 
         //Setting Timers
+        chargeTimer = defaultChargeTimer;
         timer = defaultTimer;
         eatTimer = defaultEatTimer;
         barkTimer = defaultBarkTimer;
@@ -184,13 +213,16 @@ public class enemyPathfinding : MonoBehaviour
         detectSoundTimer = defaultDetectSoundTimer;
         turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
         agentNotMovingTimer = defaultAgentNotMovingTimer;
+        //end of Setting Timers
 
+        //Misc 
         playerCollider = player.GetComponent<Collider>();
+        //end of Misc
     }
 
     void Update()
     {
-
+        //Timer for the animator guy to see enemies actual speed
         if (agent.velocity != Vector3.zero)
         {
             Vector3 currentMove = transform.position - previousPosition;
@@ -198,9 +230,13 @@ public class enemyPathfinding : MonoBehaviour
             previousPosition = transform.position;
 			updateAnimator();
         }
+        //end of Timer for the animator guy to see enemies actual speed
 
-
+        //To prevent opponent from sleeping
         GetComponent<Rigidbody>().WakeUp();
+        //end of To prevent opponent from sleeping
+
+
         //------------------//
         //Code of the states//
         //------------------//
@@ -224,7 +260,7 @@ public class enemyPathfinding : MonoBehaviour
                     //agentStopped = false;
                     //agent.Resume();
 
-
+                    //Check if the player is within offset range from the current target
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     { 
                         stateManager(1);
@@ -249,7 +285,7 @@ public class enemyPathfinding : MonoBehaviour
                         agentStopped = true;
                         agent.Stop();
                     }
-
+                    //Check if the player is within offset range from the current target
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
 
@@ -298,11 +334,9 @@ public class enemyPathfinding : MonoBehaviour
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
-                    //--------------------------//
-                    //Leap Attack While Chasing //
-                    //--------------------------//
 
                     patrolAnim.SetBool("patrolRun", true);
+                    //patrolAnim.SetBool("patrolIdle", false);
 
                     if (vectorx < chargeRange || vectorz < chargeRange)
                     {
@@ -311,21 +345,21 @@ public class enemyPathfinding : MonoBehaviour
                         transform.LookAt(enemyRotation);
                         transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed / 2 * Time.deltaTime);
 
-                        leapTimer--;
-                        if (leapTimer <= 0)
+                        chargeTimer--;
+                        if (chargeTimer <= 0)
                         {
                             // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
                             agent.autoBraking = true;
-                            leapTimer = defaultLeapTimer;
+                            chargeTimer = defaultChargeTimer;
                         }
                     }
                     else
                     {
-                        leapTimer--;
-                        if (leapTimer <= 0)
+                        chargeTimer--;
+                        if (chargeTimer <= 0)
                         {
                             agent.autoBraking = true;
-                            leapTimer = defaultLeapTimer;
+                            chargeTimer = defaultChargeTimer;
                         }
                     }
 
@@ -418,8 +452,6 @@ public class enemyPathfinding : MonoBehaviour
                     agentStopped = false;
                     agent.Resume();
                 }
-                //if (ringOfSmellScript.smellDetected == false)
-               // {
                     if (alertTimer == 0 || alertTimer < 0)
                     {
                         if (lastTarget != null)
@@ -428,7 +460,7 @@ public class enemyPathfinding : MonoBehaviour
                             stateManager(4);
                         }
                     }
-
+                    //Check if the player is within offset range from the current target
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {                       
                         if (timer <= 0 && (!distracted))
@@ -486,8 +518,6 @@ public class enemyPathfinding : MonoBehaviour
                         agentStopped = true;
                         agent.Stop();
                     }
-                   // if (ringOfSmellScript.smellDetected == false)
-                   // {
                         if (coneOfVisionScript.playerSeen == true)
                         {
                             agentStopped = false;
@@ -541,12 +571,6 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             idleTimer = 0;
                         }
-                    //}
-
-                    //else if (ringOfSmellScript.smellDetected == true)
-                    //{
-                    //    RotateDogWhileSmelling();
-                    //}
                     break;
                 }
             case enumStates.distracted:
@@ -575,7 +599,8 @@ public class enemyPathfinding : MonoBehaviour
                 {
                      patrolAnim.SetBool("patrolRun", false);
                     // tempWaypointPos.position = currentTarget.position;
-                    print("sound squid > " + soundSource);
+                                  
+                    
                     if (soundSource && soundSource.tag != "bone")
                     {
                         if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
@@ -586,30 +611,24 @@ public class enemyPathfinding : MonoBehaviour
                         }
                     }
                     else if (soundSource.tag == "bone")
-                    {
-                        print("This is the wonderland it should have always been");
+                    {                       
                         currentTarget = soundSource.transform;                        
                     }
-                    agent.SetDestination(currentTarget.transform.position);
-                    print("Set destination to " + currentTarget.transform.position);
+                    agent.SetDestination(currentTarget.transform.position);             
 
                     //---------------------------------------------//
                     // when sound is heard, move towards the source//
-                    //---------------------------------------------//
+                    //---------------------------------------------//    
 
-                  
-                    
-
+                    //Check if the player is within offset range from the current target
                     if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
                     {
                         alertTimer = defaultAlertTimer;
                         stateManager(7);
                     }
-
-
-
                 }
                 break;
+
             case enumStates.eatBone:
                 {
                     //------------------------------------------------------------------//
@@ -645,13 +664,18 @@ public class enemyPathfinding : MonoBehaviour
                 }
 
                 break;
+               
             case enumStates.smell:
                 {
 					patrolAnim.SetBool("patrolRun", false);
+					//------------------------------------------------//
+                    //turns enemy towards player's last known location//
+                    //------------------------------------------------//
+
                     SeekForSmellSource = true;
                     agentStopped = true;
                     agent.Stop();
-                    Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);//player.transform.position);
+                    Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
                     float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                     transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
                     if (angle < 5.0f && angle > -5.0f)
@@ -667,6 +691,7 @@ public class enemyPathfinding : MonoBehaviour
 
         if (currentTarget != null)
         {
+            //vector calculations used multiple time in the update
             vectorTransformPositionx = transform.position.x;
             vectorTransformPositionz = transform.position.z;
 
@@ -705,23 +730,23 @@ public class enemyPathfinding : MonoBehaviour
             {
                 turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
             }
-
-            //RotateDogWhileSmelling();
         }
         //-------------//
         //End of Update//
         //-------------//
     }
+
+  
     void LateUpdate()
     {
+        //Just to make sure enemies will have a target
         if (timer <= 0)
         {
             timer += defaultTimer;
 
             if (States != enumStates.idleSuspicious)
-            {
-                //   Vector3 tempVector = currentTarget.position;
-                if (/*agent.SetDestination(currentTarget.position)*/ currentTarget != null && !currentTarget.Equals(null))
+            {               
+                if (currentTarget != null && !currentTarget.Equals(null))
                 {
                     agent.SetDestination(currentTarget.position);
                 }
@@ -733,7 +758,7 @@ public class enemyPathfinding : MonoBehaviour
         }
         timer--;
 
-       
+       //To decide what player should do when he's not moving in the end of an update.
         if (agentStopped == true)
         {
             if (States == enumStates.patrol)
@@ -763,6 +788,8 @@ public class enemyPathfinding : MonoBehaviour
             }           
         }
 
+        //To make sure even if the enemies lose their target for some reason
+        //they will become recover and start to move again. 
         agentNotMovingTimer--;
         if (agentNotMovingTimer < 0)
         {
@@ -771,9 +798,7 @@ public class enemyPathfinding : MonoBehaviour
         if (agentNotMovingTimer == 0)
         {
             if (visited == false)
-            {
-
-               
+            {               
                 tempPosX = vectorx;
                 tempPosZ = vectorz;
                 visited = true;
@@ -781,6 +806,7 @@ public class enemyPathfinding : MonoBehaviour
             }
             else
             {
+                //Check if the player is within offset range from the current target
                 if (tempPosX == vectorx || tempPosX >= (vectorx - waypointOffsetMin) || tempPosX <= (vectorx - waypointOffsetMax) && tempPosZ == vectorz || tempPosX >= (vectorz - waypointOffsetMin) || tempPosZ <= (vectorz - waypointOffsetMax))
                 {                    
                     agent.SetDestination(currentTarget.position);
@@ -810,13 +836,7 @@ public class enemyPathfinding : MonoBehaviour
 
     void setTargetWaypoints()
     {
-        /*
-        targets.Add(target1);
-        targets.Add(target2);
-        targets.Add(target3);
-        */
-
-        // Marc's tests
+        // Last edited by Marc
         if (target1 != null)
         {
             targets.Add(target1);
@@ -836,7 +856,7 @@ public class enemyPathfinding : MonoBehaviour
         {
             targets.Add(target4);
         }
-        // End of Marc's tests
+        //end of Last edited by Marc
     }
 
 
@@ -1039,18 +1059,13 @@ public class enemyPathfinding : MonoBehaviour
                 waypointLocations.Add(tempAlertWaypoints[i].position);
             }
         }
-
-        //if (soundSource)
-        //{
         Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
-        //}
         closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
         closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
         closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
 
         //Choose one of the waypoints to be the closest
         closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
-
 
         //Run the check if it's really the closest waypoint we're looking for
         for (int i = 0; i < waypointLocations.Count; i++)
@@ -1138,6 +1153,8 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //Whenever enemy enters a new room with a different alert area, it will be given new waypoints
+    //to navigate if it goes into a alert state.
     public void setAlertArea(GameObject area)
     {
         Component[] transforms;
@@ -1154,6 +1171,7 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //Actual function to rotate enemy when the player is staying too close of the enemies
     public void rotateDogWhileSmelling( Vector3 targetTransformPosition)
     {
         if (ringOfSmellScript.smellingPlayer)
@@ -1167,6 +1185,8 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //if player stays within smelling range enemies will get suspicious and eventually turn to look
+    //for the source of the smell.
   public  void checkContinuousSmelling(Vector3 targetTransformPosition)
     {
         turnTowardsSmellTimer--;
@@ -1178,6 +1198,8 @@ public class enemyPathfinding : MonoBehaviour
         }       
     }
 
+    //This is used to prevent enemies from being unable to find a path to the destructible object.
+    //It will take a random points around the object for the enemy to navigate to.
   bool RandomPoint(Vector3 center, float range, out Vector3 result)
   {
       for (int i = 0; i < 6; i++)
