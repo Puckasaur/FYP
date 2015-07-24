@@ -90,7 +90,7 @@ public class enemyPathfinding : MonoBehaviour
     int barkTimer;
     float escapeTimer;
     public float alertTimer;
-    float eatTimer;
+    public float eatTimer;
     float failTimer;
     public int defaultEatTimer;
     public int defaultIdleTimer;
@@ -141,6 +141,19 @@ public class enemyPathfinding : MonoBehaviour
     Collider playerCollider;
     Animator patrolAnim;
 
+    //These variables are for the enemies to use when they smell a bone
+    float maxRange = 1.5f;
+    Vector3 soundSourcePos;
+    Transform tempWaypointPos;
+
+
+    //This is for Animator to see enemies actual speeds, it uses normal update atm.
+    //It can be changed to FixedUpdate if it gives better results
+    Vector3 previousPosition;
+    Vector3 currentPosition;
+    public float currentSpeed;
+
+
     //values if enemy doesn't receive a new waypoint to prevent them from being stuck	
     void Start()
     {
@@ -180,6 +193,15 @@ public class enemyPathfinding : MonoBehaviour
 
     void Update()
     {
+
+        if (agent.velocity != Vector3.zero)
+        {
+            Vector3 currentMove = transform.position - previousPosition;
+            currentSpeed = currentMove.magnitude / Time.deltaTime;
+            previousPosition = transform.position;
+        }
+
+
         GetComponent<Rigidbody>().WakeUp();
         //------------------//
         //Code of the states//
@@ -591,35 +613,43 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-                    float maxRange = 1.5f;
-                    Vector3 soundSourcePos;
-                    Vector3 tempWaypointPos = currentTarget.position;
-
+                     
+                    // tempWaypointPos.position = currentTarget.position;
+                    print("sound squid > " + soundSource);
                     if (soundSource && soundSource.tag != "bone")
                     {
                         print(" It came through");
                         if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
                         {
                             Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
-                            tempWaypointPos = currentTarget.position;
-                            currentTarget.position = soundSourcePos;
+                            tempWaypointPos = soundSource.transform;
+                            currentTarget = tempWaypointPos;//soundSourcePos;
                         }
                     }
-                    else 
+                    else if (soundSource.tag == "bone")
                     {
-                        currentTarget = soundSource.transform;
+                        print("This is the wonderland it should have always been");
+                        currentTarget = soundSource.transform;                        
                     }
-                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
-                    {
-                        alertTimer = defaultAlertTimer;
-                        currentTarget.position = tempWaypointPos;
-                    }
-                    //organizeAlertWaypoints();
-                    stateManager(3);
+                    agent.SetDestination(currentTarget.transform.position);
+                    print("Set destination to " + currentTarget.transform.position);
 
                     //---------------------------------------------//
                     // when sound is heard, move towards the source//
                     //---------------------------------------------//
+
+                    
+
+                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+                    {
+                        alertTimer = defaultAlertTimer;
+                        stateManager(7);
+                        //currentTarget.position = tempWaypointPos;
+                    }
+                    //organizeAlertWaypoints();
+                    //stateManager(3);
+
+
 
                 }
                 break;
@@ -628,14 +658,18 @@ public class enemyPathfinding : MonoBehaviour
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
+                    if (soundSource != null && soundSource.tag == "bone")
+                    {
+                        //print("bone set");
+                        bone = soundSource;
+                    }
 
                     eatBone = true;
                     if (!bone)
                     {
-                        vision.SetActive(true);
-                        smell.SetActive(true);
                         alertTimer += defaultAlertTimer;
                         stateManager(3);
+                        eatTimer = defaultEatTimer;
                         currentTarget = alertArea[areaCounter];
                     }
 
@@ -643,12 +677,11 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         eatTimer = defaultEatTimer;
                         distracted = false;
-                        vision.SetActive(true);
-                        smell.SetActive(true);
                         eatBone = false;
 
                         currentTarget = alertArea[areaCounter];
                         Destroy(bone);
+                        print(bone + " trying to destroy boen");
                         alertTimer += defaultAlertTimer;
                         stateManager(3);
 
