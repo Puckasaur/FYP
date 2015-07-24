@@ -9,17 +9,17 @@ public class patrolDogAudio : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		patrolSource = GetComponent<AudioSource>();
+		//patrolSource = GetComponents<AudioSource>;
 	
 	}
 
-	void playBark()
-	{
-		if(!patrolSource.isPlaying)
-		{
-			patrolSource.Play();
-		}
-	}
+//	void playBark()
+//	{
+//		if(!patrolSource.isPlaying)
+//		{
+//			patrolSource.Play();
+//		}
+//	}
 	
 	// Update is called once per frame
 	void Update () {

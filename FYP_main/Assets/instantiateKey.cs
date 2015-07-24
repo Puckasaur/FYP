@@ -20,10 +20,10 @@ public class instantiateKey : MonoBehaviour {
 	public void checkpoint()
     {
         Destroy(newKey);
-            newKey = (GameObject)Instantiate(key, transform.localPosition, Quaternion.identity);
-            newKey.transform.parent = transform;
-            keyscript = newKey.GetComponent<Key>();
-            keyscript.keyNumber = keyNumber;
+        newKey = (GameObject)Instantiate(key, transform.localPosition, Quaternion.identity);
+        newKey.transform.parent = transform;
+        keyscript = newKey.GetComponent<Key>();
+        keyscript.keyNumber = keyNumber;
 
     }
 	// Update is called once per frame
