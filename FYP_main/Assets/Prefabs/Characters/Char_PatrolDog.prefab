@@ -1116,7 +1116,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1184,7 +1184,7 @@ Animator:
   m_GameObject: {fileID: 133886}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba1b2400b041954438c021a86178dcb8, type: 3}
-  m_Controller: {fileID: 9100000, guid: 5fc016b1226aca648a4853e80b583124, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6ff904a547d71174b821d2ddd74426da, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1238,6 +1238,7 @@ MonoBehaviour:
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -1261,6 +1262,7 @@ MonoBehaviour:
   chargeRange: 5
   tempSmellPosition: {x: 0, y: 0, z: 0}
   continueRotation: 0
+  currentSpeed: 0
 --- !u!114 &11444014
 MonoBehaviour:
   m_ObjectHideFlags: 1

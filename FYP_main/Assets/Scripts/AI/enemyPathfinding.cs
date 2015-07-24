@@ -199,6 +199,7 @@ public class enemyPathfinding : MonoBehaviour
             Vector3 currentMove = transform.position - previousPosition;
             currentSpeed = currentMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
+			updateAnimator();
         }
 
 
@@ -214,7 +215,7 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
-
+					patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == true && isPaired)
                     {
                         agentStopped = false;
@@ -225,8 +226,6 @@ public class enemyPathfinding : MonoBehaviour
 
                     //agentStopped = false;
                     //agent.Resume();
-                    //patrolAnim.SetBool("patrolWalk", true);
-                    //patrolAnim.SetBool("patrolRun", false);
 
 
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
@@ -238,9 +237,6 @@ public class enemyPathfinding : MonoBehaviour
                             //print("agent stopped");
                             agentStopped = true;
                             agent.Stop();
-                            patrolAnim.SetBool("patrolWalk", false);
-                            patrolAnim.SetBool("patrolRun", false);
-                            //patrolAnim.SetBool("patrolIdle", true);
                         }
                     }
                     //print(SeekForSmellSource);
@@ -256,6 +252,7 @@ public class enemyPathfinding : MonoBehaviour
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
+					patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
                     {
                         agentStopped = true;
@@ -270,9 +267,6 @@ public class enemyPathfinding : MonoBehaviour
                             if (currentTarget.gameObject.tag != "bone")
                             {
                                 lastTarget = currentTarget;
-                                //patrolAnim.SetBool("patrolWalk", false);
-                                //patrolAnim.SetBool("patrolRun", false);
-                                //patrolAnim.SetBool("patrolIdle", true);
                             }                            
                             if( isPaired == true)
                             {
@@ -314,7 +308,6 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else
                     {
-                        patrolAnim.SetBool("patrolWalk", false);
                         patrolAnim.SetBool("patrolRun", false);
                         stateManager(0);
                     }
@@ -331,10 +324,7 @@ public class enemyPathfinding : MonoBehaviour
                     //Leap Attack While Chasing //
                     //--------------------------//
 
-                    patrolAnim.SetBool("patrolWalk", false);
                     patrolAnim.SetBool("patrolRun", true);
-                    //patrolAnim.SetBool("patrolIdle", false);
-
 
                     if (vectorx < chargeRange || vectorz < chargeRange)
                     {
@@ -439,6 +429,7 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
+				patrolAnim.SetBool("patrolRun", false);	
                 if (distracted)
                 {
                     stateManager(5);
@@ -520,7 +511,7 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
-
+					patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
                     {                        
                         agentStopped = true;
@@ -594,7 +585,7 @@ public class enemyPathfinding : MonoBehaviour
                     //-------------------------//
                     // Move towards distraction//
                     //-------------------------//
-
+					patrolAnim.SetBool("patrolRun", false);
                     distracted = true;
                     Vector3 bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
                     if (bonedir.x <= 4 && bonedir.x >= -4 && bonedir.z <= 4 && bonedir.z >= -4)
@@ -613,7 +604,7 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-                     
+                     patrolAnim.SetBool("patrolRun", false);
                     // tempWaypointPos.position = currentTarget.position;
                     print("sound squid > " + soundSource);
                     if (soundSource && soundSource.tag != "bone")
@@ -658,6 +649,7 @@ public class enemyPathfinding : MonoBehaviour
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
+					patrolAnim.SetBool("patrolRun", false);
                     if (soundSource != null && soundSource.tag == "bone")
                     {
                         //print("bone set");
@@ -693,6 +685,7 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.smell:
                 {
+					patrolAnim.SetBool("patrolRun", false);
                     SeekForSmellSource = true;
                     agentStopped = true;
                     agent.Stop();
@@ -1263,4 +1256,9 @@ public class enemyPathfinding : MonoBehaviour
       result = Vector3.zero;
       return false;
   }
+
+	void updateAnimator()
+	{
+		patrolAnim.SetFloat ("patrolMovement", currentSpeed);
+	}
 }
