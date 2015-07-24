@@ -235,7 +235,6 @@ public class enemyPathfinding : MonoBehaviour
 						
 						if (agentStopped == false)
                         {
-                            //print("agent stopped");
                             agentStopped = true;
                             agent.Stop();
                             patrolAnim.SetBool("patrolWalk", false);
@@ -243,7 +242,6 @@ public class enemyPathfinding : MonoBehaviour
                             //patrolAnim.SetBool("patrolIdle", true);
                         }
                     }
-                    //print(SeekForSmellSource);
                     //if (!SeekForSmellSource)
                     //{
                     //    transform.rotation = new Quaternion(0, 0, 0, 0);
@@ -618,7 +616,6 @@ public class enemyPathfinding : MonoBehaviour
                     print("sound squid > " + soundSource);
                     if (soundSource && soundSource.tag != "bone")
                     {
-                        print(" It came through");
                         if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
                         {
                             Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
