@@ -8718,7 +8718,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 223750979}
-  m_LocalRotation: {x: -.499999911, y: .5, z: .50000006, w: .50000006}
+  m_LocalRotation: {x: .500000238, y: .499999821, z: .499999911, w: -.500000119}
   m_LocalPosition: {x: 9.94099998, y: 3.58999991, z: 9.10999966}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -9239,23 +9239,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 1786417889}
   target2: {fileID: 1033066939}
   target3: {fileID: 199625565}
   target4: {fileID: 1959785314}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -9268,12 +9273,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -9286,17 +9292,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &239270061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17506,7 +17506,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 461952985}
-  m_LocalRotation: {x: -.499999911, y: .5, z: .50000006, w: .50000006}
+  m_LocalRotation: {x: -.5, y: -.5, z: -.499999762, w: .500000298}
   m_LocalPosition: {x: 36.4539986, y: 1.59300005, z: -3.69899988}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -22668,23 +22668,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 501626819}
   target2: {fileID: 897481739}
   target3: {fileID: 0}
   target4: {fileID: 0}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -22697,12 +22702,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -22715,17 +22721,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &626742639
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23998,23 +23998,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 1734838623}
   target2: {fileID: 2008870358}
   target3: {fileID: 2026114074}
   target4: {fileID: 483496789}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -24027,12 +24032,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -24045,17 +24051,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &657584423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28526,23 +28526,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 1275797540}
   target2: {fileID: 1026742570}
   target3: {fileID: 0}
   target4: {fileID: 0}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -28555,12 +28560,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -28573,17 +28579,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &795211314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34109,7 +34109,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438469186}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!65 &969773293
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35926,7 +35926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1027806571
 Transform:
   m_ObjectHideFlags: 0
@@ -38791,23 +38791,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 215115212}
   target2: {fileID: 309622884}
   target3: {fileID: 616437733}
   target4: {fileID: 951909635}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -38820,12 +38825,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -38838,17 +38844,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &1108887649
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41127,23 +41127,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 199625565}
   target2: {fileID: 1959785314}
   target3: {fileID: 1786417889}
   target4: {fileID: 1033066939}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -41156,12 +41161,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -41174,17 +41180,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &1180262424
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45182,23 +45182,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 1734838623}
   target2: {fileID: 2008870358}
   target3: {fileID: 2026114074}
   target4: {fileID: 483496789}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -45211,12 +45216,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -45229,17 +45235,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &1234592328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -45839,23 +45839,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 215115212}
   target2: {fileID: 309622884}
   target3: {fileID: 616437733}
   target4: {fileID: 951909635}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -45868,12 +45873,13 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
   alertTimer: 0
+  eatTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -45886,17 +45892,11 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
+  currentSpeed: 0
 --- !u!54 &1244391814
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50087,7 +50087,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341906628}
-  m_LocalRotation: {x: -.499999911, y: .5, z: .50000006, w: .50000006}
+  m_LocalRotation: {x: -.5, y: -.5, z: -.499999762, w: .500000298}
   m_LocalPosition: {x: 29.9400005, y: .25, z: -10.1700001}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
@@ -52098,7 +52098,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438469186}
-  m_RootOrder: 13
+  m_RootOrder: 12
 --- !u!65 &1406186344
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -52847,7 +52847,6 @@ Transform:
   - {fileID: 354670954}
   - {fileID: 1830707726}
   - {fileID: 1946892088}
-  - {fileID: 1468438233}
   - {fileID: 2048544910}
   - {fileID: 969773292}
   - {fileID: 1406186343}
@@ -53617,46 +53616,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 469414, guid: eea05f78fde9a684d8fb236a3c5f6381, type: 2}
   m_PrefabInternal: {fileID: 1263091597}
---- !u!1 &1468438232
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1468438233}
-  - 65: {fileID: 1468438234}
-  m_Layer: 31
-  m_Name: Movement_Blocker 10
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
---- !u!4 &1468438233
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1468438232}
-  m_LocalRotation: {x: 0, y: .707106709, z: 0, w: .707106829}
-  m_LocalPosition: {x: 12.6009998, y: 4.5, z: 1.972}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1438469186}
-  m_RootOrder: 10
---- !u!65 &1468438234
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1468438232}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.59614921, y: 1.84287262, z: .658070505}
-  m_Center: {x: .748022854, y: -.57856369, z: -.529267371}
 --- !u!1 &1469928971
 GameObject:
   m_ObjectHideFlags: 0
@@ -63873,11 +63832,11 @@ Prefab:
       objectReference: {fileID: 390052142}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.2200003
+      value: -39
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .119999997
+      value: -.400000006
       objectReference: {fileID: 0}
     - target: {fileID: 156102, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_TagString
@@ -66502,8 +66461,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .100000001, y: 3, z: 5.8583293}
-  m_Center: {x: -3.06241163e-05, y: 0, z: 2.07083678}
+  m_Size: {x: 4.70058727, y: 3, z: 5.81314087}
+  m_Center: {x: 2.5817554, y: 0, z: 1.44996488}
 --- !u!4 &1834656149 stripped
 Transform:
   m_PrefabParentObject: {fileID: 406952, guid: f7611d66d3155914abd6e1a52c336a48, type: 2}
@@ -68178,6 +68137,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 464116, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
       propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210328, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
+      propertyPath: m_Volume
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -74666,7 +74629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1438469186}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!65 &2048544911
 BoxCollider:
   m_ObjectHideFlags: 0
