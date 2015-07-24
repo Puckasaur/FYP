@@ -433,8 +433,6 @@ public class fatDogAi : MonoBehaviour {
                             secondDirectionAlert += 360;
                         }
 
-
-
                         alertLookingDirectionsSet = true;
 
                         if (directionDegreesAlert[0] != null)
@@ -454,11 +452,14 @@ public class fatDogAi : MonoBehaviour {
 
                     if (turnCounter < 4)
                     {
+                        print(targetAngle + "Target Angle");
+                        print(directionDegreesAlert[0] + "Direction degrees");
                         targetAngle = directionDegreesAlert[0];
                         rotateEnemy(targetAngle, rotationStep);
 
                         if (rotationCompleted)
                         {
+                            directionDegreesAlert.Add(directionDegreesAlert[0]);
                             directionDegreesAlert.Remove(directionDegreesAlert[0]);
                             rotationCompleted = false;
                             turnCounter++;
@@ -902,8 +903,6 @@ public class fatDogAi : MonoBehaviour {
         }
 		
 	}
-
-
 
 	//--------------------------------------------------------------------------------//
 	//This is to rotate enemy towards a smell before he detects the cause of the smell//
