@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: fbdcd127daef99a4cb12c9eee54f37f1
+timeCreated: 1437724057
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Spritesheet - Bag_0
+    21300002: Spritesheet - Bag_1
+    21300004: Spritesheet - Bag_2
+    21300006: Spritesheet - Bag_3
+    21300008: Spritesheet - Bag_4
+    21300010: Spritesheet - Bag_5
+    21300012: Spritesheet - Bag_6
+    21300014: Spritesheet - Bag_7
+    21300016: Spritesheet - Bag_8
+    21300018: Spritesheet - Bag_9
+    21300020: Spritesheet - Bag_10
+    21300022: Spritesheet - Bag_11
+    21300024: Spritesheet - Bag_12
+    21300026: Spritesheet - Bag_13
+    21300028: Spritesheet - Bag_14
+    21300030: Spritesheet - Bag_15
+    21300032: Spritesheet - Bag_16
+    21300034: Spritesheet - Bag_17
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Spritesheet - Bag_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_1
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_2
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_3
+      rect:
+        serializedVersion: 2
+        x: 624
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_4
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_5
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_6
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_7
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Spritesheet - Bag_8
+      rect:
+        serializedVersion: 2
+        x: 1664
+        y: 14
+        width: 208
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

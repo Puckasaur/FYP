@@ -39,17 +39,51 @@ public class TemporaryMovement : MonoBehaviour
     public float horizontal;
     public float vertical;
 
-    public Vector3 movement;
+	public Vector3 movement;
 
+	public GameObject boneCoolDown;
+	public GameObject bagCoolDown;
+
+	private float durationOfSpriteAnimationBone; 
+	public AnimationClip spriteAnimationBone;
+
+	private float durationOfSpriteAnimationBag; 
+	public AnimationClip spriteAnimationBag;
+
+	IEnumerator spriteBoneTimer()
+	{
+		boneCoolDown.GetComponent<Animator>().enabled = true;
+
+		yield return new WaitForSeconds(durationOfSpriteAnimationBone);
+
+		boneCoolDown.GetComponent<Animator>().enabled = false;	
+	}
+
+	IEnumerator spriteBagTimer()
+	{
+		bagCoolDown.GetComponent<Animator>().enabled = true;
+		
+		yield return new WaitForSeconds(durationOfSpriteAnimationBag);
+		
+		bagCoolDown.GetComponent<Animator>().enabled = false;	
+	}
 
 	void Start()
 	{
+		boneCoolDown.GetComponent<Animator>().enabled = false;
+		bagCoolDown.GetComponent<Animator>().enabled = false;
+
+		bagCoolDown.SetActive(false);
+		
 		m_GroundCheckDistance = 0.6f;
 		rb = GetComponent<Rigidbody> ();
 		catAnim = GetComponent<Animator> ();
 		origMovementSpeed = movementSpeed;
 		sprintSpeed = movementSpeed * sprintModifier;
         ring = GetComponentInChildren<ringOfSmell>();
+
+		durationOfSpriteAnimationBone = spriteAnimationBone.length;
+		durationOfSpriteAnimationBag = spriteAnimationBag.length;
 	}
 
 	void FixedUpdate() 
@@ -71,13 +105,24 @@ public class TemporaryMovement : MonoBehaviour
         transform.LookAt(transform.position + look, Vector3.up);
 		
 		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
-        {
+		{	
+			boneCoolDown.SetActive(true);
+			bagCoolDown.SetActive(false);
+
+		//	StopCoroutine(spriteBagTimer());
+			StartCoroutine(spriteBoneTimer());
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 
-		if (Input.GetKeyDown(KeyCode.Y) && bags > 0)
+		if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/)
 		{
+			boneCoolDown.SetActive(false);
+			bagCoolDown.SetActive(true);
+
+		//	StopCoroutine(spriteBoneTimer());
+			StartCoroutine(spriteBagTimer());
+
 			print(boneSpawner.transform.parent);
 			bags--;
 			newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);

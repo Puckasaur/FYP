@@ -15,12 +15,14 @@ public class CameraVent : MonoBehaviour
     private bool isDone = false; // if scripted camera's movement is over or not
 
     private TemporaryMovement playerMovement;
+	private ObstructionDetector obstructD;
 
 	void Start ()
     {
         scriptedCam.enabled = false;
         durationOfAnim = animation.length;
         playerMovement = GameObject.Find("Char_Cat").GetComponent<TemporaryMovement>();
+        obstructD = GameObject.Find("Target 1").GetComponent<ObstructionDetector>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -34,7 +36,7 @@ public class CameraVent : MonoBehaviour
                 if (isActivated == true && isDone == false)
                 {
                     //scriptedCam.transform.position = new Vector3(mainCam.transform.position.x, mainCam.transform.position.y, mainCam.transform.position.z);
-
+					obstructD.enabled = false;
                     playerMovement.GetComponent<Animator>().enabled = false;
                     playerMovement.enabled = false;
                     scriptedCam.enabled = true;
@@ -50,6 +52,7 @@ public class CameraVent : MonoBehaviour
     {
         yield return new WaitForSeconds(durationOfAnim);
 
+		obstructD.enabled = true;
         playerMovement.enabled = true;
         playerMovement.GetComponent<Animator>().enabled = true;
         scriptedCam.enabled = false;

@@ -13,8 +13,8 @@ public class hidingThirdPerson : MonoBehaviour {
     public Transform prevPosition;
     public Transform hidingPosition;
 
-   	public Text checkToEnter;
-    public Text checkToExit;
+   	public GameObject checkToEnter;
+	public GameObject checkToExit;
 
     public bool isHiding;
 	public bool isPaused;
@@ -27,13 +27,14 @@ public class hidingThirdPerson : MonoBehaviour {
 		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
 		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
 		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
+
 	}
 
     void OnTriggerStay(Collider catType)
     {	
 		if (catType.tag == "player") 
 		{
-			checkToEnter.enabled = true;
+			checkToEnter.SetActive(true);
 			
 			if (isHiding == false)
 			{
@@ -49,7 +50,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		checkToEnter.enabled = false;
+		checkToEnter.SetActive(false);
 	}
 
 	void Update (){ 
@@ -89,8 +90,8 @@ public class hidingThirdPerson : MonoBehaviour {
         if(ros.disguised == false)
         	ros.isDisguised("htp");
 
-		checkToEnter.enabled = false;
-		checkToExit.enabled = true;
+		checkToEnter.SetActive(false);
+		checkToExit.SetActive(true);
         
 	}
 	
@@ -99,7 +100,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-		checkToExit.enabled = false;
+		checkToExit.SetActive(false);
    
 	}
 
