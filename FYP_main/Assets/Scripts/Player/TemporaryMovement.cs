@@ -134,7 +134,7 @@ public class TemporaryMovement : MonoBehaviour
 		if (isGrounded)
 		{
             // WALK / SPRINT ACCORDING JOYSTICK PRESSURE
-
+            /*
             if (movement.magnitude > 1.6)
             {
                 catAnim.SetBool("isSprinting", true);
@@ -152,10 +152,10 @@ public class TemporaryMovement : MonoBehaviour
                 catAnim.SetBool("isSprinting", false);
                 movementSpeed = origMovementSpeed;
             }
-
+            */
             // WALK / SPRINT WITH THE USE OF A BUTTON
 
-            /*
+            
 			if (Input.GetButton ("Sprint") && movement.magnitude > 0.1) 
 			{
 				catAnim.SetBool("isSprinting", true);
@@ -167,7 +167,7 @@ public class TemporaryMovement : MonoBehaviour
 				catAnim.SetBool("isSprinting", false);
 				movementSpeed = origMovementSpeed;
 			}
-            */
+            
 		}
 	}
 
