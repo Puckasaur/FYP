@@ -173,6 +173,7 @@ public class enemyPathfinding : MonoBehaviour
     //Misc variables
     Collider playerCollider;
     Animator patrolAnim;
+    bool randomPointSelected = false;
 
     //This is for Animator guy to see enemies actual speeds, it uses normal update atm.
     //It can be changed to FixedUpdate if it gives better results
@@ -602,18 +603,28 @@ public class enemyPathfinding : MonoBehaviour
                                   
                     
                     if (soundSource && soundSource.tag != "bone")
-                    {
-                        if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
-                        {
-                            Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
-                            tempWaypointPos = soundSource.transform;
-                            currentTarget = tempWaypointPos;//soundSourcePos;
-                        }
+                    {                                                  
+                            if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
+                            {
+                                randomPointSelected = true;
+                                Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
+                                tempWaypointPos = soundSource.transform;
+                                currentTarget = tempWaypointPos;//soundSourcePos;
+                            }
+                      
+                       
                     }
                     else if (soundSource.tag == "bone")
-                    {                       
+                    {
                         currentTarget = soundSource.transform;                        
                     }
+
+                    agentStopped = true;
+                    agent.Stop();
+                    agentStopped = false;
+                    agent.Resume();
+                    
+                    
                     agent.SetDestination(currentTarget.transform.position);             
 
                     //---------------------------------------------//
@@ -622,9 +633,35 @@ public class enemyPathfinding : MonoBehaviour
 
                     //Check if the player is within offset range from the current target
                     if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
-                    {
+                    {                       
+                         Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
+                        Debug.DrawLine(this.transform.position, soundSource.transform.position);
                         alertTimer = defaultAlertTimer;
-                        stateManager(7);
+
+                        if (hit.collider != null)
+                        { 
+                                if (agentStopped == false)
+                                {
+                                    agentStopped = true;
+                                    agent.Stop();
+                                }
+                            if(hit.collider.tag == "bone")
+                            {
+                                randomPointSelected = false;
+                                stateManager(7);
+                            }                              
+                            
+                            else
+                            {
+                                randomPointSelected = false;                               
+                                stateManager(3);
+                            }
+                        }
+                        else
+                        {
+                            randomPointSelected = false;
+                            stateManager(3);
+                        }
                     }
                 }
                 break;
@@ -634,34 +671,42 @@ public class enemyPathfinding : MonoBehaviour
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
-					patrolAnim.SetBool("patrolRun", false);
+                    patrolAnim.SetBool("patrolRun", false);
                     if (soundSource != null && soundSource.tag == "bone")
                     {
                         bone = soundSource;
+                    }                        
+
+                        if (hit.collider.tag == "player")
+                        {
+                            eatBone = true;
+                            if (!bone)
+                            {
+                                alertTimer += defaultAlertTimer;
+                                stateManager(3);
+                                eatTimer = defaultEatTimer;
+                                currentTarget = alertArea[areaCounter];
+                            }
+
+                            if (eatTimer <= 0)
+                            {
+                                eatTimer = defaultEatTimer;
+                                distracted = false;
+                                eatBone = false;
+
+                                currentTarget = alertArea[areaCounter];
+                                Destroy(bone);
+                                alertTimer += defaultAlertTimer;
+                                stateManager(3);
+                            }
+                            eatTimer--;
+                            if (eatTimer < 0)
+                            {
+                                eatTimer = 0;
+                            }
+                        }                        
                     }
-                        eatBone = true;
-                        if (!bone)
-                        {
-                            alertTimer += defaultAlertTimer;
-                            stateManager(3);
-                            eatTimer = defaultEatTimer;
-                            currentTarget = alertArea[areaCounter];
-                        }
-
-                        if (eatTimer <= 0)
-                        {
-                            eatTimer = defaultEatTimer;
-                            distracted = false;
-                            eatBone = false;
-
-                            currentTarget = alertArea[areaCounter];
-                            Destroy(bone);
-                            print(bone + " trying to destroy boen");
-                            alertTimer += defaultAlertTimer;
-                            stateManager(3);
-                        }
-                        eatTimer--;                    
-                }
+                
 
                 break;
                
@@ -1202,8 +1247,6 @@ public class enemyPathfinding : MonoBehaviour
     //It will take a random points around the object for the enemy to navigate to.
   bool RandomPoint(Vector3 center, float range, out Vector3 result)
   {
-      for (int i = 0; i < 6; i++)
-      {
           Vector3 randomPoint = center + Random.insideUnitSphere * range;
           NavMeshHit hit;
           if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
@@ -1211,7 +1254,6 @@ public class enemyPathfinding : MonoBehaviour
               result = hit.position;
               return true;
           }
-      }
       result = Vector3.zero;
       return false;
   }
