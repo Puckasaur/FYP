@@ -31,7 +31,7 @@ public class huntingDog : MonoBehaviour {
     public float firstDirection; //= 33;
     public float secondDirection; // = 66;
     public float thirdDirection; // = 78;
-    List<float> directionDegrees = new List<float>();
+    public List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
 
     float rotationStep = 65.0f;
@@ -47,7 +47,6 @@ public class huntingDog : MonoBehaviour {
     public int areaCounter = 0;
     int turnCounter = 0;
     int tempcounters = 0;
-
 
     public int defaultBarkTimer;
     public int defaultAlertTimer;
@@ -86,6 +85,8 @@ public class huntingDog : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = chaseSpeed;
         agent.SetDestination(currentTarget.position);
+
+        setDirectionsForIdle();
 
         timer = defaultTimer;
         idleTimer = defaultIdleTimer;
@@ -148,13 +149,11 @@ public class huntingDog : MonoBehaviour {
                             hunterSphereScript = newSphere.GetComponent<soundSphere>();
                             hunterSphereScript.setMaxDiameter(maxScale);
                         }
-
                     }
                     barkTimer--;
                     //-----------------//
                     //Escape from chase//
                     //-----------------//
-
 
                     Physics.Linecast(transform.position, player.transform.position, out hit);
                     if (hit.collider.tag != player.GetComponent<Collider>().tag)
@@ -201,9 +200,6 @@ public class huntingDog : MonoBehaviour {
                     }
                 }
                 break;
-
-
-
             case enumStatesHunter.alert:
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
@@ -215,7 +211,6 @@ public class huntingDog : MonoBehaviour {
                 }
                 if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                 {
-
                     if (timer <= 0)
                     {
                         if (alertArea[areaCounter] != null)
@@ -240,11 +235,8 @@ public class huntingDog : MonoBehaviour {
                             }
                             tempcounters++;
                             stateManager(4);
-
                         }
                     }
-
-
                 }
 
                 break;
@@ -253,7 +245,6 @@ public class huntingDog : MonoBehaviour {
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
-
 
                     if (alertTimer > 0)
                     {
@@ -281,13 +272,10 @@ public class huntingDog : MonoBehaviour {
                             turnCounter++;
                             turnTimer += defaultTurnTimer * Time.deltaTime;
                         }
-
                     }
 
                     if (turnCounter > 2)
                     {
-
-
                         alertTimer = defaultAlertTimer;
                         turnCounter = 0;
                         stateManager(3);
@@ -305,27 +293,6 @@ public class huntingDog : MonoBehaviour {
 
             vectorCurrentTargetx = currentTarget.position.x;
             vectorCurrentTargetz = currentTarget.position.z;
-
-            if (vectorTransformPositionx < 0)
-            {
-                vectorTransformPositionx *= -1;
-            }
-
-            if (vectorTransformPositionz < 0)
-            {
-                vectorTransformPositionz *= -1;
-            }
-
-            if (vectorCurrentTargetx < 0)
-            {
-                vectorCurrentTargetx *= -1;
-            }
-
-            if (vectorCurrentTargetz < 0)
-            {
-                vectorCurrentTargetz *= -1;
-            }
-
             vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
             if (vectorz < 0)
@@ -431,7 +398,6 @@ public class huntingDog : MonoBehaviour {
                                     rotationDifference = rotationDifference * -1;
                                 }
 
-
                                 if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
@@ -528,16 +494,11 @@ public class huntingDog : MonoBehaviour {
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                 }
-
                             }
                         }
                     }
-
                 }
-
             }
-
-
         }
         else
         {
@@ -547,6 +508,12 @@ public class huntingDog : MonoBehaviour {
                 turnTimer = 0;
             }
         }
+    }
+    void setDirectionsForIdle()
+    {
+        directionDegrees.Add(firstDirection);
+        directionDegrees.Add(secondDirection);
+        directionDegrees.Add(thirdDirection);
 
     }
     public void setAlertArea(GameObject area)

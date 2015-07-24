@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2376700}
   - 65: {fileID: 6524914}
   - 65: {fileID: 6586480}
-  - 114: {fileID: 11479862}
   - 208: {fileID: 20845116}
   - 95: {fileID: 9587956}
   - 65: {fileID: 6598732}
@@ -121,18 +120,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11449638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676f693f8e9bf484abbecb9e9ea27d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorNumber: 1
---- !u!114 &11479862
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

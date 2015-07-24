@@ -1770,10 +1770,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd48bd43e63b92c49b67b33161c92244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  radius: 0
   startRadius: 10
+  setToOff: 0
   playerSeen: 0
+  disguised: 0
+  smellingPlayer: 0
   detectionTimer: 45
+  defaultDetectionRange: 0
   alarmBonus: 0
+  smellDetected: 0
   sniffDistance: 15
   visualDistance: 7.5
   detectionDistance: 5
@@ -1792,7 +1798,14 @@ MonoBehaviour:
   checkPointPosition: {fileID: 0}
   checkPointActivated: 1
   allEnemies: []
+  allKeys: []
+  allDoors: []
+  allDestructibles: []
   script: {fileID: 0}
+  hunterScript: {fileID: 0}
+  playerScript: {fileID: 0}
+  player: {fileID: 0}
+  sendBack: 0
 --- !u!114 &11471844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1819,13 +1832,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfKeys: 0
   keyPossessed: 000000000000000000000000
+  joystickPressure: 0
+  magnMultiplier: 0
   movementSpeed: 5
   sprintModifier: 1.5
   origMovementSpeed: 0
   jumpHeight: 6
+  rb: {fileID: 0}
   bone: {fileID: 199134, guid: f4c2e241b8f80684880b060c30b3adda, type: 2}
+  bagOfAir: {fileID: 0}
   throwForce: 9.99999975e-05
   bones: 2
+  bags: 0
+  enemies: []
+  horizontal: 0
+  vertical: 0
+  movement: {x: 0, y: 0, z: 0}
 --- !u!114 &11480376
 MonoBehaviour:
   m_ObjectHideFlags: 1

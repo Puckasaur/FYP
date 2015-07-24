@@ -18,36 +18,49 @@ public enum enumStates
 
 public class enemyPathfinding : MonoBehaviour
 {
+    //Detection variables//
+
+    //smell detection
+
     ringOfSmell ringOfSmellScript;
-    coneOfVision coneOfVisionScript;
-    soundSphere sphereScript;
-    RaycastHit hit;
-    public Vector3 respawnPosition;
-    public Transform target1;
-    public Transform target2;
-    public Transform target3;
-    public Transform target4;
-    public GameObject visionRotator;
-    public Transform currentTarget;
-    public Transform lastTarget;
-    public enumStates States;
-    GameObject vision;
-    GameObject smell;
     GameObject bone;
-    public GameObject player;
+    
+    //rotation after smelling values
+    public Vector3 tempSmellPosition;
+    public bool continueRotation = false;
+
+    //These variables are for the enemies to use when they smell a bone
+    float maxRange = 1.5f;
+    Vector3 soundSourcePos;
+    Transform tempWaypointPos;
+
+    //end of rotation after smelling values
+
+    //sound detection
+    soundSphere sphereScript;
     GameObject newSphere;
     public GameObject sphere;
     public GameObject soundSource;
     GameObject brokenObject;
 
-    public bool isOnWaypoint = false;
-    public NavMeshAgent agent;
-    public List<Transform> targets = new List<Transform>();
-    public List<Transform> alertArea = new List<Transform>();
+    //vision detection
+    coneOfVision coneOfVisionScript;
 
-    public bool isPaired = false;
-    public bool eatBone = false;
-    public bool distracted = false;
+
+    //end of Detection variables
+
+    RaycastHit hit;
+    public Vector3 respawnPosition;
+
+    //Pathfinding variables
+    public Transform target1;
+    public Transform target2;
+    public Transform target3;
+    public Transform target4;
+
+    public Transform currentTarget;
+    public Transform lastTarget;
+
     float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
@@ -57,41 +70,63 @@ public class enemyPathfinding : MonoBehaviour
     float vectorCurrentTargetz = 0;
     float vectorx;
     float vectorz;
+	
+	  Vector3[] path = new Vector3[0];
+    Vector3 currentWaypoint;
+    //End of Pathfinding variables
 
-    //Idle Suspicious values
+    public GameObject visionRotator;
+    public GameObject player;
+    public enumStates States;
+    
+    public float patrolSpeed;
+    public float chaseSpeed;
+    public float chaseRange;
+  
+    public NavMeshAgent agent;
+    public List<Transform> targets = new List<Transform>();
+    public List<Transform> alertArea = new List<Transform>();
 
+    public bool isOnWaypoint = false;
+    public bool isPaired = false;
+    public bool eatBone = false;
+    public bool distracted = false;
+
+
+    //Idle Suspicious variables
     float rotationDifference = 0;
     public bool idleSuscpicious = false;
-    public float firstDirection; //= 33;
-    public float secondDirection; // = 66;
-    public float thirdDirection; // = 78;
+    public float firstDirection;    //-These are used to determine where the opponen will look when it
+    public float secondDirection;   // reaches the waypoint.
+    public float thirdDirection;    //Insert integer to set the angle between -180 and 180. 
     List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
 
-    bool rotating = false;
-    float rotationStep = 65.0f;
+    
+    float rotationStep = 65.0f;             //-Enemies turning speed
     public float rotationDegrees = 90;
     public float currentAngle = 0;
     public float targetAngle = 0;
-    public float angleOffsetMax = 10.0f;
-    public float angleOffsetMin = -10.0f;
+    public float angleOffsetMax = 10.0f;    // -These values are used to prevent the Unity from missing
+    public float angleOffsetMin = -10.0f;   // the right angle during updates.
+    public float turnTimer = 100.0f;        // -This is used to determine how long the enemy will sit idling between turning from a single angle to another.
+    float currentTargetDirection;           
+    int turnCounter = 0;
+    bool rotating = false;
     bool rotationInProgress = false;
     public bool rotationCompleted = false;
-    public float turnTimer = 100.0f;
-    float currentTargetDirection;
-    int turnCounter = 0;
     public bool SeekForSmellSource = false;
     public bool agentStopped = false;
+    // end of Idle Suspicious variables
 
-    //So many timers
+    //Timers
     int tempcounters = 0;
     int timer;
     public int idleTimer;
     int barkTimer;
     float escapeTimer;
     public float alertTimer;
-    float eatTimer;
-    float failTimer;
+    public float eatTimer;
     public int defaultEatTimer;
     public int defaultIdleTimer;
     public int defaultBarkTimer;
@@ -105,28 +140,26 @@ public class enemyPathfinding : MonoBehaviour
     int detectSoundTimer;
     public float turnTowardsSmellTimer;
     public float defaultTurnTowardsSmellTimer;
-    public float patrolSpeed;
-    public float chaseSpeed;
-    public float chaseRange;
     public float agentNotMovingTimer;
     public float defaultAgentNotMovingTimer;
+    //end of Timers
 
-    Vector3[] path = new Vector3[0];
-    Vector3 currentWaypoint;
-    //Leap values
-    public float leapRange;
-    float leapTimer;
-    public float defaultLeapTimer;
-    Vector3 leapPosition;
-    public float impulse;
+  
+
+    //Charge variables
+    float chargeTimer;
+    public float defaultChargeTimer;
     public float chargeRange;
     Vector3 enemyRotation;
+    //end of Charge variables
 
-    //Stuck thingies
+    //If enemies get stuck variables
     float tempPosX = 0;
     float tempPosZ = 0;
     bool visited = false;
-    //end of stuck thingies
+    //end of If enemies get stuck variables
+
+    //Alert waypoint organization variables
     List<Transform> usedWaypoints = new List<Transform>();
     List<Vector3> waypointLocations = new List<Vector3>();
     List<Transform> tempAlertWaypoints = new List<Transform>();
@@ -134,26 +167,32 @@ public class enemyPathfinding : MonoBehaviour
     int currentWaypointIndex = 0;
     float waypointLocationValue = 0;
     Vector3 waypointDifference;
-    //for smart rotation
-    public Vector3 tempSmellPosition;
-    public bool continueRotation = false;
+    //end of Alert waypoint organization variables
 
+    //Misc variables
     Collider playerCollider;
     Animator patrolAnim;
+    bool randomPointSelected = false;
 
-    //values if enemy doesn't receive a new waypoint to prevent them from being stuck	
+    //This is for Animator guy to see enemies actual speeds, it uses normal update atm.
+    //It can be changed to FixedUpdate if it gives better results
+    Vector3 previousPosition;
+    Vector3 currentPosition;
+    public float currentSpeed;
+    //end of Misc variables
+
+
     void Start()
     {
-        
-        leapTimer = defaultLeapTimer;
-        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");
         respawnPosition = this.transform.position;
+
+        visionRotator = GameObject.FindGameObjectWithTag("visionRotator");        
         player = GameObject.FindGameObjectWithTag("player");
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         patrolAnim = gameObject.GetComponent<Animator>();
-        //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
-
+		
+        //Setting waypoints and Navigation Mesh agent
         setDirectionsForIdle();
         setTargetWaypoints();
         currentTarget = targets[0];
@@ -161,11 +200,12 @@ public class enemyPathfinding : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = patrolSpeed;
         agent.SetDestination(currentTarget.position);
+        //end of Setting waypoints and Navigation Mesh agent
 
         //Setting Timers
+        chargeTimer = defaultChargeTimer;
         timer = defaultTimer;
         eatTimer = defaultEatTimer;
-        //idleTimer = defaultIdleTimer;
         barkTimer = defaultBarkTimer;
         alertTimer = defaultAlertTimer;
         escapeTimer = defaultEscapeTimer;
@@ -173,14 +213,31 @@ public class enemyPathfinding : MonoBehaviour
         detectSoundTimer = defaultDetectSoundTimer;
         turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
         agentNotMovingTimer = defaultAgentNotMovingTimer;
+        //end of Setting Timers
 
+        //Misc 
         playerCollider = player.GetComponent<Collider>();
-        //patrolAnim = GetComponentInChildren<Animator>();
+        //end of Misc
     }
+
 
     void Update()
     {
+        //Velocity meter for the animator guy to see enemies actual speed
+        if (agent.velocity != Vector3.zero)
+        {
+            Vector3 currentMove = transform.position - previousPosition;
+            currentSpeed = currentMove.magnitude / Time.deltaTime;
+            previousPosition = transform.position;
+            updateAnimator();
+        }
+        //end of Timer for the animator guy to see enemies actual speed
+
+        //To prevent opponent from sleeping
         GetComponent<Rigidbody>().WakeUp();
+        //end of To prevent opponent from sleeping
+
+
         //------------------//
         //Code of the states//
         //------------------//
@@ -192,54 +249,44 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
-
+                    patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == true && isPaired)
                     {
                         agentStopped = false;
                         agent.Resume();
                     }
-                    
-                    //patrolAnim.SetBool("patrolIdle", false);
 
-                    //agentStopped = false;
-                    //agent.Resume();
-                    //patrolAnim.SetBool("patrolWalk", true);
-                    //patrolAnim.SetBool("patrolRun", false);
-
+                    //Check if the player is within offset range from the current target
 
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    { 
+                    {
                         stateManager(1);
-						
-						if (agentStopped == false)
+
+                        if (agentStopped == false)
                         {
-                            //print("agent stopped");
                             agentStopped = true;
                             agent.Stop();
-                            patrolAnim.SetBool("patrolWalk", false);
+
+                           // patrolAnim.SetBool("patrolWalk", false);
                             patrolAnim.SetBool("patrolRun", false);
-                            //patrolAnim.SetBool("patrolIdle", true);
+
                         }
                     }
-                    //print(SeekForSmellSource);
-                    //if (!SeekForSmellSource)
-                    //{
-                    //    transform.rotation = new Quaternion(0, 0, 0, 0);
-                    //}
                 }
 
                 break;
             case enumStates.idle:
-                {                    
+                {
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
+                    patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
                     {
                         agentStopped = true;
                         agent.Stop();
                     }
-
+                    //Check if the player is within offset range from the current target
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                     {
 
@@ -248,23 +295,12 @@ public class enemyPathfinding : MonoBehaviour
                             if (currentTarget.gameObject.tag != "bone")
                             {
                                 lastTarget = currentTarget;
-                                //patrolAnim.SetBool("patrolWalk", false);
-                                //patrolAnim.SetBool("patrolRun", false);
-                                //patrolAnim.SetBool("patrolIdle", true);
-                            }                            
-                            if( isPaired == true)
+                            }
+                            if (isPaired == true)
                             {
                                 idleTimer = defaultIdleTimer;
-                            isOnWaypoint = true;
+                                isOnWaypoint = true;
                             }
-                            //if (isPaired == true && idleTimer <= 0)
-                            //{ stateManager(4); }
-                            //if (agent.SetDestination(currentTarget.position) != null)
-                            //{
-
-                            //    // agent.SetDestination(currentTarget.position);
-                            //}
-
                             idleTimer = defaultIdleTimer;
                             if (isPaired == false)
                             {
@@ -277,12 +313,6 @@ public class enemyPathfinding : MonoBehaviour
                                 }
                             }
                             agent.speed = patrolSpeed;
-                            //if (agentStopped == true)
-                            //{
-                            //    agentStopped = false;
-                            //    agent.Resume();
-                            //}
-                            //stateManager(0);
                         }
                         idleTimer--;
                         if (idleTimer <= 0)
@@ -292,7 +322,6 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else
                     {
-                        patrolAnim.SetBool("patrolWalk", false);
                         patrolAnim.SetBool("patrolRun", false);
                         stateManager(0);
                     }
@@ -301,18 +330,12 @@ public class enemyPathfinding : MonoBehaviour
                 }
 
             case enumStates.chase:
-                {                   
+                {
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
-                    //--------------------------//
-                    //Leap Attack While Chasing //
-                    //--------------------------//
 
-                    patrolAnim.SetBool("patrolWalk", false);
                     patrolAnim.SetBool("patrolRun", true);
-                    //patrolAnim.SetBool("patrolIdle", false);
-
 
                     if (vectorx < chargeRange || vectorz < chargeRange)
                     {
@@ -321,21 +344,20 @@ public class enemyPathfinding : MonoBehaviour
                         transform.LookAt(enemyRotation);
                         transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed / 2 * Time.deltaTime);
 
-                        leapTimer--;
-                        if (leapTimer <= 0)
+                        chargeTimer--;
+                        if (chargeTimer <= 0)
                         {
-                            // GetComponent<Rigidbody>().AddForce(leapPosition * impulse, ForceMode.Impulse);
                             agent.autoBraking = true;
-                            leapTimer = defaultLeapTimer;
+                            chargeTimer = defaultChargeTimer;
                         }
                     }
                     else
                     {
-                        leapTimer--;
-                        if (leapTimer <= 0)
+                        chargeTimer--;
+                        if (chargeTimer <= 0)
                         {
                             agent.autoBraking = true;
-                            leapTimer = defaultLeapTimer;
+                            chargeTimer = defaultChargeTimer;
                         }
                     }
 
@@ -417,154 +439,135 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
+                patrolAnim.SetBool("patrolRun", false);
                 if (distracted)
                 {
                     stateManager(5);
                 }
-                
+
                 if (agentStopped == true)
                 {
                     agentStopped = false;
                     agent.Resume();
                 }
-                //if (ringOfSmellScript.smellDetected == false)
-               // {
-                    if (alertTimer == 0 || alertTimer < 0)
+                if (alertTimer == 0 || alertTimer < 0)
+                {
+                    if (lastTarget != null)
                     {
-                        if (lastTarget != null)
-                        {                           
-                            currentTarget = lastTarget;
+                        currentTarget = lastTarget;
+                        stateManager(4);
+                    }
+                }
+                //Check if the player is within offset range from the current target
+                if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                {
+                    if (timer <= 0 && (!distracted))
+                    {
+                        if (currentTarget != null && currentTarget.gameObject.tag != "bone")
+                        {
+                            lastTarget = currentTarget;
+                        }
+                        if (alertArea[areaCounter] != null)
+                        {
+                            currentTarget = alertArea[areaCounter];
+                        }
+
+                        areaCounter++;
+                        if (areaCounter > 2)
+                        {
+                            areaCounter = 0;
+                        }
+                        if (tempcounters < 6)
+                        {
+                            if (turnCounter != 0)
+                            {
+                                turnCounter = 0;
+                            }
+                            if (idleTimer != defaultIdleTimer)
+                            {
+                                idleTimer = defaultIdleTimer;
+                            }
+                            tempcounters++;
                             stateManager(4);
+
                         }
                     }
 
-                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {                       
-                        if (timer <= 0 && (!distracted))
-                        {
-                            if (currentTarget != null && currentTarget.gameObject.tag != "bone")
-                            {                              
-                                lastTarget = currentTarget;
-                            }
-                            if (alertArea[areaCounter] != null)
-                            {
-                                currentTarget = alertArea[areaCounter];
-                            }
 
-                            areaCounter++;
-                            if (areaCounter > 2)
-                            {
-                                areaCounter = 0;
-                            }
-                            if (tempcounters < 6)
-                            {
-                                if (turnCounter != 0)
-                                {
-                                    turnCounter = 0;
-                                }
-                                if (idleTimer != defaultIdleTimer)
-                                {
-                                    idleTimer = defaultIdleTimer;
-                                }
-                                tempcounters++;                                
-                                stateManager(4);
-
-                            }
-                        }
-
-
+                }
+                else
+                {
+                    alertTimer--;
+                    if (alertTimer <= 0)
+                    {
+                        alertTimer = 0;
                     }
-                    else
-                    {                       
-                        alertTimer--;
-                        if (alertTimer <= 0)
-                        {
-                            alertTimer = 0;
-                        }
-                    }
-                //}
-                //else 
-                //{
-                //    alertTimer--;
-                //    if (alertTimer <= 0)
-                //    {
-                //        alertTimer = 0;
-                //    }
-                //}
-
+                }
                 break;
             case enumStates.idleSuspicious:
                 {
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
-
+                    patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
-                    {                        
+                    {
                         agentStopped = true;
                         agent.Stop();
                     }
-                   // if (ringOfSmellScript.smellDetected == false)
-                   // {
-                        if (coneOfVisionScript.playerSeen == true)
+                    if (coneOfVisionScript.playerSeen == true)
+                    {
+                        agentStopped = false;
+                        agent.Resume();
+                        stateManager(2);
+                    }
+                    if (alertTimer > 0)
+                    {
+                        alertTimer--;
+                    }
+
+                    if (alertTimer < 0)
+                    {
+                        alertTimer = 0;
+                    }
+                    if (alertTimer <= 0)
+                    {
+                        agent.speed = patrolSpeed;
+                        turnCounter = 0;
+                        agentStopped = false;
+                        agent.Resume();
+                        stateManager(0);
+                    }
+                    if (turnCounter < 3)
+                    {
+                        currentTargetDirection = directionDegrees[0];
+                        rotateEnemy(currentTargetDirection, rotationStep);
+
+                        if (rotationCompleted)
                         {
-                            agentStopped = false;
-                            agent.Resume();
-                            stateManager(2);
-                        }
-                        if (alertTimer > 0)
-                        {
-                            alertTimer--;
+                            directionDegrees.Add(directionDegrees[0]);
+                            directionDegrees.Remove(directionDegrees[0]);
+                            rotationCompleted = false;
+                            turnCounter++;
+                            turnTimer += defaultTurnTimer * Time.deltaTime;
                         }
 
-                        if (alertTimer < 0)
-                        {
-                            alertTimer = 0;
-                        }
-                        if (alertTimer <= 0)
-                        {
-                            agent.speed = patrolSpeed;
-                            turnCounter = 0;
-                            agentStopped = false;
-                            agent.Resume();
-                            stateManager(0);
-                        }
-                        if (turnCounter < 3)
-                        {
-                            currentTargetDirection = directionDegrees[0];
-                            rotateEnemy(currentTargetDirection, rotationStep);
+                    }
 
-                            if (rotationCompleted)
-                            {
-                                directionDegrees.Add(directionDegrees[0]);
-                                directionDegrees.Remove(directionDegrees[0]);
-                                rotationCompleted = false;
-                                turnCounter++;
-                                turnTimer += defaultTurnTimer * Time.deltaTime;
-                            }
+                    if (turnCounter > 2)
+                    {
+                        alertTimer = defaultAlertTimer;
+                        turnCounter = 0;
+                        agentStopped = false;
+                        agent.Resume();
+                        stateManager(3);
+                    }
 
-                        }
-
-                        if (turnCounter > 2)
-                        {
-                            alertTimer = defaultAlertTimer;
-                            turnCounter = 0;
-                            agentStopped = false;
-                            agent.Resume();
-                            stateManager(3);
-                        }
-
-                        idleTimer--;
-                        if (idleTimer < 0)
-                        {
-                            idleTimer = 0;
-                        }
-                    //}
-
-                    //else if (ringOfSmellScript.smellDetected == true)
-                    //{
-                    //    RotateDogWhileSmelling();
-                    //}
+                    idleTimer--;
+                    if (idleTimer < 0)
+                    {
+                        idleTimer = 0;
+                    }
                     break;
                 }
             case enumStates.distracted:
@@ -572,7 +575,7 @@ public class enemyPathfinding : MonoBehaviour
                     //-------------------------//
                     // Move towards distraction//
                     //-------------------------//
-
+                    patrolAnim.SetBool("patrolRun", false);
                     distracted = true;
                     Vector3 bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
                     if (bonedir.x <= 4 && bonedir.x >= -4 && bonedir.z <= 4 && bonedir.z >= -4)
@@ -591,79 +594,120 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-                    float maxRange = 1.5f;
-                    Vector3 soundSourcePos;
-                    Vector3 tempWaypointPos = currentTarget.position;
+                    patrolAnim.SetBool("patrolRun", false);
 
                     if (soundSource && soundSource.tag != "bone")
-                    {
-                        print(" It came through");
-                        if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
-                        {
-                            Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
-                            tempWaypointPos = currentTarget.position;
-                            currentTarget.position = soundSourcePos;
-                        }
+                    {                                                  
+                            if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
+                            {
+                                randomPointSelected = true;
+                                Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
+                                tempWaypointPos = soundSource.transform;
+                                currentTarget = tempWaypointPos;//soundSourcePos;
+                            }
+                      
+                       
                     }
-                    else 
+                    else if (soundSource.tag == "bone")
                     {
+
                         currentTarget = soundSource.transform;
                     }
-                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
-                    {
-                        alertTimer = defaultAlertTimer;
-                        currentTarget.position = tempWaypointPos;
-                    }
-                    //organizeAlertWaypoints();
-                    stateManager(3);
+                    agent.SetDestination(currentTarget.transform.position);
 
                     //---------------------------------------------//
                     // when sound is heard, move towards the source//
-                    //---------------------------------------------//
+                    //---------------------------------------------//    
 
+                    //Check if the player is within offset range from the current target
+                    if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
+                    {                       
+                         Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
+                        Debug.DrawLine(this.transform.position, soundSource.transform.position);
+                        alertTimer = defaultAlertTimer;
+
+                        if (hit.collider != null)
+                        { 
+                                if (agentStopped == false)
+                                {
+                                    agentStopped = true;
+                                    agent.Stop();
+                                }
+                            if(hit.collider.tag == "bone")
+                            {
+                                randomPointSelected = false;
+                                stateManager(7);
+                            }                              
+                            
+                            else
+                            {
+                                randomPointSelected = false;                               
+                                stateManager(3);
+                            }
+                        }
+                        else
+                        {
+                            randomPointSelected = false;
+                            stateManager(3);
+                        }
+                    }
                 }
                 break;
+
             case enumStates.eatBone:
                 {
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
-
-                    eatBone = true;
-                    if (!bone)
+                    patrolAnim.SetBool("patrolRun", false);
+                    if (soundSource != null && soundSource.tag == "bone")
                     {
-                        vision.SetActive(true);
-                        smell.SetActive(true);
-                        alertTimer += defaultAlertTimer;
-                        stateManager(3);
-                        currentTarget = alertArea[areaCounter];
+                        bone = soundSource;
+                    }                        
+
+                        if (hit.collider.tag == "player")
+                        {
+                            eatBone = true;
+                            if (!bone)
+                            {
+                                alertTimer += defaultAlertTimer;
+                                stateManager(3);
+                                eatTimer = defaultEatTimer;
+                                currentTarget = alertArea[areaCounter];
+                            }
+
+                            if (eatTimer <= 0)
+                            {
+                                eatTimer = defaultEatTimer;
+                                distracted = false;
+                                eatBone = false;
+
+                                currentTarget = alertArea[areaCounter];
+                                Destroy(bone);
+                                alertTimer += defaultAlertTimer;
+                                stateManager(3);
+                            }
+                            eatTimer--;
+                            if (eatTimer < 0)
+                            {
+                                eatTimer = 0;
+                            }
+                        }                        
                     }
-
-                    if (eatTimer <= 0)
-                    {
-                        eatTimer = defaultEatTimer;
-                        distracted = false;
-                        vision.SetActive(true);
-                        smell.SetActive(true);
-                        eatBone = false;
-
-                        currentTarget = alertArea[areaCounter];
-                        Destroy(bone);
-                        alertTimer += defaultAlertTimer;
-                        stateManager(3);
-
-                    }
-                    eatTimer--;
-
-                }
-
+                
                 break;
+
             case enumStates.smell:
                 {
+                    patrolAnim.SetBool("patrolRun", false);
+                    //------------------------------------------------//
+                    //turns enemy towards player's last known location//
+                    //------------------------------------------------//
+
                     SeekForSmellSource = true;
                     agentStopped = true;
                     agent.Stop();
-                    Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);//player.transform.position);
+                    Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
                     float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                     transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
                     if (angle < 5.0f && angle > -5.0f)
@@ -675,65 +719,67 @@ public class enemyPathfinding : MonoBehaviour
 
             default:
                 break;
+
         }
-
-        if (currentTarget != null)
-        {
-            vectorTransformPositionx = transform.position.x;
-            vectorTransformPositionz = transform.position.z;
-
-            vectorCurrentTargetx = currentTarget.position.x;
-            vectorCurrentTargetz = currentTarget.position.z;
-
-            vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
-            vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
-            if (vectorz < 0)
-            {
-                vectorz *= -1;
-            }
-            if (vectorx < 0)
-            {
-                vectorx *= -1;
-            }
-        }
-        if (ringOfSmellScript.smellDetected == true)
-        {
-
-            Vector3 direction = (player.transform.position - transform.position).normalized;
-            Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
-            Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
-            if (hit.collider != null)
-            {
-                if (hit.collider.tag == player.GetComponent<Collider>().tag)
+                if (currentTarget != null)
                 {
-                    checkContinuousSmelling(player.transform.position);
-                }
-                else
-                {
-                    turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
-                }
-            }
-            else
-            {
-                turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
-            }
+                    //vector calculations used multiple time in the update
+                    vectorTransformPositionx = transform.position.x;
+                    vectorTransformPositionz = transform.position.z;
 
-            //RotateDogWhileSmelling();
+                    vectorCurrentTargetx = currentTarget.position.x;
+                    vectorCurrentTargetz = currentTarget.position.z;
+
+                    vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
+                    vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
+                    if (vectorz < 0)
+                    {
+                        vectorz *= -1;
+                    }
+                    if (vectorx < 0)
+                    {
+                        vectorx *= -1;
+                    }
+                }
+                if (ringOfSmellScript.smellDetected == true)
+                {
+
+                    Vector3 direction = (player.transform.position - transform.position).normalized;
+                    Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
+                    Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
+                    if (hit.collider != null)
+                    {
+                        if (hit.collider.tag == player.GetComponent<Collider>().tag)
+                        {
+                            checkContinuousSmelling(player.transform.position);
+                        }
+                        else
+                        {
+                            turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
+                        }
+                    }
+                    else
+                    {
+                        turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
+                    }
+                }
+            //-------------//
+            //End of Update//
+            //-------------//
         }
-        //-------------//
-        //End of Update//
-        //-------------//
-    }
+    
+
+  
     void LateUpdate()
     {
+        //Just to make sure enemies will have a target
         if (timer <= 0)
         {
             timer += defaultTimer;
 
             if (States != enumStates.idleSuspicious)
-            {
-                //   Vector3 tempVector = currentTarget.position;
-                if (/*agent.SetDestination(currentTarget.position)*/ currentTarget != null && !currentTarget.Equals(null))
+            {               
+                if (currentTarget != null && !currentTarget.Equals(null))
                 {
                     agent.SetDestination(currentTarget.position);
                 }
@@ -741,12 +787,11 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     currentTarget = lastTarget;
                 }
-            }
-            
+            }            
         }
         timer--;
 
-       
+       //To decide what player should do when he's not moving in the end of an update.
         if (agentStopped == true)
         {
             if (States == enumStates.patrol)
@@ -773,11 +818,11 @@ public class enemyPathfinding : MonoBehaviour
             {                
                 agentStopped = false;
                 agent.Stop();
-            }
-             
-          
+            }           
         }
 
+        //To make sure even if the enemies lose their target for some reason
+        //they will become recover and start to move again. 
         agentNotMovingTimer--;
         if (agentNotMovingTimer < 0)
         {
@@ -786,9 +831,7 @@ public class enemyPathfinding : MonoBehaviour
         if (agentNotMovingTimer == 0)
         {
             if (visited == false)
-            {
-
-               
+            {               
                 tempPosX = vectorx;
                 tempPosZ = vectorz;
                 visited = true;
@@ -796,6 +839,7 @@ public class enemyPathfinding : MonoBehaviour
             }
             else
             {
+                //Check if the player is within offset range from the current target
                 if (tempPosX == vectorx || tempPosX >= (vectorx - waypointOffsetMin) || tempPosX <= (vectorx - waypointOffsetMax) && tempPosZ == vectorz || tempPosX >= (vectorz - waypointOffsetMin) || tempPosZ <= (vectorz - waypointOffsetMax))
                 {                    
                     agent.SetDestination(currentTarget.position);
@@ -825,13 +869,7 @@ public class enemyPathfinding : MonoBehaviour
 
     void setTargetWaypoints()
     {
-        /*
-        targets.Add(target1);
-        targets.Add(target2);
-        targets.Add(target3);
-        */
-
-        // Marc's tests
+        // Last edited by Marc
         if (target1 != null)
         {
             targets.Add(target1);
@@ -851,7 +889,7 @@ public class enemyPathfinding : MonoBehaviour
         {
             targets.Add(target4);
         }
-        // End of Marc's tests
+        //end of Last edited by Marc
     }
 
 
@@ -914,9 +952,7 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                 }
-
                             }
-
                         }
 
                         //=============//
@@ -993,7 +1029,6 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
                                 }
-
                             }
                         }
                         //=============//
@@ -1028,16 +1063,11 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
                                 }
-
                             }
                         }
                     }
-
                 }
-
             }
-
-
         }
         else
         {
@@ -1054,40 +1084,21 @@ public class enemyPathfinding : MonoBehaviour
 
     void organizeAlertWaypoints()
     {
-        //tempAlertWaypoints.Clear();
-        //foreach (Transform alert in alertArea)
-        //{
-        //    tempAlertWaypoints.Add(alert);
-        //    waypointLocations.Add(alert.position);
-        //}
         for (int i = 0; i < alertArea.Count; i++)
-        {
-            //if (tempAlertWaypoints[i] != null)
-            //{
-
-            //}
+        {          
             if (alertArea[i] != null || tempAlertWaypoints[i] != null)
             {
                 tempAlertWaypoints.Add(alertArea[i]);
                 waypointLocations.Add(tempAlertWaypoints[i].position);
             }
-            else
-            {
-            }
-
         }
-
-        //if (soundSource)
-        //{
         Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
-        //}
         closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
         closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
         closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
 
         //Choose one of the waypoints to be the closest
         closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
-
 
         //Run the check if it's really the closest waypoint we're looking for
         for (int i = 0; i < waypointLocations.Count; i++)
@@ -1137,14 +1148,8 @@ public class enemyPathfinding : MonoBehaviour
                     closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
 
                     closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
-
-                }
-
-
+                    }
             }
-
-
-
 
             //Run the check if it's really the closest waypoint we're looking for
             for (int y = 0; y < waypointLocations.Count; y++)
@@ -1175,6 +1180,8 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //Whenever enemy enters a new room with a different alert area, it will be given new waypoints
+    //to navigate if it goes into a alert state.
     public void setAlertArea(GameObject area)
     {
         Component[] transforms;
@@ -1191,6 +1198,7 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //Actual function to rotate enemy when the player is staying too close of the enemies
     public void rotateDogWhileSmelling( Vector3 targetTransformPosition)
     {
         if (ringOfSmellScript.smellingPlayer)
@@ -1204,6 +1212,8 @@ public class enemyPathfinding : MonoBehaviour
         }
     }
 
+    //if player stays within smelling range enemies will get suspicious and eventually turn to look
+    //for the source of the smell.
   public  void checkContinuousSmelling(Vector3 targetTransformPosition)
     {
         turnTowardsSmellTimer--;
@@ -1215,10 +1225,10 @@ public class enemyPathfinding : MonoBehaviour
         }       
     }
 
+    //This is used to prevent enemies from being unable to find a path to the destructible object.
+    //It will take a random points around the object for the enemy to navigate to.
   bool RandomPoint(Vector3 center, float range, out Vector3 result)
   {
-      for (int i = 0; i < 6; i++)
-      {
           Vector3 randomPoint = center + Random.insideUnitSphere * range;
           NavMeshHit hit;
           if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
@@ -1226,8 +1236,12 @@ public class enemyPathfinding : MonoBehaviour
               result = hit.position;
               return true;
           }
-      }
       result = Vector3.zero;
       return false;
   }
+
+	void updateAnimator()
+	{
+		patrolAnim.SetFloat ("patrolMovement", currentSpeed);
+	}
 }

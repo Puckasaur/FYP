@@ -31,11 +31,25 @@ public class soundSphere : MonoBehaviour
         if (other.gameObject.tag == "enemy")
         {
 
-			script = other.GetComponent<enemyPathfinding>();
-            if (this.transform.parent != other.transform && script.States != enumStates.chase)
+            script = other.GetComponent<enemyPathfinding>();
+            if (script != null)
             {
-                script.stateManager(6);
-				script.soundSource = transform.parent.gameObject;
+                if (this.transform.parent != other.transform)
+                    if (script.States != enumStates.chase && script.States != enumStates.distracted && script.States != enumStates.eatBone)
+                    {
+                        script.stateManager(6);
+                        script.soundSource = transform.parent.gameObject;
+                    }
+            }
+            fatDogAi fatDogScript = other.GetComponent<fatDogAi>();
+            if (fatDogScript != null)
+            {
+                if (this.transform.parent != other.transform)
+                    if (fatDogScript.States != enumStatesFatDog.chase && fatDogScript.States != enumStatesFatDog.distracted && fatDogScript.States != enumStatesFatDog.eatBone)
+                    {
+                        fatDogScript.stateManager(6);
+                        fatDogScript.soundSource = transform.parent.gameObject;
+                    }
             }
         }
     }
