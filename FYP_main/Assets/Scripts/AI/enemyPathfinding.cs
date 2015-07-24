@@ -165,7 +165,6 @@ public class enemyPathfinding : MonoBehaviour
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
         coneOfVisionScript = GetComponentInChildren<coneOfVision>();
         patrolAnim = gameObject.GetComponent<Animator>();
-        //setPlayerOffSetTransform(playerOffSetTransform, player.transform);
 
         setDirectionsForIdle();
         setTargetWaypoints();
@@ -178,7 +177,6 @@ public class enemyPathfinding : MonoBehaviour
         //Setting Timers
         timer = defaultTimer;
         eatTimer = defaultEatTimer;
-        //idleTimer = defaultIdleTimer;
         barkTimer = defaultBarkTimer;
         alertTimer = defaultAlertTimer;
         escapeTimer = defaultEscapeTimer;
@@ -188,7 +186,6 @@ public class enemyPathfinding : MonoBehaviour
         agentNotMovingTimer = defaultAgentNotMovingTimer;
 
         playerCollider = player.GetComponent<Collider>();
-        //patrolAnim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -242,10 +239,6 @@ public class enemyPathfinding : MonoBehaviour
                             //patrolAnim.SetBool("patrolIdle", true);
                         }
                     }
-                    //if (!SeekForSmellSource)
-                    //{
-                    //    transform.rotation = new Quaternion(0, 0, 0, 0);
-                    //}
                 }
 
                 break;
@@ -277,13 +270,6 @@ public class enemyPathfinding : MonoBehaviour
                                 idleTimer = defaultIdleTimer;
                             isOnWaypoint = true;
                             }
-                            //if (isPaired == true && idleTimer <= 0)
-                            //{ stateManager(4); }
-                            //if (agent.SetDestination(currentTarget.position) != null)
-                            //{
-
-                            //    // agent.SetDestination(currentTarget.position);
-                            //}
 
                             idleTimer = defaultIdleTimer;
                             if (isPaired == false)
@@ -297,12 +283,6 @@ public class enemyPathfinding : MonoBehaviour
                                 }
                             }
                             agent.speed = patrolSpeed;
-                            //if (agentStopped == true)
-                            //{
-                            //    agentStopped = false;
-                            //    agent.Resume();
-                            //}
-                            //stateManager(0);
                         }
                         idleTimer--;
                         if (idleTimer <= 0)
@@ -502,15 +482,6 @@ public class enemyPathfinding : MonoBehaviour
                             alertTimer = 0;
                         }
                     }
-                //}
-                //else 
-                //{
-                //    alertTimer--;
-                //    if (alertTimer <= 0)
-                //    {
-                //        alertTimer = 0;
-                //    }
-                //}
 
                 break;
             case enumStates.idleSuspicious:
@@ -635,16 +606,14 @@ public class enemyPathfinding : MonoBehaviour
                     // when sound is heard, move towards the source//
                     //---------------------------------------------//
 
+                  
                     
 
-                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+                    if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
                     {
                         alertTimer = defaultAlertTimer;
                         stateManager(7);
-                        //currentTarget.position = tempWaypointPos;
                     }
-                    //organizeAlertWaypoints();
-                    //stateManager(3);
 
 
 
@@ -657,34 +626,30 @@ public class enemyPathfinding : MonoBehaviour
                     //------------------------------------------------------------------//
                     if (soundSource != null && soundSource.tag == "bone")
                     {
-                        //print("bone set");
                         bone = soundSource;
                     }
+                        eatBone = true;
+                        if (!bone)
+                        {
+                            alertTimer += defaultAlertTimer;
+                            stateManager(3);
+                            eatTimer = defaultEatTimer;
+                            currentTarget = alertArea[areaCounter];
+                        }
 
-                    eatBone = true;
-                    if (!bone)
-                    {
-                        alertTimer += defaultAlertTimer;
-                        stateManager(3);
-                        eatTimer = defaultEatTimer;
-                        currentTarget = alertArea[areaCounter];
-                    }
+                        if (eatTimer <= 0)
+                        {
+                            eatTimer = defaultEatTimer;
+                            distracted = false;
+                            eatBone = false;
 
-                    if (eatTimer <= 0)
-                    {
-                        eatTimer = defaultEatTimer;
-                        distracted = false;
-                        eatBone = false;
-
-                        currentTarget = alertArea[areaCounter];
-                        Destroy(bone);
-                        print(bone + " trying to destroy boen");
-                        alertTimer += defaultAlertTimer;
-                        stateManager(3);
-
-                    }
-                    eatTimer--;
-
+                            currentTarget = alertArea[areaCounter];
+                            Destroy(bone);
+                            print(bone + " trying to destroy boen");
+                            alertTimer += defaultAlertTimer;
+                            stateManager(3);
+                        }
+                        eatTimer--;                    
                 }
 
                 break;
@@ -771,8 +736,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     currentTarget = lastTarget;
                 }
-            }
-            
+            }            
         }
         timer--;
 
@@ -803,9 +767,7 @@ public class enemyPathfinding : MonoBehaviour
             {                
                 agentStopped = false;
                 agent.Stop();
-            }
-             
-          
+            }           
         }
 
         agentNotMovingTimer--;
@@ -944,9 +906,7 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                 }
-
                             }
-
                         }
 
                         //=============//
@@ -1023,7 +983,6 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
                                 }
-
                             }
                         }
                         //=============//
@@ -1058,16 +1017,11 @@ public class enemyPathfinding : MonoBehaviour
                                     rotationInProgress = false;
                                     turnTimer += defaultTurnTimer;
                                 }
-
                             }
                         }
                     }
-
                 }
-
             }
-
-
         }
         else
         {
@@ -1084,27 +1038,13 @@ public class enemyPathfinding : MonoBehaviour
 
     void organizeAlertWaypoints()
     {
-        //tempAlertWaypoints.Clear();
-        //foreach (Transform alert in alertArea)
-        //{
-        //    tempAlertWaypoints.Add(alert);
-        //    waypointLocations.Add(alert.position);
-        //}
         for (int i = 0; i < alertArea.Count; i++)
-        {
-            //if (tempAlertWaypoints[i] != null)
-            //{
-
-            //}
+        {          
             if (alertArea[i] != null || tempAlertWaypoints[i] != null)
             {
                 tempAlertWaypoints.Add(alertArea[i]);
                 waypointLocations.Add(tempAlertWaypoints[i].position);
             }
-            else
-            {
-            }
-
         }
 
         //if (soundSource)
