@@ -218,7 +218,7 @@ ModelImporter:
       curves: []
       events:
       - time: .512231469
-        functionName: patrolDogWalk
+        functionName: patrolWalk
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7,
           type: 3}
@@ -226,7 +226,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: .0345565826
-        functionName: patrolDogWalk
+        functionName: patrolWalk
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7,
           type: 3}
@@ -760,7 +760,7 @@ ModelImporter:
       curves: []
       events:
       - time: .261773676
-        functionName: patrolWalkSource
+        functionName: patrolWalk
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7,
           type: 3}
@@ -776,7 +776,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: .781344593
-        functionName: NewEvent
+        functionName: patrolWalk
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7,
           type: 3}
@@ -784,7 +784,7 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: .957799554
-        functionName: NewEvent
+        functionName: patrolWalk
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7,
           type: 3}

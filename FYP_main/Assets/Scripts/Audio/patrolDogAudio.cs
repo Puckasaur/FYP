@@ -4,22 +4,32 @@ using UnityEngine.Audio;
 
 public class patrolDogAudio : MonoBehaviour {
 
-	public AudioSource patrolSource;
+	public AudioSource patrolBarkSource;
+	public AudioSource patrolWalkSource;
+
 
 	// Use this for initialization
 	void Start () {
 
-		//patrolSource = GetComponents<AudioSource>;
+		//patrolBarkSource = GetComponents<AudioSource>;
 	
 	}
 
-//	void playBark()
-//	{
-//		if(!patrolSource.isPlaying)
-//		{
-//			patrolSource.Play();
-//		}
-//	}
+	void playBark()
+	{
+		if(!patrolBarkSource.isPlaying)
+		{
+			patrolBarkSource.Play();
+		}
+	}
+
+	void patrolWalk ()
+	{
+		if(!patrolWalkSource.isPlaying)
+		{
+			patrolWalkSource.Play();
+		}
+	}
 	
 	// Update is called once per frame
 	void Update () {
