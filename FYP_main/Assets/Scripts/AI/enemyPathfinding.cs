@@ -665,11 +665,12 @@ public class enemyPathfinding : MonoBehaviour
                         bone = soundSource;
                     }                        
 
-                        if (hit.collider.tag == "player")
+                        if (hit.collider.tag == "bone")
                         {
                             eatBone = true;
                             if (!bone)
                             {
+                                eatBone = true;
                                 alertTimer += defaultAlertTimer;
                                 stateManager(3);
                                 eatTimer = defaultEatTimer;
@@ -692,7 +693,7 @@ public class enemyPathfinding : MonoBehaviour
                             {
                                 eatTimer = 0;
                             }
-                        }                        
+                        }
                     }
                 
                 break;
