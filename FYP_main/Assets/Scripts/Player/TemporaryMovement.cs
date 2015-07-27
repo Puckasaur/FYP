@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -41,8 +42,13 @@ public class TemporaryMovement : MonoBehaviour
 
 	public Vector3 movement;
 
-	public GameObject boneCoolDown;
-	public GameObject bagCoolDown;
+	public float duration = 0.2f;
+
+	public Image boneCoolDown;
+	public Image bagCoolDown;
+
+	public Image boneBackground;
+	public Image bagBackground;
 
 	private float durationOfSpriteAnimationBone; 
 	public AnimationClip spriteAnimationBone;
@@ -51,7 +57,7 @@ public class TemporaryMovement : MonoBehaviour
 	public AnimationClip spriteAnimationBag;
 
 	IEnumerator spriteBoneTimer()
-	{
+	{	
 		boneCoolDown.GetComponent<Animator>().enabled = true;
 
 		yield return new WaitForSeconds(durationOfSpriteAnimationBone);
@@ -73,7 +79,7 @@ public class TemporaryMovement : MonoBehaviour
 		boneCoolDown.GetComponent<Animator>().enabled = false;
 		bagCoolDown.GetComponent<Animator>().enabled = false;
 
-		bagCoolDown.SetActive(false);
+		bagCoolDown.enabled = false;
 		
 		m_GroundCheckDistance = 0.6f;
 		rb = GetComponent<Rigidbody> ();
@@ -106,10 +112,15 @@ public class TemporaryMovement : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
 		{	
-			boneCoolDown.SetActive(true);
-			bagCoolDown.SetActive(false);
+			boneCoolDown.enabled = true;
+			bagCoolDown.enabled = false;
 
-		//	StopCoroutine(spriteBagTimer());
+			boneBackground.enabled = true;
+			bagBackground.enabled = false;
+
+			boneBackground.CrossFadeAlpha(1.0f, duration, true);
+			bagBackground.CrossFadeAlpha(0.0f, duration, true);
+
 			StartCoroutine(spriteBoneTimer());
 			bones--;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
@@ -117,10 +128,15 @@ public class TemporaryMovement : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/)
 		{
-			boneCoolDown.SetActive(false);
-			bagCoolDown.SetActive(true);
+			boneCoolDown.enabled = false;
+			bagCoolDown.enabled = true;
 
-		//	StopCoroutine(spriteBoneTimer());
+			boneBackground.enabled = false;
+			bagBackground.enabled = true;
+
+			boneBackground.CrossFadeAlpha(0.0f, duration, true);
+			bagBackground.CrossFadeAlpha(1.0f, duration, true);
+
 			StartCoroutine(spriteBagTimer());
 
 			print(boneSpawner.transform.parent);
