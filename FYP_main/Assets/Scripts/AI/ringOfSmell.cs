@@ -225,7 +225,8 @@ public class ringOfSmell : MonoBehaviour {
                         {
                             return;
                         }
-                        
+                    smellDetected = false;
+                    script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
                     }
                 }
                 else if (scriptFatDog != null)
@@ -236,8 +237,6 @@ public class ringOfSmell : MonoBehaviour {
                     }
                 }               
             }
-            smellDetected = false;
-            script.turnTowardsSmellTimer = script.defaultTurnTowardsSmellTimer;
         }
         
         

@@ -383,7 +383,7 @@ public class enemyPathfinding : MonoBehaviour
 
 
                     Physics.Linecast(this.transform.position, player.transform.position, out hit);
-                    Debug.DrawLine(this.transform.position, player.transform.position);
+                    Debug.DrawLine(this.transform.position, player.transform.position, Color.red);
                     if (hit.collider.tag != playerCollider.tag)
                     {
                         if (vectorx >= chaseRange || vectorz >= chaseRange)
@@ -596,7 +596,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     patrolAnim.SetBool("patrolRun", false);
 
-                    if (soundSource && soundSource.tag != "bone")
+                    if (soundSource && soundSource.tag != "bone" && randomPointSelected == false)
                     {                                                  
                             if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
                             {
@@ -623,7 +623,7 @@ public class enemyPathfinding : MonoBehaviour
                     if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
                     {                       
                          Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
-                        Debug.DrawLine(this.transform.position, soundSource.transform.position);
+                        Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
                         alertTimer = defaultAlertTimer;
 
                         if (hit.collider != null)

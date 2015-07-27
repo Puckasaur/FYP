@@ -173,25 +173,25 @@ public class fatDogAi : MonoBehaviour {
             vectorCurrentTargetx = currentTarget.position.x;
             vectorCurrentTargetz = currentTarget.position.z;
 
-            if (vectorTransformPositionx < 0)
-            {
-                vectorTransformPositionx *= -1;
-            }
+            //if (vectorTransformPositionx < 0)
+            //{
+            //    vectorTransformPositionx *= -1;
+            //}
 
-            if (vectorTransformPositionz < 0)
-            {
-                vectorTransformPositionz *= -1;
-            }
+            //if (vectorTransformPositionz < 0)
+            //{
+            //    vectorTransformPositionz *= -1;
+            //}
 
-            if (vectorCurrentTargetx < 0)
-            {
-                vectorCurrentTargetx *= -1;
-            }
+            //if (vectorCurrentTargetx < 0)
+            //{
+            //    vectorCurrentTargetx *= -1;
+            //}
 
-            if (vectorCurrentTargetz < 0)
-            {
-                vectorCurrentTargetz *= -1;
-            }
+            //if (vectorCurrentTargetz < 0)
+            //{
+            //    vectorCurrentTargetz *= -1;
+            //}
             vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
         }
@@ -239,20 +239,22 @@ public class fatDogAi : MonoBehaviour {
                 if (idleTimer <= 0)
                 {
                     lastTarget = currentTarget;
-                    currentTarget = targets[targetCounter];
-
-                    if (agent.SetDestination(currentTarget.position) != null)
+                    if (currentTarget != targets[targetCounter])
                     {
-                        agent.SetDestination(currentTarget.position);
+                        currentTarget = targets[targetCounter];
                     }
+                    //if (agent.SetDestination(currentTarget.position) != null)
+                    //{
+                    //    agent.SetDestination(currentTarget.position);
+                    //}
 
 
                     idleTimer = defaultIdleTimer;
-                    targetCounter++;
-                    if (targetCounter >= targets.Count)
-                    {
-                        targetCounter = 0;
-                    }
+                    //targetCounter++;
+                    //if (targetCounter >= targets.Count)
+                    //{
+                    //    targetCounter = 0;
+                    //}
                     stateManager(4);
 
                 }
@@ -278,7 +280,7 @@ public class fatDogAi : MonoBehaviour {
             {                
                 if (hit.collider != null)
                 {                    
-                    if (hit.collider.tag == player.GetComponent<Collider>().tag )
+                    if (hit.collider.tag == "player")
                     {                       
                         if (coneOfVisionScript.playerSeen == true)
                         {
@@ -352,7 +354,7 @@ public class fatDogAi : MonoBehaviour {
 
             else if (escapeTimer > 0 && hit.collider != null)
             {               
-                if (hit.collider.tag == player.GetComponent<Collider>().tag)
+                if (hit.collider.tag == "player")
                 {
                     if (coneOfVisionScript.playerSeen == true)
                     {
@@ -382,9 +384,6 @@ public class fatDogAi : MonoBehaviour {
                 escapeTimer--;
                // coneOfVisionScript.playerSeen = false;
             }
-
-
-
                 //escapeTimer--;
                 if (escapeTimer <= 0)
                 {
@@ -402,14 +401,8 @@ public class fatDogAi : MonoBehaviour {
                     }
                     stateManager(3);
                 }
-            
-
-       
-
 		}
 			break;
-
-
 
         case enumStatesFatDog.alert:
             {
@@ -486,21 +479,25 @@ public class fatDogAi : MonoBehaviour {
             {
                 if (ringOfSmellScript.smellDetected == false)
                 {
+                    print("noSmellHere");
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//            
                     if (coneOfVisionScript.playerSeen == true)
                     {
+                        print("Going To Chase");
                         stateManager(2);
                     }
 
                     if (turnCounter < directionDegrees.Count)
                     {
+                        print("Rotating towards target");
                         targetAngle = directionDegrees[0];
                         rotateEnemy(targetAngle, rotationStep);
 
                         if (rotationCompleted)
                         {
+                            print("taking new target");
                             directionDegrees.Add(directionDegrees[0]);
                             directionDegrees.Remove(directionDegrees[0]);
                             rotationCompleted = false;
@@ -512,6 +509,7 @@ public class fatDogAi : MonoBehaviour {
 
                     else if (turnCounter >= directionDegrees.Count)
                     {
+                        print("Going back to alert");
                         //alertTimer = defaultAlertTimer;
                         turnCounter = 0;
                         idleTimer = defaultIdleTimer;
@@ -526,6 +524,7 @@ public class fatDogAi : MonoBehaviour {
                 }
                 else if (ringOfSmellScript.smellDetected == true)
                 {
+                    print("smelling something");
                     RotateDogWhileSmelling();
                 }                
             }
@@ -637,6 +636,7 @@ public class fatDogAi : MonoBehaviour {
                 {
                     currentTarget = lastTarget;
                 }
+                agent.Resume();
 			}
 		}
 		timer--;

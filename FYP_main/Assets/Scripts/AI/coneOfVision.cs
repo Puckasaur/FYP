@@ -86,10 +86,7 @@ public class coneOfVision : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             RaycastHit hit;
-            if(parent.position.y <= 1)
-            {
-                //parent.transform.;
-            }
+
             Physics.Linecast(transform.position, other.transform.position, out hit);
             Debug.DrawLine(transform.position, other.transform.position, Color.green);
             if (hit.collider.tag == "player")//other.tag)
