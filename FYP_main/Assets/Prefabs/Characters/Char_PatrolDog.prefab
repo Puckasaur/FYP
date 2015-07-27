@@ -90,6 +90,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &115496
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441438}
+  - 82: {fileID: 8294842}
+  m_Layer: 0
+  m_Name: Patrol Walk Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &123650
 GameObject:
   m_ObjectHideFlags: 1
@@ -313,6 +329,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &167402
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 433760}
+  m_Layer: 0
+  m_Name: Patrol Audio Folder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &168688
 GameObject:
   m_ObjectHideFlags: 1
@@ -480,7 +511,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &188850
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -488,7 +519,7 @@ GameObject:
   - 4: {fileID: 488238}
   - 82: {fileID: 8268216}
   m_Layer: 0
-  m_Name: Patrol Source
+  m_Name: Patrol Bark Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,6 +738,20 @@ Transform:
   - {fileID: 489042}
   m_Father: {fileID: 487298}
   m_RootOrder: 1
+--- !u!4 &433760
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167402}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 488238}
+  - {fileID: 441438}
+  m_Father: {fileID: 487298}
+  m_RootOrder: 3
 --- !u!4 &434092
 Transform:
   m_ObjectHideFlags: 1
@@ -745,6 +790,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 466390}
   m_RootOrder: 0
+--- !u!4 &441438
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 433760}
+  m_RootOrder: 1
 --- !u!4 &444000
 Transform:
   m_ObjectHideFlags: 1
@@ -916,7 +973,7 @@ Transform:
   - {fileID: 475982}
   - {fileID: 428096}
   - {fileID: 488060}
-  - {fileID: 488238}
+  - {fileID: 433760}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &488060
@@ -941,8 +998,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 487298}
-  m_RootOrder: 3
+  m_Father: {fileID: 433760}
+  m_RootOrder: 0
 --- !u!4 &489042
 Transform:
   m_ObjectHideFlags: 1
@@ -1114,7 +1171,78 @@ AudioSource:
   m_GameObject: {fileID: 188850}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24316910, guid: cf9efcf4ff3730b4098147ab841edb5a,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 2559f51ccbef086429911cea246673cf, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!82 &8294842
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115496}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 24390740, guid: cf9efcf4ff3730b4098147ab841edb5a,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1203,23 +1331,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0557aa12172d2f47b098043d4707d45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tempSmellPosition: {x: 0, y: 0, z: 0}
+  continueRotation: 0
+  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
+  soundSource: {fileID: 0}
   respawnPosition: {x: 0, y: 0, z: 0}
   target1: {fileID: 0}
   target2: {fileID: 0}
   target3: {fileID: 0}
   target4: {fileID: 0}
-  visionRotator: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
-  States: 0
+  visionRotator: {fileID: 0}
   player: {fileID: 0}
-  sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
-  soundSource: {fileID: 0}
-  isOnWaypoint: 0
+  States: 0
+  patrolSpeed: 3.5
+  chaseSpeed: 13
+  chaseRange: 10
   agent: {fileID: 0}
   targets: []
   alertArea:
   - {fileID: 0}
+  isOnWaypoint: 0
   isPaired: 0
   eatBone: 0
   distracted: 0
@@ -1232,8 +1365,8 @@ MonoBehaviour:
   targetAngle: 0
   angleOffsetMax: 10
   angleOffsetMin: -10
-  rotationCompleted: 0
   turnTimer: 100
+  rotationCompleted: 0
   SeekForSmellSource: 0
   agentStopped: 0
   idleTimer: 0
@@ -1251,17 +1384,10 @@ MonoBehaviour:
   defaultDetectSoundTimer: 0
   turnTowardsSmellTimer: 0
   defaultTurnTowardsSmellTimer: 0
-  patrolSpeed: 3.5
-  chaseSpeed: 13
-  chaseRange: 10
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
-  leapRange: 0
-  defaultLeapTimer: 60
-  impulse: 0
+  defaultChargeTimer: 0
   chargeRange: 5
-  tempSmellPosition: {x: 0, y: 0, z: 0}
-  continueRotation: 0
   currentSpeed: 0
 --- !u!114 &11444014
 MonoBehaviour:
