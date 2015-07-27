@@ -4,6 +4,7 @@ using System.Collections;
 
 public class hidingThirdPerson : MonoBehaviour {
 
+	private OnScreenInstructionChild onScreenChild;
 	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
 
@@ -27,6 +28,7 @@ public class hidingThirdPerson : MonoBehaviour {
 		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
 		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
 		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
+		onScreenChild = GameObject.Find ("TriggerArea").GetComponent<OnScreenInstructionChild>();
 
 	}
 
@@ -35,7 +37,7 @@ public class hidingThirdPerson : MonoBehaviour {
 		if (catType.tag == "player") 
 		{
 			checkToEnter.SetActive(true);
-			
+			onScreenChild.sprintIns.SetActive(false);
 			if (isHiding == false)
 			{
 				if (Input.GetButtonDown("Interact") || Input.GetKeyDown (KeyCode.E))
@@ -65,6 +67,8 @@ public class hidingThirdPerson : MonoBehaviour {
 				isPaused = false;            
                 if(ros.disguised == true)
             	ros.isNotDisguised("htp");
+				onScreenChild.sprintIns.SetActive(false);
+				
 			}
 		} 
 
