@@ -1418,7 +1418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolSource: {fileID: 8268216}
+  patrolBarkSource: {fileID: 8268216}
+  patrolWalkSource: {fileID: 8294842}
 --- !u!136 &13696986
 CapsuleCollider:
   m_ObjectHideFlags: 1
