@@ -109,6 +109,8 @@ public class hidingThirdPerson : MonoBehaviour {
 
         character.transform.position = prevPosition.transform.position;
 		controllerCheckToExit.SetActive(false);
+		keyboardCheckToExit.SetActive(false);
+		
    
 	}
 

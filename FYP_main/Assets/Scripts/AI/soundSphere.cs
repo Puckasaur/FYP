@@ -28,7 +28,7 @@ public class soundSphere : MonoBehaviour
         //----------------------------------------------------------------------------//
         // if an enemy enters the sound sphere, this code sends a message to the enemy//
         //----------------------------------------------------------------------------//
-        if (other.gameObject.tag == "enemy")
+        if (other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
         {
 
             script = other.GetComponent<enemyPathfinding>();

@@ -86,7 +86,7 @@ public class smelling : MonoBehaviour {
 		exitPoint.GetComponent<ParticleSystem>().enableEmission = false;
 		//colliderCheck.GetComponent<BoxCollider> ().enabled = false;
         cooldown = defautCooldown;
-		boneSpawnerComo = GameObject.FindGameObjectWithTag("boneSpawnerRoom");
+		//boneSpawnerComo = GameObject.FindGameObjectWithTag("boneSpawnerRoom");
 	}
 
 	void OnTriggerEnter(Collider boneTrigger)

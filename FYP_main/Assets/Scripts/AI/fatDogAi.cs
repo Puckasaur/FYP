@@ -45,13 +45,14 @@ public class fatDogAi : MonoBehaviour {
 	List<Transform> targets = new List<Transform>();
 	public bool eatBone = false;
 	public bool distracted = false;
-	
+    public bool onWaypoint = false;
+
 	public float turnSpeed = 2.0f;
 	
 	public float speed = 2;
 	
 	float maxSpeed = 5;
-	float maxScale = 60;
+	float maxScale = 20;
 	float waypointOffsetMin = -2.05f;
 	float waypointOffsetMax = 2.05f;
 	float vectorTransformPositionx = 0;
@@ -107,6 +108,7 @@ public class fatDogAi : MonoBehaviour {
 	public int defaultBarkTimer;
 	public int defaultTimer;
 	public int defaultEscapeTimer;
+    public float defaultNewTargetTimer;
 	public int playerOutOfSight;
 	int targetIndex;
 	int targetCounter = 0;
@@ -114,6 +116,8 @@ public class fatDogAi : MonoBehaviour {
 	public float defaultTurnTimer;
 	public int defaultDetectSoundTimer;
 	int detectSoundTimer;
+    public float newTargetTimer;
+
     float raycastRange;
     public float defaultRaycastRange;
 
@@ -192,6 +196,12 @@ public class fatDogAi : MonoBehaviour {
 			//-----------------------------------------------------------------------------------------//
 			//patrol, moves from one waypoint to the next waiting for a second before advancing forward//
 			//-----------------------------------------------------------------------------------------//
+
+            if (newTargetTimer >= 0)
+            {
+                agent.velocity = Vector3.zero;
+                newTargetTimer--;
+            }
             if (ringOfSmellScript.smellDetected == false)
             {
                 if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
@@ -199,7 +209,7 @@ public class fatDogAi : MonoBehaviour {
                     agent.Stop();
                     agentStopped = true;
                     stateManager(1);
-
+                    onWaypoint = true;
                 }
             }
 			
@@ -213,9 +223,11 @@ public class fatDogAi : MonoBehaviour {
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
+            agent.velocity = Vector3.zero;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
             agent.Stop();
-            if (ringOfSmellScript.smellDetected == false)
-            {
+
+
                 if (idleTimer <= 0)
                 {
                     lastTarget = currentTarget;
@@ -243,7 +255,7 @@ public class fatDogAi : MonoBehaviour {
                 {
                     idleTimer = 0;
                 }
-            }
+            
             //else if (ringOfSmellScript.smellDetected == true)
             //{
             //    RotateDogWhileSmelling();
@@ -424,47 +436,56 @@ public class fatDogAi : MonoBehaviour {
             {
                 //if (ringOfSmellScript.smellDetected == false)
                 {
-                    //-----------------------------------------------//
-                    //Stand on the spot and look at preset directions//
-                    //-----------------------------------------------//            
-                    if (coneOfVisionScript.playerSeen == true)
+                    if (agentStopped == false || idleTimer >= 0)
                     {
-                        stateManager(2);
+                        //agent.velocity = Vector3.zero;
+                        idleTimer--;
+                        agent.Stop();
                     }
-
-                    if (turnCounter < directionDegrees.Count && targetAngle != directionDegrees[0])
+                    else
                     {
-                        targetAngle = directionDegrees[0];
-                        //rotateEnemy(targetAngle, rotationStep);
+                        //-----------------------------------------------//
+                        //Stand on the spot and look at preset directions//
+                        //-----------------------------------------------//            
+                        if (coneOfVisionScript.playerSeen == true)
+                        {
+                            stateManager(2);
+                        }
+
+                        if (turnCounter < directionDegrees.Count && targetAngle != directionDegrees[0])
+                        {
+                            targetAngle = directionDegrees[0];
+                            //rotateEnemy(targetAngle, rotationStep);
 
 
 
-                    }
+                        }
 
-                    else if (turnCounter >= directionDegrees.Count)
-                    {
-                        //alertTimer = defaultAlertTimer;
-                        turnCounter = 0;
-                        idleTimer = defaultIdleTimer;
-                        stateManager(1);
+                        else if (turnCounter >= directionDegrees.Count)
+                        {
+                            //alertTimer = defaultAlertTimer;
+                            turnCounter = 0;
+                            idleTimer = defaultIdleTimer;
+                            stateManager(1);
 
-                    }                       
-                    else if (rotationCompleted)
-                    {
+                        }
+                        else if (rotationCompleted)
+                        {
                             directionDegrees.Add(directionDegrees[0]);
                             directionDegrees.Remove(directionDegrees[0]);
                             rotationCompleted = false;
                             turnCounter++;
                             turnTimer += defaultTurnTimer; //* Time.deltaTime;
-                    }
-                    else if (currentAngle != targetAngle)
-                    {
-                        rotateEnemy(targetAngle, rotationStep);
-                    }
-                    idleTimer--;
-                    if (idleTimer < 0)
-                    {
-                        idleTimer = 0;
+                        }
+                        else if (currentAngle != targetAngle)
+                        {
+                            rotateEnemy(targetAngle, rotationStep);
+                        }
+                       // idleTimer--;
+                        if (idleTimer < 0)
+                        {
+                            idleTimer = 0;
+                        }
                     }
                 }
             }
@@ -499,27 +520,49 @@ public class fatDogAi : MonoBehaviour {
 		case enumStatesFatDog.detectSound:
 		{
 
-            currentTarget = soundSource.transform;
+           // currentTarget = soundSource.transform;
 
-            if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
-            {
-                if (soundSource.tag == "bone")
+            //if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+            //{
+                if (soundSource && soundSource.tag == "bone")
                 {
-                    stateManager(5);
+                    currentTarget = soundSource.transform;
                 }
                 else
                 {
                     currentTarget = lastTarget;
-                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+                    if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
                     {
-                        stateManager(3);
+                        stateManager(0);
                     }
                 }
-            }
+            
 			//---------------------------------------------//
 			// when sound is heard, move towards the source//
 			//---------------------------------------------//
-			
+                if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
+            {
+                if (soundSource != null || !soundSource.Equals(null))
+                {
+                    Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
+                    Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
+                }
+                //alertTimer = defaultAlertTimer;
+
+                if (hit.collider != null)
+                {
+                    if (agentStopped == false)
+                    {
+                        agentStopped = true;
+                        agent.Stop();
+                    }
+                    if (hit.collider.tag == "bone")
+                    {
+                        //randomPointSelected = false;
+                        stateManager(7);
+                    }
+                }
+            }                          
 		}
 			break;
 		case enumStatesFatDog.eatBone:
@@ -527,35 +570,44 @@ public class fatDogAi : MonoBehaviour {
 			//------------------------------------------------------------------//
 			// holds the enemy still for long enough for the distraction to pass//
 			//------------------------------------------------------------------//
-			
-			eatBone = true;
-			if (!bone)
-			{
-                if (turnCounter != 0)
-                {
-                    turnCounter = 0;
-                }
-				stateManager(3);
-			}
-			
-			if (eatTimer <= 0)
-				
-			{
-				eatTimer = defaultEatTimer;// 120;
-				distracted = false;
-				eatBone = false;
-				
-				Destroy(bone);
-                if (turnCounter != 0)
-                {
-                    turnCounter = 0;
-                }
-				stateManager(3);
-				
-			}
-			eatTimer--;
-			
-		}
+
+            if (soundSource != null && soundSource.tag == "bone")
+            {
+                bone = soundSource;
+            }
+
+            //if (hit.collider.tag == "bone")
+            //{
+            eatBone = true;
+            if (!bone)
+            {
+                eatBone = true;
+                //alertTimer += defaultAlertTimer;
+
+                stateManager(0);
+                eatTimer = defaultEatTimer;
+                currentTarget = lastTarget;
+                //currentTarget = alertArea[areaCounter];
+            }
+
+            if (eatTimer <= 0)
+            {
+                eatTimer = defaultEatTimer;
+                distracted = false;
+                eatBone = false;
+                currentTarget = lastTarget;
+               // currentTarget = alertArea[areaCounter];
+                Destroy(bone);
+               // alertTimer += defaultAlertTimer;
+                stateManager(0);
+            }
+            eatTimer--;
+            if (eatTimer < 0)
+            {
+                eatTimer = 0;
+            }
+            //}
+        }
 			
 			break;
 		default:
@@ -568,15 +620,25 @@ public class fatDogAi : MonoBehaviour {
 
             if (States != enumStatesFatDog.idleSuspicious && States != enumStatesFatDog.chase)
 			{
-				if(currentTarget != null)
+				if(currentTarget != null && currentTarget.position != transform.position)
 				{
+                    //agent.Stop();
 					agent.SetDestination(currentTarget.position);
+                    agent.Resume();
+                    if (newTargetTimer <= 0 && onWaypoint == true)
+                    {
+                        newTargetTimer = defaultNewTargetTimer;
+                        onWaypoint = false;
+                    }
 				}
-                else
+                else if(currentTarget == null)
                 {
                     currentTarget = lastTarget;
                 }
-                agent.Resume();
+                else
+                {
+                    agent.Stop();
+                }
 			}
 		}
 		timer--;
