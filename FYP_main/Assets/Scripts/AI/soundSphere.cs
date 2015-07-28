@@ -6,7 +6,7 @@ public class soundSphere : MonoBehaviour
 {
     enemyPathfinding script;
 
-    Vector3 scalingRate = new Vector3(1.0f, 1.0f, 1.0f);
+    Vector3 scalingRate = new Vector3(1.0f, 0.125f, 1.0f);
     public float maxDiameter;
 	// Use this for initialization
 	void Start () 

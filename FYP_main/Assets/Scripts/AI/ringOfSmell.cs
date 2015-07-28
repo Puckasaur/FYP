@@ -259,13 +259,13 @@ public class ringOfSmell : MonoBehaviour {
     public void increaseSmell(float value)
     {
         //print("3");
-        radius = startRadius;
+        //radius = startRadius;
         radius += value;
     }
     public void decreaseSmell(float value)
     {
         //print("4");
-        radius = startRadius;
+        //radius = startRadius;
         radius -= value;
     }
 }
