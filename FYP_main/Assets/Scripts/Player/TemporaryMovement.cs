@@ -32,6 +32,7 @@ public class TemporaryMovement : MonoBehaviour
     public int bags;
 
 	private bool isGrounded;
+	private bool isEsc;
     public List<GameObject> enemies = new List<GameObject>();
     ringOfSmell ring;
     bool smellHidden;
@@ -90,6 +91,8 @@ public class TemporaryMovement : MonoBehaviour
 
 		durationOfSpriteAnimationBone = spriteAnimationBone.length;
 		durationOfSpriteAnimationBag = spriteAnimationBag.length;
+
+		isEsc = !isEsc;
 	}
 
 	void FixedUpdate() 
@@ -171,8 +174,10 @@ public class TemporaryMovement : MonoBehaviour
                 ring.isDisguised("tempMove");
             }
         }
+	
+		
 	}
-
+	
 	void Update()
 	{
 		//checks if character is grounded

@@ -18,7 +18,6 @@ public class OnScreenInstructionChild : MonoBehaviour {
 
 	IEnumerator delay()
 	{
-		walkIns.SetActive(false);
 
 		yield return new WaitForSeconds(0.5f);
 
@@ -30,8 +29,10 @@ public class OnScreenInstructionChild : MonoBehaviour {
 	void Update()
 	{
 		if (gameObject.GetComponentInParent<OnScreenInstructionParent>().enterArea1 == true)
-		{
+		{		
 			StartCoroutine(delay ());
+
+
 		}
 	}
 }
