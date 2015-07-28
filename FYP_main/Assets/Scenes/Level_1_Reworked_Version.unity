@@ -17109,6 +17109,10 @@ Prefab:
       propertyPath: m_LocalScale.x
       value: -.286753714
       objectReference: {fileID: 0}
+    - target: {fileID: 198532, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
   m_IsPrefabParent: 0
@@ -36201,7 +36205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1027806571
 Transform:
   m_ObjectHideFlags: 0
@@ -37714,6 +37718,10 @@ Prefab:
     - target: {fileID: 198532, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
       propertyPath: m_Name
       value: '"e"_button1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 198532, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
@@ -74430,6 +74438,10 @@ Prefab:
     - target: {fileID: 442308, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
       propertyPath: m_LocalScale.x
       value: -.286753684
+      objectReference: {fileID: 0}
+    - target: {fileID: 198532, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a38c0599cdb6c79448cb802a6c762b3f, type: 2}
