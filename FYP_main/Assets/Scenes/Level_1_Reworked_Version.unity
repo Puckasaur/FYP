@@ -18634,6 +18634,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e0da99a631320864f877a85148545b1c, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &495351765 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100148, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+  m_PrefabInternal: {fileID: 1731741030}
 --- !u!4 &496925204 stripped
 Transform:
   m_PrefabParentObject: {fileID: 433698, guid: baf9bce5909d3ad4f8570c25651f29ee, type: 2}
@@ -64571,6 +64575,10 @@ Prefab:
       propertyPath: tonemapper
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11400696, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 495351765}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
   m_IsPrefabParent: 0

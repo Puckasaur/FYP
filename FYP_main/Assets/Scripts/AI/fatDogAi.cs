@@ -163,7 +163,6 @@ public class fatDogAi : MonoBehaviour {
 	
 	void Update()
 	{
-        //darnYouGandalf = coneOfVisionScript.playerSeen;
         /// Calcumalationen for ze vector differences///
         if (currentTarget != null)
         {
@@ -173,25 +172,6 @@ public class fatDogAi : MonoBehaviour {
             vectorCurrentTargetx = currentTarget.position.x;
             vectorCurrentTargetz = currentTarget.position.z;
 
-            //if (vectorTransformPositionx < 0)
-            //{
-            //    vectorTransformPositionx *= -1;
-            //}
-
-            //if (vectorTransformPositionz < 0)
-            //{
-            //    vectorTransformPositionz *= -1;
-            //}
-
-            //if (vectorCurrentTargetx < 0)
-            //{
-            //    vectorCurrentTargetx *= -1;
-            //}
-
-            //if (vectorCurrentTargetz < 0)
-            //{
-            //    vectorCurrentTargetz *= -1;
-            //}
             vectorx = (vectorTransformPositionx - vectorCurrentTargetx);
             vectorz = (vectorTransformPositionz - vectorCurrentTargetz);
         }
@@ -264,10 +244,10 @@ public class fatDogAi : MonoBehaviour {
                     idleTimer = 0;
                 }
             }
-            else if (ringOfSmellScript.smellDetected == true)
-            {
-                RotateDogWhileSmelling();
-            }  
+            //else if (ringOfSmellScript.smellDetected == true)
+            //{
+            //    RotateDogWhileSmelling();
+            //}  
 			break;
 		}
 			
@@ -289,17 +269,21 @@ public class fatDogAi : MonoBehaviour {
                                 lastTarget = currentTarget;
                             }
                             currentTarget = player.transform;
-                            
-                            transform.LookAt(currentTarget);
+
+                            Vector3 relative = transform.InverseTransformPoint(currentTarget.position);
+                            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;          
+                            transform.Rotate(0, angle * Time.deltaTime * 4.5f, 0);
+        
+                            //transform.LookAt(currentTarget);
                         }
-                        else 
-                        {
-                            if (ringOfSmellScript.smellDetected == true)
-                            {
-                                RotateDogWhileSmelling();  
-                            }
+                        //else 
+                        //{
+                        //    if (ringOfSmellScript.smellDetected == true)
+                        //    {
+                        //        RotateDogWhileSmelling();  
+                        //    }
                                                        
-                        }
+                        //}
 
                         if (barkTimer < 0)
                         {
@@ -352,62 +336,13 @@ public class fatDogAi : MonoBehaviour {
                 }
             }
 
-            else if (escapeTimer > 0 && hit.collider != null)
-            {               
-                if (hit.collider.tag == "player")
-                {
-                    if (coneOfVisionScript.playerSeen == true)
-                    {
-                        if (currentTarget != player.transform)
-                        {
-                            lastTarget = currentTarget;
-                        }
-                        currentTarget = player.transform;
-
-                        transform.LookAt(currentTarget);
-                    }
-                    else
-                    {
-                        RotateDogWhileSmelling();
-                    }
-
-                    if (barkTimer < 0)
-                    {
-                        bark();
-                    }
-                    barkTimer--;
-                }
-            }
-
-            else
-            {
-                escapeTimer--;
-               // coneOfVisionScript.playerSeen = false;
-            }
-                //escapeTimer--;
-                if (escapeTimer <= 0)
-                {
-                    escapeTimer = 0;
-                    //transform.LookAt(currentTarget);
-                    if (currentTarget == player.transform)
-                    {
-                        currentTarget = lastTarget;
-                    }
-                    escapeTimer = defaultEscapeTimer;
-                    coneOfVisionScript.playerSeen = false;
-                    if (turnCounter != 0)
-                    {
-                        turnCounter = 0;
-                    }
-                    stateManager(3);
-                }
 		}
 			break;
 
         case enumStatesFatDog.alert:
             {
                 
-                if (ringOfSmellScript.smellDetected == false)
+                //if (ringOfSmellScript.smellDetected == false)
                 {
                     
                     if (alertLookingDirectionsSet == false)
@@ -443,78 +378,88 @@ public class fatDogAi : MonoBehaviour {
 
                     int tempAlertCount = directionDegreesAlert.Count;
 
-                    if (turnCounter < 4)
+                    if (turnCounter < 4 && targetAngle != directionDegreesAlert[0])
                     {
-                        print(targetAngle + "Target Angle");
-                        print(directionDegreesAlert[0] + "Direction degrees");
                         targetAngle = directionDegreesAlert[0];
-                        rotateEnemy(targetAngle, rotationStep);
+                        //rotateEnemy(targetAngle, rotationStep);
 
-                        if (rotationCompleted)
-                        {
-                            directionDegreesAlert.Add(directionDegreesAlert[0]);
-                            directionDegreesAlert.Remove(directionDegreesAlert[0]);
-                            rotationCompleted = false;
-                            turnCounter++;
-                            turnTimerAlert += defaultTurnTimerAlert * Time.deltaTime;
-                        }
+                        //if (rotationCompleted)
+                        //{
+                        //    directionDegreesAlert.Add(directionDegreesAlert[0]);
+                        //    directionDegreesAlert.Remove(directionDegreesAlert[0]);
+                        //    rotationCompleted = false;
+                        //    turnCounter++;
+                        //    turnTimerAlert += defaultTurnTimerAlert * Time.deltaTime;
+                        //}
                     }
 
                     else if (turnCounter >= 4)
                     {
-
                         turnCounter = 0;
                         alertLookingDirectionsSet = false;
                         stateManager(4);
 
+                    }                    
+                    else if(rotationCompleted)
+                    {
+                        directionDegreesAlert.Add(directionDegreesAlert[0]);
+                        directionDegreesAlert.Remove(directionDegreesAlert[0]);
+                        rotationCompleted = false;
+                        turnCounter++;
+                        turnTimerAlert += defaultTurnTimerAlert;// *Time.deltaTime;
                     }
+                    else if(currentAngle != targetAngle)
+                    {
+                        rotateEnemy(targetAngle, rotationStep);
+                    }
+
                 }
-                else if (ringOfSmellScript.smellDetected == true)
-                {
-                    RotateDogWhileSmelling();
-                }  
+                //else if (ringOfSmellScript.smellDetected == true)
+                //{
+                //    RotateDogWhileSmelling();
+                //}  
             }
             break;
         case enumStatesFatDog.idleSuspicious:
             {
-                if (ringOfSmellScript.smellDetected == false)
+                //if (ringOfSmellScript.smellDetected == false)
                 {
-                    print("noSmellHere");
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//            
                     if (coneOfVisionScript.playerSeen == true)
                     {
-                        print("Going To Chase");
                         stateManager(2);
                     }
 
-                    if (turnCounter < directionDegrees.Count)
+                    if (turnCounter < directionDegrees.Count && targetAngle != directionDegrees[0])
                     {
-                        print("Rotating towards target");
                         targetAngle = directionDegrees[0];
-                        rotateEnemy(targetAngle, rotationStep);
+                        //rotateEnemy(targetAngle, rotationStep);
 
-                        if (rotationCompleted)
-                        {
-                            print("taking new target");
-                            directionDegrees.Add(directionDegrees[0]);
-                            directionDegrees.Remove(directionDegrees[0]);
-                            rotationCompleted = false;
-                            turnCounter++;
-                            turnTimer += defaultTurnTimer; //* Time.deltaTime;
-                        }
+
 
                     }
 
                     else if (turnCounter >= directionDegrees.Count)
                     {
-                        print("Going back to alert");
                         //alertTimer = defaultAlertTimer;
                         turnCounter = 0;
                         idleTimer = defaultIdleTimer;
                         stateManager(1);
 
+                    }                       
+                    else if (rotationCompleted)
+                    {
+                            directionDegrees.Add(directionDegrees[0]);
+                            directionDegrees.Remove(directionDegrees[0]);
+                            rotationCompleted = false;
+                            turnCounter++;
+                            turnTimer += defaultTurnTimer; //* Time.deltaTime;
+                    }
+                    else if (currentAngle != targetAngle)
+                    {
+                        rotateEnemy(targetAngle, rotationStep);
                     }
                     idleTimer--;
                     if (idleTimer < 0)
@@ -522,11 +467,6 @@ public class fatDogAi : MonoBehaviour {
                         idleTimer = 0;
                     }
                 }
-                else if (ringOfSmellScript.smellDetected == true)
-                {
-                    print("smelling something");
-                    RotateDogWhileSmelling();
-                }                
             }
             break;
 		case enumStatesFatDog.distracted:
@@ -688,10 +628,8 @@ public class fatDogAi : MonoBehaviour {
 	
 	void rotateEnemy(float targetDegrees, float rotationStep)
 	{
-        
-        if (ringOfSmellScript.smellDetected == false)
+        //if (ringOfSmellScript.smellDetected == false)
         {
-
             rotationDifference = 0;
 
             if (turnTimer <= 0)
@@ -712,12 +650,11 @@ public class fatDogAi : MonoBehaviour {
                             //=============//
                             // First Sector//
                             //=============//
+                            
                             if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
                             {
-
                                 if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                                 {
-
 
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                     currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
@@ -731,15 +668,13 @@ public class fatDogAi : MonoBehaviour {
                                     if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
 
-
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer;
+                                        //turnTimer += defaultTurnTimer;
                                     }
                                 }
                                 else //if (currentAngle > targetAngle && turnTimer == 0)
                                 {
-
 
 
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
@@ -749,7 +684,7 @@ public class fatDogAi : MonoBehaviour {
                                     {
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        //turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
 
                                 }
@@ -759,12 +694,11 @@ public class fatDogAi : MonoBehaviour {
                             //=============//
                             //Second Sector//
                             //=============//
-
+                                
                             else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
                             {
                                 if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
                                 {
-
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -776,23 +710,24 @@ public class fatDogAi : MonoBehaviour {
 
                                     if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
                                 }
                                 else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
                                 {
-
 
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                     currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
                                     if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
                                 }
                             }
@@ -800,7 +735,7 @@ public class fatDogAi : MonoBehaviour {
 
                         else if (targetAngle < 0 && targetAngle > -180)  //decide which side the target is
                         {
-
+                           
                             //=============//
                             //Third Sector //
                             //=============//
@@ -809,7 +744,6 @@ public class fatDogAi : MonoBehaviour {
                                 if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                                 {
 
-
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -820,14 +754,14 @@ public class fatDogAi : MonoBehaviour {
 
                                     if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
                                 }
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
-
 
 
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
@@ -835,9 +769,10 @@ public class fatDogAi : MonoBehaviour {
                                     rotationDifference = targetAngle - currentAngle;
                                     if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
 
                                 }
@@ -850,7 +785,6 @@ public class fatDogAi : MonoBehaviour {
                                 if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                                 {
 
-
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -861,14 +795,14 @@ public class fatDogAi : MonoBehaviour {
 
                                     if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                       // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
                                 }
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
-
 
 
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
@@ -876,9 +810,10 @@ public class fatDogAi : MonoBehaviour {
                                     rotationDifference = targetAngle - currentAngle;
                                     if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                     {
+
                                         rotationCompleted = true;
                                         rotationInProgress = false;
-                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
+                                        //turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
 
                                 }
@@ -910,9 +845,9 @@ public class fatDogAi : MonoBehaviour {
 
     public void RotateDogWhileSmelling()
     {
-        // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        Vector3 relative = transform.InverseTransformPoint(player.transform.position);
-        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-        transform.Rotate(0, angle * Time.deltaTime * 2, 0);
+        //// currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+        //Vector3 relative = transform.InverseTransformPoint(player.transform.position);
+        //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+        //transform.Rotate(0, angle * Time.deltaTime * 2, 0);
     }
 }

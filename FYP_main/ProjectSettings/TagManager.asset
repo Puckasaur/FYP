@@ -45,6 +45,10 @@ TagManager:
   - door
   - key
   - destructible
+  - Vision
+  - Smell
+  - ball
+  - fatDog
   layers:
   - Default
   - TransparentFX

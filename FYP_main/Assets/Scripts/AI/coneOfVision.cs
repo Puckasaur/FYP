@@ -27,9 +27,6 @@ public class coneOfVision : MonoBehaviour
         width = startWidth;
         height = startHeight;
 
-
-        //if (transform.parent.tag == "enemy")
-        //{
         if (this.transform.parent.GetComponent<enemyPathfinding>() != null)
         {
             script = this.transform.parent.GetComponent<enemyPathfinding>();
@@ -45,23 +42,19 @@ public class coneOfVision : MonoBehaviour
         }
         parent = this.transform.parent;
 
-        //}
-        width = startWidth;
-        height = startHeight;
-        range = startRange;
     }
     void Update()
     {
         GetComponent<Rigidbody>().WakeUp();
 
-        if (transform.localScale.x < width)
+        if (transform.localScale.x < width || transform.localScale.x > width)
         {
             transform.localScale = new Vector3(width, height, range);
         }
-        else if (transform.localScale.x > width)
-        {
-            transform.localScale = new Vector3(width, height, range);
-        }
+        //else if (transform.localScale.x > width)
+        //{
+        //    transform.localScale = new Vector3(width, height, range);
+        //}
     }
 
 	void OnTriggerEnter (Collider other)
