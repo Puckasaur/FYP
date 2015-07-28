@@ -5,7 +5,6 @@ using System.Collections;
 public class hidingThirdPerson : MonoBehaviour {
 
 	private OnScreenInstructionChild onScreenChild;
-	private TemporaryMovement tmpMovement;
 	private ringOfSmell ros;
 
 	private checkPoint cp;
@@ -14,8 +13,11 @@ public class hidingThirdPerson : MonoBehaviour {
     public Transform prevPosition;
     public Transform hidingPosition;
 
-   	public GameObject checkToEnter;
-	public GameObject checkToExit;
+   	public GameObject keyboardCheckToEnter;
+	public GameObject keyboardCheckToExit;
+
+	public GameObject controllerCheckToEnter;
+	public GameObject controllerCheckToExit;
 
     public bool isHiding;
 	public bool isPaused;
@@ -24,8 +26,7 @@ public class hidingThirdPerson : MonoBehaviour {
 	{
         //isHiding = false;
         //isPaused = false;
-
-		tmpMovement = GameObject.Find ("Char_Cat").GetComponent<TemporaryMovement>();
+		
 		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
 		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
 
@@ -35,7 +36,9 @@ public class hidingThirdPerson : MonoBehaviour {
     {	
 		if (catType.tag == "player") 
 		{
-			checkToEnter.SetActive(true);
+			keyboardCheckToEnter.SetActive(true);
+			controllerCheckToEnter.SetActive(true);
+			
 			if (isHiding == false)
 			{
 				if (Input.GetButtonDown("Interact") || Input.GetKeyDown (KeyCode.E))
@@ -50,7 +53,8 @@ public class hidingThirdPerson : MonoBehaviour {
 
 	void OnTriggerExit()
 	{
-		checkToEnter.SetActive(false);
+		keyboardCheckToEnter.SetActive(false);
+		controllerCheckToEnter.SetActive(false);
 	}
 
 	void Update (){ 
@@ -91,8 +95,11 @@ public class hidingThirdPerson : MonoBehaviour {
         if(ros.disguised == false)
         	ros.isDisguised("htp");
 
-		checkToEnter.SetActive(false);
-		checkToExit.SetActive(true);
+		keyboardCheckToEnter.SetActive(false);
+		keyboardCheckToExit.SetActive(true);
+
+		controllerCheckToEnter.SetActive(false);
+		controllerCheckToExit.SetActive(true);
         
 	}
 	
@@ -101,7 +108,7 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-		checkToExit.SetActive(false);
+		controllerCheckToExit.SetActive(false);
    
 	}
 
