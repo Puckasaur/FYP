@@ -202,8 +202,7 @@ public class fatDogAi : MonoBehaviour {
                 agent.velocity = Vector3.zero;
                 newTargetTimer--;
             }
-            if (ringOfSmellScript.smellDetected == false)
-            {
+
                 if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
                 {
                     agent.Stop();
@@ -211,7 +210,7 @@ public class fatDogAi : MonoBehaviour {
                     stateManager(1);
                     onWaypoint = true;
                 }
-            }
+            
 			
 		}
 			
@@ -613,7 +612,21 @@ public class fatDogAi : MonoBehaviour {
 		default:
 			break;
 		}
-		
+
+        if (ringOfSmellScript.smellDetected == true)
+        {
+
+            Vector3 direction = (player.transform.position - transform.position).normalized;
+            Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
+            Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
+            if (hit.collider != null)
+            {
+                if (hit.collider.tag == player.GetComponent<Collider>().tag)
+                {
+                    rotateDogWhileSmelling(player.transform.position);
+                }
+            }
+        }
 		if(timer <= 0)
 		{
 			timer+=defaultTimer;
@@ -905,11 +918,16 @@ public class fatDogAi : MonoBehaviour {
 	//This is to rotate enemy towards a smell before he detects the cause of the smell//
 	//--------------------------------------------------------------------------------//
 
-    public void RotateDogWhileSmelling()
+    public void rotateDogWhileSmelling(Vector3 targetTransformPosition)
     {
-        //// currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        //Vector3 relative = transform.InverseTransformPoint(player.transform.position);
-        //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-        //transform.Rotate(0, angle * Time.deltaTime * 2, 0);
+        if (ringOfSmellScript.smellingPlayer)
+        {
+            //SeekForSmellSource = true;
+            agentStopped = true;
+            agent.Stop();
+            Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
+            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+            transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+        }
     }
 }

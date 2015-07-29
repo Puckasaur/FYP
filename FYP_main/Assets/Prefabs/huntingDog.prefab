@@ -493,7 +493,7 @@ NavMeshAgent:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137594}
   m_Enabled: 1
-  m_Radius: 1
+  m_Radius: .5
   m_Speed: 3.5
   m_Acceleration: 8.40999985
   avoidancePriority: 50
