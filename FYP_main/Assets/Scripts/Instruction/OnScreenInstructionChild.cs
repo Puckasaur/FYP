@@ -4,6 +4,8 @@ using System.Collections;
 
 public class OnScreenInstructionChild : MonoBehaviour {
 
+	public GameObject area1;
+
 	public GameObject walkIns;
 	public GameObject sprintIns;
 
@@ -18,11 +20,14 @@ public class OnScreenInstructionChild : MonoBehaviour {
 
 	IEnumerator delay()
 	{
+		walkIns.SetActive(false);
 
-		yield return new WaitForSeconds(0.5f);
+		yield return new WaitForSeconds(0.2f);
 
 		sprintIns.SetActive(true);
 
+		area1.SetActive(false);
+	
 		gameObject.GetComponentInParent<OnScreenInstructionParent>().enterArea1 = false;
 	}
 
@@ -31,7 +36,6 @@ public class OnScreenInstructionChild : MonoBehaviour {
 		if (gameObject.GetComponentInParent<OnScreenInstructionParent>().enterArea1 == true)
 		{		
 			StartCoroutine(delay ());
-
 
 		}
 	}

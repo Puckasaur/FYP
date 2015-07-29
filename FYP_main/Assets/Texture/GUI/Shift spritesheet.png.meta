@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: f3fe517613c5e0945ac0ec88cf7956d7
-timeCreated: 1437728433
+guid: 9f0a17eb7ed14f44fb1946546f539325
+timeCreated: 1438073949
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PacmanDown_0
-    21300002: PacmanDown_1
-    21300004: PacmanDown_2
+    21300000: Shift spritesheet_0
+    21300002: Shift spritesheet_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -52,35 +51,25 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: PacmanDown_0
+    - name: Shift spritesheet_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 4
-        width: 14
-        height: 14
+        x: 0
+        y: 0
+        width: 1422
+        height: 1422
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PacmanDown_1
+    - name: Shift spritesheet_1
       rect:
         serializedVersion: 2
-        x: 22
-        y: 5
-        width: 14
-        height: 14
+        x: 1422
+        y: 0
+        width: 1422
+        height: 1422
       alignment: 0
-      pivot: {x: .5, y: .5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: PacmanDown_2
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 5
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 

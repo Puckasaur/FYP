@@ -16,11 +16,17 @@ public class smellIncrease : MonoBehaviour {
 	void Update () {
 	
 	}
-    void OnTriggerEnter(Collider other)
+
+    void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag == "player" || other.gameObject.tag == "smell")
         {
             script.increaseSmell(value);
         }
+    }
+
+    void OnTriggerExit()
+    {
+        script.radius = Mathf.Floor(script.radius);
     }
 }

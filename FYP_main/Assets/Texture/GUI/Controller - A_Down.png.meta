@@ -1,14 +1,11 @@
 fileFormatVersion: 2
-guid: b8ccfc7ca078c644fab8531c311da5b7
-timeCreated: 1438073931
+guid: bff897d69c80f364a86dc66ab23c6c5e
+timeCreated: 1438073999
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: WASD spritesheet_0
-    21300002: WASD spritesheet_1
-    21300004: WASD spritesheet_2
-    21300006: WASD spritesheet_3
-    21300008: WASD spritesheet_4
+    21300000: A version 2_0
+    21300002: A version 2_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,53 +51,23 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: WASD spritesheet_0
+    - name: A version 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1422
-        height: 1422
+        width: 2250
+        height: 2250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: WASD spritesheet_1
+    - name: A version 2_1
       rect:
         serializedVersion: 2
-        x: 1422
+        x: 2250
         y: 0
-        width: 1422
-        height: 1422
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: WASD spritesheet_2
-      rect:
-        serializedVersion: 2
-        x: 2844
-        y: 0
-        width: 1422
-        height: 1422
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: WASD spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 4266
-        y: 0
-        width: 1422
-        height: 1422
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: WASD spritesheet_4
-      rect:
-        serializedVersion: 2
-        x: 5688
-        y: 0
-        width: 1422
-        height: 1422
+        width: 2250
+        height: 2250
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

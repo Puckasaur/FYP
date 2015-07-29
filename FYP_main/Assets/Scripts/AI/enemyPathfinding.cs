@@ -91,6 +91,7 @@ public class enemyPathfinding : MonoBehaviour
     public bool isPaired = false;
     public bool eatBone = false;
     public bool distracted = false;
+    public bool onWaypoint = false;
 
 
     //Idle Suspicious variables
@@ -137,11 +138,13 @@ public class enemyPathfinding : MonoBehaviour
     public int areaCounter = 0;
     public float defaultTurnTimer;
     public int defaultDetectSoundTimer;
+    public float defaultNewTargetTimer;
     int detectSoundTimer;
     public float turnTowardsSmellTimer;
     public float defaultTurnTowardsSmellTimer;
     public float agentNotMovingTimer;
     public float defaultAgentNotMovingTimer;
+    public float newTargetTimer;
     //end of Timers
 
   
@@ -213,6 +216,7 @@ public class enemyPathfinding : MonoBehaviour
         detectSoundTimer = defaultDetectSoundTimer;
         turnTowardsSmellTimer = defaultTurnTowardsSmellTimer;
         agentNotMovingTimer = defaultAgentNotMovingTimer;
+        newTargetTimer = defaultNewTargetTimer;
         //end of Setting Timers
 
         //Misc 
@@ -249,27 +253,37 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
-                    patrolAnim.SetBool("patrolRun", false);
-                    if (agentStopped == true && isPaired)
+                    if (newTargetTimer >= 0)
                     {
-                        agentStopped = false;
-                        agent.Resume();
+                        agent.velocity = Vector3.zero;
+                        newTargetTimer--;
                     }
-
-                    //Check if the player is within offset range from the current target
-
-                    if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                    else
                     {
-                        stateManager(1);
 
-                        if (agentStopped == false)
+
+                        patrolAnim.SetBool("patrolRun", false);
+                        if (agentStopped == true && isPaired)
                         {
-                            agentStopped = true;
-                            agent.Stop();
+                            agentStopped = false;
+                            agent.Resume();
+                        }
 
-                           // patrolAnim.SetBool("patrolWalk", false);
-                            patrolAnim.SetBool("patrolRun", false);
+                        //Check if the player is within offset range from the current target
 
+                        if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                        {
+                            stateManager(1);
+                            onWaypoint = true;
+                            if (agentStopped == false)
+                            {
+                                agentStopped = true;
+                                agent.Stop();
+
+                                // patrolAnim.SetBool("patrolWalk", false);
+                                patrolAnim.SetBool("patrolRun", false);
+
+                            }
                         }
                     }
                 }
@@ -334,7 +348,10 @@ public class enemyPathfinding : MonoBehaviour
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
-
+                    if(onWaypoint == true)
+                    {
+                        onWaypoint = false;
+                    }
                     patrolAnim.SetBool("patrolRun", true);
 
                     if (vectorx < chargeRange || vectorz < chargeRange)
@@ -444,7 +461,10 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     stateManager(5);
                 }
-
+                if (onWaypoint == true)
+                {
+                    onWaypoint = false;
+                }
                 if (agentStopped == true)
                 {
                     agentStopped = false;
@@ -467,6 +487,10 @@ public class enemyPathfinding : MonoBehaviour
                         {
                             lastTarget = currentTarget;
                         }
+                        //if(alertArea[areaCounter] == null)
+                        //{
+                        //    //areaCounter = 0;
+                        //}
                         if (alertArea[areaCounter] != null)
                         {
                             currentTarget = alertArea[areaCounter];
@@ -608,12 +632,12 @@ public class enemyPathfinding : MonoBehaviour
                       
                        
                     }
-                    else if (soundSource.tag == "bone")
+                    else if (soundSource && soundSource.tag == "bone")
                     {
 
                         currentTarget = soundSource.transform;
                     }
-                    agent.SetDestination(currentTarget.transform.position);
+                   // agent.SetDestination(currentTarget.transform.position);
 
                     //---------------------------------------------//
                     // when sound is heard, move towards the source//
@@ -621,9 +645,12 @@ public class enemyPathfinding : MonoBehaviour
 
                     //Check if the player is within offset range from the current target
                     if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
-                    {                       
-                         Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
-                        Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
+                    {
+                        if (soundSource != null || !soundSource.Equals(null))
+                        {
+                            Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
+                            Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
+                        }
                         alertTimer = defaultAlertTimer;
 
                         if (hit.collider != null)
@@ -665,8 +692,8 @@ public class enemyPathfinding : MonoBehaviour
                         bone = soundSource;
                     }                        
 
-                        if (hit.collider.tag == "bone")
-                        {
+                        //if (hit.collider.tag == "bone")
+                        //{
                             eatBone = true;
                             if (!bone)
                             {
@@ -693,7 +720,7 @@ public class enemyPathfinding : MonoBehaviour
                             {
                                 eatTimer = 0;
                             }
-                        }
+                        //}
                     }
                 
                 break;
@@ -779,10 +806,15 @@ public class enemyPathfinding : MonoBehaviour
             timer += defaultTimer;
 
             if (States != enumStates.idleSuspicious)
-            {               
+            {
                 if (currentTarget != null && !currentTarget.Equals(null))
                 {
                     agent.SetDestination(currentTarget.position);
+                    if (newTargetTimer <= 0 && onWaypoint == true)
+                    {
+                        newTargetTimer = defaultNewTargetTimer;
+                        onWaypoint = false;
+                    }
                 }
                 else
                 {
@@ -844,6 +876,7 @@ public class enemyPathfinding : MonoBehaviour
                 if (tempPosX == vectorx || tempPosX >= (vectorx - waypointOffsetMin) || tempPosX <= (vectorx - waypointOffsetMax) && tempPosZ == vectorz || tempPosX >= (vectorz - waypointOffsetMin) || tempPosZ <= (vectorz - waypointOffsetMax))
                 {                    
                     agent.SetDestination(currentTarget.position);
+
                     agentNotMovingTimer = defaultAgentNotMovingTimer;
                 }                
                 visited = false;
