@@ -14,16 +14,16 @@ public class decreaseSmell : MonoBehaviour
         script = player.GetComponentInChildren<ringOfSmell>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "smell")
         {
             script.decreaseSmell(value);
         }
+    }
+
+    void OnTriggerExit()
+    {
+        script.radius = Mathf.Ceil(script.radius);
     }
 }

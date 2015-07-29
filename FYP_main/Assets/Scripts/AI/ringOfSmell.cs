@@ -9,6 +9,9 @@ public class ringOfSmell : MonoBehaviour {
     huntingDog huntingDogScript;
     public float radius;
     public float startRadius;
+    public float maxRadius;
+    public float minRadius;
+
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
     RaycastHit hit;
@@ -260,12 +263,16 @@ public class ringOfSmell : MonoBehaviour {
     {
         //print("3");
         //radius = startRadius;
-        radius += value;
+        if (radius < maxRadius) radius += value;
+        if (radius > maxRadius-1 || radius > maxRadius) radius = maxRadius;
+        
     }
     public void decreaseSmell(float value)
     {
         //print("4");
         //radius = startRadius;
-        radius -= value;
+        if (radius > minRadius) radius -= value;
+        if (radius < minRadius+1 || radius < minRadius) radius = minRadius;
+        //radius = Mathf.Floor(radius);
     }
 }

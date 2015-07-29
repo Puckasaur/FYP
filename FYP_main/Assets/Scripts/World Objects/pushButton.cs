@@ -32,20 +32,12 @@ public class pushButton : MonoBehaviour
             buttonActivated = true;
         }
     }
+
     void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
         {
-            //buttonActivated = true;
             timer = defaultTimer;
         }
     }
-
-    //void OnTriggerExit(Collider other)
-    //{
-    //    if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
-    //    {
-    //        buttonActivated = false;
-    //    }
-    //}
 }
