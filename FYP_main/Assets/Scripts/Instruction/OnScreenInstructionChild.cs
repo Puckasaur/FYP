@@ -26,10 +26,16 @@ public class OnScreenInstructionChild : MonoBehaviour {
 
 		sprintIns.SetActive(true);
 
-		area1.SetActive(false);
-	
+		//area1.SetActive(false);
 		gameObject.GetComponentInParent<OnScreenInstructionParent>().enterArea1 = false;
+
 	}
+    IEnumerator sprintDelay()
+    {
+        yield return new WaitForSeconds(5.0f);
+        sprintIns.SetActive(false);
+        area1.SetActive(false);
+    }
 
 	void Update()
 	{
@@ -38,5 +44,9 @@ public class OnScreenInstructionChild : MonoBehaviour {
 			StartCoroutine(delay ());
 
 		}
+        else if(sprintIns.activeSelf == true)
+        {
+            StartCoroutine(sprintDelay());
+        }
 	}
 }
