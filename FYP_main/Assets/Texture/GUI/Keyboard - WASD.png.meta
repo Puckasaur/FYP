@@ -1,14 +1,14 @@
 fileFormatVersion: 2
-guid: 5acec8d8417594b4d9b702b6dba13686
-timeCreated: 1437991431
+guid: b8ccfc7ca078c644fab8531c311da5b7
+timeCreated: 1438073931
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Keyboard - WASD_0
-    21300002: Keyboard - WASD_1
-    21300004: Keyboard - WASD_2
-    21300006: Keyboard - WASD_3
-    21300008: Keyboard - WASD_4
+    21300000: WASD spritesheet_0
+    21300002: WASD spritesheet_1
+    21300004: WASD spritesheet_2
+    21300006: WASD spritesheet_3
+    21300008: WASD spritesheet_4
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -54,7 +54,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Keyboard - WASD_0
+    - name: WASD spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -64,7 +64,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Keyboard - WASD_1
+    - name: WASD spritesheet_1
       rect:
         serializedVersion: 2
         x: 1422
@@ -74,7 +74,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Keyboard - WASD_2
+    - name: WASD spritesheet_2
       rect:
         serializedVersion: 2
         x: 2844
@@ -84,7 +84,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Keyboard - WASD_3
+    - name: WASD spritesheet_3
       rect:
         serializedVersion: 2
         x: 4266
@@ -94,7 +94,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Keyboard - WASD_4
+    - name: WASD spritesheet_4
       rect:
         serializedVersion: 2
         x: 5688
