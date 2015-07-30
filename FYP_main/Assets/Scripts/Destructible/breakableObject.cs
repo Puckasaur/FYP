@@ -20,6 +20,7 @@ public class breakableObject: MonoBehaviour
     public float ballRadius;
     public float cubeRadius;
     soundSphere sphereScript;
+	sfxPlayer SFX;
 	void Start () 
     {
         //---------------------------------------------------//
@@ -34,6 +35,7 @@ public class breakableObject: MonoBehaviour
             maxScale = 50.0f;
         }
         playerMovement = GameObject.FindGameObjectWithTag("player").GetComponent<TemporaryMovement>();
+		SFX = GameObject.Find ("SFX").GetComponent<sfxPlayer>();
 	}
 	
 	// Update is called once per frame
@@ -102,6 +104,7 @@ public class breakableObject: MonoBehaviour
                 //makeSound = false;
                 {
                     objectBreaking();
+					SFX.playGlassBreak();
                 }
             }
     }
