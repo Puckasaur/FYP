@@ -6,6 +6,8 @@ public class sfxPlayer : MonoBehaviour {
 
 	public AudioSource keySource;
 	public AudioSource unlockSource;
+	public AudioClip[] glassBreak;
+	public AudioSource glassSource;
 
 	// Use this for initialization
 	void Start () 
@@ -21,5 +23,12 @@ public class sfxPlayer : MonoBehaviour {
 	public void playUnlock()
 	{
 		unlockSource.Play ();
+	}
+
+	public void playGlassBreak()
+	{
+		int randClip = Random.Range (0, glassBreak.Length);
+		glassSource.clip = glassBreak [randClip];
+		glassSource.Play ();
 	}
 }

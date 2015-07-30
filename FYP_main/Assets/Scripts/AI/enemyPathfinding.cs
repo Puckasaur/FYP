@@ -711,7 +711,9 @@ public class enemyPathfinding : MonoBehaviour
                                 eatBone = false;
 
                                 currentTarget = alertArea[areaCounter];
-                                Destroy(bone);
+                                breakableObject boneScript = bone.GetComponent<breakableObject>();
+                                boneScript.destroySelf();
+                                //Destroy(bone);
                                 alertTimer += defaultAlertTimer;
                                 stateManager(3);
                             }

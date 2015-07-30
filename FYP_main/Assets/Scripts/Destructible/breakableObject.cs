@@ -11,6 +11,7 @@ public class breakableObject: MonoBehaviour
     public GameObject Sphere;
     public GameObject brokenSphere;
     public GameObject brokenCube;
+    public TemporaryMovement playerMovement;
     GameObject bone;
     public bool makeSound = false;
     public float timer = 60.0f;
@@ -32,6 +33,7 @@ public class breakableObject: MonoBehaviour
         {
             maxScale = 50.0f;
         }
+        playerMovement = GameObject.FindGameObjectWithTag("player").GetComponent<TemporaryMovement>();
 	}
 	
 	// Update is called once per frame
@@ -82,7 +84,7 @@ public class breakableObject: MonoBehaviour
     {
         if (expireTimer <= 0)
         {
-            Destroy(gameObject);
+            destroySelf();
         }
     }
     void OnCollisionEnter(Collision Other)
@@ -108,7 +110,14 @@ public class breakableObject: MonoBehaviour
     {    
         makeSound = true;
     }
-
+    public void destroySelf()
+    {
+        if(gameObject.tag == "bone")
+        {
+            playerMovement.bonesPlaced--;
+        }
+        Destroy(gameObject);
+    }
     public void objectBreaking()
     {
         if (this.gameObject.tag == "bottle")
@@ -118,7 +127,7 @@ public class breakableObject: MonoBehaviour
             newSphere.transform.parent = brokenObject.transform;
             sphereScript = newSphere.GetComponent<soundSphere>();
             sphereScript.setMaxDiameter(maxScale);
-            Destroy(this.gameObject);
+            destroySelf();
         }
 
         if (this.gameObject.tag == "glass")
@@ -128,7 +137,7 @@ public class breakableObject: MonoBehaviour
             newSphere.transform.parent = brokenObject.transform;
             sphereScript = newSphere.GetComponent<soundSphere>();
             sphereScript.setMaxDiameter(maxScale);
-            Destroy(this.gameObject);
+            destroySelf();
         }
 
         if (this.gameObject.tag == "jar")
@@ -138,7 +147,7 @@ public class breakableObject: MonoBehaviour
             newSphere.transform.parent = brokenObject.transform;
             sphereScript = newSphere.GetComponent<soundSphere>();
             sphereScript.setMaxDiameter(maxScale);
-            Destroy(this.gameObject);
+            destroySelf();
         }
     }
 }
