@@ -7525,15 +7525,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 403646, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 32.6871719
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403646, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.68573833
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403646, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 10.0320473
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 403646, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
       propertyPath: m_LocalRotation.x
@@ -7553,10 +7553,6 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403646, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11402986, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
-      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9598,9 +9594,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &239270061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -23709,9 +23707,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &626742639
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25041,9 +25041,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &657584423
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -29843,9 +29845,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &795211314
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40511,9 +40515,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &1108887649
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42817,9 +42823,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &1180262424
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -46945,9 +46953,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &1234592328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -47655,9 +47665,11 @@ MonoBehaviour:
   agentNotMovingTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   newTargetTimer: 0
+  organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
   currentSpeed: 0
+  _soundSource: {x: 0, y: 0, z: 0}
 --- !u!54 &1244391814
 Rigidbody:
   m_ObjectHideFlags: 0
