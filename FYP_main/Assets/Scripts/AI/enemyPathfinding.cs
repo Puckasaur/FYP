@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+
 public enum enumStates
 {	
 	patrol = 0,
@@ -145,6 +146,8 @@ public class enemyPathfinding : MonoBehaviour
     public float agentNotMovingTimer;
     public float defaultAgentNotMovingTimer;
     public float newTargetTimer;
+    public int organizeAlertWaypointsTimer;
+
     //end of Timers
 
   
@@ -170,6 +173,7 @@ public class enemyPathfinding : MonoBehaviour
     int currentWaypointIndex = 0;
     float waypointLocationValue = 0;
     Vector3 waypointDifference;
+    Vector3 _soundSourceValue;
     //end of Alert waypoint organization variables
 
     //Misc variables
@@ -182,6 +186,7 @@ public class enemyPathfinding : MonoBehaviour
     Vector3 previousPosition;
     Vector3 currentPosition;
     public float currentSpeed;
+    public Vector3 _soundSource;
     //end of Misc variables
 
 
@@ -456,6 +461,9 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
+
+                 organizeAlertWaypoints();
+
                 patrolAnim.SetBool("patrolRun", false);
                 if (distracted)
                 {
@@ -1118,100 +1126,130 @@ public class enemyPathfinding : MonoBehaviour
     //Sets an area from a room the enemy is in for the alert-state//
     //------------------------------------------------------------//
 
-    void organizeAlertWaypoints()
+    public void organizeAlertWaypoints()
     {
-        for (int i = 0; i < alertArea.Count; i++)
-        {          
-            if (alertArea[i] != null || tempAlertWaypoints[i] != null)
-            {
-                tempAlertWaypoints.Add(alertArea[i]);
-                waypointLocations.Add(tempAlertWaypoints[i].position);
-            }
-        }
-        Vector3 closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[0].x - soundSource.transform.position.x), 2.0f), Mathf.Pow((waypointLocations[0].y - soundSource.transform.position.y), 2.0f), Mathf.Pow((waypointLocations[0].z - soundSource.transform.position.z), 2.0f));
-        closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
-        closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
-        closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
+       // float lowestValue;
+        List<Transform> toBeWaypointOrder = new List<Transform>();
+        Vector3 thisWaypoint = new Vector3(0,0,0);
+       List<float> usedValues = new List<float>();
+       List<Vector3> usedVector = new List<Vector3>();
+        List<Vector3> orderForWaypoints = new List<Vector3>();
+       List<Transform> tempUsedWaypoints = new List<Transform>();
+       tempUsedWaypoints.Clear();
+       int counter = 0;
 
-        //Choose one of the waypoints to be the closest
-        closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
 
-        //Run the check if it's really the closest waypoint we're looking for
-        for (int i = 0; i < waypointLocations.Count; i++)
+        if (organizeAlertWaypointsTimer <= 0)
         {
-
-            waypointLocations[i] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[i].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[i].z, 2.0f)));
-
-            waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
-
-            if (waypointLocationValue < closestWaypointValue)
+            for (int zi = 0; zi < alertArea.Count; zi++)
             {
-                closestWaypoint = waypointLocations[i];
-            }
-        }
-        //set the closest waypoint to be the first one on the list
-        for (int i = 0; i < waypointLocations.Count; i++)
-        {
-            if (tempAlertWaypoints[i].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[i]))
-            {
-                alertArea.Add(tempAlertWaypoints[i]);
-                currentWaypointIndex = i;
-                //set waypoint into a used waypoints list to prevent the AI from using it multiple times
-                usedWaypoints.Add(tempAlertWaypoints[i]);
-            }
-        }
+                // goes through every alertArea waypoint
 
-        //-------------------------------------------------------//
-        // search the closest waypoint from the current waypoint//
-        //-----------------------------------------------------//
-        for (int i = 0; i < waypointLocations.Count; i++)
-        {
-            // closestWaypoint = new Vector3(Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].y - waypointLocations[currentWaypointIndex].x), 2.0f), Mathf.Pow((waypointLocations[0].z - waypointLocations[currentWaypointIndex].z), 2.0f));
 
-            //set closest waypoint to a random, not used waypoint
-            for (int y = 0; y < waypointLocations.Count; y++)
-            {
+                    tempAlertWaypoints.Clear();
+                    waypointLocations.Clear();
+                    
 
-                if (!usedWaypoints.Contains(tempAlertWaypoints[y]))
-                {
-
-                    closestWaypoint.x = Mathf.Pow((waypointLocations[i].x - waypointLocations[currentWaypointIndex].x), 2.0f);
-                    closestWaypoint.y = Mathf.Pow((waypointLocations[i].y - waypointLocations[currentWaypointIndex].y), 2.0f);
-                    closestWaypoint.z = Mathf.Pow((waypointLocations[i].z - waypointLocations[currentWaypointIndex].z), 2.0f);
-
-                    closestWaypoint.x = Mathf.Sqrt(waypointLocations[0].x);
-                    closestWaypoint.y = Mathf.Sqrt(waypointLocations[0].y);
-                    closestWaypoint.z = Mathf.Sqrt(waypointLocations[0].z);
-
-                    closestWaypointValue = (closestWaypoint.x + closestWaypoint.y + closestWaypoint.z);
+                    for (int i = 0; i < alertArea.Count; i++)
+                    {
+                        if (alertArea[i] != null || tempAlertWaypoints[i] != null && !tempUsedWaypoints.Contains(alertArea[i]))
+                        {
+                            tempAlertWaypoints.Add(alertArea[i]);
+                            if(!usedWaypoints.Contains(alertArea[i]))
+                            {
+                             waypointLocations.Add(tempAlertWaypoints[i].transform.position);
+                            }
+                           
+                        }
                     }
+
+                    //calculate the length of the vector we're going to set as the closest one
+                    Vector3 closestWaypoint = new Vector3(waypointLocations[0].x, waypointLocations[0].y, waypointLocations[0].z);
+                    Vector3 _soundSourceValue = new Vector3( 0, 0, 0 );
+                if(zi == 0)
+                {
+                    _soundSourceValue = new Vector3(_soundSource.x, _soundSource.y, _soundSource.z);
+                }
+                   
+                else
+                {
+                    _soundSourceValue = new Vector3(toBeWaypointOrder[zi - 1].transform.position.x, toBeWaypointOrder[zi - 1].transform.position.y, toBeWaypointOrder[zi - 1].transform.position.z);
+                }
+                    Vector3 tempVec = new Vector3(closestWaypoint.x - _soundSourceValue.x, closestWaypoint.y - _soundSourceValue.y, closestWaypoint.z - _soundSourceValue.z);
+                    tempVec = new Vector3(tempVec.x * tempVec.x, tempVec.y * tempVec.y, tempVec.z * tempVec.z);
+
+                    closestWaypointValue = tempVec.x + tempVec.y + tempVec.z;
+                    closestWaypointValue = Mathf.Sqrt(closestWaypointValue);
+
+
+                    //Run the check if it's really the closest waypoint we're looking for
+                    for (int i = 0; i < waypointLocations.Count; i++)
+                    {                    
+                        if(!usedVector.Contains(waypointLocations[i]))
+                        {                            
+                            // run the same kind of calculations as above
+                            Vector3 possiblyClosest = new Vector3(waypointLocations[i].x, waypointLocations[i].y, waypointLocations[i].z);
+                            possiblyClosest = new Vector3(waypointLocations[i].x - _soundSourceValue.x, waypointLocations[i].y - _soundSourceValue.y, waypointLocations[i].z - _soundSourceValue.z);
+                            possiblyClosest = new Vector3(possiblyClosest.x * possiblyClosest.x, possiblyClosest.y * possiblyClosest.y, possiblyClosest.z * possiblyClosest.z);
+
+                            waypointLocationValue = possiblyClosest.x + possiblyClosest.y + possiblyClosest.z;
+                            waypointLocationValue = Mathf.Sqrt(waypointLocationValue);                         
+
+                            if (waypointLocationValue <= closestWaypointValue)
+                            {                               
+                                counter = i;
+                                closestWaypointValue = waypointLocationValue;
+                                thisWaypoint = waypointLocations[i];                                                  
+                            }                          
+                        }
+                    }
+                 
+                    if (alertArea[counter].transform.position == thisWaypoint)
+                    {                       
+                        toBeWaypointOrder.Add(alertArea[counter]);
+                        usedWaypoints.Add(alertArea[counter]);
+                    }
+                    else
+                    {
+                        for (int i = 0; i < alertArea.Count; i++)
+                        {
+                            if (alertArea[i].transform.position == thisWaypoint)
+                            {
+                                toBeWaypointOrder.Add(alertArea[i]);
+                                usedWaypoints.Add(alertArea[i]);
+                            }
+                        }
+                    }                   
+
+                //for (int i = 0; i < usedWaypoints.Count; i++)
+                //{
+                //    print(usedWaypoints[i] + " usedwaypoints [" + i + "]");
+                //}
+
+                //for (int i = 0; i < toBeWaypointOrder.Count; i++)
+                //{
+                //    print(toBeWaypointOrder[i] + " toBeWaypointOrder [" + i + "]");
+                //}
             }
 
-            //Run the check if it's really the closest waypoint we're looking for
-            for (int y = 0; y < waypointLocations.Count; y++)
+            //for (int i = 0; i < alertArea.Count; i++)
+            //{
+            //    if (!usedWaypoints.Contains(alertArea[i]))
+            //    {
+            //        print("the last one added " + alertArea[i]);
+            //    }
+            //}
+
+                organizeAlertWaypointsTimer = 900;
+        }
+     
+        else
+        {
+
+            organizeAlertWaypointsTimer--;
+            if (organizeAlertWaypointsTimer < 0)
             {
-
-                waypointLocations[y] = new Vector3(Mathf.Sqrt(Mathf.Pow(waypointLocations[y].x, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].y, 2.0f)), Mathf.Sqrt(Mathf.Pow(waypointLocations[y].z, 2.0f)));
-
-                waypointLocationValue = (waypointLocations[i].x + waypointLocations[i].y + waypointLocations[i].z);
-
-                if (waypointLocationValue < closestWaypointValue)
-                {
-                    closestWaypoint = waypointLocations[i];
-                }
-            }
-
-            //add the closest waypoint to the list
-            for (int y = 0; y < waypointLocations.Count; y++)
-            {
-                if (tempAlertWaypoints[y].position == closestWaypoint && !usedWaypoints.Contains(tempAlertWaypoints[y]))
-                {
-                    alertArea.Add(tempAlertWaypoints[y]);
-                    currentWaypointIndex = y;
-
-                    //set waypoint into a used waypoints list to prevent the AI from using it multiple times//
-                    usedWaypoints.Add(tempAlertWaypoints[y]);
-                }
+                organizeAlertWaypointsTimer = 0;
             }
         }
     }
@@ -1275,6 +1313,7 @@ public class enemyPathfinding : MonoBehaviour
       result = Vector3.zero;
       return false;
   }
+
 
 	void updateAnimator()
 	{
