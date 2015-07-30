@@ -462,7 +462,7 @@ public class enemyPathfinding : MonoBehaviour
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
 
-                 organizeAlertWaypoints();
+                
 
                 patrolAnim.SetBool("patrolRun", false);
                 if (distracted)
@@ -626,6 +626,9 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
+
+                    organizeAlertWaypoints();
+
                     patrolAnim.SetBool("patrolRun", false);
 
                     if (soundSource && soundSource.tag != "bone" && randomPointSelected == false)
@@ -1219,19 +1222,27 @@ public class enemyPathfinding : MonoBehaviour
                                 usedWaypoints.Add(alertArea[i]);
                             }
                         }
-                    }                   
+                    }
 
-                //for (int i = 0; i < usedWaypoints.Count; i++)
-                //{
-                //    print(usedWaypoints[i] + " usedwaypoints [" + i + "]");
-                //}
+                    //for (int i = 0; i < usedWaypoints.Count; i++)
+                    //{
+                    //    print(usedWaypoints[i] + " usedwaypoints [" + i + "]");
+                    //}
 
-                //for (int i = 0; i < toBeWaypointOrder.Count; i++)
-                //{
-                //    print(toBeWaypointOrder[i] + " toBeWaypointOrder [" + i + "]");
-                //}
+                    //for (int i = 0; i < toBeWaypointOrder.Count; i++)
+                    //{
+                    //    print(toBeWaypointOrder[i] + " toBeWaypointOrder [" + i + "]");
+                    //}
             }
 
+            alertArea.Clear();
+            for (int i = 0; i < toBeWaypointOrder.Count; i++)
+            {
+                alertArea.Add(toBeWaypointOrder[i]);
+          
+            }
+
+           
             //for (int i = 0; i < alertArea.Count; i++)
             //{
             //    if (!usedWaypoints.Contains(alertArea[i]))
