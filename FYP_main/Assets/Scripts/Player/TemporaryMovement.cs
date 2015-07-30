@@ -4,11 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TemporaryMovement : MonoBehaviour
-{
-	public int numberOfKeys;
-	public int[] keyPossessed = new int[3];
-
-    public float joystickPressure;
+{ 
     public float magnMultiplier;
 
 	public float movementSpeed;
@@ -38,9 +34,6 @@ public class TemporaryMovement : MonoBehaviour
     bool smellHidden;
     bool disguisedAsDog;
 
-    public float horizontal;
-    public float vertical;
-
 	public Vector3 movement;
 
 	public float duration = 0.2f;
@@ -56,6 +49,13 @@ public class TemporaryMovement : MonoBehaviour
 
 	private float durationOfSpriteAnimationBag; 
 	public AnimationClip spriteAnimationBag;
+    
+    [HideInInspector]
+    public float joystickPressure;
+    public int numberOfKeys;
+    public int[] keyPossessed = new int[3];
+    public float horizontal;
+    public float vertical;
 
 	IEnumerator spriteBoneTimer()
 	{	
@@ -113,7 +113,7 @@ public class TemporaryMovement : MonoBehaviour
 
         transform.LookAt(transform.position + look, Vector3.up);
 		
-		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
+		if (Input.GetKeyDown(KeyCode.T) && bones > 0 /*|| Input.GetButtonDown("Fire3")*/)
 		{	
 			boneCoolDown.enabled = true;
 			bagCoolDown.enabled = false;

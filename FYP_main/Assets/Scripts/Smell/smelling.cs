@@ -32,13 +32,13 @@ public class smelling : MonoBehaviour {
 
             enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(3);
 
             exitPoint.GetComponent<ParticleSystem>().enableEmission = true;
 
             newBoneComo = (GameObject)Instantiate(boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
 
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(2);
 
             isEnterBone = false;
         }
@@ -113,6 +113,20 @@ public class smelling : MonoBehaviour {
 			}
 		}
 	}
+
+    void OnTriggerStay(Collider player)
+    {
+        if (player.gameObject.tag == "player")
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                isEnterBone = true;
+                StopCoroutine(bagSmell());
+                StartCoroutine(boneSmell());
+            }
+            
+        }
+    }
 
 	void Update()
 	{	
