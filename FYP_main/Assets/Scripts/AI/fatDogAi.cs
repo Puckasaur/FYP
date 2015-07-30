@@ -596,7 +596,8 @@ public class fatDogAi : MonoBehaviour {
                 eatBone = false;
                 currentTarget = lastTarget;
                // currentTarget = alertArea[areaCounter];
-                Destroy(bone);
+                breakableObject boneScript = bone.GetComponent<breakableObject>();
+                boneScript.destroySelf();
                // alertTimer += defaultAlertTimer;
                 stateManager(0);
             }

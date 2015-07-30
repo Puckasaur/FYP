@@ -28,8 +28,6 @@ public class TemporaryMovement : MonoBehaviour
     GameObject newBagOfAir;
 
     public float throwForce = 00.00010f;
-    public int bones = 2;
-    public int bags;
 
 	private bool isGrounded;
 	private bool isEsc;
@@ -47,6 +45,15 @@ public class TemporaryMovement : MonoBehaviour
 
 	public Image boneCoolDown;
 	public Image bagCoolDown;
+    float boneCooldown;
+    public float defalutBoneCooldown;
+    public int bonesPlaced;
+    public int maxBonesPlaced;
+    public int maxBones;
+    public float boneSpawnTimer;
+
+    public int bones = 2;
+    public int bags;
 
 	public Image boneBackground;
 	public Image bagBackground;
@@ -81,7 +88,7 @@ public class TemporaryMovement : MonoBehaviour
 		bagCoolDown.GetComponent<Animator>().enabled = false;
 
 		bagCoolDown.enabled = false;
-		
+        boneSpawnTimer = defalutBoneCooldown;
 		m_GroundCheckDistance = 0.6f;
 		rb = GetComponent<Rigidbody> ();
 		catAnim = GetComponent<Animator> ();
@@ -112,8 +119,8 @@ public class TemporaryMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement.normalized * movementSpeed * Time.deltaTime);
 
         transform.LookAt(transform.position + look, Vector3.up);
-		
-		if (Input.GetKeyDown(KeyCode.T) && bones > 0 || Input.GetButtonDown("Fire3"))
+
+        if (Input.GetKeyDown(KeyCode.T) && bones > 0 && bonesPlaced < maxBonesPlaced || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced)
 		{	
 			boneCoolDown.enabled = true;
 			bagCoolDown.enabled = false;
@@ -126,6 +133,7 @@ public class TemporaryMovement : MonoBehaviour
 
 			StartCoroutine(spriteBoneTimer());
 			bones--;
+            bonesPlaced++;
 			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 
@@ -175,8 +183,19 @@ public class TemporaryMovement : MonoBehaviour
             }
         }
 	
-		
-	}
+		if(boneSpawnTimer <= 0)
+        {
+            if(bones<maxBones)
+            {
+                bones++;
+                boneSpawnTimer = defalutBoneCooldown;
+            }
+        }
+        if(boneSpawnTimer >0)
+        {
+            boneSpawnTimer-= Time.deltaTime;
+	    }
+    }
 	
 	void Update()
 	{
