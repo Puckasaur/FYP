@@ -4,52 +4,59 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class TemporaryMovement : MonoBehaviour
-{ 
+{
     public float magnMultiplier;
 
-	public float movementSpeed;
-	public float sprintModifier;
-	private float sprintSpeed;
-	public float origMovementSpeed;
-	public float jumpHeight;
-	float m_GroundCheckDistance;
-	float m_OrigGroundCheckDistance;
-	public Rigidbody rb;
-	Animator catAnim;
-	public GameObject bone;
-	public GameObject bagOfAir;
+    public float movementSpeed;
+    public float sprintModifier;
+    private float sprintSpeed;
+    public float origMovementSpeed;
+    public float jumpHeight;
+    float m_GroundCheckDistance;
+    float m_OrigGroundCheckDistance;
+    public Rigidbody rb;
+    Animator catAnim;
+    public GameObject bone;
+    public GameObject bagOfAir;
 
     GameObject boneSpawner;
     GameObject newBone;
     GameObject newBagOfAir;
 
     public float throwForce = 00.00010f;
-    public int bones = 2;
-    public int bags;
 
-	private bool isGrounded;
-	private bool isEsc;
+    private bool isGrounded;
+    private bool isEsc;
     public List<GameObject> enemies = new List<GameObject>();
     ringOfSmell ring;
     bool smellHidden;
     bool disguisedAsDog;
 
-	public Vector3 movement;
+    public Vector3 movement;
 
-	public float duration = 0.2f;
+    public float duration = 0.2f;
 
-	public Image boneCoolDown;
-	public Image bagCoolDown;
+    public Image boneCoolDown;
+    public Image bagCoolDown;
+    float boneCooldown;
+    public float defalutBoneCooldown;
+    public int bonesPlaced;
+    public int maxBonesPlaced;
+    public int maxBones;
+    public float boneSpawnTimer;
 
-	public Image boneBackground;
-	public Image bagBackground;
+    public int bones = 2;
+    public int bags;
 
-	private float durationOfSpriteAnimationBone; 
-	public AnimationClip spriteAnimationBone;
+    public Image boneBackground;
+    public Image bagBackground;
 
-	private float durationOfSpriteAnimationBag; 
-	public AnimationClip spriteAnimationBag;
-    
+    private float durationOfSpriteAnimationBone;
+    public AnimationClip spriteAnimationBone;
+
+    private float durationOfSpriteAnimationBag;
+    public AnimationClip spriteAnimationBag;
+
     [HideInInspector]
     public float joystickPressure;
     public int numberOfKeys;
@@ -57,54 +64,54 @@ public class TemporaryMovement : MonoBehaviour
     public float horizontal;
     public float vertical;
 
-	IEnumerator spriteBoneTimer()
-	{	
-		boneCoolDown.GetComponent<Animator>().enabled = true;
+    IEnumerator spriteBoneTimer()
+    {
+        boneCoolDown.GetComponent<Animator>().enabled = true;
 
-		yield return new WaitForSeconds(durationOfSpriteAnimationBone);
+        yield return new WaitForSeconds(durationOfSpriteAnimationBone);
 
-		boneCoolDown.GetComponent<Animator>().enabled = false;	
-	}
+        boneCoolDown.GetComponent<Animator>().enabled = false;
+    }
 
-	IEnumerator spriteBagTimer()
-	{
-		bagCoolDown.GetComponent<Animator>().enabled = true;
-		
-		yield return new WaitForSeconds(durationOfSpriteAnimationBag);
-		
-		bagCoolDown.GetComponent<Animator>().enabled = false;	
-	}
+    IEnumerator spriteBagTimer()
+    {
+        bagCoolDown.GetComponent<Animator>().enabled = true;
 
-	void Start()
-	{
-		boneCoolDown.GetComponent<Animator>().enabled = false;
-		bagCoolDown.GetComponent<Animator>().enabled = false;
+        yield return new WaitForSeconds(durationOfSpriteAnimationBag);
 
-		bagCoolDown.enabled = false;
-		
-		m_GroundCheckDistance = 0.6f;
-		rb = GetComponent<Rigidbody> ();
-		catAnim = GetComponent<Animator> ();
-		origMovementSpeed = movementSpeed;
-		sprintSpeed = movementSpeed * sprintModifier;
+        bagCoolDown.GetComponent<Animator>().enabled = false;
+    }
+
+    void Start()
+    {
+        boneCoolDown.GetComponent<Animator>().enabled = false;
+        bagCoolDown.GetComponent<Animator>().enabled = false;
+
+        bagCoolDown.enabled = false;
+        boneSpawnTimer = defalutBoneCooldown;
+        m_GroundCheckDistance = 0.6f;
+        rb = GetComponent<Rigidbody>();
+        catAnim = GetComponent<Animator>();
+        origMovementSpeed = movementSpeed;
+        sprintSpeed = movementSpeed * sprintModifier;
         ring = GetComponentInChildren<ringOfSmell>();
 
-		durationOfSpriteAnimationBone = spriteAnimationBone.length;
-		durationOfSpriteAnimationBag = spriteAnimationBag.length;
+        durationOfSpriteAnimationBone = spriteAnimationBone.length;
+        durationOfSpriteAnimationBag = spriteAnimationBag.length;
 
-		isEsc = !isEsc;
-	}
+        isEsc = !isEsc;
+    }
 
-	void FixedUpdate() 
+    void FixedUpdate()
     {
-		bags = inventory.inventoryArray [0];
-		sprint ();
-		updateAnimator();
-		boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
-		checkGroundStatus ();
+        bags = inventory.inventoryArray[0];
+        sprint();
+        updateAnimator();
+        boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
+        checkGroundStatus();
 
-		horizontal = Input.GetAxis ("Horizontal"); 
-        vertical = Input.GetAxis("Vertical"); 
+        horizontal = Input.GetAxis("Horizontal");
+        vertical = Input.GetAxis("Vertical");
 
         movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
         Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
@@ -112,93 +119,105 @@ public class TemporaryMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement.normalized * movementSpeed * Time.deltaTime);
 
         transform.LookAt(transform.position + look, Vector3.up);
-		
-		if (Input.GetKeyDown(KeyCode.T) && bones > 0 /*|| Input.GetButtonDown("Fire3")*/)
-		{	
-			boneCoolDown.enabled = true;
-			bagCoolDown.enabled = false;
 
-			boneBackground.enabled = true;
-			bagBackground.enabled = false;
+        if (Input.GetKeyDown(KeyCode.T) && bones > 0 && bonesPlaced < maxBonesPlaced || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced)
+        {
+            boneCoolDown.enabled = true;
+            bagCoolDown.enabled = false;
 
-			boneBackground.CrossFadeAlpha(1.0f, duration, true);
-			bagBackground.CrossFadeAlpha(0.0f, duration, true);
+            boneBackground.enabled = true;
+            bagBackground.enabled = false;
 
-			StartCoroutine(spriteBoneTimer());
-			bones--;
-			newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+            boneBackground.CrossFadeAlpha(1.0f, duration, true);
+            bagBackground.CrossFadeAlpha(0.0f, duration, true);
+
+            StartCoroutine(spriteBoneTimer());
+            bones--;
+            bonesPlaced++;
+            newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 
-		if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/)
-		{
-			boneCoolDown.enabled = false;
-			bagCoolDown.enabled = true;
-
-			boneBackground.enabled = false;
-			bagBackground.enabled = true;
-
-			boneBackground.CrossFadeAlpha(0.0f, duration, true);
-			bagBackground.CrossFadeAlpha(1.0f, duration, true);
-
-			StartCoroutine(spriteBagTimer());
-
-			print(boneSpawner.transform.parent);
-			bags--;
-			newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
-		}
-
-        if(Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/)
         {
-            if(!disguisedAsDog)
+            boneCoolDown.enabled = false;
+            bagCoolDown.enabled = true;
+
+            boneBackground.enabled = false;
+            bagBackground.enabled = true;
+
+            boneBackground.CrossFadeAlpha(0.0f, duration, true);
+            bagBackground.CrossFadeAlpha(1.0f, duration, true);
+
+            StartCoroutine(spriteBagTimer());
+
+            print(boneSpawner.transform.parent);
+            bags--;
+            newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
+        }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            if (!disguisedAsDog)
             {
                 disguisedAsDog = true;
                 disGuiseAsDog();
             }
-            else if(disguisedAsDog)
+            else if (disguisedAsDog)
             {
                 disguisedAsDog = false;
                 disGuiseAsDog();
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             if (smellHidden)
             {
                 smellHidden = false;
                 ring.isNotDisguised("tempMove");
             }
-            else if(!smellHidden)
+            else if (!smellHidden)
             {
                 smellHidden = true;
                 ring.isDisguised("tempMove");
             }
         }
-	
-		
-	}
-	
-	void Update()
-	{
-		//checks if character is grounded
+
+        if (boneSpawnTimer <= 0)
+        {
+            if (bones < maxBones)
+            {
+                bones++;
+                boneSpawnTimer = defalutBoneCooldown;
+            }
+        }
+        if (boneSpawnTimer > 0)
+        {
+            boneSpawnTimer -= Time.deltaTime;
+        }
+    }
+
+    void Update()
+    {
+        //checks if character is grounded
 
         movementSpeed = (movement.magnitude * magnMultiplier) + origMovementSpeed;
 
-		if (isGrounded) 
-		{
-			// Jump
-			if (Input.GetButtonDown ("Jump")) 
-			{
-				rb.velocity += new Vector3 (0.0f, jumpHeight, 0.0f);
-				//Debug.Log(rb.velocity);
-			}	
-		}
-	}
+        if (isGrounded)
+        {
+            // Jump
+            if (Input.GetButtonDown("Jump"))
+            {
+                rb.velocity += new Vector3(0.0f, jumpHeight, 0.0f);
+                //Debug.Log(rb.velocity);
+            }
+        }
+    }
 
-	void sprint()
-	{
-		if (isGrounded)
-		{
+    void sprint()
+    {
+        if (isGrounded)
+        {
             // WALK / SPRINT ACCORDING JOYSTICK PRESSURE
             /*
             if (movement.magnitude > 1.6)
@@ -221,50 +240,50 @@ public class TemporaryMovement : MonoBehaviour
             */
             // WALK / SPRINT WITH THE USE OF A BUTTON
 
-            
-			if (Input.GetButton ("Sprint") && movement.magnitude > 0.1) 
-			{
-				catAnim.SetBool("isSprinting", true);
-				movementSpeed = sprintSpeed;
-			}
 
-			else 
-			{
-				catAnim.SetBool("isSprinting", false);
-				movementSpeed = origMovementSpeed;
-			}
-            
-		}
-	}
+            if (Input.GetButton("Sprint") && movement.magnitude > 0.1)
+            {
+                catAnim.SetBool("isSprinting", true);
+                movementSpeed = sprintSpeed;
+            }
 
-	void updateAnimator()
-	{
-		float horizontal = Input.GetAxis ("Horizontal");
-		float vertical = Input.GetAxis("Vertical");
-		
-		catAnim.SetFloat ("hSpeed", horizontal);
-		catAnim.SetFloat ("vSpeed", vertical);
-	}
+            else
+            {
+                catAnim.SetBool("isSprinting", false);
+                movementSpeed = origMovementSpeed;
+            }
 
-	//uses raycast to check if player is grounded
-	void checkGroundStatus()
-	{
-		RaycastHit hitInfo;
-		#if UNITY_EDITOR
-		// helper to visualise the ground check ray in the scene view
-		Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
-		#endif
-		// 0.1f is a small offset to start the ray from inside the character
-		// it is also good to note that the transform position in the sample assets is at the base of the character
-		if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
-		{
-			isGrounded = true;
-		}
-		else
-		{
-			isGrounded = false;
-		}
-	}
+        }
+    }
+
+    void updateAnimator()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        catAnim.SetFloat("hSpeed", horizontal);
+        catAnim.SetFloat("vSpeed", vertical);
+    }
+
+    //uses raycast to check if player is grounded
+    void checkGroundStatus()
+    {
+        RaycastHit hitInfo;
+#if UNITY_EDITOR
+        // helper to visualise the ground check ray in the scene view
+        Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
+#endif
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets is at the base of the character
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+        {
+            isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
+        }
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -285,12 +304,13 @@ public class TemporaryMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision col)
     {
-        if (col.collider.tag == "trap") {        
-			breakableObject trap = col.collider.transform.GetComponent<breakableObject> ();
-			trap.makeSound = true;
-		}
+        if (col.collider.tag == "trap")
+        {
+            breakableObject trap = col.collider.transform.GetComponent<breakableObject>();
+            trap.makeSound = true;
+        }
     }
-	
+
 
     void disGuiseAsDog()
     {
@@ -330,7 +350,7 @@ public class TemporaryMovement : MonoBehaviour
     }
     public void resetKeys()
     {
-        
+
         keyPossessed = new int[3];
     }
 }
