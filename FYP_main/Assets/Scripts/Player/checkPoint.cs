@@ -10,7 +10,7 @@ using System.Collections;
 
 public class checkPoint: MonoBehaviour
 {
-
+	chaseTransition chaseTransScript;
     public GameObject checkPointPosition; // Position of the check point
     public bool checkPointActivated = false; // if the check point has been reached or not
 
@@ -33,6 +33,7 @@ public class checkPoint: MonoBehaviour
 		sendBack = false;
 
         currentLevel = Application.loadedLevelName; // get current level name
+		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();//get chase music transition script
     }
 
     void OnTriggerEnter(Collider other) // turns the check point on
@@ -45,6 +46,7 @@ public class checkPoint: MonoBehaviour
 
         if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog") && checkPointActivated == false) // if check point has not been reached
         {
+			chaseTransScript.resetChaseTrans();//resets BGM.
             Application.LoadLevel(currentLevel);
         }
 
@@ -61,6 +63,7 @@ public class checkPoint: MonoBehaviour
             allKeys = GameObject.FindGameObjectsWithTag("key");
             allDoors = GameObject.FindGameObjectsWithTag("door");
             allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
+			chaseTransScript.resetChaseTrans();//resets BGM.
 
             foreach(GameObject hunter in allHunters)
             {

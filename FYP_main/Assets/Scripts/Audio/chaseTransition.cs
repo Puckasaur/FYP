@@ -35,6 +35,11 @@ public class chaseTransition : MonoBehaviour {
 		outOfChase.TransitionTo(outTransition);
 	}
 
+	public void resetChaseTrans()
+	{
+		outOfChase.TransitionTo(0.1f);
+	}
+
 	public void playSting()
 	{
 		int randClip = Random.Range (0, stings.Length);
