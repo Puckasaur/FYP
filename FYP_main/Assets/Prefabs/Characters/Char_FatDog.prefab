@@ -724,7 +724,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 193676}
-  m_LocalRotation: {x: .127942219, y: .0158362538, z: -.00333415298, w: .991649568}
+  m_LocalRotation: {x: .173646986, y: -.0153270392, z: -.00143998023, w: -.984687626}
   m_LocalPosition: {x: -4.76837158e-07, y: 0, z: 8.94069672e-07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -776,8 +776,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127488}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.78000021, y: 6.44000006, z: -.579999983}
+  m_LocalRotation: {x: 0, y: -.707106709, z: 0, w: .707106829}
+  m_LocalPosition: {x: 6.11999989, y: -2.36999989, z: 5.07999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482378}
@@ -946,6 +946,7 @@ MonoBehaviour:
   soundSource: {fileID: 0}
   eatBone: 0
   distracted: 0
+  onWaypoint: 0
   turnSpeed: 2
   speed: 2
   idleSuscpicious: 0
@@ -974,10 +975,12 @@ MonoBehaviour:
   defaultBarkTimer: 90
   defaultTimer: 60
   defaultEscapeTimer: 240
+  defaultNewTargetTimer: 0
   playerOutOfSight: 0
   areaCounter: 0
   defaultTurnTimer: 60
   defaultDetectSoundTimer: 200
+  newTargetTimer: 0
   defaultRaycastRange: 5
   patrolSpeed: 3.5
   chaseSpeed: 0

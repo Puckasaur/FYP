@@ -38,9 +38,10 @@ public class TemporaryMovement : MonoBehaviour
 
     public Image boneCoolDown;
     public Image bagCoolDown;
+
     float boneCooldown;
     public float defalutBoneCooldown;
-    public int bonesPlaced;
+    
     public int maxBonesPlaced;
     public int maxBones;
     public float boneSpawnTimer;
@@ -63,6 +64,7 @@ public class TemporaryMovement : MonoBehaviour
     public int[] keyPossessed = new int[3];
     public float horizontal;
     public float vertical;
+    public int bonesPlaced;
 
     IEnumerator spriteBoneTimer()
     {
@@ -120,7 +122,7 @@ public class TemporaryMovement : MonoBehaviour
 
         transform.LookAt(transform.position + look, Vector3.up);
 
-        if (Input.GetKeyDown(KeyCode.T) && bones > 0 && bonesPlaced < maxBonesPlaced || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced)
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced)
         {
             boneCoolDown.enabled = true;
             bagCoolDown.enabled = false;
