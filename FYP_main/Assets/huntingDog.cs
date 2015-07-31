@@ -27,7 +27,7 @@ public class huntingDog : MonoBehaviour {
     float vectorx;
     float vectorz;
 
-    public bool idleSuscpicious = false;
+   
     public float firstDirection; //= 33;
     public float secondDirection; // = 66;
     public float thirdDirection; // = 78;
@@ -35,7 +35,6 @@ public class huntingDog : MonoBehaviour {
     GameObject enemyObject;
 
     float rotationStep = 65.0f;
-    public float rotationDegrees = 90;
     public float currentAngle = 0;
     public float targetAngle = 0;
     public float angleOffsetMax = 10.0f;

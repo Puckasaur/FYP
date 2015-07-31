@@ -46,7 +46,7 @@ public class fatDogAi : MonoBehaviour {
 	public bool eatBone = false;
 	public bool distracted = false;
     public bool onWaypoint = false;
-
+    public bool isOnWaypoint;
 	public float turnSpeed = 2.0f;
 	
 	public float speed = 2;
@@ -64,7 +64,6 @@ public class fatDogAi : MonoBehaviour {
 	
 	
 	//Idle Suspicious values
-	public bool idleSuscpicious = false;
 	public float firstDirection;
 	public float secondDirection;
 	public float thirdDirection;
@@ -74,7 +73,6 @@ public class fatDogAi : MonoBehaviour {
 	
 	bool rotating = false;
 	float rotationStep = 65.0f;
-	public float rotationDegrees = 90;
 	public float currentAngle = 0;
 	public float targetAngle = 0;
 	public float angleOffsetMax = 10.0f;
@@ -114,8 +112,6 @@ public class fatDogAi : MonoBehaviour {
 	int targetCounter = 0;
 	public int areaCounter = 0;
 	public float defaultTurnTimer;
-	public int defaultDetectSoundTimer;
-	int detectSoundTimer;
     public float newTargetTimer;
 
     float raycastRange;
@@ -162,7 +158,7 @@ public class fatDogAi : MonoBehaviour {
 		barkTimer = defaultBarkTimer;
 		escapeTimer = defaultEscapeTimer;
 		turnTimer = defaultTurnTimer;
-		detectSoundTimer = defaultDetectSoundTimer;
+
 	}
 	
 	void Update()
