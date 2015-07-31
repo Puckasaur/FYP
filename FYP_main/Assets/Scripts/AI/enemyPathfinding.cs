@@ -626,7 +626,7 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-
+                    
                     organizeAlertWaypoints();
 
                     patrolAnim.SetBool("patrolRun", false);
@@ -645,8 +645,9 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else if (soundSource && soundSource.tag == "bone")
                     {
-
+                        
                         currentTarget = soundSource.transform;
+                        print("target changed to " + soundSource);
                     }
                    // agent.SetDestination(currentTarget.transform.position);
 
@@ -1223,23 +1224,13 @@ public class enemyPathfinding : MonoBehaviour
                             }
                         }
                     }
-
-                    //for (int i = 0; i < usedWaypoints.Count; i++)
-                    //{
-                    //    print(usedWaypoints[i] + " usedwaypoints [" + i + "]");
-                    //}
-
-                    //for (int i = 0; i < toBeWaypointOrder.Count; i++)
-                    //{
-                    //    print(toBeWaypointOrder[i] + " toBeWaypointOrder [" + i + "]");
-                    //}
             }
 
             alertArea.Clear();
             for (int i = 0; i < toBeWaypointOrder.Count; i++)
             {
                 alertArea.Add(toBeWaypointOrder[i]);
-          
+
             }
 
            
@@ -1247,7 +1238,7 @@ public class enemyPathfinding : MonoBehaviour
             //{
             //    if (!usedWaypoints.Contains(alertArea[i]))
             //    {
-            //        print("the last one added " + alertArea[i]);
+            //        //print("the last one added " + alertArea[i]);
             //    }
             //}
 

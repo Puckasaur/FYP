@@ -17,7 +17,7 @@ public class Sniffing : MonoBehaviour
         {
             audio = GetComponent<AudioSource>();
             audio.Play();
-            print("OnTriggerEnter");
+            //print("OnTriggerEnter");
         }
     }
 
@@ -26,7 +26,7 @@ public class Sniffing : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             if (!audio.isPlaying) audio.Play();
-            print("OnTriggerStay");
+            //print("OnTriggerStay");
         }
     }
 
@@ -35,7 +35,7 @@ public class Sniffing : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
             if (audio.isPlaying) audio.Stop();
-            print("OnTriggerExit");
+            //print("OnTriggerExit");
         }
     }
 }

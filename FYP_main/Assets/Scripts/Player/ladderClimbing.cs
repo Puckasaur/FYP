@@ -54,6 +54,6 @@ public class ladderClimbing : MonoBehaviour
 			characterController.transform.position += Vector3.up / heightFactor;
 		}
 
-        //print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
+        ////print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
 	}
 }

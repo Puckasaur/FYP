@@ -128,7 +128,7 @@ public class huntingDog : MonoBehaviour {
                     }
                     else
                     {
-                        //print("pilasi kaiken");
+                        ////print("pilasi kaiken");
                         leapTimer--;
                         if (leapTimer <= 0)
                         {

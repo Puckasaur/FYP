@@ -614,9 +614,8 @@ public class fatDogAi : MonoBehaviour {
 			break;
 		}
 
-        if (ringOfSmellScript.smellDetected == true)
-        {
 
+        { 
             Vector3 direction = (player.transform.position - transform.position).normalized;
             Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
             Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
@@ -628,6 +627,7 @@ public class fatDogAi : MonoBehaviour {
                 }
             }
         }
+        
 		if(timer <= 0)
 		{
 			timer+=defaultTimer;
@@ -921,14 +921,13 @@ public class fatDogAi : MonoBehaviour {
 
     public void rotateDogWhileSmelling(Vector3 targetTransformPosition)
     {
-        if (ringOfSmellScript.smellingPlayer)
-        {
+
             //SeekForSmellSource = true;
             agentStopped = true;
             agent.Stop();
             Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
             float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
             transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
-        }
+        
     }
 }

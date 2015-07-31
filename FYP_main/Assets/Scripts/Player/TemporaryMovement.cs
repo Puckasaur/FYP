@@ -220,7 +220,7 @@ public class TemporaryMovement : MonoBehaviour
     {
         if (isGrounded)
         {
-            // WALK / SPRINT ACCORDING JOYSTICK PRESSURE
+            // WALK / Sprint ACCORDING JOYSTICK PRESSURE
             /*
             if (movement.magnitude > 1.6)
             {
@@ -240,7 +240,7 @@ public class TemporaryMovement : MonoBehaviour
                 movementSpeed = origMovementSpeed;
             }
             */
-            // WALK / SPRINT WITH THE USE OF A BUTTON
+            // WALK / Sprint WITH THE USE OF A BUTTON
 
 
             if (Input.GetButton("Sprint") && movement.magnitude > 0.1)

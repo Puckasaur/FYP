@@ -14,14 +14,10 @@ public class destroyableTrigger : MonoBehaviour {
 	}
     void OnTriggerStay(Collider other)
     {
-        print("collision");
-        print(other.tag);
         if (other.tag == "player")
         {
-            print("Player in trigger");
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                print("Enter pressed");
                 transform.parent.GetComponent<Rigidbody>().AddForce(Vector3.forward * 50, ForceMode.Force);
             }
         }

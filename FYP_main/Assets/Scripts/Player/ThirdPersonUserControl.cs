@@ -162,7 +162,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Move = (v * target.transform.forward + h * target.transform.right) * 0.5f;
            
 			// walk speed multiplier
-	        if (Input.GetButton("Sprint")) m_Move *= speedHat;
+	        if (Input.GetButton("S//print")) m_Move *= speedHat;
 
             // pass all parameters to the character control script
             m_Character.Move(m_Move, crouch, m_Jump);
