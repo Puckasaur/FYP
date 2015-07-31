@@ -120,8 +120,8 @@ public class TemporaryMovement : MonoBehaviour
         boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
         checkGroundStatus();
 
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+		horizontal = Input.GetAxis("Horizontal");
+		vertical = Input.GetAxis("Vertical");
 
         movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
         Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
@@ -273,8 +273,8 @@ public class TemporaryMovement : MonoBehaviour
 
     void updateAnimator()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+		float horizontal = Input.GetAxis("Horizontal");
+		float vertical = Input.GetAxis("Vertical");
 
         catAnim.SetFloat("hSpeed", horizontal);
         catAnim.SetFloat("vSpeed", vertical);
