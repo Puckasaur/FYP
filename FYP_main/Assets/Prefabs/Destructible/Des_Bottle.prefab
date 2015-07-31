@@ -89,6 +89,7 @@ MonoBehaviour:
   Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   brokenSphere: {fileID: 100000, guid: d88d27f2a2ecab841ad910b895ea1b32, type: 3}
   brokenCube: {fileID: 0}
+  playerMovement: {fileID: 0}
   makeSound: 0
   timer: 60
   expireTimer: 10
@@ -103,7 +104,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 145296}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .0858154297
   m_Height: .349744081
   m_Direction: 1

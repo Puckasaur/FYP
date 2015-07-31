@@ -23,7 +23,7 @@ public class instantiateKey : MonoBehaviour
 	public void checkpoint()
     {
         Destroy(newKey);
-        newKey = (GameObject)Instantiate(key, transform.localPosition, Quaternion.identity);
+        newKey = (GameObject)Instantiate(key, transform.localPosition, transform.localRotation);
         newKey.transform.parent = transform;
         keyscript = newKey.GetComponent<Key>();
         keyscript.keyNumber = keyNumber;

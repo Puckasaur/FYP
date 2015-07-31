@@ -165,6 +165,7 @@ public class enemyPathfinding : MonoBehaviour
     Collider playerCollider;
     Animator patrolAnim;
     bool randomPointSelected = false;
+    public float animationSpeedModifier;
     //This is for Animator guy to see enemies actual speeds, it uses normal update atm.
     //It can be changed to FixedUpdate if it gives better results
     Vector3 previousPosition;
@@ -225,7 +226,6 @@ public class enemyPathfinding : MonoBehaviour
     [HideInInspector]
     public Vector3 _soundSource;
 
-    
     //end of Misc variables
 
 
@@ -276,6 +276,7 @@ public class enemyPathfinding : MonoBehaviour
             Vector3 currentMove = transform.position - previousPosition;
             currentSpeed = currentMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
+            patrolAnim.speed = agent.speed * animationSpeedModifier;
             updateAnimator();
         }
         //end of Timer for the animator guy to see enemies actual speed

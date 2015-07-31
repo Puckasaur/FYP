@@ -59,11 +59,17 @@ public class TemporaryMovement : MonoBehaviour
     public AnimationClip spriteAnimationBag;
 
     [HideInInspector]
+
     public float joystickPressure;
+        [HideInInspector]
     public int numberOfKeys;
+        [HideInInspector]
     public int[] keyPossessed = new int[3];
+        [HideInInspector]
     public float horizontal;
+        [HideInInspector]
     public float vertical;
+        [HideInInspector]
     public int bonesPlaced;
 
     IEnumerator spriteBoneTimer()
