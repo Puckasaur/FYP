@@ -422,6 +422,7 @@ public class enemyPathfinding : MonoBehaviour
                                 areaCounter = 0;
                             }
                             alertTimer = defaultAlertTimer;
+                            organizeAlertWaypoints();
                             stateManager(3);
                         }
                         else if (escapeTimer <= 0)
@@ -438,6 +439,7 @@ public class enemyPathfinding : MonoBehaviour
                                 areaCounter = 0;
                             }
                             alertTimer = defaultAlertTimer;
+                            organizeAlertWaypoints();
                             stateManager(3);
                         }
                         escapeTimer--;
@@ -628,7 +630,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     
                     organizeAlertWaypoints();
-
+                    
                     patrolAnim.SetBool("patrolRun", false);
 
                     if (soundSource && soundSource.tag != "bone" && randomPointSelected == false)
