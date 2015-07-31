@@ -460,7 +460,7 @@ public class enemyPathfinding : MonoBehaviour
                                 areaCounter = 0;
                             }
                             alertTimer = defaultAlertTimer;
-                            organizeAlertWaypoints();
+                           // organizeAlertWaypoints();
                             stateManager(3);
                         }
                         else if (escapeTimer <= 0)
@@ -477,7 +477,7 @@ public class enemyPathfinding : MonoBehaviour
                                 areaCounter = 0;
                             }
                             alertTimer = defaultAlertTimer;
-                            organizeAlertWaypoints();
+                            //organizeAlertWaypoints();
                             stateManager(3);
                         }
                         escapeTimer--;
@@ -695,9 +695,10 @@ public class enemyPathfinding : MonoBehaviour
                     // when sound is heard, move towards the source//
                     //---------------------------------------------//    
 
-                    //Check if the player is within offset range from the current target
-                    if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
+                    //Check if the enemy is within offset range from the current target
+                    if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                     {
+                        print("waypoint getto");
                         if (soundSource != null || !soundSource.Equals(null))
                         {
                             Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
@@ -729,6 +730,10 @@ public class enemyPathfinding : MonoBehaviour
                             randomPointSelected = false;
                             stateManager(3);
                         }
+                    }
+                    else if(soundSource == null)
+                    {
+                        stateManager(3);
                     }
                 }
                 break;
@@ -1196,7 +1201,7 @@ public class enemyPathfinding : MonoBehaviour
 
                     for (int i = 0; i < alertArea.Count; i++)
                     {
-                        if (alertArea[i] != null || tempAlertWaypoints[i] != null && !tempUsedWaypoints.Contains(alertArea[i]))
+                        if (alertArea[i] != null /*|| tempAlertWaypoints[i] != null*/ && !tempUsedWaypoints.Contains(alertArea[i]))
                         {
                             tempAlertWaypoints.Add(alertArea[i]);
                             if(!usedWaypoints.Contains(alertArea[i]))
