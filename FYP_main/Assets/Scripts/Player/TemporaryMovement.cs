@@ -209,23 +209,20 @@ public class TemporaryMovement : MonoBehaviour
     void Update()
     {
         //checks if character is grounded
-
-        //movementSpeed = (movement.magnitude * magnMultiplier) + origMovementSpeed;
-
         if (isGrounded)
         {
             catAnim.speed = 1;
             // Jump
             if (Input.GetButtonDown("Jump"))
             {
-                rb.AddForce(Vector3.up * jumpHeight);
+                rb.AddForce(Vector3.up * (jumpHeight * 100)); // *100 is just here so that we don't have to enter scary values in the inspector
             }
         }
 
         else
         {
             catAnim.speed = 0.1f;
-            rb.AddForce(Vector3.down * grav);
+            rb.AddForce(Vector3.down * (grav / 10)); // /10 is just here so that we don't have to enter scary values in the inspector
         }
     }
 
