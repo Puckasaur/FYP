@@ -223,11 +223,11 @@ public class enemyPathfinding : MonoBehaviour
     public int targetCounter = 0;
     [HideInInspector]
     public float newTargetTimer;
-    [HideInInspector]
+    
     public float agentNotMovingTimer;
-    [HideInInspector]
+    
     public float currentAngle = 0;
-    [HideInInspector]
+   
     public float targetAngle = 0;
     [HideInInspector]
     public bool isPaired = false;
@@ -433,7 +433,7 @@ public class enemyPathfinding : MonoBehaviour
                         agent.autoBraking = false;
                         enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
                         transform.LookAt(enemyRotation);
-                        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed / 2 * Time.deltaTime);
+                        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed * Time.deltaTime);
 
                         chargeTimer--;
                         if (chargeTimer <= 0)
@@ -532,8 +532,6 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-
-                
 
                 patrolAnim.SetBool("patrolRun", false);
                 if (distracted)
@@ -825,13 +823,21 @@ public class enemyPathfinding : MonoBehaviour
                     SeekForSmellSource = true;
                     agentStopped = true;
                     agent.Stop();
-                    Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
-                    float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                    transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
-                    if (angle < 5.0f && angle > -5.0f)
+                    if (tempSmellPosition != null)
+                    {
+                        Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
+                        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                        transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+                        if (angle < 5.0f && angle > -5.0f)
+                        {
+                            stateManager(1);
+                        }
+                    }
+                    else 
                     {
                         stateManager(1);
                     }
+                   
                 }
                 break;
 
@@ -945,14 +951,14 @@ public class enemyPathfinding : MonoBehaviour
         }
 
         //To make sure even if the enemies lose their target for some reason
-        //they will become recover and start to move again. 
+        //they will recover and start to move again. 
         agentNotMovingTimer--;
         if (agentNotMovingTimer < 0)
         {
             agentNotMovingTimer = 0;
         }
         if (agentNotMovingTimer == 0)
-        {
+        {                       
             if (visited == false)
             {               
                 tempPosX = vectorx;
@@ -971,6 +977,12 @@ public class enemyPathfinding : MonoBehaviour
                 }                
                 visited = false;
             }
+
+            agentStopped = true;
+            agent.Stop();
+            agentStopped = false;
+            agent.Resume();
+
         }
     }
 
