@@ -4,7 +4,6 @@ using System.Collections;
 
 public class hidingThirdPerson : MonoBehaviour {
 
-	private OnScreenInstructionChild onScreenChild;
 	private ringOfSmell ros;
 
 	private checkPoint cp;

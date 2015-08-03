@@ -55,11 +55,11 @@ public class TemporaryMovement : MonoBehaviour
     private float durationOfSpriteAnimationBone;
     public AnimationClip spriteAnimationBone;
 
+
     private float durationOfSpriteAnimationBag;
     public AnimationClip spriteAnimationBag;
-
+    public float grav;
     [HideInInspector]
-
     public float joystickPressure;
         [HideInInspector]
     public int numberOfKeys;
@@ -92,6 +92,8 @@ public class TemporaryMovement : MonoBehaviour
 
     void Start()
     {
+       // Physics.gravity = new Vector3(0.0f, -grav, 0.0f);
+
         boneCoolDown.GetComponent<Animator>().enabled = false;
         bagCoolDown.GetComponent<Animator>().enabled = false;
 
@@ -118,17 +120,16 @@ public class TemporaryMovement : MonoBehaviour
         boneSpawner = GameObject.FindGameObjectWithTag("boneSpawner");
         checkGroundStatus();
 
-        horizontal = Input.GetAxis("Horizontal");
-        vertical = Input.GetAxis("Vertical");
+		horizontal = Input.GetAxis("Horizontal");
+		vertical = Input.GetAxis("Vertical");
 
         movement = new Vector3(1, 0, 1) * vertical + new Vector3(1, 0, -1) * horizontal;
         Vector3 look = new Vector3(-1, 0, 1) * vertical + new Vector3(1, 0, 1) * horizontal;
 
-        rb.MovePosition(transform.position + movement.normalized * movementSpeed * Time.deltaTime);
-
+        rb.MovePosition(transform.position + movement.normalized * (movementSpeed + movement.magnitude) * Time.deltaTime);
         transform.LookAt(transform.position + look, Vector3.up);
 
-        if (Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced)
+        if (Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced) // BONE
         {
             boneCoolDown.enabled = true;
             bagCoolDown.enabled = false;
@@ -145,7 +146,7 @@ public class TemporaryMovement : MonoBehaviour
             newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 
-        if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/)
+        if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/) // BAG
         {
             boneCoolDown.enabled = false;
             bagCoolDown.enabled = true;
@@ -163,7 +164,7 @@ public class TemporaryMovement : MonoBehaviour
             newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
         }
 
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.G)) // DISGUIUSED AS A DOG
         {
             if (!disguisedAsDog)
             {
@@ -177,7 +178,7 @@ public class TemporaryMovement : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.H))
+        if (Input.GetKeyDown(KeyCode.H)) // CANNOT SMELL
         {
             if (smellHidden)
             {
@@ -209,16 +210,22 @@ public class TemporaryMovement : MonoBehaviour
     {
         //checks if character is grounded
 
-        movementSpeed = (movement.magnitude * magnMultiplier) + origMovementSpeed;
+        //movementSpeed = (movement.magnitude * magnMultiplier) + origMovementSpeed;
 
         if (isGrounded)
         {
+            catAnim.speed = 1;
             // Jump
             if (Input.GetButtonDown("Jump"))
             {
-                rb.velocity += new Vector3(0.0f, jumpHeight, 0.0f);
-                //Debug.Log(rb.velocity);
+                rb.AddForce(Vector3.up * jumpHeight);
             }
+        }
+
+        else
+        {
+            catAnim.speed = 0.1f;
+            rb.AddForce(Vector3.down * grav);
         }
     }
 
@@ -266,8 +273,8 @@ public class TemporaryMovement : MonoBehaviour
 
     void updateAnimator()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+		float horizontal = Input.GetAxis("Horizontal");
+		float vertical = Input.GetAxis("Vertical");
 
         catAnim.SetFloat("hSpeed", horizontal);
         catAnim.SetFloat("vSpeed", vertical);
