@@ -79,8 +79,8 @@ public class Wall : MonoBehaviour {
         //}
 
         
-            //Get all the renderers
-            m_Renderers = GetComponents<Renderer>();
+        //Get all the renderers
+        m_Renderers = GetComponents<Renderer>();
 
         //Update length of the array to match with the number of renderer
         m_InitialMaterial = new Material[m_Renderers.Length];
@@ -104,6 +104,7 @@ public class Wall : MonoBehaviour {
             transparentMaterial[j].renderQueue = 3000;
             transparentMaterial[j].SetColor("_Color", transparenColor);
         }
+
 		//Update length of the array to match with the number of renderer
         if (m_RenderersChildren != null)
         {
