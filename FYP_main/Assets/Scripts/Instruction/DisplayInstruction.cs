@@ -4,8 +4,10 @@ using System.Collections;
 public class DisplayInstruction : MonoBehaviour
 {
 	private SpriteRenderer instruction;
+	private SpriteRenderer doorInstruction;
+
 	private Animator animate;
-	///public GameObject controller;
+	private Animator doorAnimate;
 
 	public Sprite keyboard;
 	public Sprite controller;
@@ -16,23 +18,25 @@ public class DisplayInstruction : MonoBehaviour
 
 	void Start () 
     {
-		animate = GameObject.Find("OnScreenInstruction_instruction").GetComponent<Animator>();
-		instruction = GameObject.Find("OnScreenInstruction_instruction").GetComponent<SpriteRenderer>();
+		doorAnimate = GameObject.Find("OnScreenInstruction").GetComponent<Animator>();
+		doorInstruction = GameObject.Find("OnScreenInstruction").GetComponent<SpriteRenderer>();
+
+		animate = GetComponentInChildren<Animator>();
+		instruction = GetComponentInChildren<SpriteRenderer>();
 	
-		instruction.enabled = false;
-		//controller.SetActive (false);
+		if (instruction.enabled == true) instruction.enabled = false;
 	}
 	
 	void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "player")
+		if (other.gameObject.tag == "player") 
 			instruction.enabled = true;
 	}
 
     void OnTriggerExit()
     {
+
 		instruction.enabled = false;
-		//controller.SetActive (false	);
 	}
 	
 	void OnGUI()
@@ -86,7 +90,7 @@ public class DisplayInstruction : MonoBehaviour
 		}
 		
 		// joystick axis
-		if(Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f)
+		if(Input.GetAxis("horizontalCheck") != 0.0f || Input.GetAxis("verticalCheck") != 0.0f)
 		{
 			instruction.sprite = controller; 
 			animate.runtimeAnimatorController = controller1;

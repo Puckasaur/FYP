@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: shiftInstructionAnimation
+  m_Name: shiftControllerAnimation
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,11 +18,11 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 21300000, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
+      value: {fileID: 21300000, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
     - time: .416666657
-      value: {fileID: 21300002, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
+      value: {fileID: 21300002, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
     - time: .833333313
-      value: {fileID: 21300000, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
+      value: {fileID: 21300000, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -41,9 +41,9 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 21300000, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
-    - {fileID: 21300002, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
-    - {fileID: 21300000, guid: 6035e7bc4fb687946b4b17d612166802, type: 3}
+    - {fileID: 21300000, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
+    - {fileID: 21300002, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
+    - {fileID: 21300000, guid: 07fe7917f56cb49498b1723067197d81, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0

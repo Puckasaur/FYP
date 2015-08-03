@@ -5,13 +5,13 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: OnScreenInstruction_ControllerShift
+  m_Name: OnScreenInstruction_ControllerSpace
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
-    m_StateMachine: {fileID: 110732042}
+    m_StateMachine: {fileID: 110795278}
     m_Mask: {fileID: 0}
     m_Motions: []
     m_Behaviours: []
@@ -22,13 +22,13 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   m_MultiThreadedStateMachine: 1
---- !u!1102 &110266964
+--- !u!1102 &110238982
 AnimatorState:
   serializedVersion: 5
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: shiftControllerAnimation
+  m_Name: spaceControllerAnimation
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -37,9 +37,9 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_Motion: {fileID: 7400000, guid: e117ede660f8dd54ca0b6c17503bb71d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2f341c659f33a7d4582ea32570719e26, type: 2}
   m_Tag: 
---- !u!1107 &110732042
+--- !u!1107 &110795278
 AnimatorStateMachine:
   serializedVersion: 5
   m_ObjectHideFlags: 1
@@ -48,7 +48,7 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 110266964}
+    m_State: {fileID: 110238982}
     m_Position: {x: 200, y: 0, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
@@ -59,4 +59,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 110266964}
+  m_DefaultState: {fileID: 110238982}

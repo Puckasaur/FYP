@@ -12,14 +12,11 @@ public class hidingThirdPerson : MonoBehaviour {
     public Transform prevPosition;
     public Transform hidingPosition;
 
-   	public GameObject keyboardCheckToEnter;
-	public GameObject keyboardCheckToExit;
-
-	public GameObject controllerCheckToEnter;
-	public GameObject controllerCheckToExit;
 
     public bool isHiding;
 	public bool isPaused;
+
+	public bool isEntered = false;
 
 	void Start () 
 	{
@@ -34,9 +31,11 @@ public class hidingThirdPerson : MonoBehaviour {
     void OnTriggerStay(Collider catType)
     {	
 		if (catType.tag == "player") 
-		{
-			keyboardCheckToEnter.SetActive(true);
-			controllerCheckToEnter.SetActive(true);
+		{	
+
+			isEntered = true;
+			//keyboardCheckToEnter.SetActive(true);
+			//controllerCheckToEnter.SetActive(true);
 			
 			if (isHiding == false)
 			{
@@ -51,9 +50,12 @@ public class hidingThirdPerson : MonoBehaviour {
     }
 
 	void OnTriggerExit()
-	{
-		keyboardCheckToEnter.SetActive(false);
-		controllerCheckToEnter.SetActive(false);
+	{	
+
+		isEntered = true;
+		
+		//keyboardCheckToEnter.SetActive(false);
+		//controllerCheckToEnter.SetActive(false);
 	}
 
 	void Update (){ 
@@ -94,11 +96,11 @@ public class hidingThirdPerson : MonoBehaviour {
         if(ros.disguised == false)
         	ros.isDisguised("htp");
 
-		keyboardCheckToEnter.SetActive(false);
-		keyboardCheckToExit.SetActive(true);
+		//keyboardCheckToEnter.SetActive(false);
+		//keyboardCheckToExit.SetActive(true);
 
-		controllerCheckToEnter.SetActive(false);
-		controllerCheckToExit.SetActive(true);
+		//controllerCheckToEnter.SetActive(false);
+		//controllerCheckToExit.SetActive(true);
         
 	}
 	
@@ -107,8 +109,8 @@ public class hidingThirdPerson : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
 
         character.transform.position = prevPosition.transform.position;
-		controllerCheckToExit.SetActive(false);
-		keyboardCheckToExit.SetActive(false);
+		//controllerCheckToExit.SetActive(false);
+		//keyboardCheckToExit.SetActive(false);
 		
    
 	}
