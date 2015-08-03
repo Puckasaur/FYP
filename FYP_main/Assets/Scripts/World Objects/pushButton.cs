@@ -1,4 +1,4 @@
-﻿// This script goes on the button that has to be pressed by the player to open a door
+﻿// This script goes on the button that has to be pressed by the player or an enemy to open a door
 
 using UnityEngine;
 using System.Collections;
@@ -27,7 +27,7 @@ public class pushButton : MonoBehaviour
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
+        if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
         {
             buttonActivated = true;
         }
@@ -35,7 +35,7 @@ public class pushButton : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy")
+        if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
         {
             timer = defaultTimer;
         }

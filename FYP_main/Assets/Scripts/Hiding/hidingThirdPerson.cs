@@ -74,7 +74,8 @@ public class hidingThirdPerson : MonoBehaviour {
 			}
 		} 
 
-		if (cp.sendBack == true) {
+		if (cp.sendBack == true) 
+        {
 			isHiding = false;
 			isPaused = false;    
 			

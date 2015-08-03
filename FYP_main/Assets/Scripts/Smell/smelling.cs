@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class smelling : MonoBehaviour {
-	
+public class smelling : MonoBehaviour 
+{
 	public ParticleSystem enterPoint;
 	public ParticleSystem exitPoint;
 
@@ -21,7 +21,6 @@ public class smelling : MonoBehaviour {
 	public float boneLimit = 1;
 	public float boneCount;
 
-
 	//Bone
     IEnumerator boneSmell()
     {
@@ -32,16 +31,17 @@ public class smelling : MonoBehaviour {
 
             enterPoint.GetComponent<ParticleSystem>().enableEmission = true;
 
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(1);
 
             exitPoint.GetComponent<ParticleSystem>().enableEmission = true;
 
             newBoneComo = (GameObject)Instantiate(boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
 
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(7);
 
             isEnterBone = false;
         }
+
         if(hasSpawnedBone == true)
         {
             cooldown--;
@@ -124,7 +124,6 @@ public class smelling : MonoBehaviour {
                 StopCoroutine(bagSmell());
                 StartCoroutine(boneSmell());
             }
-            
         }
     }
 

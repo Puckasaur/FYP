@@ -34,7 +34,15 @@ public class ringOfSmell : MonoBehaviour {
     public float visualDistance;
     public float detectionDistance;
     public float somethingElseDistance;
+    
 	//AudioSource sniff;
+
+    public Renderer rend;
+    
+    public Color maxColor;
+    public Color color;
+    public Color minColor;
+    public float colorAlpha;
 
     //Vector3 to make sure the enemy does not smell the player when the player exits the ring of smell
     Vector3 exitrange;
@@ -42,6 +50,11 @@ public class ringOfSmell : MonoBehaviour {
     
     void Start()
     {
+        maxColor.a = colorAlpha;
+        color.a = colorAlpha;
+        minColor.a = colorAlpha;
+
+        rend = GetComponent<Renderer>();
         radius = startRadius;
         sniff = GetComponent<AudioSource>();
         chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
@@ -60,6 +73,21 @@ public class ringOfSmell : MonoBehaviour {
         else if (transform.localScale.x > radius)
         {
             transform.localScale -= scalingRate;
+        }
+
+        if (radius == maxRadius && color != Color.cyan) // Fat radius
+        {
+            rend.material.SetColor("_Color", maxColor);
+        }
+
+        else if (radius < maxRadius && radius > minRadius) // Any radius which 
+        {
+            rend.material.SetColor("_Color", color);
+        }
+
+        else if (radius == minRadius)
+        {
+            rend.material.SetColor("_Color", minColor);
         }
     }
 
