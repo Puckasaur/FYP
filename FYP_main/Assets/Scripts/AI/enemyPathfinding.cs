@@ -201,6 +201,7 @@ public class enemyPathfinding : MonoBehaviour
     //It can be changed to FixedUpdate if it gives better results
     Vector3 previousPosition;
     Vector3 currentPosition;
+    int smellTimer = 180;
 
     [Tooltip("To show enemy's current speed")]
     public float currentSpeed;
@@ -223,11 +224,11 @@ public class enemyPathfinding : MonoBehaviour
     public int targetCounter = 0;
     [HideInInspector]
     public float newTargetTimer;
-    
+    [HideInInspector]
     public float agentNotMovingTimer;
-    
+    [HideInInspector]
     public float currentAngle = 0;
-   
+    [HideInInspector]
     public float targetAngle = 0;
     [HideInInspector]
     public bool isPaired = false;
@@ -815,30 +816,42 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.smell:
                 {
-                    patrolAnim.SetBool("patrolRun", false);
-                    //------------------------------------------------//
-                    //turns enemy towards player's last known location//
-                    //------------------------------------------------//
-
-                    SeekForSmellSource = true;
-                    agentStopped = true;
-                    agent.Stop();
-                    if (tempSmellPosition != null)
+                    if (smellTimer > 0)
                     {
-                        Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
-                        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                        transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
-                        if (angle < 5.0f && angle > -5.0f)
+                        smellTimer = 180;
+                        patrolAnim.SetBool("patrolRun", false);
+                        //------------------------------------------------//
+                        //turns enemy towards player's last known location//
+                        //------------------------------------------------//
+
+
+                        SeekForSmellSource = true;
+                        agentStopped = true;
+                        agent.Stop();
+                        if (tempSmellPosition != null)
+                        {
+                            print(tempSmellPosition);
+                            Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
+                            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                            transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+                            if (angle < 5.0f && angle > -5.0f)
+                            {
+                                stateManager(1);
+                            }
+                        }
+                        else
                         {
                             stateManager(1);
                         }
+
                     }
-                    else 
+                    else
                     {
                         stateManager(1);
                     }
+                    smellTimer--;
+                    }
                    
-                }
                 break;
 
             default:

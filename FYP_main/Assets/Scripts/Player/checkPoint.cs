@@ -25,7 +25,6 @@ public class checkPoint: MonoBehaviour
     public huntingDog hunterScript;
     public TemporaryMovement playerScript;
     public GameObject player;
-
 	public bool sendBack;
 
     void Start()
