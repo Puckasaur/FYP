@@ -1,4 +1,4 @@
-﻿// This script goes on the button that has to be pressed by the player to open a door
+﻿// This script goes on the button that has to be pressed by the player or an enemy to open a door
 
 using UnityEngine;
 using System.Collections;

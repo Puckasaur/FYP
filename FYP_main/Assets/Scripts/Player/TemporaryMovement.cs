@@ -6,7 +6,6 @@ using System.Collections.Generic;
 public class TemporaryMovement : MonoBehaviour
 {
     public float magnMultiplier;
-
     public float movementSpeed;
     public float sprintModifier;
     private float sprintSpeed;
@@ -14,51 +13,49 @@ public class TemporaryMovement : MonoBehaviour
     public float jumpHeight;
     float m_GroundCheckDistance;
     float m_OrigGroundCheckDistance;
+    public float duration = 0.2f;
+    float boneCooldown;
+    public float defalutBoneCooldown;
+    public float boneSpawnTimer;
+    private float durationOfSpriteAnimationBone;
+    public float grav;
+    private float durationOfSpriteAnimationBag;
+    public float throwForce;
+
+    public int maxBonesPlaced;
+    public int maxBones;
+    public int bones = 2;
+    public int bags;
+
     public Rigidbody rb;
+
     Animator catAnim;
+
     public GameObject bone;
     public GameObject bagOfAir;
-
     GameObject boneSpawner;
     GameObject newBone;
     GameObject newBagOfAir;
 
-    public float throwForce = 00.00010f;
-
-    private bool isGrounded;
-    private bool isEsc;
-    public List<GameObject> enemies = new List<GameObject>();
-    ringOfSmell ring;
+    public bool isGrounded;
+    private bool isEsc;    
     bool smellHidden;
     bool disguisedAsDog;
 
-    public Vector3 movement;
+    public List<GameObject> enemies = new List<GameObject>();
 
-    public float duration = 0.2f;
+    ringOfSmell ring;
+
+    public Vector3 movement;
 
     public Image boneCoolDown;
     public Image bagCoolDown;
-
-    float boneCooldown;
-    public float defalutBoneCooldown;
-    
-    public int maxBonesPlaced;
-    public int maxBones;
-    public float boneSpawnTimer;
-
-    public int bones = 2;
-    public int bags;
-
     public Image boneBackground;
     public Image bagBackground;
 
-    private float durationOfSpriteAnimationBone;
     public AnimationClip spriteAnimationBone;
-
-
-    private float durationOfSpriteAnimationBag;
     public AnimationClip spriteAnimationBag;
-    public float grav;
+
     [HideInInspector]
     public float joystickPressure;
         [HideInInspector]
@@ -129,7 +126,7 @@ public class TemporaryMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement.normalized * (movementSpeed + movement.magnitude) * Time.deltaTime);
         transform.LookAt(transform.position + look, Vector3.up);
 
-        if (Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3") && bones > 0 && bonesPlaced < maxBonesPlaced) // BONE
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3")) && bones > 0 && bonesPlaced < maxBonesPlaced) // BONE
         {
             boneCoolDown.enabled = true;
             bagCoolDown.enabled = false;
@@ -213,10 +210,15 @@ public class TemporaryMovement : MonoBehaviour
         {
             catAnim.speed = 1;
             // Jump
+            //if(Input.GetKeyDown(KeyCode.Space))
+            //{
+            //    rb.AddForce(Vector3.up * jumpHeight);
+            //}
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector3.up * (jumpHeight * 100)); // *100 is just here so that we don't have to enter scary values in the inspector
             }
+            //else 
         }
 
         else

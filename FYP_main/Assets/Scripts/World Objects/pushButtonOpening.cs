@@ -7,6 +7,9 @@ using System.Collections;
 public class pushButtonOpening : MonoBehaviour
 {
     public GameObject[] triggerButtons;
+
+    public bool reguire_Both = false;
+
     private int count;
 
     private Animator m_Animator;
@@ -23,31 +26,25 @@ public class pushButtonOpening : MonoBehaviour
 
 	void Update () 
     {
-        if (triggerButtons[0].GetComponent<pushButton>().buttonActivated == true)
+        if(triggerButtons.Length == 1 && triggerButtons[0].GetComponent<pushButton>().buttonActivated == true)
         {
-
-            if (triggerButtons.Length > 1)
-            {
-                if (triggerButtons[1].GetComponent<pushButton>().buttonActivated == true)
-                {
-
-                    m_Animator.SetBool("DoorOpen", true);
-                }
-
-                else
-                {
-
-                    m_Animator.SetBool("DoorOpen", false);
-                }
-            }
-
-            else
-            {
-
                 m_Animator.SetBool("DoorOpen", true);
-            }
         }
-
+        else if(triggerButtons.Length > 1)
+        { 
+        if(triggerButtons[1].GetComponent<pushButton>().buttonActivated == true && reguire_Both == false)
+        {
+            m_Animator.SetBool("DoorOpen", true);
+        }
+        if(triggerButtons[0].GetComponent<pushButton>().buttonActivated == true && reguire_Both == false)
+        {
+            m_Animator.SetBool("DoorOpen", true);
+        }
+        if(triggerButtons[0].GetComponent<pushButton>().buttonActivated == true && triggerButtons[1].GetComponent<pushButton>().buttonActivated == true && reguire_Both == true)
+        {
+            m_Animator.SetBool("DoorOpen",true);
+        }
+        }
         else
         {
 

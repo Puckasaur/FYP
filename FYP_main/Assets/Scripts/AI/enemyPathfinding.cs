@@ -68,6 +68,8 @@ public class enemyPathfinding : MonoBehaviour
     [Tooltip("Waypoint the enemy was heading moment ago")]
 
     public Transform lastTarget;
+    [Tooltip("The first waypoint enemy will head, used for checkpoint")]
+    public Transform firstTarget;
     float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
@@ -79,6 +81,7 @@ public class enemyPathfinding : MonoBehaviour
     float vectorz;	
 	Vector3[] path = new Vector3[0];
     Vector3 currentWaypoint;
+    Vector3 firstWaypoint;
     //End of Pathfinding variables
 
     [Tooltip("FOR DEBUG The state where enemy is right now")]
@@ -276,6 +279,7 @@ public class enemyPathfinding : MonoBehaviour
         setTargetWaypoints();
         currentTarget = targets[0];
         lastTarget = currentTarget;
+        firstTarget = currentTarget;
         agent = GetComponent<NavMeshAgent>();
         agent.speed = patrolSpeed;
         agent.SetDestination(currentTarget.position);
@@ -717,7 +721,6 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         
                         currentTarget = soundSource.transform;
-                        print("target changed to " + soundSource);
                     }
                    // agent.SetDestination(currentTarget.transform.position);
 
@@ -728,7 +731,6 @@ public class enemyPathfinding : MonoBehaviour
                     //Check if the enemy is within offset range from the current target
                     if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                     {
-                        print("waypoint getto");
                         if (soundSource != null || !soundSource.Equals(null))
                         {
                             Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
