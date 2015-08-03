@@ -7,7 +7,6 @@ using System.Collections;
 public class pushButtonOpening : MonoBehaviour
 {
     public GameObject[] triggerButtons;
-    private bool yo;
     private int count;
 
     private Animator m_Animator;

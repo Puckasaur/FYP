@@ -44,13 +44,13 @@ public class checkPoint: MonoBehaviour
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
 
-        if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog") && checkPointActivated == false) // if check point has not been reached
+        if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == false) // if check point has not been reached
         {
 			chaseTransScript.resetChaseTrans();//resets BGM.
             Application.LoadLevel(currentLevel);
         }
 
-        else if ( (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog")&&checkPointActivated == true ) // if check point has been reached
+        else if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == true) // if check point has been reached
         {     
 
 			sendBack = true;

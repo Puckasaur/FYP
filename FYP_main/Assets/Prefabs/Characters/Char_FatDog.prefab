@@ -776,8 +776,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127488}
-  m_LocalRotation: {x: 0, y: -.707106709, z: 0, w: .707106829}
-  m_LocalPosition: {x: 6.11999989, y: -2.36999989, z: 5.07999992}
+  m_LocalRotation: {x: 0, y: .99999696, z: 0, w: -.00246862718}
+  m_LocalPosition: {x: 4.44155073, y: 6.28781891, z: 4.90423775}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482378}
@@ -905,8 +905,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: .930000007, y: 1, z: 2.1400001}
-  m_Center: {x: .0399999991, y: -.150000006, z: 0}
+  m_Size: {x: .929999948, y: 1, z: 1.55823946}
+  m_Center: {x: .0400081575, y: -.150000095, z: .290882915}
 --- !u!95 &9574864
 Animator:
   serializedVersion: 3
@@ -947,14 +947,13 @@ MonoBehaviour:
   eatBone: 0
   distracted: 0
   onWaypoint: 0
+  isOnWaypoint: 0
   turnSpeed: 2
   speed: 2
-  idleSuscpicious: 0
-  firstDirection: 90
-  secondDirection: -90
-  thirdDirection: 90
-  fourthDirection: -90
-  rotationDegrees: 90
+  firstDirection: 0
+  secondDirection: 0
+  thirdDirection: 0
+  fourthDirection: 0
   currentAngle: 0
   targetAngle: 0
   angleOffsetMax: 10
@@ -972,14 +971,13 @@ MonoBehaviour:
   eatTimer: 0
   defaultEatTimer: 200
   defaultIdleTimer: 60
-  defaultBarkTimer: 90
+  defaultBarkTimer: 20
   defaultTimer: 60
   defaultEscapeTimer: 240
   defaultNewTargetTimer: 0
   playerOutOfSight: 0
   areaCounter: 0
   defaultTurnTimer: 60
-  defaultDetectSoundTimer: 200
   newTargetTimer: 0
   defaultRaycastRange: 5
   patrolSpeed: 3.5
