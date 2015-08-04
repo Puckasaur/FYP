@@ -14,7 +14,7 @@ GameObject:
   m_Name: Props_Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &136776
@@ -31,7 +31,7 @@ GameObject:
   m_Name: Particle_Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &161282
@@ -47,7 +47,7 @@ GameObject:
   m_Name: Point light_Candle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &433698
@@ -56,9 +56,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109970}
-  m_LocalRotation: {x: -.707106829, y: 0, z: -0, w: .707106829}
-  m_LocalPosition: {x: 3.95700002, y: .930000007, z: -1.78100002}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -.532212436, y: -.465564102, z: -.465564102, w: .532212436}
+  m_LocalPosition: {x: -14.8100004, y: -.0184000004, z: 12.0799999}
+  m_LocalScale: {x: .879495859, y: .869893312, z: .797202706}
   m_Children:
   - {fileID: 434268}
   m_Father: {fileID: 0}
@@ -95,7 +95,7 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 109970}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_Materials:
   - {fileID: 2100000, guid: 5c12d376a695dc345abfc4d66c274507, type: 2}
@@ -134,10 +134,10 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_Strength: 1
-    m_Bias: .0500000007
+    m_Bias: .140000001
     m_NormalBias: .400000006
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
@@ -146,7 +146,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0

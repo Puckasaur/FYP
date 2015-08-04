@@ -15,7 +15,7 @@ GameObject:
   m_Name: Props_BrokenPillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &456924
@@ -24,9 +24,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169892}
-  m_LocalRotation: {x: -.705973625, y: .0397045203, z: -.039702557, w: .706008852}
-  m_LocalPosition: {x: 1.81299996, y: 1.31799996, z: 5.22300005}
-  m_LocalScale: {x: .5, y: .5, z: .5}
+  m_LocalRotation: {x: .640157104, y: -.300394595, z: .300331324, w: .64012748}
+  m_LocalPosition: {x: -10.6068802, y: 5.92886925, z: 18.8547897}
+  m_LocalScale: {x: .306839526, y: .291943848, z: .210411638}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
