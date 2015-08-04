@@ -61979,6 +61979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerButtons:
   - {fileID: 175883391}
+  OUVERT: 0
 --- !u!1001 &1656655488
 Prefab:
   m_ObjectHideFlags: 0
@@ -64505,11 +64506,11 @@ Prefab:
       objectReference: {fileID: 390052142}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .600000024
+      value: 4.42000008
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -.400000006
+      value: -3.13000011
       objectReference: {fileID: 0}
     - target: {fileID: 156102, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_TagString
@@ -64610,6 +64611,26 @@ Prefab:
     - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: movementSpeed
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.699
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: maxBones
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: boneSpawnTimer
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: maxBonesPlaced
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: defalutBoneCooldown
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
