@@ -15361,6 +15361,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerButtons:
   - {fileID: 583716925}
+  reguire_Both: 0
 --- !u!4 &336138741
 Transform:
   m_ObjectHideFlags: 0
@@ -15479,6 +15480,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerButtons:
   - {fileID: 73641818}
+  reguire_Both: 0
 --- !u!1001 &336302085
 Prefab:
   m_ObjectHideFlags: 0
@@ -21507,6 +21509,7 @@ MonoBehaviour:
   triggerButtons:
   - {fileID: 277124293}
   - {fileID: 33754802}
+  reguire_Both: 0
 --- !u!1001 &468418403
 Prefab:
   m_ObjectHideFlags: 0
@@ -34736,6 +34739,7 @@ MonoBehaviour:
   triggerButtons:
   - {fileID: 2076557960}
   - {fileID: 357671360}
+  reguire_Both: 0
 --- !u!1001 &787928087
 Prefab:
   m_ObjectHideFlags: 0
@@ -34912,6 +34916,7 @@ MonoBehaviour:
   triggerButtons:
   - {fileID: 277124293}
   - {fileID: 33754802}
+  reguire_Both: 0
 --- !u!1001 &789377861
 Prefab:
   m_ObjectHideFlags: 0
@@ -82657,11 +82662,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 50.3699989
+      value: 16.3600006
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 57.8699989
+      value: 24.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: bones
@@ -82673,7 +82678,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.36000013
+      value: -.469999999
       objectReference: {fileID: 0}
     - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: boneCoolDown
