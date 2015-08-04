@@ -22,6 +22,8 @@ public class TemporaryMovement : MonoBehaviour
     private float durationOfSpriteAnimationBag;
     public float throwForce;
 
+    RaycastHit hit;
+
     public int maxBonesPlaced;
     public int maxBones;
     public int bones = 2;
@@ -105,7 +107,6 @@ public class TemporaryMovement : MonoBehaviour
 
         durationOfSpriteAnimationBone = spriteAnimationBone.length;
         durationOfSpriteAnimationBag = spriteAnimationBag.length;
-
         isEsc = !isEsc;
     }
 
@@ -140,6 +141,30 @@ public class TemporaryMovement : MonoBehaviour
             StartCoroutine(spriteBoneTimer());
             bones--;
             bonesPlaced++;
+          
+            Vector3 direction = (boneSpawner.transform.position - this.transform.position).normalized;
+            Physics.Raycast(transform.position, direction, out hit, 1.3f);
+            Debug.DrawRay(transform.position, direction * 1.3f, Color.blue, 2.0f);
+            if (hit.collider != null)
+            {
+                if (hit.collider.tag == "wall")
+                {
+                    Vector3 vectorBetweenWallPlayer = hit.point - this.transform.position;
+                    float distanceWallPlayer = vectorBetweenWallPlayer.magnitude;
+                    vectorBetweenWallPlayer = vectorBetweenWallPlayer.normalized;
+                    Debug.DrawRay(transform.position, vectorBetweenWallPlayer * distanceWallPlayer, Color.red, 5.0f);
+                    boneSpawner.transform.position = this.transform.position + (distanceWallPlayer * vectorBetweenWallPlayer);
+                }
+            }
+               
+                else 
+                {
+                   Vector3 length = (boneSpawner.transform.position - this.transform.position).normalized;
+                   boneSpawner.transform.position = this.transform.position + (length * 1.3f);
+                }
+            
+
+
             newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
         }
 

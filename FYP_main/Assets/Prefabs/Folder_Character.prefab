@@ -1783,10 +1783,12 @@ MonoBehaviour:
   allKeys: []
   allDoors: []
   allDestructibles: []
+  allBones: []
   script: {fileID: 0}
   hunterScript: {fileID: 0}
   playerScript: {fileID: 0}
   player: {fileID: 0}
+  bo: {fileID: 0}
   sendBack: 0
 --- !u!114 &11414694
 MonoBehaviour:
@@ -1816,7 +1818,10 @@ MonoBehaviour:
   detectionDistance: 5
   somethingElseDistance: 0
   rend: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  maxColor: {r: 1, g: 0, b: 0, a: .0980392173}
+  color: {r: 0, g: .255172253, b: 1, a: .0980392173}
+  minColor: {r: .241379261, g: 1, b: 0, a: .0980392173}
+  colorAlpha: .100000001
 --- !u!114 &11419000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1877,26 +1882,27 @@ MonoBehaviour:
   sprintModifier: 2
   origMovementSpeed: 0
   jumpHeight: 2.75
+  duration: .200000003
+  defalutBoneCooldown: 0
+  boneSpawnTimer: 0
+  grav: 1.75
+  throwForce: 9.99999975e-05
+  maxBonesPlaced: 0
+  maxBones: 0
+  bones: 5000
+  bags: 0
   rb: {fileID: 0}
   bone: {fileID: 199134, guid: f4c2e241b8f80684880b060c30b3adda, type: 2}
   bagOfAir: {fileID: 0}
-  throwForce: 9.99999975e-05
+  isGrounded: 0
   enemies: []
   movement: {x: 0, y: 0, z: 0}
-  duration: .200000003
   boneCoolDown: {fileID: 11488418, guid: c8c32343a50e299428a2e72ea9799c5a, type: 2}
   bagCoolDown: {fileID: 11469878, guid: 68bf48b7f19d59d439b8fd01d6bf4ab7, type: 2}
-  defalutBoneCooldown: 0
-  maxBonesPlaced: 0
-  maxBones: 0
-  boneSpawnTimer: 0
-  bones: 5000
-  bags: 0
   boneBackground: {fileID: 11463364, guid: 5cdb5e9f63170e9428b1265f73128252, type: 2}
   bagBackground: {fileID: 11411442, guid: 003cdd5a61eb6dd4480a45a631b7b00d, type: 2}
-  spriteAnimationBone: {fileID: 0}
-  spriteAnimationBag: {fileID: 0}
-  grav: 1.75
+  spriteAnimationBone: {fileID: 7400000, guid: 37adc9a7621e3ea478daaea6db953c87, type: 2}
+  spriteAnimationBag: {fileID: 7400000, guid: c434cd8736ee62f41beaba6e298ddd4a, type: 2}
   joystickPressure: .850000024
   numberOfKeys: 0
   keyPossessed: 000000000000000000000000
