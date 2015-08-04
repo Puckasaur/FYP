@@ -15,9 +15,15 @@ public class DisplayInstruction : MonoBehaviour
 	public RuntimeAnimatorController keyboard1;
 	public RuntimeAnimatorController controller1;
 
+	private float maximum = 1.0f;
+	private float minimum = 0.0f;
+	private float duration = 5.0f;
+	private float startTime;
 
 	void Start () 
     {
+		startTime = Time.time;
+
 		doorAnimate = GameObject.Find("OnScreenInstruction").GetComponent<Animator>();
 		doorInstruction = GameObject.Find("OnScreenInstruction").GetComponent<SpriteRenderer>();
 
@@ -25,20 +31,24 @@ public class DisplayInstruction : MonoBehaviour
 		instruction = GetComponentInChildren<SpriteRenderer>();
 	
 		if (instruction.enabled == true) instruction.enabled = false;
+		
 	}
-	
-	void OnTriggerStay(Collider other)
-    {
+
+	void OnTriggerEnter(Collider other)
+	{
 		if (other.gameObject.tag == "player") 
+		{
+			StartCoroutine(FadeIn());
+
 			instruction.enabled = true;
+		}
 	}
 
     void OnTriggerExit()
     {
-
-		instruction.enabled = false;
+		StartCoroutine(FadeOut());
+		//instruction.enabled = false;
 	}
-	
 	void OnGUI()
 	{
 		isMouseKeyboard ();
@@ -96,5 +106,52 @@ public class DisplayInstruction : MonoBehaviour
 			animate.runtimeAnimatorController = controller1;
 
 		}
+	}
+
+	IEnumerator FadeOut()
+	{	
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.8f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.4f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+		
+		yield return new WaitForSeconds(0.06f);
+			
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.0f);
+
+		instruction.enabled = false;
+	}
+	
+	IEnumerator FadeIn()
+	{
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.4f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.6f);
+		
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.8f);
+
+		yield return new WaitForSeconds(0.06f);
+		
+		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1.0f);
 	}
 }
