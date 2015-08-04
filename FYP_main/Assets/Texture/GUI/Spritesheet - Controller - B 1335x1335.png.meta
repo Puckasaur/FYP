@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 07fe7917f56cb49498b1723067197d81
-timeCreated: 1438051986
+guid: cbc5b1d9401112348b9cce61ffe09c9f
+timeCreated: 1438672328
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Controller - A_0
-    21300002: Controller - A_1
+    21300000: Spritesheet - Controller - B 1335x1335_0
+    21300002: Spritesheet - Controller - B 1335x1335_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -51,23 +51,23 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Controller - A_0
+    - name: Spritesheet - Controller - B 1335x1335_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2250
-        height: 2250
+        width: 1335
+        height: 1335
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Controller - A_1
+    - name: Spritesheet - Controller - B 1335x1335_1
       rect:
         serializedVersion: 2
-        x: 2250
+        x: 1335
         y: 0
-        width: 2250
-        height: 2250
+        width: 1335
+        height: 1335
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
