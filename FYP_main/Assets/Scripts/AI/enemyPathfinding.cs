@@ -82,6 +82,9 @@ public class enemyPathfinding : MonoBehaviour
 	Vector3[] path = new Vector3[0];
     Vector3 currentWaypoint;
     Vector3 firstWaypoint;
+
+    public float rotationSpeed;
+
     //End of Pathfinding variables
 
     [Tooltip("FOR DEBUG The state where enemy is right now")]
@@ -835,7 +838,7 @@ public class enemyPathfinding : MonoBehaviour
                             print(tempSmellPosition);
                             Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
                             float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                            transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+                            transform.Rotate(0, angle * Time.deltaTime * rotationSpeed, 0);
                             if (angle < 5.0f && angle > -5.0f)
                             {
                                 stateManager(1);

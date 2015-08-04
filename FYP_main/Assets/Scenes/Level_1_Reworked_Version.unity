@@ -9308,6 +9308,8 @@ MonoBehaviour:
   target4: {fileID: 1959785314}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -23117,6 +23119,8 @@ MonoBehaviour:
   target4: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -24401,6 +24405,8 @@ MonoBehaviour:
   target4: {fileID: 483496789}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -29031,6 +29037,8 @@ MonoBehaviour:
   target4: {fileID: 0}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -36541,7 +36549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1027806571
 Transform:
   m_ObjectHideFlags: 0
@@ -39468,6 +39476,8 @@ MonoBehaviour:
   target4: {fileID: 951909635}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -41696,6 +41706,8 @@ MonoBehaviour:
   target4: {fileID: 1033066939}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -45831,6 +45843,8 @@ MonoBehaviour:
   target4: {fileID: 483496789}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -46557,6 +46571,8 @@ MonoBehaviour:
   target4: {fileID: 951909635}
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
+  firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -61979,7 +61995,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerButtons:
   - {fileID: 175883391}
-  OUVERT: 0
+  reguire_Both: 0
 --- !u!1001 &1656655488
 Prefab:
   m_ObjectHideFlags: 0
@@ -64506,11 +64522,11 @@ Prefab:
       objectReference: {fileID: 390052142}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.42000008
+      value: -37.7999992
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3.13000011
+      value: -6.9000001
       objectReference: {fileID: 0}
     - target: {fileID: 156102, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_TagString
@@ -64614,7 +64630,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 469692, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.699
+      value: 1.70000005
       objectReference: {fileID: 0}
     - target: {fileID: 11445672, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: maxBones
