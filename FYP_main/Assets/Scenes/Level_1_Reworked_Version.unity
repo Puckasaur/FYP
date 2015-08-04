@@ -7323,6 +7323,26 @@ Prefab:
       propertyPath: character
       value: 
       objectReference: {fileID: 1880577546}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .382683456
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .923879504
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.26499987
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.0170000009
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 1.25100005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
   m_IsPrefabParent: 0
@@ -9309,6 +9329,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -18470,6 +18491,22 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: .121348955
       objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: .382683456
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .923879504
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.104000002
+      objectReference: {fileID: 0}
+    - target: {fileID: 429938, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: .893999994
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d946249ebed2dc42a84a950d3fe9687, type: 2}
   m_IsPrefabParent: 0
@@ -23140,6 +23177,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -24425,6 +24463,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -29056,6 +29095,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -39494,6 +39534,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -41723,6 +41764,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -45859,6 +45901,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
@@ -46586,6 +46629,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
   patrolSpeed: 3.5
   chaseSpeed: 13
