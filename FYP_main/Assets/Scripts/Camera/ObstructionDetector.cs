@@ -8,7 +8,7 @@ public class ObstructionDetector : MonoBehaviour {
 	public Transform playerTransform;
 	//private Wall m_LastWall;
 	private List<Wall> lastWalls = new List<Wall>();
-	
+    Vector3 direction;
 	void FixedUpdate()
 	{
 		if (lastWalls != null) {
@@ -17,8 +17,9 @@ public class ObstructionDetector : MonoBehaviour {
 			}
 			lastWalls.Clear();
 		}
-		
-		Vector3 direction = (playerTransform.position - Camera.main.transform.position).normalized;
+
+        direction = (playerTransform.position - Camera.main.transform.position).normalized;
+
 		RaycastHit[] rayCastHit;
 		
 		rayCastHit = Physics.RaycastAll(Camera.main.transform.position, direction, (playerTransform.position - Camera.main.transform.position).magnitude);

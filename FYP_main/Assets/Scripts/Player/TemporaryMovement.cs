@@ -21,6 +21,7 @@ public class TemporaryMovement : MonoBehaviour
     public float grav;
     private float durationOfSpriteAnimationBag;
     public float throwForce;
+    public string movieFolder;
 
     RaycastHit hit;
 
