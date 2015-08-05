@@ -208,7 +208,7 @@ public class enemyPathfinding : MonoBehaviour
     //It can be changed to FixedUpdate if it gives better results
     Vector3 previousPosition;
     Vector3 currentPosition;
-    int smellTimer = 240;
+    int smellTimer = 180;
 
     [Tooltip("To show enemy's current speed")]
     public float currentSpeed;
@@ -384,13 +384,7 @@ public class enemyPathfinding : MonoBehaviour
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
-                    if (currentSpeed > 0)
-                    {
-                    
-                    }
-
-
-
+                   
                     patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
                     {
@@ -400,8 +394,7 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     //Check if the player is within offset range from the current target
                     if (vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
-                    {
-                        
+                    {                       
 
                         if (idleTimer <= 0)
                         {
@@ -419,7 +412,6 @@ public class enemyPathfinding : MonoBehaviour
                             if (isPaired == false)
                             {
                                 idleTimer = defaultIdleTimer;
-                                print("isPaired == false");
                                 currentTarget = targets[targetCounter];
                                 stateManager(0);
                                 targetCounter++;
@@ -436,11 +428,11 @@ public class enemyPathfinding : MonoBehaviour
                             idleTimer = 0;
                         }
                     }
-                    //else
-                    //{
-                    //    patrolAnim.SetBool("patrolRun", false);
-                    //    stateManager(0);
-                    //}
+                    else
+                    {
+                        patrolAnim.SetBool("patrolRun", false);
+                        stateManager(0);
+                    }
 
                     break;
                 }
@@ -863,42 +855,50 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.smell:
                 {
-                    if (smellTimer > 0)
-                    {
-                       
-                        patrolAnim.SetBool("patrolRun", false);
-                        //------------------------------------------------//
-                        //turns enemy towards player's last known location//
-                        //------------------------------------------------//
+                    //if (smellTimer > 0)
+                   // {
 
+                    patrolAnim.SetBool("patrolRun", false);
+                    //------------------------------------------------//
+                    //turns enemy towards player's last known location//
+                    //------------------------------------------------//
 
-                        SeekForSmellSource = true;
-                        agentStopped = true;
-                        agent.velocity = Vector3.zero;
-                        agent.Stop();
-                        if (tempSmellPosition != null)
-                        {
-                            print(tempSmellPosition);
-                            Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
-                            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                            transform.Rotate(0, angle * Time.deltaTime * rotationSpeed, 0);
-                            if (angle < 5.0f && angle > -5.0f)
-                            {
-                                stateManager(1);
-                            }
-                        }
-                        else
+                    SeekForSmellSource = true;
+                    agentStopped = true;
+                    agent.velocity = Vector3.zero;
+                    agent.Stop();
+                    if (tempSmellPosition != null)
+                    {                        
+                        // print(tempSmellPosition);
+                        
+                        Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
+                        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;                                      
+                        transform.Rotate(0, angle * Time.deltaTime * rotationSpeed, 0);
+                        if (angle < 5.0f && angle > -5.0f)
                         {
                             stateManager(1);
                         }
-
                     }
                     else
                     {
-                        smellTimer = 240;
+                        agentStopped = false;
+                        agent.Resume();
                         stateManager(1);
                     }
-                    smellTimer--;
+
+
+                    //}
+                    //else
+                    //{
+                    //    smellTimer = 180;
+                    //    stateManager(1);
+                    //}
+                   // else
+                    //smellTimer--;
+                    //if (smellTimer <= 0)
+                    //{
+                    //    stateManager(0);
+                    //}
                     }
                    
                 break;
@@ -1425,15 +1425,18 @@ public class enemyPathfinding : MonoBehaviour
     //Actual function to rotate enemy when the player is staying too close of the enemies
     public void rotateDogWhileSmelling( Vector3 targetTransformPosition)
     {
-        if (ringOfSmellScript.smellingPlayer)
+        if (States != enumStates.smell)
         {
-            SeekForSmellSource = true;
-            agentStopped = true;
-            agent.velocity = Vector3.zero;
-            agent.Stop();
-            Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
-            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;          
-            transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+            if (ringOfSmellScript.smellingPlayer)
+            {
+                SeekForSmellSource = true;
+                agentStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.Stop();
+                Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
+                float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+            }
         }
     }
 
@@ -1441,13 +1444,17 @@ public class enemyPathfinding : MonoBehaviour
     //for the source of the smell.
   public  void checkContinuousSmelling(Vector3 targetTransformPosition)
     {
-        turnTowardsSmellTimer--;
-        if (turnTowardsSmellTimer <= 0)
-        {            
-            turnTowardsSmellTimer = 0;
-            SeekForSmellSource = true;
-            rotateDogWhileSmelling(targetTransformPosition);
-        }       
+        if (States != enumStates.smell)
+        {
+            turnTowardsSmellTimer--;
+            if (turnTowardsSmellTimer <= 0)
+            {
+                turnTowardsSmellTimer = 0;
+                SeekForSmellSource = true;
+                rotateDogWhileSmelling(targetTransformPosition);
+            }   
+        }
+         
     }
 
     //This is used to prevent enemies from being unable to find a path to the destructible object.
