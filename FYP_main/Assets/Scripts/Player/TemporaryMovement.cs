@@ -360,8 +360,11 @@ public class TemporaryMovement : MonoBehaviour
     {
         if (coll.gameObject.tag == "ladder")
         {
-            catAnim.SetBool("isClimbing", true);
-            onLadder = true;
+            if (Vector3.Distance(this.transform.position, coll.transform.position) < 1.5f)
+            {
+                catAnim.SetBool("isClimbing", true);
+                onLadder = true;
+            }
         }
     }
 
