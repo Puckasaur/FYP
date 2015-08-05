@@ -233,14 +233,6 @@ public class TemporaryMovement : MonoBehaviour
 
     void Update()
     {
-        if (onLadder == true)
-        {
-            catAnim.SetBool("isOnGround", true);
-            catAnim.SetBool("isClimbing", true);
-        }
-
-        else if (onLadder == false) catAnim.SetBool("isClimbing", false);
-
         //checks if character is grounded
         if (isGrounded)
         {
@@ -257,7 +249,13 @@ public class TemporaryMovement : MonoBehaviour
             //catAnim.speed = 0.1f;
             if (onLadder == false) catAnim.SetBool("isOnGround", false);
             rb.AddForce(Vector3.down * (grav / 10)); // /10 is just here so that we don't have to enter scary values in the inspector
-        }   
+        }
+
+        if (onLadder == true)
+        {
+            catAnim.SetBool("isOnGround", true);
+            catAnim.SetBool("isClimbing", true);
+        }
     }
 
     void sprint()
@@ -315,10 +313,10 @@ public class TemporaryMovement : MonoBehaviour
     void checkGroundStatus()
     {
         RaycastHit hitInfo;
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         // helper to visualise the ground check ray in the scene view
         Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
-#endif
+        #endif
         // 0.1f is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
@@ -357,6 +355,25 @@ public class TemporaryMovement : MonoBehaviour
         }
     }
 
+    
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "ladder")
+        {
+            catAnim.SetBool("isClimbing", true);
+            onLadder = true;
+        }
+    }
+
+    void OnTriggerExit(Collider coll)
+    {
+        if (coll.gameObject.tag == "ladder")
+        {
+            onLadder = false;
+            catAnim.SetBool("isClimbing", false);
+        }
+    }
+    
 
     void disGuiseAsDog()
     {

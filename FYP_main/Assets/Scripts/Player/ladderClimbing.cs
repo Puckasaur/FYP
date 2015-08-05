@@ -40,7 +40,7 @@ public class ladderClimbing : MonoBehaviour
 		
 	void OnTriggerExit(Collider ladder)
 	{
-        ladder.GetComponent<TemporaryMovement>().onLadder = false;
+       // ladder.GetComponent<TemporaryMovement>().onLadder = false;
 		if (ladder.gameObject.tag == "player")
 		{
 			climbMovement.enabled = true;
