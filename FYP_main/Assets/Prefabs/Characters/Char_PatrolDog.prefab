@@ -967,7 +967,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.7488003, y: 3, z: .604162633}
+  m_LocalPosition: {x: 3.36999989, y: .75999999, z: -5.69000006}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 475982}
@@ -1341,8 +1341,9 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   lastTarget: {fileID: 0}
   firstTarget: {fileID: 0}
+  rotationSpeed: 0
   States: 0
-  patrolSpeed: 3.5
+  patrolSpeed: 2.5
   chaseSpeed: 13
   chaseRange: 10
   firstDirection: 90
@@ -1358,13 +1359,13 @@ MonoBehaviour:
   defaultAlertTimer: 400
   defaultEscapeTimer: 400
   defaultTurnTimer: 0
-  defaultNewTargetTimer: 0
+  defaultNewTargetTimer: 60
   defaultTurnTowardsSmellTimer: 0
   defaultAgentNotMovingTimer: 120.010002
   organizeAlertWaypointsTimer: 0
   defaultChargeTimer: 0
   chargeRange: 5
-  animationSpeedModifier: 0
+  animationSpeedModifier: .699999988
   currentSpeed: 0
   player: {fileID: 0}
   soundSource: {fileID: 0}
@@ -1422,8 +1423,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd2c072a5a6360b41b6ecb5e49bc8da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolBarkSource: {fileID: 0}
-  patrolWalkSource: {fileID: 0}
+  patrolBarkSource: {fileID: 8268216}
+  patrolWalkSource: {fileID: 8268216}
 --- !u!136 &13696986
 CapsuleCollider:
   m_ObjectHideFlags: 1

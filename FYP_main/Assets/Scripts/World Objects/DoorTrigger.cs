@@ -5,6 +5,8 @@ public class DoorTrigger : MonoBehaviour
 {
 	sfxPlayer SFX;
 
+	private SpriteRenderer showLock;
+
     public int doorNumber; // number of the door (opened by a key with the same number)
 
     private bool opening = false; // checks if the door is opened or not
@@ -15,6 +17,8 @@ public class DoorTrigger : MonoBehaviour
 	void Start ()
 	{
         m_Animator = GetComponent<Animator>();
+		showLock = GetComponentInChildren<SpriteRenderer>();
+		showLock.enabled = false;
 	}
     
      
@@ -26,6 +30,7 @@ public class DoorTrigger : MonoBehaviour
 
             for (var j = 0; j < other.GetComponent<TemporaryMovement>().numberOfKeys; j++) // checks all the keys possessed by the player and if one corresponds with the door he wants to open
             {
+
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
                 {
                     opening = true;
@@ -35,7 +40,12 @@ public class DoorTrigger : MonoBehaviour
                     //this.transform.Rotate(new Vector3(0.0f, 0.0f, zRotation), angle, Space.Self);
                 }
             }
-        }
+        	
+			if (other.GetComponent<TemporaryMovement>().numberOfKeys == 0)
+			{
+				showLock.enabled = true;
+			}
+		}
     }
     public void checkpoint()
     {

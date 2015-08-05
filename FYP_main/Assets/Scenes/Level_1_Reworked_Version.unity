@@ -36830,7 +36830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1027806571
 Transform:
   m_ObjectHideFlags: 0
@@ -46703,22 +46703,6 @@ Prefab:
       propertyPath: target2
       value: 
       objectReference: {fileID: 897481739}
-    - target: {fileID: 11416580, guid: 2ee5cf79659ba4843a115b1a81811a8f, type: 2}
-      propertyPath: defaultNewTargetTimer
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 19556720, guid: 2ee5cf79659ba4843a115b1a81811a8f, type: 2}
-      propertyPath: m_Speed
-      value: 3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11416580, guid: 2ee5cf79659ba4843a115b1a81811a8f, type: 2}
-      propertyPath: animationSpeedModifier
-      value: .699999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 11416580, guid: 2ee5cf79659ba4843a115b1a81811a8f, type: 2}
-      propertyPath: patrolSpeed
-      value: 2.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ee5cf79659ba4843a115b1a81811a8f, type: 2}
   m_IsPrefabParent: 0
@@ -50228,20 +50212,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 132282, guid: c2ba8792328c5d949b2b9825c15b87df, type: 2}
-      propertyPath: m_TagString
-      value: door
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586480, guid: c2ba8792328c5d949b2b9825c15b87df, type: 2}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6598732, guid: c2ba8792328c5d949b2b9825c15b87df, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 6586480, guid: c2ba8792328c5d949b2b9825c15b87df, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2ba8792328c5d949b2b9825c15b87df, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1321736389
