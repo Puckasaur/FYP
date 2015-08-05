@@ -855,8 +855,14 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.smell:
                 {
-                    //if (smellTimer > 0)
-                   // {
+                    if (smellTimer > 0)
+                    {
+                        smellTimer--;
+                        if (smellTimer <= 0)
+                        {
+                            smellTimer = 180;
+                            stateManager(1);
+                        }
 
                     patrolAnim.SetBool("patrolRun", false);
                     //------------------------------------------------//
@@ -881,24 +887,15 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     else
                     {
+                        smellTimer = 180;
                         agentStopped = false;
                         agent.Resume();
                         stateManager(1);
                     }
 
 
-                    //}
-                    //else
-                    //{
-                    //    smellTimer = 180;
-                    //    stateManager(1);
-                    //}
-                   // else
-                    //smellTimer--;
-                    //if (smellTimer <= 0)
-                    //{
-                    //    stateManager(0);
-                    //}
+                    }
+
                     }
                    
                 break;
