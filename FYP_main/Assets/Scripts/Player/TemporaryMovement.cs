@@ -49,6 +49,8 @@ public class TemporaryMovement : MonoBehaviour
 
     ringOfSmell ring;
 
+    public bool onLadder;
+
     public Vector3 movement;
 
     public Image boneCoolDown;
@@ -61,15 +63,15 @@ public class TemporaryMovement : MonoBehaviour
 
     [HideInInspector]
     public float joystickPressure;
-        [HideInInspector]
+    [HideInInspector]
     public int numberOfKeys;
-        [HideInInspector]
+    [HideInInspector]
     public int[] keyPossessed = new int[3];
-        [HideInInspector]
+    [HideInInspector]
     public float horizontal;
-        [HideInInspector]
+    [HideInInspector]
     public float vertical;
-        [HideInInspector]
+    [HideInInspector]
     public int bonesPlaced;
 
     IEnumerator spriteBoneTimer()
@@ -231,27 +233,31 @@ public class TemporaryMovement : MonoBehaviour
 
     void Update()
     {
+        if (onLadder == true)
+        {
+            catAnim.SetBool("isOnGround", true);
+            catAnim.SetBool("isClimbing", true);
+        }
+
+        else if (onLadder == false) catAnim.SetBool("isClimbing", false);
+
         //checks if character is grounded
         if (isGrounded)
         {
+            catAnim.SetBool("isOnGround", true);
             catAnim.speed = 1;
-            // Jump
-            //if(Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    rb.AddForce(Vector3.up * jumpHeight);
-            //}
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector3.up * (jumpHeight * 100)); // *100 is just here so that we don't have to enter scary values in the inspector
-            }
-            //else 
+            } 
         }
 
         else
         {
-            catAnim.speed = 0.1f;
+            //catAnim.speed = 0.1f;
+            if (onLadder == false) catAnim.SetBool("isOnGround", false);
             rb.AddForce(Vector3.down * (grav / 10)); // /10 is just here so that we don't have to enter scary values in the inspector
-        }
+        }   
     }
 
     void sprint()
