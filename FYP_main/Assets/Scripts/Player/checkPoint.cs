@@ -45,13 +45,13 @@ public class checkPoint: MonoBehaviour
 
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
-
         if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == false) // if check point has not been reached
         {
             if (other.gameObject.tag == "enemy")
             {
                 other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
             }
+
             this.transform.position = startPosition.transform.position;
             resetLevel();
             //Application.LoadLevel(currentLevel);
@@ -63,76 +63,81 @@ public class checkPoint: MonoBehaviour
             {
                 other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
             }
+
             this.transform.position = checkPointPosition.transform.position;
             resetLevel();
         }
     }
+
     public static bool isNull(System.Object aObj)
     {
         return aObj == null || aObj.Equals(null);
     }
+
     void resetLevel()
     {
-
         sendBack = true;
         playerScript = player.GetComponent<TemporaryMovement>();
-            playerScript.resetKeys();
-            allEnemies = GameObject.FindGameObjectsWithTag("enemy");
-            allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
-            allKeys = GameObject.FindGameObjectsWithTag("key");
-            allDoors = GameObject.FindGameObjectsWithTag("door");
-            allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
-            allBones = GameObject.FindGameObjectsWithTag("bone");
-			chaseTransScript.resetChaseTrans();//resets BGM.
+        playerScript.resetKeys();
+        allEnemies = GameObject.FindGameObjectsWithTag("enemy");
+        allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
+        allKeys = GameObject.FindGameObjectsWithTag("key");
+        allDoors = GameObject.FindGameObjectsWithTag("door");
+        allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
+        allBones = GameObject.FindGameObjectsWithTag("bone");
+		chaseTransScript.resetChaseTrans(); //resets BGM.
 
-            foreach(GameObject hunter in allHunters)
-            {
-                hunterScript = (huntingDog)hunter.GetComponent<huntingDog>();
-                hunterScript.selfDestruct();
-                //Destroy(hunter);
-            }
-            foreach (GameObject enemy in allEnemies)
-            {
+        foreach(GameObject hunter in allHunters)
+        {
+            hunterScript = (huntingDog)hunter.GetComponent<huntingDog>();
+            hunterScript.selfDestruct();
+            //Destroy(hunter);
+        }
 
-                script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();
-                script.agent.Stop();
-                script.agent.velocity = Vector3.zero;
-                script.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                if (script.respawnPosition != null)
-                {
-                    enemy.transform.position = script.respawnPosition;
-                }
-                script.currentTarget = script.firstTarget;
-                script.targetCounter = 0;
+        foreach (GameObject enemy in allEnemies)
+        {
+            script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();
+            script.agent.Stop();
+            script.agent.velocity = Vector3.zero;
+            script.GetComponent<Rigidbody>().velocity = Vector3.zero;
 
-                script.agent.speed = script.patrolSpeed;
-                script.stateManager(1);
-                script.agent.SetDestination(script.currentTarget.position);
-                script.newTargetTimer = script.defaultNewTargetTimer;
+            if (script.respawnPosition != null)
+            {
+                enemy.transform.position = script.respawnPosition;
+            }
 
-            }
-            foreach(GameObject key in allKeys)
-            {
-                instantiateKey Key = key.GetComponent<instantiateKey>();
-                Key.checkpoint();
-            }
-            foreach(GameObject bone in allBones)
-            {
-                //bo = bone.gameObject.GetComponent<breakableObject>();
-                player.GetComponent<TemporaryMovement>().bonesPlaced--;
-                Destroy(bone);
-            }
-            foreach (GameObject destructible in allDestructibles)
-            {
+            script.currentTarget = script.firstTarget;
+            script.targetCounter = 0;
 
-                instantiateDestructible DES = destructible.GetComponent<instantiateDestructible>();
-                DES.checkpoint();
-            }
-            foreach (GameObject door in allDoors)
-            {
-                DoorTrigger dt = door.GetComponent<DoorTrigger>();
-                dt.checkpoint();
-            }
-        
+            script.agent.speed = script.patrolSpeed;
+            script.stateManager(1);
+            script.agent.SetDestination(script.currentTarget.position);
+            script.newTargetTimer = script.defaultNewTargetTimer;
+        }
+
+        foreach(GameObject key in allKeys)
+        {
+            instantiateKey Key = key.GetComponent<instantiateKey>();
+            Key.checkpoint();
+        }
+
+        foreach(GameObject bone in allBones)
+        {
+            //bo = bone.gameObject.GetComponent<breakableObject>();
+            player.GetComponent<TemporaryMovement>().bonesPlaced--;
+            Destroy(bone);
+        }
+
+        foreach (GameObject destructible in allDestructibles)
+        {
+            instantiateDestructible DES = destructible.GetComponent<instantiateDestructible>();
+            DES.checkpoint();
+        }
+
+        foreach (GameObject door in allDoors)
+        {
+            DoorTrigger dt = door.GetComponent<DoorTrigger>();
+            dt.checkpoint();
+        }       
     }
 }
