@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967291
   m_IsActive: 1
 --- !u!1 &158582
 GameObject:
@@ -32,7 +32,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967291
   m_IsActive: 1
 --- !u!4 &405694
 Transform:
@@ -40,9 +40,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 158582}
-  m_LocalRotation: {x: -.63116467, y: -.340876281, z: -.203491941, w: .666352451}
-  m_LocalPosition: {x: 7.73799992, y: 3.15300012, z: 11.1709995}
-  m_LocalScale: {x: .5, y: .500000119, z: .49999997}
+  m_LocalRotation: {x: 0, y: -.707106709, z: 0, w: .707106829}
+  m_LocalPosition: {x: -.606999993, y: -.456, z: -.00100000005}
+  m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 438134}
   m_Father: {fileID: 0}
@@ -111,9 +111,9 @@ Light:
   m_Enabled: 1
   serializedVersion: 6
   m_Type: 2
-  m_Color: {r: 1, g: .784313738, b: 0, a: 1}
-  m_Intensity: 4
-  m_Range: 3
+  m_Color: {r: 1, g: .784313798, b: 0, a: 1}
+  m_Intensity: 2
+  m_Range: 4
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
