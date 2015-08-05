@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &164580
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   Sphere: {fileID: 181896, guid: 17692f10cc5333943afd63271381978e, type: 2}
   brokenSphere: {fileID: 161818, guid: f670731de8d4d79459c4cfb241a8a0ff, type: 2}
   brokenCube: {fileID: 100000, guid: 417b4b38ad6e8394394afeaf2cbbf04b, type: 3}
+  playerMovement: {fileID: 0}
   makeSound: 0
   timer: 60
   expireTimer: 10

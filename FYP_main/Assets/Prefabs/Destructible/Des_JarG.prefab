@@ -12,7 +12,6 @@ GameObject:
   - 23: {fileID: 2367932}
   - 64: {fileID: 6481648}
   - 114: {fileID: 11429720}
-  - 136: {fileID: 13662986}
   m_Layer: 0
   m_Name: Des_JarG
   m_TagString: jar
@@ -96,19 +95,6 @@ MonoBehaviour:
   boneRadius: 0
   ballRadius: 0
   cubeRadius: 0
---- !u!136 &13662986
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 186378}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: .307628632
-  m_Height: .762932777
-  m_Direction: 1
-  m_Center: {x: -3.43322754e-05, y: .397361159, z: -1.43051147e-06}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

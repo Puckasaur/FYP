@@ -9,33 +9,43 @@ public class leadEnemy : MonoBehaviour {
     int firstTargetCounter;
     int secondTargetCounter;
 	// Use this for initialization
-	void Start () {
+	void Start () 
+    {
         enemyScript = enemy.GetComponent<enemyPathfinding>();
         thisEnemyScript = gameObject.GetComponent<enemyPathfinding>();
+        enemyScript.isPaired = true;
+        thisEnemyScript.isPaired = true;
+
 	}
 	
 	// Update is called once per frame
-	void Update () {
-	if(enemyScript.isOnWaypoint)
+	void Update () 
     {
-        if (thisEnemyScript.isOnWaypoint)
+        if (enemyScript.isOnWaypoint)
         {
-            thisEnemyScript.currentTarget = thisEnemyScript.targets[firstTargetCounter];
-            enemyScript.currentTarget = enemyScript.targets[secondTargetCounter];
-            enemyScript.isOnWaypoint = false;
-            firstTargetCounter++;
-            secondTargetCounter++;
-            thisEnemyScript.stateManager(0);
-            enemyScript.stateManager(0);
-            if (firstTargetCounter >= enemyScript.targets.Count)
+            if (thisEnemyScript.isOnWaypoint)
             {
-                firstTargetCounter = 0;
+                thisEnemyScript.currentTarget = thisEnemyScript.targets[firstTargetCounter];
+                enemyScript.currentTarget = enemyScript.targets[secondTargetCounter];
+                print(thisEnemyScript.currentTarget + "  <<  thisEnemyScript.currentTarget" + enemyScript.currentTarget + "  << enemyScript.currentTarget");
+                enemyScript.isOnWaypoint = false;
+                firstTargetCounter++;
+                secondTargetCounter++;
+                thisEnemyScript.stateManager(0);
+                enemyScript.stateManager(0);
+                if (firstTargetCounter >= enemyScript.targets.Count)
+                {
+                    firstTargetCounter = 0;
+                }
+                if (secondTargetCounter >= thisEnemyScript.targets.Count)
+                {
+                    secondTargetCounter = 0;
+                }
             }
-            if (secondTargetCounter >= thisEnemyScript.targets.Count)
+            else 
             {
-                secondTargetCounter = 0;
+                enemyScript.stateManager(0);
             }
         }
-    }
 	}
 }
