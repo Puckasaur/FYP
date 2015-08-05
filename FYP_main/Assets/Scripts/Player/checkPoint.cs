@@ -120,7 +120,6 @@ public class checkPoint: MonoBehaviour
             instantiateKey Key = key.GetComponent<instantiateKey>();
             Key.checkpoint();
         }
-        6
 
         foreach(GameObject bone in allBones)
         {
