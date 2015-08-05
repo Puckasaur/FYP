@@ -12,6 +12,7 @@ public class checkPoint: MonoBehaviour
 {
 	chaseTransition chaseTransScript;
     public GameObject checkPointPosition; // Position of the check point
+    public Transform startPosition;
     public bool checkPointActivated = false; // if the check point has been reached or not
 
     private string currentLevel; // the current level
@@ -33,7 +34,6 @@ public class checkPoint: MonoBehaviour
     void Start()
     {	
 		sendBack = false;
-
         currentLevel = Application.loadedLevelName; // get current level name
 		chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();//get chase music transition script
     }
@@ -48,20 +48,34 @@ public class checkPoint: MonoBehaviour
 
         if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == false) // if check point has not been reached
         {
-			chaseTransScript.resetChaseTrans();//resets BGM.
-            Application.LoadLevel(currentLevel);
-        }
-
-        else if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == true) // if check point has been reached
-        {     
-            if(other.gameObject.tag == "enemy")
+            if (other.gameObject.tag == "enemy")
             {
                 other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
             }
-			sendBack = true;
+            this.transform.position = startPosition.transform.position;
+            resetLevel();
+            //Application.LoadLevel(currentLevel);
+        }
 
+        else if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == true) // if check point has been reached
+        {
+            if (other.gameObject.tag == "enemy")
+            {
+                other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
+            }
             this.transform.position = checkPointPosition.transform.position;
-            playerScript = player.GetComponent<TemporaryMovement>();
+            resetLevel();
+        }
+    }
+    public static bool isNull(System.Object aObj)
+    {
+        return aObj == null || aObj.Equals(null);
+    }
+    void resetLevel()
+    {
+
+        sendBack = true;
+        playerScript = player.GetComponent<TemporaryMovement>();
             playerScript.resetKeys();
             allEnemies = GameObject.FindGameObjectsWithTag("enemy");
             allHunters = GameObject.FindGameObjectsWithTag("huntingDog");
@@ -119,10 +133,6 @@ public class checkPoint: MonoBehaviour
                 DoorTrigger dt = door.GetComponent<DoorTrigger>();
                 dt.checkpoint();
             }
-        }
-    }
-    public static bool isNull(System.Object aObj)
-    {
-        return aObj == null || aObj.Equals(null);
+        
     }
 }
