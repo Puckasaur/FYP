@@ -213,39 +213,39 @@ public class enemyPathfinding : MonoBehaviour
     [Tooltip("To show enemy's current speed")]
     public float currentSpeed;
 
-    [HideInInspector]
+   // [HideInInspector]
      public GameObject player;
-    [HideInInspector]
+   // [HideInInspector]
      public GameObject soundSource;
-    [HideInInspector]
+   // [HideInInspector]
      public float alertTimer;
-    [HideInInspector]
+   // [HideInInspector]
     public float eatTimer;
-    [HideInInspector]
+   // [HideInInspector]
     public int defaultTimer;
-    [HideInInspector]
+   // [HideInInspector]
     public int areaCounter = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public float turnTowardsSmellTimer;
-    [HideInInspector]
+  //  [HideInInspector]
     public int targetCounter = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public float newTargetTimer;
-    [HideInInspector]
+   // [HideInInspector]
     public float agentNotMovingTimer;
-    [HideInInspector]
+   // [HideInInspector]
     public float currentAngle = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public float targetAngle = 0;
-    [HideInInspector]
+   // [HideInInspector]
     public bool isPaired = false;
-    [HideInInspector]
+  //  [HideInInspector]
     public bool eatBone = false;
-    [HideInInspector]
+   // [HideInInspector]
     public bool distracted = false;
-    [HideInInspector]
+   // [HideInInspector]
     public bool onWaypoint = false;
-    [HideInInspector]
+  //  [HideInInspector]
     public bool continueRotation = false;
     [HideInInspector]
     public GameObject visionRotator;
@@ -255,15 +255,15 @@ public class enemyPathfinding : MonoBehaviour
     public List<Transform> targets = new List<Transform>();
     [HideInInspector]
     public List<Transform> alertArea = new List<Transform>();
-    [HideInInspector]
+   // [HideInInspector]
     public bool isOnWaypoint = false;
-    [HideInInspector]
+   // [HideInInspector]
     public bool rotationCompleted = false;
-    [HideInInspector]
+  //  [HideInInspector]
     public bool SeekForSmellSource = false;
-    [HideInInspector]
+   // [HideInInspector]
     public bool agentStopped = false;
-    [HideInInspector]
+   // [HideInInspector]
     public Vector3 _soundSource;
 
     //public float deceleration = 60f;
@@ -374,6 +374,12 @@ public class enemyPathfinding : MonoBehaviour
 
                             }
                         }
+
+                        if (SeekForSmellSource)
+                        {
+                            tempSmellPosition = player.transform.position;
+                            stateManager(8);
+                        }
                     }
                 }
 
@@ -404,7 +410,6 @@ public class enemyPathfinding : MonoBehaviour
                             }
                             if (isPaired == true)
                             {
-                                print("isPaired is true and idle timer is set to default");
                                 idleTimer = defaultIdleTimer;
                                 isOnWaypoint = true;
                             }
@@ -428,10 +433,17 @@ public class enemyPathfinding : MonoBehaviour
                             idleTimer = 0;
                         }
                     }
+                    //We assume enemy is not in a waypoint
                     else
                     {
                         patrolAnim.SetBool("patrolRun", false);
                         stateManager(0);
+                    }
+
+                    if (SeekForSmellSource)
+                    {
+                        tempSmellPosition = player.transform.position;
+                        stateManager(8);
                     }
 
                     break;
@@ -633,6 +645,13 @@ public class enemyPathfinding : MonoBehaviour
                         alertTimer = 0;
                     }
                 }
+
+                if (SeekForSmellSource)
+                {
+                    tempSmellPosition = player.transform.position; 
+                    stateManager(8);
+                }
+
                 break;
             case enumStates.idleSuspicious:
                 {
@@ -727,7 +746,7 @@ public class enemyPathfinding : MonoBehaviour
                 {
                     navPath = new NavMeshPath();
                    NavMesh.CalculatePath(transform.position, soundSource.transform.position, NavMesh.AllAreas, navPath);
-                   if (navPath == null)
+                   if (navPath != null)
                    {
 
                        organizeAlertWaypoints();
@@ -864,36 +883,40 @@ public class enemyPathfinding : MonoBehaviour
                             stateManager(1);
                         }
 
-                    patrolAnim.SetBool("patrolRun", false);
-                    //------------------------------------------------//
-                    //turns enemy towards player's last known location//
-                    //------------------------------------------------//
+                        patrolAnim.SetBool("patrolRun", false);
+                        //------------------------------------------------//
+                        //turns enemy towards player's last known location//
+                        //------------------------------------------------//
 
-                    SeekForSmellSource = true;
-                    agentStopped = true;
-                    agent.velocity = Vector3.zero;
-                    agent.Stop();
-                    if (tempSmellPosition != null)
-                    {                        
-                        // print(tempSmellPosition);
-                        
-                        Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
-                        float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;                                      
-                        transform.Rotate(0, angle * Time.deltaTime * rotationSpeed, 0);
-                        if (angle < 5.0f && angle > -5.0f)
-                        {
-                            stateManager(1);
+                        SeekForSmellSource = true;
+                        agentStopped = true;
+                        agent.velocity = Vector3.zero;
+                        agent.Stop();
+                        if (tempSmellPosition != null)
+                        {            
+                            Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
+                            float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                            transform.Rotate(0, angle * Time.deltaTime * rotationSpeed, 0);
+                            if (angle < 5.0f && angle > -5.0f)
+                            {
+                                SeekForSmellSource = false;
+                                stateManager(1);
+                            }
                         }
-                    }
+                        //else
+                        //{
+                        //    smellTimer = 180;
+                        //    agentStopped = false;
+                        //    agent.Resume();
+                        //    stateManager(1);
+                        //}
+
+
+                   }
                     else
                     {
                         smellTimer = 180;
-                        agentStopped = false;
-                        agent.Resume();
                         stateManager(1);
-                    }
-
-
                     }
 
                     }
@@ -906,7 +929,7 @@ public class enemyPathfinding : MonoBehaviour
         }
                 if (currentTarget != null)
                 {
-                    //vector calculations used multiple time in the update
+                    //vector calculations used multiple times during the update
                     vectorTransformPositionx = transform.position.x;
                     vectorTransformPositionz = transform.position.z;
 
@@ -1378,15 +1401,6 @@ public class enemyPathfinding : MonoBehaviour
 
             }
 
-           
-            //for (int i = 0; i < alertArea.Count; i++)
-            //{
-            //    if (!usedWaypoints.Contains(alertArea[i]))
-            //    {
-            //        //print("the last one added " + alertArea[i]);
-            //    }
-            //}
-
                 organizeAlertWaypointsTimer = 900;
         }
      
@@ -1433,6 +1447,10 @@ public class enemyPathfinding : MonoBehaviour
                 Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
                 float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                 transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
+                if (angle < 5.0f && angle > -5.0f)
+                {
+                    SeekForSmellSource = false;
+                }
             }
         }
     }
