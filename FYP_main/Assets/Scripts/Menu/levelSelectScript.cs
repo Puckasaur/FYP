@@ -5,7 +5,6 @@ using System.Collections;
 public class levelSelectScript : MonoBehaviour {
 
 	private fade fading;
-	private AsyncOperation ao;
 
 	public Canvas notAvailable;
 	public Button levelOne;
@@ -125,10 +124,7 @@ public class levelSelectScript : MonoBehaviour {
 	{
 		float fadeTime = fading.BeginFade(1);
 		yield return new WaitForSeconds(fadeTime);
-		ao = Application.LoadLevelAsync(Application.loadedLevel + 1);
-
-		yield return ao;
-
+		Application.LoadLevel(Application.loadedLevel + 1);
 	}
 
 	IEnumerator fadeBackChange()
