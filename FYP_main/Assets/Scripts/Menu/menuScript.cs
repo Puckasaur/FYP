@@ -46,6 +46,9 @@ public class menuScript : MonoBehaviour {
 
 	public void startGame ()
 	{
+        PlayerPrefs.SetString("Movie", "Intro");
+        PlayerPrefs.SetInt("Scene", 2);
+        PlayerPrefs.Save();
 		Application.LoadLevel (1);
 	}
 
