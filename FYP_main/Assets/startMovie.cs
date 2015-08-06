@@ -4,6 +4,7 @@ using System.Collections;
 public class startMovie : MonoBehaviour {
 
     public string movieFolder;
+    public int nextScene;
 	// Use this for initialization
 	void Start () {
 	
@@ -17,9 +18,10 @@ public class startMovie : MonoBehaviour {
     {
         if (other.gameObject.tag == "player")
         {
-
-            moviePlayer mp = GameObject.FindGameObjectWithTag("moviePlayer").GetComponent<moviePlayer>();
-            mp.endOfLevel(movieFolder);
+            PlayerPrefs.SetInt("Scene", nextScene);
+            PlayerPrefs.SetString("Movie", movieFolder);
+            PlayerPrefs.Save();
+            Application.LoadLevel(1);
         }
     }
 }

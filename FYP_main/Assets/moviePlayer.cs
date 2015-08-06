@@ -3,92 +3,61 @@ using System.Collections;
 using System.Collections.Generic;
 public class moviePlayer : MonoBehaviour 
 {
-    Renderer movieRenderer;
-    MovieTexture movie;
-    string folderName;
-    public bool makeTexture = true;
-    List<Texture> pictures = new List<Texture>();
-    bool loop = false;
-    int counter = 0;
-    bool film = true;
-    bool isPlaying = true;
-    float pictureRateInSeconds = 1;
-    public string startFolder;
-    public string value;
-    public float nextPicture = 0;
-    public Camera mainCamera;
-    public Camera movieCamera;
+    public MovieTexture[] movies;
+    public Material[] materials;
+    public MovieTexture movie;
+    public string filename;
+    public Texture texture;
+    //public MovieTexture mp;
+    public Material material;
 	// Use this for initialization
 	void Awake () 
-    {        
-        if(film == true)
+    {
+        //mp = gameObject.GetComponent<MovieTexture>();
+        //texture = 
+        material = gameObject.GetComponent<Renderer>().sharedMaterial;
+        movie = (MovieTexture)GetComponent<Renderer>().sharedMaterial.mainTexture;
+
+        filename = (PlayerPrefs.GetString("Movie"));
+        movies = Resources.LoadAll<MovieTexture>("Movie");
+        materials = Resources.LoadAll<Material>("Movie/Materials");
+        for (int j = 0; j < materials.Length;j++ )
         {
-            pictureRateInSeconds = 0.0166666666f;
+            if(materials[j].name == filename)
+            {
+                print("found one");
+                material = materials[j] as Material;
+                gameObject.GetComponent<Renderer>().sharedMaterial = material;
+            }
         }
-        Texture[] textures = Resources.LoadAll<Texture>(startFolder);
-        for(int i = 0; i< textures.Length; i++)
+            for (int i = 0; i < movies.Length; i++)
+            {
+                if (movies[i].name == filename)
+                {
+
+                    movie = movies[i];
+                    //material = movies[i];
+                    //mp = movies[i];
+                    //movie = mp;
+                }
+            }
+        //movie = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
+        if(movie != null)
         {
-            pictures.Add(textures[i]);
+            movie.Play();
+            //mp.Play();
+            if(movie.isPlaying == true)
+            print(" All Ok!");
         }
-        movieRenderer = GetComponent<Renderer>();
 	}
 	
 	// Update is called once per frame
 	void Update () 
-    {
-        if(isPlaying)
+    {   
+        if(!movie.isPlaying)
         {
-            movieCamera.enabled = true;
-            mainCamera.enabled = false;
-        if(Time.time >= nextPicture)
-        {
-            if(makeTexture)
-            {
-                movieRenderer.material.mainTexture = pictures[counter];
-            }           
-            nextPicture = Time.time + pictureRateInSeconds;
-            counter += 1;
+            print(" no longer playing");
+            Application.LoadLevel(PlayerPrefs.GetInt("Scene"));
         }
-        if(counter >= pictures.Count)
-        {
-            if(loop)
-            {
-                counter = 0;
-            }
-            else
-            {
-                isPlaying = false;
-
-            }
-        }
-        }
-        else
-        {
-            movieCamera.enabled = false;
-            mainCamera.enabled = true;
-        }
-        //if(Input.GetKeyDown(KeyCode.Return))
-        //{
-        //    print("Return pressed");
-        //    if(movie.isPlaying)
-        //    {
-        //        movie.Pause();
-        //        print("pausing movie");
-        //    }
-        //    else
-        //    {
-        //        movie.Play();
-        //        print("playing movie");
-        //    }
-        //}
 	}
-    public void endOfLevel(string value)
-    {
-            Texture[] textures = Resources.LoadAll<Texture>(value);
-            for (int i = 0; i < textures.Length; i++)
-            {
-                pictures.Add(textures[i]);
-            }
-            isPlaying = true;
-    }
 }

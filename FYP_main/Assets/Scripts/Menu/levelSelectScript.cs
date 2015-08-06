@@ -4,6 +4,9 @@ using System.Collections;
 
 public class levelSelectScript : MonoBehaviour {
 
+	private fade fading;
+	private AsyncOperation ao;
+
 	public Canvas notAvailable;
 	public Button levelOne;
 	public Button levelTwo;
@@ -16,6 +19,9 @@ public class levelSelectScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+
+		fading = GameObject.Find ("Fading").GetComponent<fade>();
+		
 
 		notAvailable = notAvailable.GetComponent<Canvas> ();
 		levelOne = levelOne.GetComponent<Button> ();
@@ -33,7 +39,9 @@ public class levelSelectScript : MonoBehaviour {
 
 	public void onePress()
 	{
-		Application.LoadLevel (2);
+		//Application.LoadLevel (2);
+
+		StartCoroutine(fadeChange());
 	}
 
 	public void twoPress()
@@ -109,11 +117,29 @@ public class levelSelectScript : MonoBehaviour {
 
 	public void bactToMain()
 	{
-		Application.LoadLevel (0);
+		//Application.LoadLevel (0);
+		StartCoroutine(fadeBackChange());
 	}
-	
+
+	IEnumerator fadeChange()
+	{
+		float fadeTime = fading.BeginFade(1);
+		yield return new WaitForSeconds(fadeTime);
+		ao = Application.LoadLevelAsync(Application.loadedLevel + 1);
+
+		yield return ao;
+
+	}
+
+	IEnumerator fadeBackChange()
+	{
+		float fadeTime = fading.BeginFade(1);
+		yield return new WaitForSeconds(fadeTime);
+		Application.LoadLevel(Application.loadedLevel - 1);
+	}
+
 	// Update is called once per frame
 	void Update () {
-	
+		//Debug.Log(ao.isDone);
 	}
 }

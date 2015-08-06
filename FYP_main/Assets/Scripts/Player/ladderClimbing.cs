@@ -20,8 +20,10 @@ public class ladderClimbing : MonoBehaviour
 	{
 		if (ladder.gameObject.tag == "player")
 		{
+            ladder.GetComponent<TemporaryMovement>().onLadder = true;
+
             if (climbMovement.movement.magnitude > 0.1)
-            {
+            {    
                 climbMovement.rb.useGravity = false;
                 climbMovement.enabled = false;
             }
@@ -38,6 +40,7 @@ public class ladderClimbing : MonoBehaviour
 		
 	void OnTriggerExit(Collider ladder)
 	{
+       // ladder.GetComponent<TemporaryMovement>().onLadder = false;
 		if (ladder.gameObject.tag == "player")
 		{
 			climbMovement.enabled = true;
@@ -54,6 +57,6 @@ public class ladderClimbing : MonoBehaviour
 			characterController.transform.position += Vector3.up / heightFactor;
 		}
 
-        ////print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
+        //print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
 	}
 }

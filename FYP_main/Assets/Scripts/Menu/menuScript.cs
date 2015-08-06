@@ -4,6 +4,8 @@ using System.Collections;
 
 public class menuScript : MonoBehaviour {
 
+	private fade fading;
+
 	public Canvas quitMenu;
 	public Button startButton;
 	public Button optionsButton;
@@ -13,6 +15,7 @@ public class menuScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
+		fading = GameObject.Find ("Fading").GetComponent<fade>();
 	
 		quitMenu = quitMenu.GetComponent<Canvas> ();
 		startButton = startButton.GetComponent<Button> ();
@@ -46,7 +49,21 @@ public class menuScript : MonoBehaviour {
 
 	public void startGame ()
 	{
-		Application.LoadLevel (1);
+		//Application.LoadLevel (1);
+		StartCoroutine(fadeChange());
+     		PlayerPrefs.SetString("Movie", "Intro");
+        	PlayerPrefs.SetInt("Scene", 2);
+        	PlayerPrefs.Save();
+	}
+
+	IEnumerator fadeChange()
+	{
+
+		float fadeTime = fading.BeginFade(1);
+		yield return new WaitForSeconds(fadeTime);
+		Application.LoadLevel(Application.loadedLevel + 1);
+
+
 	}
 
 }

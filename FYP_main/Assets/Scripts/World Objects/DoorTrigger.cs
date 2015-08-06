@@ -34,7 +34,9 @@ public class DoorTrigger : MonoBehaviour
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
                 {
                     opening = true;
+					showLock.enabled = false;
                     m_Animator.SetBool("DoorOpen", true);
+
 					//SFX.playUnlock();
                     //Destroy(this.gameObject, 0.1f);
                     //this.transform.Rotate(new Vector3(0.0f, 0.0f, zRotation), angle, Space.Self);

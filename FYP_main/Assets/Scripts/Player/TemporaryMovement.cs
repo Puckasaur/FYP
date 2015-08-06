@@ -49,6 +49,8 @@ public class TemporaryMovement : MonoBehaviour
 
     ringOfSmell ring;
 
+    public bool onLadder;
+
     public Vector3 movement;
 
     public Image boneCoolDown;
@@ -61,15 +63,15 @@ public class TemporaryMovement : MonoBehaviour
 
     [HideInInspector]
     public float joystickPressure;
-        [HideInInspector]
+    [HideInInspector]
     public int numberOfKeys;
-        [HideInInspector]
+    [HideInInspector]
     public int[] keyPossessed = new int[3];
-        [HideInInspector]
+    [HideInInspector]
     public float horizontal;
-        [HideInInspector]
+    [HideInInspector]
     public float vertical;
-        [HideInInspector]
+    [HideInInspector]
     public int bonesPlaced;
 
     IEnumerator spriteBoneTimer()
@@ -234,23 +236,25 @@ public class TemporaryMovement : MonoBehaviour
         //checks if character is grounded
         if (isGrounded)
         {
+            catAnim.SetBool("isOnGround", true);
             catAnim.speed = 1;
-            // Jump
-            //if(Input.GetKeyDown(KeyCode.Space))
-            //{
-            //    rb.AddForce(Vector3.up * jumpHeight);
-            //}
             if (Input.GetButtonDown("Jump"))
             {
                 rb.AddForce(Vector3.up * (jumpHeight * 100)); // *100 is just here so that we don't have to enter scary values in the inspector
-            }
-            //else 
+            } 
         }
 
         else
         {
-            catAnim.speed = 0.1f;
+            //catAnim.speed = 0.1f;
+            if (onLadder == false) catAnim.SetBool("isOnGround", false);
             rb.AddForce(Vector3.down * (grav / 10)); // /10 is just here so that we don't have to enter scary values in the inspector
+        }
+
+        if (onLadder == true)
+        {
+            catAnim.SetBool("isOnGround", true);
+            catAnim.SetBool("isClimbing", true);
         }
     }
 
@@ -309,10 +313,10 @@ public class TemporaryMovement : MonoBehaviour
     void checkGroundStatus()
     {
         RaycastHit hitInfo;
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         // helper to visualise the ground check ray in the scene view
         Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
-#endif
+        #endif
         // 0.1f is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
         if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
@@ -351,6 +355,28 @@ public class TemporaryMovement : MonoBehaviour
         }
     }
 
+    
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "ladder")
+        {
+            if (Vector3.Distance(this.transform.position, coll.transform.position) < 1.5f)
+            {
+                catAnim.SetBool("isClimbing", true);
+                onLadder = true;
+            }
+        }
+    }
+
+    void OnTriggerExit(Collider coll)
+    {
+        if (coll.gameObject.tag == "ladder")
+        {
+            onLadder = false;
+            catAnim.SetBool("isClimbing", false);
+        }
+    }
+    
 
     void disGuiseAsDog()
     {

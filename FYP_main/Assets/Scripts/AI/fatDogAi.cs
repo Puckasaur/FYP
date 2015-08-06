@@ -130,7 +130,15 @@ public class fatDogAi : MonoBehaviour {
 	//int checkIfStuck = 100;
 	//bool isStuck = false;
 
-   
+    float x;
+    float y;
+    public float startingAngle;
+    [Tooltip(" what is the max amount the enemy can look from the starting angle before timer for zeroing starts to tick")]
+    public float facingAngle;
+    public float angleDiff;
+    Vector3 startingVector;
+
+    public bool wasChasing = false;
 	
 	void Start()
 	{
@@ -159,6 +167,18 @@ public class fatDogAi : MonoBehaviour {
 		escapeTimer = defaultEscapeTimer;
 		turnTimer = defaultTurnTimer;
 
+        x = transform.right.x * 1.0f;
+        y = transform.right.z * 1.0f;
+        startingAngle = Mathf.Atan2(x, y) * Mathf.Rad2Deg;
+        startingVector = transform.forward * 2.0f;
+
+        
+        //print(startingAngle + "  starting angle");
+
+
+        //Vector3 relative = transform.InverseTransformPoint(transform.position);
+        //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+
 	}
 	
 	void Update()
@@ -178,6 +198,12 @@ public class fatDogAi : MonoBehaviour {
 
         /// End of Calcumalationen for ze vector difference///
 
+        // Calculation for the angle the enemy is facing right now //
+
+        facingAngle = Mathf.Atan2(transform.right.x, transform.right.z) * Mathf.Rad2Deg;
+
+
+        // End of Calculation for the angle the enemy is facing right now //
 
 		
 		GetComponent<Rigidbody>().WakeUp();
@@ -206,8 +232,6 @@ public class fatDogAi : MonoBehaviour {
                     stateManager(1);
                     onWaypoint = true;
                 }
-            
-			
 		}
 			
 			break;
@@ -222,7 +246,6 @@ public class fatDogAi : MonoBehaviour {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             agent.Stop();
 
-
                 if (idleTimer <= 0)
                 {
                     lastTarget = currentTarget;
@@ -230,22 +253,13 @@ public class fatDogAi : MonoBehaviour {
                     {
                         currentTarget = targets[targetCounter];
                     }
-                    //if (agent.SetDestination(currentTarget.position) != null)
-                    //{
-                    //    agent.SetDestination(currentTarget.position);
-                    //}
-
-
-                    idleTimer = defaultIdleTimer;
-                    //targetCounter++;
-                    //if (targetCounter >= targets.Count)
-                    //{
-                    //    targetCounter = 0;
-                    //}
+                    
+                    idleTimer = defaultIdleTimer;                    
                     stateManager(4);
-
                 }
+
                 idleTimer--;
+
                 if (idleTimer <= 0)
                 {
                     idleTimer = 0;
@@ -259,7 +273,9 @@ public class fatDogAi : MonoBehaviour {
 		}
 			
 		case enumStatesFatDog.chase:
-		{
+		{        
+           
+            wasChasing = true;
             Vector3 direction = (player.transform.position - transform.position).normalized;
             Physics.Raycast(transform.position, direction, out hit, raycastRange);
             Debug.DrawRay(transform.position, direction * 8.75f, Color.yellow);
@@ -348,10 +364,26 @@ public class fatDogAi : MonoBehaviour {
 
         case enumStatesFatDog.alert:
             {
-                
-                //if (ringOfSmellScript.smellDetected == false)
+                agentStopped = true;
+                agent.velocity = Vector3.zero;
+                agent.Stop();
+                angleDiff = startingAngle - facingAngle;
+
+                if (wasChasing == true)
+                { 
+                    Vector3 relative = transform.InverseTransformPoint(startingVector);
+                    float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                    transform.Rotate(Vector3.up, Time.deltaTime * rotationStep, 0);
+
+                    if (angleDiff < angleOffsetMax)
+                    {
+                        wasChasing = false;
+                    }
+                   
+                }
+
+                if (wasChasing == false)
                 {
-                    
                     if (alertLookingDirectionsSet == false)
                     {
 
@@ -406,8 +438,8 @@ public class fatDogAi : MonoBehaviour {
                         alertLookingDirectionsSet = false;
                         stateManager(4);
 
-                    }                    
-                    else if(rotationCompleted)
+                    }
+                    else if (rotationCompleted)
                     {
                         directionDegreesAlert.Add(directionDegreesAlert[0]);
                         directionDegreesAlert.Remove(directionDegreesAlert[0]);
@@ -415,16 +447,17 @@ public class fatDogAi : MonoBehaviour {
                         turnCounter++;
                         turnTimerAlert += defaultTurnTimerAlert;// *Time.deltaTime;
                     }
-                    else if(currentAngle != targetAngle)
+                    else if (currentAngle != targetAngle)
                     {
                         rotateEnemy(targetAngle, rotationStep);
                     }
 
+                    //}
+                    //else if (ringOfSmellScript.smellDetected == true)
+                    //{
+                    //    RotateDogWhileSmelling();
+                    //}  
                 }
-                //else if (ringOfSmellScript.smellDetected == true)
-                //{
-                //    RotateDogWhileSmelling();
-                //}  
             }
             break;
         case enumStatesFatDog.idleSuspicious:
@@ -927,3 +960,74 @@ public class fatDogAi : MonoBehaviour {
         
     }
 }
+
+
+
+
+
+//if (ringOfSmellScript.smellDetected == false)
+//if (startingAngle > 0)
+//{
+//    //First we look the border areas in our sector. If the starting angle isn't in the sector 
+//    //made with angle we're currently facing and offset, we can assume that enemy is not facing
+//    //the right direction anymore and we need to set him into a starting angle.
+// 
+//
+//    //firstly check the area around 180°
+//    if(facingAngle + angleOffSet > 180)
+//    {
+//        float tempAngle = facingAngle + angleOffSet;
+//        tempAngle -= 360;
+//
+//        // check if between current angle and 180° 
+//        if ( 180 >= startingAngle  && startingAngle >= facingAngle)
+//        { 
+//         // enemy is correctly set
+//        }
+//
+//        else if ( -180 <= startingAngle && startingAngle <= tempAngle)
+//        {
+//            //enemy is correctly set
+//        }
+//    }
+//
+//
+//    //first check the the area around 0°
+//    if(facingAngle - angleOffSet < 0)
+//    {
+//  
+//    }
+//
+//
+//    // this is for the sector 0° - 180° to check if the enemy is facing the right direction.
+//    // If they don't then we need to move them to face the right direction                 
+//    if (facingAngle < startingAngle && startingAngle < facingAngle + (angleOffSet / 2) || facingAngle - (angleOffSet / 2) < startingAngle && startingAngle < facingAngle)
+//    {
+//        // Enemy is where it should be, no need to do anything
+//    }
+//
+//    else 
+//    {
+//      // Enemy is somewhere where it should not be, it needs to turn to face the starting location
+//    }
+//    //2.
+//    if(facingAngle - (angleOffSet/2) < startingAngle && startingAngle < facingAngle)
+//    {
+//
+//    }
+//
+//}
+//
+//else if (startingAngle < 0)
+//{
+//    //1.
+//    if (facingAngle + (angleOffSet/2) < startingAngle && startingAngle > facingAngle)
+//    {
+//
+//    }
+//    //2.
+//    else if(facingAngle > startingAngle && startingAngle > facingAngle - (angleOffSet/2))
+//    {
+//    
+//    }
+//}
