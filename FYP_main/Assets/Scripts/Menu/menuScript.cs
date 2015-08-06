@@ -49,21 +49,14 @@ public class menuScript : MonoBehaviour {
 
 	public void startGame ()
 	{
-		//Application.LoadLevel (1);
-		StartCoroutine(fadeChange());
+
+		Application.LoadLevel (1);
+		//StartCoroutine(fadeChange());
      		PlayerPrefs.SetString("Movie", "Intro");
         	PlayerPrefs.SetInt("Scene", 2);
         	PlayerPrefs.Save();
 	}
 
-	IEnumerator fadeChange()
-	{
 
-		float fadeTime = fading.BeginFade(1);
-		yield return new WaitForSeconds(fadeTime);
-		Application.LoadLevel(Application.loadedLevel + 1);
-
-
-	}
 
 }
