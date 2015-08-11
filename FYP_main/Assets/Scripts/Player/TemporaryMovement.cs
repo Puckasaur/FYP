@@ -94,13 +94,13 @@ public class TemporaryMovement : MonoBehaviour
 
     void Start()
     {
-       // Physics.gravity = new Vector3(0.0f, -grav, 0.0f);
+        //Physics.gravity = new Vector3(0.0f, -grav, 0.0f);
 
-        boneCoolDown.GetComponent<Animator>().enabled = false;
-        bagCoolDown.GetComponent<Animator>().enabled = false;
+        //boneCoolDown.GetComponent<Animator>().enabled = false;
+        //bagCoolDown.GetComponent<Animator>().enabled = false;
 
-        bagCoolDown.enabled = false;
-        boneSpawnTimer = defalutBoneCooldown;
+        //bagCoolDown.enabled = false;
+        //boneSpawnTimer = defalutBoneCooldown;
         m_GroundCheckDistance = 0.6f;
         rb = GetComponent<Rigidbody>();
         catAnim = GetComponent<Animator>();
