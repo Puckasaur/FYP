@@ -1209,7 +1209,7 @@ public class enemyPathfinding : MonoBehaviour
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1); //Vector3.up * Time.deltaTime * rotationStep * 1
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
@@ -1247,7 +1247,7 @@ public class enemyPathfinding : MonoBehaviour
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
@@ -1286,7 +1286,7 @@ public class enemyPathfinding : MonoBehaviour
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;
@@ -1320,7 +1320,7 @@ public class enemyPathfinding : MonoBehaviour
                                 transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                 currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                 rotationDifference = targetAngle - currentAngle;
-                                if (currentAngle == targetAngle && angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
+                                if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
                                 {
                                     rotationCompleted = true;
                                     rotationInProgress = false;

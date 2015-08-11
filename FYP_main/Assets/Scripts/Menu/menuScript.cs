@@ -21,7 +21,6 @@ public class menuScript : MonoBehaviour {
 		startButton = startButton.GetComponent<Button> ();
 		optionsButton = optionsButton.GetComponent<Button> ();
 		exitButton = exitButton.GetComponent<Button> ();
-		startButton.color = (Color)startButton.colors.highlightedColor;
 		quitMenu.enabled = false;
 
 	}

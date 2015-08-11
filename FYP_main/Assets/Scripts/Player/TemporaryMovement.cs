@@ -133,13 +133,13 @@ public class TemporaryMovement : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3")) && bones > 0 && bonesPlaced < maxBonesPlaced) // BONE
         {
             boneCoolDown.enabled = true;
-            bagCoolDown.enabled = false;
+            //bagCoolDown.enabled = false;
 
             boneBackground.enabled = true;
-            bagBackground.enabled = false;
+            //bagBackground.enabled = false;
 
             boneBackground.CrossFadeAlpha(1.0f, duration, true);
-            bagBackground.CrossFadeAlpha(0.0f, duration, true);
+           // bagBackground.CrossFadeAlpha(0.0f, duration, true);
 
             StartCoroutine(spriteBoneTimer());
             bones--;
