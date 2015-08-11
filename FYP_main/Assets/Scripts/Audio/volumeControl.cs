@@ -4,15 +4,17 @@ using System.Collections;
 
 public class volumeControl : MonoBehaviour {
 
-	float volControl;
+	float volMusicControl;
+	float volSfxControl;
 
-	public Slider volSlider;
+	public Slider volMusicSlider;
+	public Slider volSfxSlider;
 
 	// Use this for initialization
 	void Start () {
 	
-		volSlider.value = PlayerPrefs.GetFloat ("Music Vol");
-
+		volMusicSlider.value = PlayerPrefs.GetFloat ("Music Vol");
+		volSfxSlider.value = PlayerPrefs.GetFloat ("SFX Vol");
 	}
 	
 	// Update is called once per frame
@@ -22,12 +24,17 @@ public class volumeControl : MonoBehaviour {
 
 	}
 
-	public void setVolume()
+	public void setMusicVolume()
 	{
-		volControl = volSlider.value;
-		
-		PlayerPrefs.SetFloat ("Music Vol", volControl);
-		
+		volMusicControl = volMusicSlider.value;		
+		PlayerPrefs.SetFloat ("Music Vol", volMusicControl);
+		PlayerPrefs.Save ();
+	}
+
+	public void setSfxVolume()
+	{
+		volSfxControl = volSfxSlider.value;
+		PlayerPrefs.SetFloat ("SFX Vol", volSfxControl);
 		PlayerPrefs.Save ();
 	}
 }

@@ -9457,6 +9457,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -9471,6 +9472,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -15032,7 +15034,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
 --- !u!1001 &394314999
 Prefab:
   m_ObjectHideFlags: 0
@@ -23691,6 +23693,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -23705,6 +23708,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -25009,6 +25013,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -25023,6 +25028,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -29662,6 +29668,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -29676,6 +29683,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -40025,6 +40033,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -40039,6 +40048,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -41955,7 +41965,7 @@ Transform:
   m_LocalScale: {x: .400000006, y: .400000006, z: .385449409}
   m_Children: []
   m_Father: {fileID: 1222876244}
-  m_RootOrder: 175
+  m_RootOrder: 174
 --- !u!4 &1169628323 stripped
 Transform:
   m_PrefabParentObject: {fileID: 463146, guid: 82e8a056d87f46d48ad1c87287d17755, type: 2}
@@ -42331,6 +42341,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -42345,6 +42356,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -45573,8 +45585,8 @@ Transform:
   - {fileID: 1224385740}
   - {fileID: 1473617401}
   - {fileID: 336361023}
-  - {fileID: 1537784431}
   - {fileID: 1169446391}
+  - {fileID: 1537784431}
   - {fileID: 1011635775}
   - {fileID: 2072216533}
   - {fileID: 229790860}
@@ -46416,6 +46428,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -46430,6 +46443,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -47069,6 +47083,7 @@ MonoBehaviour:
   angleOffsetMin: -10
   turnTimer: 100
   idleTimer: 0
+  defaultDodgeTimer: 0
   defaultEatTimer: 120
   defaultIdleTimer: 70
   defaultBarkTimer: 120
@@ -47083,6 +47098,7 @@ MonoBehaviour:
   chargeRange: 5
   animationSpeedModifier: 0
   currentSpeed: 0
+  isPatrolling: 1
   player: {fileID: 0}
   soundSource: {fileID: 0}
   alertTimer: 0
@@ -69051,6 +69067,34 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 464116, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
   m_PrefabInternal: {fileID: 1888532030}
+--- !u!1 &1888532032 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100204, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
+  m_PrefabInternal: {fileID: 1888532030}
+--- !u!82 &1888532033 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8218850, guid: ef873d3af0ea8fb4b9d1daa49ec95846,
+    type: 2}
+  m_PrefabInternal: {fileID: 1888532030}
+--- !u!82 &1888532034 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 8210328, guid: ef873d3af0ea8fb4b9d1daa49ec95846,
+    type: 2}
+  m_PrefabInternal: {fileID: 1888532030}
+--- !u!114 &1888532035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888532032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed8f4b307550704ab9155abd3041128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 0}
+  quietSource: {fileID: 1888532034}
+  chaseSource: {fileID: 1888532033}
 --- !u!1001 &1888817193
 Prefab:
   m_ObjectHideFlags: 0
