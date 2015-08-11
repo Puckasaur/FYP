@@ -35,14 +35,20 @@ public class levelSelectScript : MonoBehaviour {
 	public void onePress()
 	{
 		//Application.LoadLevel (2);
-
+        PlayerPrefs.SetString("Movie", "Intro");
+        PlayerPrefs.SetInt("Scene", 3);
+        PlayerPrefs.Save();
 		StartCoroutine(fadeChange());
+
 	}
 
 	public void twoPress()
 	{
 		//Uncomment when level is ready
-		//Application.LoadLevel (3);
+        //PlayerPrefs.SetString("Movie", "Level_2_Intro");
+        //PlayerPrefs.SetInt("Scene", 4);
+        //PlayerPrefs.Save();
+		//Application.LoadLevel (2);
 
 		//comment out when level is ready
 		notAvailable.enabled = true;
@@ -55,7 +61,10 @@ public class levelSelectScript : MonoBehaviour {
 	public void threePress()
 	{
 		//Uncomment when level is ready
-		//Application.LoadLevel (4);
+        //PlayerPrefs.SetString("Movie", "Level_3_Intro");
+        //PlayerPrefs.SetInt("Scene", 5);
+        //PlayerPrefs.Save();
+		//Application.LoadLevel (2);
 
 		//comment out when level is ready
 		notAvailable.enabled = true;

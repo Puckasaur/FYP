@@ -8,13 +8,12 @@ public class moviePlayer : MonoBehaviour
     public MovieTexture movie;
     public string filename;
     public Texture texture;
-    //public MovieTexture mp;
+    bool loadingLevel = false;
     public Material material;
+    AsyncOperation async;
 	// Use this for initialization
 	void Awake () 
     {
-        //mp = gameObject.GetComponent<MovieTexture>();
-        //texture = 
         material = gameObject.GetComponent<Renderer>().sharedMaterial;
         movie = (MovieTexture)GetComponent<Renderer>().sharedMaterial.mainTexture;
 
@@ -25,7 +24,6 @@ public class moviePlayer : MonoBehaviour
         {
             if(materials[j].name == filename)
             {
-                print("found one");
                 material = materials[j] as Material;
                 gameObject.GetComponent<Renderer>().sharedMaterial = material;
             }
@@ -36,28 +34,27 @@ public class moviePlayer : MonoBehaviour
                 {
 
                     movie = movies[i];
-                    //material = movies[i];
-                    //mp = movies[i];
-                    //movie = mp;
+
                 }
             }
-        //movie = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
-        if(movie != null)
-        {
-            movie.Play();
-            //mp.Play();
-            if(movie.isPlaying == true)
-            print(" All Ok!");
-        }
+            if (movie != null)
+            {
+                movie.Play();
+            }
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {   
+        if(movie.isPlaying == true && loadingLevel != true)
+        {
+            async = Application.LoadLevelAsync(PlayerPrefs.GetInt("Scene"));
+            async.allowSceneActivation = false;
+            loadingLevel = true;
+        }
         if(!movie.isPlaying)
         {
-            print(" no longer playing");
-            Application.LoadLevel(PlayerPrefs.GetInt("Scene"));
+            async.allowSceneActivation = true;
         }
 	}
 }
