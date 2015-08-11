@@ -69,6 +69,7 @@ public class Wall : MonoBehaviour {
         {
             m_RenderersChildren = transform.GetComponentsInChildren<Renderer>();
         }
+
         else if(transform.parent.tag == "subFolder")
         {
             m_RenderersChildren = transform.parent.GetComponentsInChildren<Renderer>();
