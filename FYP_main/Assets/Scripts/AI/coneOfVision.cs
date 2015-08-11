@@ -15,7 +15,7 @@ public class coneOfVision : MonoBehaviour
     public float startWidth;
     float height;
     public float startHeight;
-    float range;
+    public float range;
     public float startRange;
     public float alarmBonus;
     public float detectionTimer = 60.0f;
@@ -52,11 +52,10 @@ public class coneOfVision : MonoBehaviour
     {
         GetComponent<Rigidbody>().WakeUp();
 
-     
-        //else if (transform.localScale.x > width)
-        //{
-        //    transform.localScale = new Vector3(width, height, range);
-        //}
+        if (transform.localScale.x < width || transform.localScale.x > width || transform.localScale.y < height || transform.localScale.y > height || transform.localScale.z < range || transform.localScale.z > range)
+        {
+            transform.localScale = new Vector3(width, height, range);
+        }
     }
 
 	void OnTriggerEnter (Collider other)
@@ -91,8 +90,8 @@ public class coneOfVision : MonoBehaviour
             RaycastHit hit;
 
             Physics.Linecast(transform.position, other.transform.position, out hit);
-            Debug.DrawLine(transform.position, other.transform.position, Color.green);
-            if (hit.collider.tag == "player")//other.tag)
+            Debug.DrawLine(transform.position, other.transform.position, Color.black);
+            if (hit.collider.tag == "player")
             {
                 chaseTransScript.chaseTrans();
 
