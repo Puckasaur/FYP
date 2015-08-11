@@ -11,6 +11,7 @@ GameObject:
   - 82: {fileID: 8210328}
   - 82: {fileID: 8218850}
   - 114: {fileID: 11488668}
+  - 114: {fileID: 11413638}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -41,7 +42,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .107169099, y: .0857383534, z: -.017953271}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 488988}
@@ -269,6 +270,20 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!114 &11413638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed8f4b307550704ab9155abd3041128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuMusic: {fileID: 0}
+  quietSource: {fileID: 8210328}
+  chaseSource: {fileID: 8218850}
 --- !u!114 &11488668
 MonoBehaviour:
   m_ObjectHideFlags: 1

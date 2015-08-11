@@ -69189,10 +69189,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 100204, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
   m_IsPrefabParent: 0
@@ -69200,34 +69196,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 464116, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
   m_PrefabInternal: {fileID: 1888532030}
---- !u!1 &1888532032 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 100204, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
-  m_PrefabInternal: {fileID: 1888532030}
---- !u!82 &1888532033 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 8218850, guid: ef873d3af0ea8fb4b9d1daa49ec95846,
-    type: 2}
-  m_PrefabInternal: {fileID: 1888532030}
---- !u!82 &1888532034 stripped
-AudioSource:
-  m_PrefabParentObject: {fileID: 8210328, guid: ef873d3af0ea8fb4b9d1daa49ec95846,
-    type: 2}
-  m_PrefabInternal: {fileID: 1888532030}
---- !u!114 &1888532035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1888532032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed8f4b307550704ab9155abd3041128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuMusic: {fileID: 0}
-  quietSource: {fileID: 1888532034}
-  chaseSource: {fileID: 1888532033}
 --- !u!1001 &1888817193
 Prefab:
   m_ObjectHideFlags: 0
