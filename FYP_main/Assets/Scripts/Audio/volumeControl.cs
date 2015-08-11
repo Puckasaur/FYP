@@ -6,19 +6,28 @@ public class volumeControl : MonoBehaviour {
 
 	float volControl;
 
-	Slider volSlider;
+	public Slider volSlider;
 
 	// Use this for initialization
 	void Start () {
 	
-
+		volSlider.value = PlayerPrefs.GetFloat ("Music Vol");
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
-		volControl = volSlider.value;
 
+
+	}
+
+	public void setVolume()
+	{
+		volControl = volSlider.value;
+		
+		PlayerPrefs.SetFloat ("Music Vol", volControl);
+		
+		PlayerPrefs.Save ();
 	}
 }

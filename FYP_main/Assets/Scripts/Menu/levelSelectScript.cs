@@ -10,8 +10,6 @@ public class levelSelectScript : MonoBehaviour {
 	public Button levelOne;
 	public Button levelTwo;
 	public Button levelThree;
-	public Button levelFour;
-	public Button levelFive;
 	public Button backToMain;
 
 
@@ -26,8 +24,6 @@ public class levelSelectScript : MonoBehaviour {
 		levelOne = levelOne.GetComponent<Button> ();
 		levelTwo = levelTwo.GetComponent<Button> ();
 		levelThree = levelThree.GetComponent<Button> ();
-		levelFour = levelFour.GetComponent<Button> ();
-		levelFive = levelFive.GetComponent<Button> ();
 		backToMain = backToMain.GetComponent<Button> ();
 
 		
@@ -53,8 +49,6 @@ public class levelSelectScript : MonoBehaviour {
 		levelOne.enabled = false;
 		levelTwo.enabled = false;
 		levelThree.enabled = false;
-		levelFour.enabled = false;
-		levelFive.enabled = false;
 		backToMain.enabled = false;
 	}
 
@@ -68,40 +62,9 @@ public class levelSelectScript : MonoBehaviour {
 		levelOne.enabled = false;
 		levelTwo.enabled = false;
 		levelThree.enabled = false;
-		levelFour.enabled = false;
-		levelFive.enabled = false;
 		backToMain.enabled = false;
 	}
 
-	public void fourPress()
-	{
-		//Uncomment when level is ready
-		//Application.LoadLevel (5);
-
-		//comment out when level is ready
-		notAvailable.enabled = true;
-		levelOne.enabled = false;
-		levelTwo.enabled = false;
-		levelThree.enabled = false;
-		levelFour.enabled = false;
-		levelFive.enabled = false;
-		backToMain.enabled = false;
-	}
-
-	public void fivePress()
-	{
-		//Uncomment when level is ready
-		//Application.LoadLevel (6);
-
-		//comment out when level is ready
-		notAvailable.enabled = true;
-		levelOne.enabled = false;
-		levelTwo.enabled = false;
-		levelThree.enabled = false;
-		levelFour.enabled = false;
-		levelFive.enabled = false;
-		backToMain.enabled = false;
-	}
 
 	public void backNoAvail()
 	{
@@ -109,8 +72,6 @@ public class levelSelectScript : MonoBehaviour {
 		levelOne.enabled = true;
 		levelTwo.enabled = true;
 		levelThree.enabled = true;
-		levelFour.enabled = true;
-		levelFive.enabled = true;
 		backToMain.enabled = true;
 	}
 
