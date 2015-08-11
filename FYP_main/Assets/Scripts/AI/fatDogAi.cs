@@ -17,7 +17,6 @@ public enum enumStatesFatDog
 public class fatDogAi : MonoBehaviour {
 
 
-    public bool darnYouGandalf;
     ringOfSmell ringOfSmellScript;
     coneOfVision coneOfVisionScript;
 	soundSphere sphereScript;
@@ -179,6 +178,7 @@ public class fatDogAi : MonoBehaviour {
         //Vector3 relative = transform.InverseTransformPoint(transform.position);
         //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
 
+        respawnPosition = transform.position;
 	}
 	
 	void Update()

@@ -22,7 +22,8 @@ public class enemyPathfinding : MonoBehaviour
     //Detection variables//
 
     //smell detection
-   
+    float maxDistance = 2.0f;
+    bool dodging = false;
     ringOfSmell ringOfSmellScript;
     GameObject bone;    
     //rotation after smelling values
@@ -137,6 +138,9 @@ public class enemyPathfinding : MonoBehaviour
     public int idleTimer;
     int barkTimer;
     float escapeTimer;
+    float dodgeTimer;
+    [Tooltip("How long will enemy dodge another enemy")]
+    public int defaultDodgeTimer;
 
     [Tooltip("How long the enemy will eat a bone")]
     public int defaultEatTimer;
@@ -213,7 +217,9 @@ public class enemyPathfinding : MonoBehaviour
     [Tooltip("To show enemy's current speed")]
     public float currentSpeed;
 
-   // [HideInInspector]
+    //[HideInInspector]
+    public bool isPatrolling = true;
+    [HideInInspector]
      public GameObject player;
    // [HideInInspector]
      public GameObject soundSource;
@@ -275,7 +281,7 @@ public class enemyPathfinding : MonoBehaviour
     void Start()
     {
         respawnPosition = this.transform.position;
-
+        dodgeTimer = defaultDodgeTimer;
         visionRotator = GameObject.FindGameObjectWithTag("visionRotator");        
         player = GameObject.FindGameObjectWithTag("player");
         ringOfSmellScript = player.GetComponentInChildren<ringOfSmell>();
@@ -310,8 +316,6 @@ public class enemyPathfinding : MonoBehaviour
         playerCollider = player.GetComponent<Collider>();
         //end of Misc
     }
-
-
     void Update()
     {
         //Velocity meter for the animator guy to see enemies actual speed
@@ -325,6 +329,16 @@ public class enemyPathfinding : MonoBehaviour
         }
         //end of Timer for the animator guy to see enemies actual speed
 
+        //Physics.Raycast(transform.position,transform.forward * 0.05f,out hit);
+        //if (hit.collider.tag == "enemy" || hit.collider.tag == "fatDog" || hit.collider.tag == "huntingDog")
+        //{
+        //    dodge(hit.collider);
+        //}
+        if (dodgeTimer <= 0 && dodging == true)
+        {
+            dodging = false;
+            currentTarget = lastTarget;
+        }
         //To prevent opponent from sleeping
         GetComponent<Rigidbody>().WakeUp();
         //end of To prevent opponent from sleeping
@@ -341,6 +355,10 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
+                    if(!isPatrolling)
+                    {
+                        isPatrolling = true;
+                    }
                     if (newTargetTimer >= 0)
                     {
                         agent.velocity = Vector3.zero;
@@ -367,6 +385,8 @@ public class enemyPathfinding : MonoBehaviour
                             {
                                 agentStopped = true;
                                 agent.velocity = Vector3.zero;
+                                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                                GetComponent<Rigidbody>().velocity = Vector3.zero;
                                 agent.Stop();
                                 //isOnWaypoint = true;
                                 // patrolAnim.SetBool("patrolWalk", false);
@@ -396,6 +416,8 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         agentStopped = true;
                         agent.velocity = Vector3.zero;
+                        GetComponent<Rigidbody>().velocity = Vector3.zero;
+                        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                         agent.Stop();
                     }
                     //Check if the player is within offset range from the current target
@@ -454,6 +476,10 @@ public class enemyPathfinding : MonoBehaviour
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
+                    if (isPatrolling)
+                    {
+                        isPatrolling = false;
+                    }
                     if(onWaypoint == true)
                     {
                         onWaypoint = false;
@@ -558,13 +584,14 @@ public class enemyPathfinding : MonoBehaviour
                 }
                 break;
 
-
-
             case enumStates.alert:
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-
+                if (isPatrolling)
+                {
+                    isPatrolling = false;
+                }
                 patrolAnim.SetBool("patrolRun", false);
                 if (distracted)
                 {
@@ -658,6 +685,10 @@ public class enemyPathfinding : MonoBehaviour
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
+                    if (isPatrolling)
+                    {
+                        isPatrolling = false;
+                    }
                     patrolAnim.SetBool("patrolRun", false);
                     if (agentStopped == false)
                     {
@@ -725,6 +756,10 @@ public class enemyPathfinding : MonoBehaviour
                     //-------------------------//
                     // Move towards distraction//
                     //-------------------------//
+                    if (isPatrolling)
+                    {
+                        isPatrolling = false;
+                    }
                     patrolAnim.SetBool("patrolRun", false);
                     distracted = true;
                     Vector3 bonedir = (currentTarget.transform.localPosition) - (this.transform.localPosition);
@@ -744,11 +779,14 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
+                    if (isPatrolling)
+                    {
+                        isPatrolling = false;
+                    }
                     navPath = new NavMeshPath();
                    NavMesh.CalculatePath(transform.position, soundSource.transform.position, NavMesh.AllAreas, navPath);
                    if (navPath != null)
                    {
-
                        organizeAlertWaypoints();
 
                        patrolAnim.SetBool("patrolRun", false);
@@ -767,7 +805,6 @@ public class enemyPathfinding : MonoBehaviour
                        }
                        else if (soundSource && soundSource.tag == "bone")
                        {
-
                            currentTarget = soundSource.transform;
                        }
                        // agent.SetDestination(currentTarget.transform.position);
@@ -831,6 +868,10 @@ public class enemyPathfinding : MonoBehaviour
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
+                    if (isPatrolling)
+                    {
+                        isPatrolling = false;
+                    }
                     patrolAnim.SetBool("patrolRun", false);
                     if (soundSource != null && soundSource.tag == "bone")
                     {
@@ -971,8 +1012,6 @@ public class enemyPathfinding : MonoBehaviour
             //-------------//
         }
     
-
-  
     void LateUpdate()
     {
         //Just to make sure enemies will have a target
@@ -998,6 +1037,10 @@ public class enemyPathfinding : MonoBehaviour
             }            
         }
         timer--;
+        if(dodgeTimer > 0)
+        {
+            dodgeTimer--;
+        }
 
        //To decide what player should do when he's not moving in the end of an update.
         if (agentStopped == true)
@@ -1026,6 +1069,8 @@ public class enemyPathfinding : MonoBehaviour
             {                
                 agentStopped = false;
                 agent.velocity = Vector3.zero;
+                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 agent.Stop();
             }           
         }
@@ -1317,11 +1362,9 @@ public class enemyPathfinding : MonoBehaviour
             {
                 // goes through every alertArea waypoint
 
-
                     tempAlertWaypoints.Clear();
                     waypointLocations.Clear();
                     
-
                     for (int i = 0; i < alertArea.Count; i++)
                     {
                         if (alertArea[i] != null /*|| tempAlertWaypoints[i] != null*/ && !tempUsedWaypoints.Contains(alertArea[i]))
@@ -1486,10 +1529,45 @@ public class enemyPathfinding : MonoBehaviour
       result = Vector3.zero;
       return false;
   }
-
-
 	void updateAnimator()
 	{
 		patrolAnim.SetFloat ("patrolMovement", currentSpeed);
 	}
+    public void dodge(Collider other)
+    {
+        print("Dodging");
+        dodging = true;
+        Transform obstacl = other.transform;
+        Vector3 obstacle = obstacl.transform.position;
+        Vector3 forward = transform.forward;
+        if (forward.x > 0)
+        {
+            obstacle.z = obstacle.z * -1;
+        }
+        else if (forward.z > 0)
+        {
+            obstacle.x = obstacle.x * -1;
+        }
+        print("dodging target");
+        if (currentTarget != obstacl)
+        {
+            lastTarget = currentTarget;
+        }
+        if (dodgeTimer <= 0)
+        {
+            currentTarget = obstacl;
+            agent.SetDestination(obstacle);
+            dodgeTimer = defaultDodgeTimer;
+        }
+    }
+    void OnCollisionExit(Collider col)
+    {
+        if(col.gameObject.tag == "player" ||col.gameObject.tag == "enemy" || col.gameObject.tag == "fatDog" || col.gameObject.tag == " huntingDog")
+        {
+            agent.Stop();
+            agent.velocity = Vector3.zero;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            agent.Resume();
+        }
+    }
 }

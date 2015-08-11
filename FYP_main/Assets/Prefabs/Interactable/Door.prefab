@@ -14,7 +14,6 @@ GameObject:
   - 208: {fileID: 20845116}
   - 95: {fileID: 9587956}
   - 65: {fileID: 6598732}
-  - 114: {fileID: 11449638}
   m_Layer: 0
   m_Name: Door
   m_TagString: door
@@ -135,18 +134,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11449638
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676f693f8e9bf484abbecb9e9ea27d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorNumber: 1
 --- !u!208 &20845116
 NavMeshObstacle:
   m_ObjectHideFlags: 1

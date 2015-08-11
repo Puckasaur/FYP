@@ -59,6 +59,7 @@ public class coneOfVision : MonoBehaviour
 
 	void OnTriggerEnter (Collider other)
 	{
+        print("collision");
         if (other.gameObject.tag == "player")
         {
             Physics.Linecast(transform.position, other.transform.position, out hit);
@@ -68,8 +69,22 @@ public class coneOfVision : MonoBehaviour
                 chaseTransScript.playSting();
             }
         }
+        else if (other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog" || other.gameObject.tag == "huntingDog")
+        {
+            print("should dodge");
+            if (script != null)
+            {
+                script.dodge(other);
+            }
+        }
 	}
-
+    void OnCollisionExit(Collider col)
+    {
+        if (col.gameObject.tag == "player" || col.gameObject.tag == "enemy" || col.gameObject.tag == "fatDog" || col.gameObject.tag == " huntingDog")
+        {
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+    }
     void OnTriggerStay(Collider other)
     {
 

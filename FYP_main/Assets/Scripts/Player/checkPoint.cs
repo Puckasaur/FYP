@@ -18,6 +18,7 @@ public class checkPoint: MonoBehaviour
     private string currentLevel; // the current level
     public  GameObject[] allEnemies; // needed to reset enemies' positions
     private GameObject[] allHunters; // Hunters need to be destroyed on player death
+    private GameObject[] allFatDogs;
     public GameObject[] allKeys;
     public GameObject[] allDoors;
     public GameObject[] allDestructibles;
@@ -25,6 +26,7 @@ public class checkPoint: MonoBehaviour
 
     public enemyPathfinding script;
     public huntingDog hunterScript;
+    public fatDogAi fatDogScript;
     public TemporaryMovement playerScript;
     public GameObject player;
     public breakableObject bo;
@@ -85,6 +87,7 @@ public class checkPoint: MonoBehaviour
         allDoors = GameObject.FindGameObjectsWithTag("door");
         allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
         allBones = GameObject.FindGameObjectsWithTag("bone");
+        allFatDogs = GameObject.FindGameObjectsWithTag("fatDog");
 		chaseTransScript.resetChaseTrans(); //resets BGM.
 
         foreach(GameObject hunter in allHunters)
@@ -93,7 +96,16 @@ public class checkPoint: MonoBehaviour
             hunterScript.selfDestruct();
             //Destroy(hunter);
         }
-
+        foreach(GameObject fatDog in allFatDogs)
+        {
+            fatDogScript = (fatDogAi)fatDog.GetComponent<fatDogAi>();
+            fatDogScript.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            if (fatDogScript.respawnPosition != null)
+            {
+                fatDog.transform.position = fatDogScript.respawnPosition;
+            }
+            fatDogScript.stateManager(4);
+        }
         foreach (GameObject enemy in allEnemies)
         {
             script = (enemyPathfinding)enemy.GetComponent<enemyPathfinding>();

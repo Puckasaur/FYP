@@ -8,6 +8,7 @@ public class leadEnemy : MonoBehaviour {
     public enemyPathfinding thisEnemyScript;
     int firstTargetCounter;
     int secondTargetCounter;
+    
 	// Use this for initialization
 	void Start () 
     {
@@ -21,17 +22,44 @@ public class leadEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
-        if (enemyScript.isOnWaypoint)
+        if (enemyScript.isPatrolling && thisEnemyScript.isPatrolling)
         {
-            if (thisEnemyScript.isOnWaypoint)
+            if (enemyScript.isOnWaypoint)
             {
-                thisEnemyScript.currentTarget = thisEnemyScript.targets[firstTargetCounter];
+                if (thisEnemyScript.isOnWaypoint)
+                {
+                    thisEnemyScript.currentTarget = thisEnemyScript.targets[firstTargetCounter];
+                    enemyScript.currentTarget = enemyScript.targets[secondTargetCounter];
+                    print(thisEnemyScript.currentTarget + "  <<  thisEnemyScript.currentTarget" + enemyScript.currentTarget + "  << enemyScript.currentTarget");
+                    enemyScript.isOnWaypoint = false;
+                    firstTargetCounter++;
+                    secondTargetCounter++;
+                    thisEnemyScript.stateManager(0);
+                    enemyScript.stateManager(0);
+                    if (firstTargetCounter >= enemyScript.targets.Count)
+                    {
+                        firstTargetCounter = 0;
+                    }
+                    if (secondTargetCounter >= thisEnemyScript.targets.Count)
+                    {
+                        secondTargetCounter = 0;
+                    }
+                }
+                else
+                {
+                    enemyScript.stateManager(0);
+                }
+            }
+        }
+        else if( enemyScript.isPatrolling && !thisEnemyScript.isPatrolling)
+        {
+            if (enemyScript.isOnWaypoint)
+            {
+                print("something should happen");
                 enemyScript.currentTarget = enemyScript.targets[secondTargetCounter];
-                print(thisEnemyScript.currentTarget + "  <<  thisEnemyScript.currentTarget" + enemyScript.currentTarget + "  << enemyScript.currentTarget");
                 enemyScript.isOnWaypoint = false;
                 firstTargetCounter++;
                 secondTargetCounter++;
-                thisEnemyScript.stateManager(0);
                 enemyScript.stateManager(0);
                 if (firstTargetCounter >= enemyScript.targets.Count)
                 {
@@ -42,10 +70,29 @@ public class leadEnemy : MonoBehaviour {
                     secondTargetCounter = 0;
                 }
             }
-            else 
+        }
+        else if(thisEnemyScript.isPatrolling && !enemyScript.isPatrolling)
+        {
+            if (thisEnemyScript.isOnWaypoint)
             {
-                enemyScript.stateManager(0);
+                thisEnemyScript.currentTarget = thisEnemyScript.targets[firstTargetCounter];
+                thisEnemyScript.isOnWaypoint = false;
+                firstTargetCounter++;
+                secondTargetCounter++;
+                thisEnemyScript.stateManager(0);
+                if (firstTargetCounter >= enemyScript.targets.Count)
+                {
+                    firstTargetCounter = 0;
+                }
+                if (secondTargetCounter >= thisEnemyScript.targets.Count)
+                {
+                    secondTargetCounter = 0;
+                }
             }
+        }
+        else
+        {
+
         }
 	}
 }
