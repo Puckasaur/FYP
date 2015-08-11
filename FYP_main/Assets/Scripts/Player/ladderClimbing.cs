@@ -16,7 +16,7 @@ public class ladderClimbing : MonoBehaviour
 		climbMovement = GameObject.Find("Char_Cat").GetComponent<TemporaryMovement>();
 	}
 		
-	void OnTriggerEnter(Collider ladder)
+	void OnTriggerStay(Collider ladder)
 	{
 		if (ladder.gameObject.tag == "player")
 		{

@@ -15,7 +15,7 @@ public class TemporaryMovement : MonoBehaviour
     float m_OrigGroundCheckDistance;
     public float duration = 0.2f;
     float boneCooldown;
-    public float defalutBoneCooldown;
+    public float defaultBoneCooldown;
     public float boneSpawnTimer;
     private float durationOfSpriteAnimationBone;
     public float grav;
@@ -100,7 +100,7 @@ public class TemporaryMovement : MonoBehaviour
         //bagCoolDown.GetComponent<Animator>().enabled = false;
 
         //bagCoolDown.enabled = false;
-        //boneSpawnTimer = defalutBoneCooldown;
+        //boneSpawnTimer = defaultBoneCooldown;
         m_GroundCheckDistance = 0.6f;
         rb = GetComponent<Rigidbody>();
         catAnim = GetComponent<Animator>();
@@ -221,7 +221,7 @@ public class TemporaryMovement : MonoBehaviour
             if (bones < maxBones)
             {
                 bones++;
-                boneSpawnTimer = defalutBoneCooldown;
+                boneSpawnTimer = defaultBoneCooldown;
             }
         }
         if (boneSpawnTimer > 0)

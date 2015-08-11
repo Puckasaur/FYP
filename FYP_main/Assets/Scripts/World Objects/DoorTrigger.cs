@@ -43,7 +43,7 @@ public class DoorTrigger : MonoBehaviour
                 }
             }
         	
-			if (other.GetComponent<TemporaryMovement>().numberOfKeys != 0)
+			if (other.GetComponent<TemporaryMovement>())
 			{
 				showLock.enabled = true;
 			}
