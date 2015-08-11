@@ -6,7 +6,7 @@ public class setMusicVolume : MonoBehaviour {
 
 	float musicVol;
 	
-	public AudioSource menuMusic;
+
 	public AudioSource quietSource;
 	public AudioSource chaseSource;
 
@@ -22,10 +22,8 @@ public class setMusicVolume : MonoBehaviour {
 	
 		musicVol = PlayerPrefs.GetFloat ("Music Vol");
 
-		menuMusic.volume = musicVol;
-		quietSource.volume = chaseSource.volume = musicVol;
 
-		Debug.Log (musicVol);
+		quietSource.volume = chaseSource.volume = musicVol;
 
 	}
 }

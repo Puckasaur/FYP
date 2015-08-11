@@ -299,12 +299,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 139924423}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bed8f4b307550704ab9155abd3041128, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ab5a6e709036f648840037d6b81514f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 139924424}
-  quietSource: {fileID: 0}
-  chaseSource: {fileID: 0}
 --- !u!1 &234316811
 GameObject:
   m_ObjectHideFlags: 0
