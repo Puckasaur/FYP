@@ -21,7 +21,7 @@ public class fatDogAi : MonoBehaviour {
     coneOfVision coneOfVisionScript;
 	soundSphere sphereScript;
 	RaycastHit hit;
-	
+
 	public Vector3 respawnPosition;
 	
 	public Transform target1;
@@ -40,7 +40,7 @@ public class fatDogAi : MonoBehaviour {
 	public GameObject soundSource;
 	GameObject brokenObject;
 	
-	NavMeshAgent agent;
+	public NavMeshAgent agent;
 	List<Transform> targets = new List<Transform>();
 	public bool eatBone = false;
 	public bool distracted = false;
@@ -138,6 +138,8 @@ public class fatDogAi : MonoBehaviour {
     Vector3 startingVector;
 
     public bool wasChasing = false;
+
+    Rigidbody rigidbody;
 	
 	void Start()
 	{
@@ -170,8 +172,7 @@ public class fatDogAi : MonoBehaviour {
         y = transform.right.z * 1.0f;
         startingAngle = Mathf.Atan2(x, y) * Mathf.Rad2Deg;
         startingVector = transform.forward * 2.0f;
-
-        
+        rigidbody = GetComponent<Rigidbody>();
         //print(startingAngle + "  starting angle");
 
 
@@ -183,6 +184,9 @@ public class fatDogAi : MonoBehaviour {
 	
 	void Update()
 	{
+        x = transform.right.x;
+        y = transform.right.z;
+
         /// Calcumalationen for ze vector differences///
         if (currentTarget != null)
         {
@@ -242,6 +246,17 @@ public class fatDogAi : MonoBehaviour {
 			//--------------------------------------------------------//
 			// idle, look around, without moving towards any waypoints//
 			//--------------------------------------------------------//
+
+            //////////////THIS MIGHT BE THE ULTIMATE ANSWER///////////////
+            //----------------------------------------------------------//
+            //          rigidbody.velocity = Vector3.zero;              //
+            //      rigidbody.angularVelocity = Vector3.zero;           //
+            //----------------------------------------------------------//
+            //////////////////////////////////////////////////////////////
+
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;  
+
             agent.velocity = Vector3.zero;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             agent.Stop();
@@ -367,23 +382,9 @@ public class fatDogAi : MonoBehaviour {
                 agentStopped = true;
                 agent.velocity = Vector3.zero;
                 agent.Stop();
-                angleDiff = startingAngle - facingAngle;
+               
 
-                if (wasChasing == true)
-                { 
-                    Vector3 relative = transform.InverseTransformPoint(startingVector);
-                    float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                    transform.Rotate(Vector3.up, Time.deltaTime * rotationStep, 0);
-
-                    if (angleDiff < angleOffsetMax)
-                    {
-                        wasChasing = false;
-                    }
-                   
-                }
-
-                if (wasChasing == false)
-                {
+               
                     if (alertLookingDirectionsSet == false)
                     {
 
@@ -457,17 +458,36 @@ public class fatDogAi : MonoBehaviour {
                     //{
                     //    RotateDogWhileSmelling();
                     //}  
-                }
+                
             }
             break;
         case enumStatesFatDog.idleSuspicious:
             {
+
+                angleDiff = facingAngle - startingAngle;
                 //if (ringOfSmellScript.smellDetected == false)
+                if (wasChasing == true)
                 {
+                    //Vector3 relative = transform.InverseTransformPoint(startingVector.x, 0 , startingVector.z);
+                    float angle = Mathf.Atan2(startingVector.x, startingVector.z) * Mathf.Rad2Deg;  //relative.x, relative.z) * Mathf.Rad2Deg;
+                    transform.Rotate(Vector3.up, angle * Time.deltaTime * 0.75f, 0);
+                    if (angleDiff > angleOffsetMin && angleDiff < angleOffsetMax)
+                    {
+                        wasChasing = false;
+
+                    }
+
+                }
+
+                if (wasChasing == false)
+                {
+
                     if (agentStopped == false || idleTimer >= 0)
                     {
                         //agent.velocity = Vector3.zero;
                         idleTimer--;
+                        agentStopped = true;
+                        agent.velocity = Vector3.zero;
                         agent.Stop();
                     }
                     else

@@ -51,7 +51,14 @@ public class checkPoint: MonoBehaviour
         {
             if (other.gameObject.tag == "enemy")
             {
-                other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
+                other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;               
+            }
+
+            if (other.gameObject.tag == "fatDog")
+            {
+                other.gameObject.GetComponent<fatDogAi>().agent.velocity = Vector3.zero;
+                other.gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                other.gameObject.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             }
 
             this.transform.position = startPosition.transform.position;
