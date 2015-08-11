@@ -21,7 +21,7 @@ public class menuScript : MonoBehaviour {
 		startButton = startButton.GetComponent<Button> ();
 		optionsButton = optionsButton.GetComponent<Button> ();
 		exitButton = exitButton.GetComponent<Button> ();
-
+		startButton.color = (Color)startButton.colors.highlightedColor;
 		quitMenu.enabled = false;
 
 	}
@@ -52,7 +52,7 @@ public class menuScript : MonoBehaviour {
 		Application.LoadLevel (1);
 		//StartCoroutine(fadeChange());
      	PlayerPrefs.SetString("Movie", "Intro");
-        PlayerPrefs.SetInt("Scene", 2);
+        PlayerPrefs.SetInt("Scene", 3);
         PlayerPrefs.Save();
 	}
 

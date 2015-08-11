@@ -463,20 +463,20 @@ public class fatDogAi : MonoBehaviour {
             break;
         case enumStatesFatDog.idleSuspicious:
             {
-
                 angleDiff = facingAngle - startingAngle;
-                //if (ringOfSmellScript.smellDetected == false)
+               
                 if (wasChasing == true)
                 {
-                    //Vector3 relative = transform.InverseTransformPoint(startingVector.x, 0 , startingVector.z);
-                    float angle = Mathf.Atan2(startingVector.x, startingVector.z) * Mathf.Rad2Deg;  //relative.x, relative.z) * Mathf.Rad2Deg;
-                    transform.Rotate(Vector3.up, angle * Time.deltaTime * 0.75f, 0);
                     if (angleDiff > angleOffsetMin && angleDiff < angleOffsetMax)
                     {
                         wasChasing = false;
-
                     }
 
+                    if (wasChasing == true)
+                    {
+                        float angle = Mathf.Atan2(startingVector.x, startingVector.z) * Mathf.Rad2Deg;
+                        transform.Rotate(Vector3.up, angle * Time.deltaTime * 0.75f, 0);
+                    }
                 }
 
                 if (wasChasing == false)
@@ -484,7 +484,6 @@ public class fatDogAi : MonoBehaviour {
 
                     if (agentStopped == false || idleTimer >= 0)
                     {
-                        //agent.velocity = Vector3.zero;
                         idleTimer--;
                         agentStopped = true;
                         agent.velocity = Vector3.zero;
@@ -494,7 +493,10 @@ public class fatDogAi : MonoBehaviour {
                     {
                         //-----------------------------------------------//
                         //Stand on the spot and look at preset directions//
-                        //-----------------------------------------------//            
+                        //-----------------------------------------------//     
+
+                        float tempAngle = targetAngle - currentAngle;
+
                         if (coneOfVisionScript.playerSeen == true)
                         {
                             stateManager(2);
@@ -503,15 +505,10 @@ public class fatDogAi : MonoBehaviour {
                         if (turnCounter < directionDegrees.Count && targetAngle != directionDegrees[0])
                         {
                             targetAngle = directionDegrees[0];
-                            //rotateEnemy(targetAngle, rotationStep);
-
-
-
                         }
 
                         else if (turnCounter >= directionDegrees.Count)
                         {
-                            //alertTimer = defaultAlertTimer;
                             turnCounter = 0;
                             idleTimer = defaultIdleTimer;
                             stateManager(1);
@@ -523,13 +520,16 @@ public class fatDogAi : MonoBehaviour {
                             directionDegrees.Remove(directionDegrees[0]);
                             rotationCompleted = false;
                             turnCounter++;
-                            turnTimer += defaultTurnTimer; //* Time.deltaTime;
+                            turnTimer += defaultTurnTimer;
                         }
-                        else if (currentAngle != targetAngle)
+
+                        
+
+                        //else if (currentAngle != targetAngle)
+                        else if (!(angleOffsetMin < tempAngle && tempAngle < angleOffsetMax))
                         {
                             rotateEnemy(targetAngle, rotationStep);
                         }
-                       // idleTimer--;
                         if (idleTimer < 0)
                         {
                             idleTimer = 0;

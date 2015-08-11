@@ -329,16 +329,18 @@ public class enemyPathfinding : MonoBehaviour
         }
         //end of Timer for the animator guy to see enemies actual speed
 
+        //Tried to make enemies be able to dodge each other when pahtfinding
         //Physics.Raycast(transform.position,transform.forward * 0.05f,out hit);
         //if (hit.collider.tag == "enemy" || hit.collider.tag == "fatDog" || hit.collider.tag == "huntingDog")
         //{
         //    dodge(hit.collider);
         //}
-        if (dodgeTimer <= 0 && dodging == true)
-        {
-            dodging = false;
-            currentTarget = lastTarget;
-        }
+        //if (dodgeTimer <= 0 && dodging == true)
+        //{
+        //    dodging = false;
+        //    currentTarget = lastTarget;
+        //}
+
         //To prevent opponent from sleeping
         GetComponent<Rigidbody>().WakeUp();
         //end of To prevent opponent from sleeping
@@ -1533,41 +1535,41 @@ public class enemyPathfinding : MonoBehaviour
 	{
 		patrolAnim.SetFloat ("patrolMovement", currentSpeed);
 	}
-    public void dodge(Collider other)
-    {
-        print("Dodging");
-        dodging = true;
-        Transform obstacl = other.transform;
-        Vector3 obstacle = obstacl.transform.position;
-        Vector3 forward = transform.forward;
-        if (forward.x > 0)
-        {
-            obstacle.z = obstacle.z * -1;
-        }
-        else if (forward.z > 0)
-        {
-            obstacle.x = obstacle.x * -1;
-        }
-        print("dodging target");
-        if (currentTarget != obstacl)
-        {
-            lastTarget = currentTarget;
-        }
-        if (dodgeTimer <= 0)
-        {
-            currentTarget = obstacl;
-            agent.SetDestination(obstacle);
-            dodgeTimer = defaultDodgeTimer;
-        }
-    }
-    void OnCollisionExit(Collider col)
-    {
-        if(col.gameObject.tag == "player" ||col.gameObject.tag == "enemy" || col.gameObject.tag == "fatDog" || col.gameObject.tag == " huntingDog")
-        {
-            agent.Stop();
-            agent.velocity = Vector3.zero;
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            agent.Resume();
-        }
-    }
+    //public void dodge(Collider other)
+    //{
+    //    print("Dodging");
+    //    dodging = true;
+    //    Transform obstacl = other.transform;
+    //    Vector3 obstacle = obstacl.transform.position;
+    //    Vector3 forward = transform.forward;
+    //    if (forward.x > 0)
+    //    {
+    //        obstacle.z = obstacle.z * -1;
+    //    }
+    //    else if (forward.z > 0)
+    //    {
+    //        obstacle.x = obstacle.x * -1;
+    //    }
+    //    print("dodging target");
+    //    if (currentTarget != obstacl)
+    //    {
+    //        lastTarget = currentTarget;
+    //    }
+    //    if (dodgeTimer <= 0)
+    //    {
+    //        currentTarget = obstacl;
+    //        agent.SetDestination(obstacle);
+    //        dodgeTimer = defaultDodgeTimer;
+    //    }
+    //}
+    //void OnCollisionExit(Collider col)
+    //{
+    //    if(col.gameObject.tag == "player" ||col.gameObject.tag == "enemy" || col.gameObject.tag == "fatDog" || col.gameObject.tag == " huntingDog")
+    //    {
+    //        agent.Stop();
+    //        agent.velocity = Vector3.zero;
+    //        GetComponent<Rigidbody>().velocity = Vector3.zero;
+    //        agent.Resume();
+    //    }
+    //}
 }

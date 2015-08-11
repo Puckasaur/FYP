@@ -3,18 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 public class moviePlayer : MonoBehaviour 
 {
+	public GameObject Background;
+	public GameObject Text;
+	public GameObject ProgressBar;
+
+	private int loadProgress = 0;
+
     public MovieTexture[] movies;
     public Material[] materials;
     public MovieTexture movie;
     public string filename;
     public Texture texture;
-    //public MovieTexture mp;
+    bool loadingLevel = false;
     public Material material;
+    AsyncOperation async;
+
+	public bool movieDone = false;
+
 	// Use this for initialization
 	void Awake () 
     {
-        //mp = gameObject.GetComponent<MovieTexture>();
-        //texture = 
         material = gameObject.GetComponent<Renderer>().sharedMaterial;
         movie = (MovieTexture)GetComponent<Renderer>().sharedMaterial.mainTexture;
 
@@ -25,7 +33,6 @@ public class moviePlayer : MonoBehaviour
         {
             if(materials[j].name == filename)
             {
-                print("found one");
                 material = materials[j] as Material;
                 gameObject.GetComponent<Renderer>().sharedMaterial = material;
             }
@@ -36,28 +43,61 @@ public class moviePlayer : MonoBehaviour
                 {
 
                     movie = movies[i];
-                    //material = movies[i];
-                    //mp = movies[i];
-                    //movie = mp;
+
                 }
             }
-        //movie = (MovieTexture)GetComponent<Renderer>().material.mainTexture;
-        if(movie != null)
-        {
-            movie.Play();
-            //mp.Play();
-            if(movie.isPlaying == true)
-            print(" All Ok!");
-        }
+            if (movie != null)
+            {
+                movie.Play();
+            }
+
+		Background.SetActive(false);
+		ProgressBar.SetActive(false);
+		Text.SetActive(false);
 	}
 	
 	// Update is called once per frame
 	void Update () 
     {   
+        if(movie.isPlaying == true && loadingLevel != true)
+        {
+            async = Application.LoadLevelAsync(PlayerPrefs.GetInt("Scene"));
+            async.allowSceneActivation = false;
+            loadingLevel = true;
+        }
         if(!movie.isPlaying)
         {
-            print(" no longer playing");
-            Application.LoadLevel(PlayerPrefs.GetInt("Scene"));
+            async.allowSceneActivation = true;
+			StartCoroutine(DisplayLoadingScreen());
         }
+	}
+
+	IEnumerator DisplayLoadingScreen()
+	{
+		Background.SetActive(true);
+		ProgressBar.SetActive(true);
+		Text.SetActive(true);
+		
+		ProgressBar.transform.localScale = new Vector3(loadProgress, 
+		                                               ProgressBar.transform.localScale.y, 
+		                                               ProgressBar.transform.localScale.z);
+		
+		Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
+//		
+//		AsyncOperation ao = Application.LoadLevelAsync(""); 
+
+		//async.allowSceneActivation = true;
+//		
+		while (!async.isDone)
+		{
+			loadProgress = (int) (async.progress * 100);
+			Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
+			ProgressBar.transform.localScale = new Vector3(async.progress, 
+			                                               ProgressBar.transform.localScale.y, 
+			                                               ProgressBar.transform.localScale.z);
+			
+			yield return null;
+		}
+		
 	}
 }
