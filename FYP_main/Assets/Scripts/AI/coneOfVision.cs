@@ -19,6 +19,7 @@ public class coneOfVision : MonoBehaviour
     public float startRange;
     public float alarmBonus;
     public float detectionTimer = 60.0f;
+
     void Start()
     {
         chaseTransScript = GameObject.Find("BGM").GetComponent<chaseTransition>();
@@ -42,15 +43,16 @@ public class coneOfVision : MonoBehaviour
         }
         parent = this.transform.parent;
 
+        //if (transform.localScale.x < width || transform.localScale.x > width)
+        //{
+            transform.localScale = new Vector3(width, height, range);
+        //}
     }
     void Update()
     {
         GetComponent<Rigidbody>().WakeUp();
 
-        if (transform.localScale.x < width || transform.localScale.x > width)
-        {
-            transform.localScale = new Vector3(width, height, range);
-        }
+     
         //else if (transform.localScale.x > width)
         //{
         //    transform.localScale = new Vector3(width, height, range);
