@@ -35002,6 +35002,45 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 453858, guid: 39f5803f25e240c45a9cefc691ac37c4, type: 2}
   m_PrefabInternal: {fileID: 918124481}
+--- !u!1 &918261571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 918261573}
+  - 114: {fileID: 918261572}
+  m_Layer: 0
+  m_Name: '"Pause"'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &918261572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 918261571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea68b548cd0cf74d8a9eb7e081ad111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &918261573
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 918261571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 67.1299973, y: -56.1009674, z: 55.506897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
 --- !u!1001 &918704592
 Prefab:
   m_ObjectHideFlags: 0
