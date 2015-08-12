@@ -17,8 +17,8 @@ public class DoorTrigger : MonoBehaviour
 	void Start ()
 	{
         m_Animator = GetComponent<Animator>();
-		showLock = GetComponentInChildren<SpriteRenderer>();
-		showLock.enabled = false;
+		//showLock = GetComponentInChildren<SpriteRenderer>();
+		//showLock.enabled = false;
 	}
     
      
@@ -34,7 +34,7 @@ public class DoorTrigger : MonoBehaviour
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
                 {
                     opening = true;
-					showLock.enabled = false;
+					//showLock.enabled = false;
                     m_Animator.SetBool("DoorOpen", true);
 
 					//SFX.playUnlock();
@@ -45,7 +45,7 @@ public class DoorTrigger : MonoBehaviour
         	
 			if (other.GetComponent<TemporaryMovement>())
 			{
-				showLock.enabled = true;
+				//showLock.enabled = true;
 			}
 		}
     }

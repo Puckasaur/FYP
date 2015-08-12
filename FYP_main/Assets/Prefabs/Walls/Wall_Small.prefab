@@ -10,14 +10,12 @@ GameObject:
   - 4: {fileID: 476096}
   - 33: {fileID: 3361870}
   - 23: {fileID: 2305460}
-  - 114: {fileID: 11400826}
-  - 65: {fileID: 6534442}
-  m_Layer: 0
+  m_Layer: 31
   m_Name: Wall_Small
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967291
   m_IsActive: 1
 --- !u!4 &476096
 Transform:
@@ -25,9 +23,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102262}
-  m_LocalRotation: {x: 0, y: -.707106709, z: 0, w: .707106829}
-  m_LocalPosition: {x: 6, y: 2, z: -2.5}
-  m_LocalScale: {x: 1, y: 1.51999998, z: 1.25}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.5, y: 1.99000001, z: 55}
+  m_LocalScale: {x: 1, y: 1.5, z: 1.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +39,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5fc313a49028376498f42aacfdbfc7b4, type: 2}
+  - {fileID: 2100000, guid: 34bbd36b33ed6f746bae6ff054ce0ae4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -62,30 +60,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102262}
   m_Mesh: {fileID: 4300000, guid: 5c294738fba6ee2479a901f772655bae, type: 3}
---- !u!65 &6534442
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102262}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: .0999999791, y: .672448039, z: .799999833}
-  m_Center: {x: 0, y: .339584053, z: 0}
---- !u!114 &11400826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 102262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b4c4c4cdde365449bbed9f7c371e03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transparenColor: {r: 1, g: 1, b: 1, a: .117647059}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
