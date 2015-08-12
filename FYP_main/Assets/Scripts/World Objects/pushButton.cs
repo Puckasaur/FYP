@@ -8,11 +8,14 @@ public class pushButton : MonoBehaviour
     public bool buttonActivated = false;
     float timer;
     public float defaultTimer;
+    Animator anim;
 
     void Start()
     {
         timer = defaultTimer;
+        anim = GetComponent<Animator>();
     }
+
     void Update()
     {
         if(buttonActivated == true)
@@ -24,7 +27,10 @@ public class pushButton : MonoBehaviour
                 timer = defaultTimer;
             }
         }
+
+        else if (buttonActivated == false) GetComponentInParent<Animator>().SetBool("isDown", false);
     }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
@@ -38,6 +44,14 @@ public class pushButton : MonoBehaviour
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
         {
             timer = defaultTimer;
+            //anim.SetBool("isDown", true);
+            GetComponentInParent<Animator>().SetBool("isDown", true);
         }
+    }
+
+    void OnTriggerExit()
+    {
+        //anim.SetBool("isDown", false);
+        //GetComponentInParent<Animator>().SetBool("isDown", false);
     }
 }
