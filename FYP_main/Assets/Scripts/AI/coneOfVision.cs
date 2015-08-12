@@ -81,7 +81,6 @@ public class coneOfVision : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//

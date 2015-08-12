@@ -184,7 +184,6 @@ public class TemporaryMovement : MonoBehaviour
 
             StartCoroutine(spriteBagTimer());
 
-            print(boneSpawner.transform.parent);
             bags--;
             newBagOfAir = (GameObject)Instantiate(bagOfAir, boneSpawner.transform.position, Quaternion.identity);
         }
