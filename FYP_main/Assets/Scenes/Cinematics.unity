@@ -87,76 +87,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &126693924
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -10.8000002
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 484598, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 453874, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .569999993
-      objectReference: {fileID: 0}
-    - target: {fileID: 437018, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: .460000008
-      objectReference: {fileID: 0}
-    - target: {fileID: 437018, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalScale.y
-      value: .100000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 437018, guid: ea739528b7eb37049b603813cad20915, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: ea739528b7eb37049b603813cad20915, type: 2}
-  m_IsPrefabParent: 0
---- !u!1 &773864951 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 123118, guid: ea739528b7eb37049b603813cad20915, type: 2}
-  m_PrefabInternal: {fileID: 126693924}
---- !u!1 &800810745 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 133084, guid: ea739528b7eb37049b603813cad20915, type: 2}
-  m_PrefabInternal: {fileID: 126693924}
---- !u!1 &816067101 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 105892, guid: ea739528b7eb37049b603813cad20915, type: 2}
-  m_PrefabInternal: {fileID: 126693924}
 --- !u!1 &837409894
 GameObject:
   m_ObjectHideFlags: 0
@@ -187,9 +117,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47267ad35cdeb0e41bbbb448d2150dee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Background: {fileID: 800810745}
-  Text: {fileID: 816067101}
-  ProgressBar: {fileID: 773864951}
+  Background: {fileID: 0}
+  Text: {fileID: 0}
+  ProgressBar: {fileID: 0}
   movies: []
   materials: []
   movie: {fileID: 0}
@@ -252,25 +182,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &1103720694 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 146298, guid: ea739528b7eb37049b603813cad20915, type: 2}
-  m_PrefabInternal: {fileID: 126693924}
---- !u!114 &1103720696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1103720694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 674c37defb8c4f24586b20b53eadc93d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  loadLevel: 
-  Background: {fileID: 800810745}
-  Text: {fileID: 773864951}
-  ProgressBar: {fileID: 816067101}
 --- !u!1 &1736194547
 GameObject:
   m_ObjectHideFlags: 0

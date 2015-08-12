@@ -39,7 +39,7 @@ public class hidingThirdPerson : MonoBehaviour {
 			
 			if (isHiding == false)
 			{
-				if (Input.GetButtonDown("Interact") || Input.GetKeyDown (KeyCode.E))
+				if (Input.GetButtonDown("Interact"))
 				{
 					character.transform.position = hidingPosition.transform.position;
 					
@@ -62,7 +62,7 @@ public class hidingThirdPerson : MonoBehaviour {
 
         if (isHiding == true) 
 		{
-			if (Input.GetButtonDown("Interact") || Input.GetKeyDown (KeyCode.E))
+			if (Input.GetButtonDown("Interact"))
 			{
 				StartCoroutine (Delayed ());
 
