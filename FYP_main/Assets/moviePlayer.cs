@@ -3,11 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 public class moviePlayer : MonoBehaviour 
 {
-	public GameObject Background;
-	public GameObject Text;
-	public GameObject ProgressBar;
-
-	private int loadProgress = 0;
 
     public MovieTexture[] movies;
     public Material[] materials;
@@ -51,9 +46,9 @@ public class moviePlayer : MonoBehaviour
                 movie.Play();
             }
 
-		Background.SetActive(false);
-		ProgressBar.SetActive(false);
-		Text.SetActive(false);
+		//Background.SetActive(false);
+		//ProgressBar.SetActive(false);
+		//Text.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -68,36 +63,36 @@ public class moviePlayer : MonoBehaviour
         if(!movie.isPlaying)
         {
             async.allowSceneActivation = true;
-			StartCoroutine(DisplayLoadingScreen());
+			//StartCoroutine(DisplayLoadingScreen());
         }
 	}
 
-	IEnumerator DisplayLoadingScreen()
-	{
-		Background.SetActive(true);
-		ProgressBar.SetActive(true);
-		Text.SetActive(true);
-		
-		ProgressBar.transform.localScale = new Vector3(loadProgress, 
-		                                               ProgressBar.transform.localScale.y, 
-		                                               ProgressBar.transform.localScale.z);
-		
-		Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
+//	IEnumerator DisplayLoadingScreen()
+//	{
+//		Background.SetActive(true);
+//		ProgressBar.SetActive(true);
+//		Text.SetActive(true);
 //		
-//		AsyncOperation ao = Application.LoadLevelAsync(""); 
-
-		//async.allowSceneActivation = true;
+//		ProgressBar.transform.localScale = new Vector3(loadProgress, 
+//		                                               ProgressBar.transform.localScale.y, 
+//		                                               ProgressBar.transform.localScale.z);
 //		
-		while (!async.isDone)
-		{
-			loadProgress = (int) (async.progress * 100);
-			Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
-			ProgressBar.transform.localScale = new Vector3(async.progress, 
-			                                               ProgressBar.transform.localScale.y, 
-			                                               ProgressBar.transform.localScale.z);
-			
-			yield return null;
-		}
-		
-	}
+//		Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
+////		
+////		AsyncOperation ao = Application.LoadLevelAsync(""); 
+//
+//		//async.allowSceneActivation = true;
+////		
+//		while (!async.isDone)
+//		{
+//			loadProgress = (int) (async.progress * 100);
+//			Text.GetComponent<GUIText> ().text = "Loading Progress " + loadProgress + "%";
+//			ProgressBar.transform.localScale = new Vector3(async.progress, 
+//			                                               ProgressBar.transform.localScale.y, 
+//			                                               ProgressBar.transform.localScale.z);
+//			
+//			yield return null;
+//		}
+//		
+//	}
 }
