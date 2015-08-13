@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 
 public class setMenuVolume : MonoBehaviour {
 
 	float musicVol;
 
-	public AudioSource menuMusic;
+	public AudioMixer menuMusic;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,6 @@ public class setMenuVolume : MonoBehaviour {
 
 		musicVol = PlayerPrefs.GetFloat ("Music Vol");
 
-		menuMusic.volume = musicVol;
+		menuMusic.SetFloat("Main Menu Master Vol", musicVol);
 	}
 }

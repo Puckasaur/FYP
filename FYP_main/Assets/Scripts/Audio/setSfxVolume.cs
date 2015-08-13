@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
 
 public class setSfxVolume : MonoBehaviour {
 
 	float sfxVol;
 
-	public AudioSource keySource;
-	public AudioSource doorSource;
-	public AudioSource destructibleSource;
+	public AudioMixer sfxMixer;
+	public AudioMixer dogMixer;
 
 	// Use this for initialization
 	void Start () {
@@ -19,7 +19,7 @@ public class setSfxVolume : MonoBehaviour {
 	
 		sfxVol = PlayerPrefs.GetFloat("SFX Vol");
 
-		keySource.volume = doorSource.volume = destructibleSource.volume = sfxVol;
-
+		sfxMixer.SetFloat ("SFX Master Vol", sfxVol);
+		dogMixer.SetFloat ("Dog Master Vol", sfxVol);
 	}
 }

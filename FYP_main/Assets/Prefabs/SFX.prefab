@@ -355,9 +355,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1262b3132d9173944a56cc9da3496392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keySource: {fileID: 8218796}
-  doorSource: {fileID: 8231678}
-  destructibleSource: {fileID: 8238682}
+  sfxMixer: {fileID: 24100000, guid: 554a71a709e29974f82d4d499d1b79fc, type: 2}
+  dogMixer: {fileID: 24100000, guid: cf9efcf4ff3730b4098147ab841edb5a, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

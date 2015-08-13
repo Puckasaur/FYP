@@ -7,8 +7,7 @@ public class setMusicVolume : MonoBehaviour {
 	float musicVol;
 	
 
-	public AudioSource quietSource;
-	public AudioSource chaseSource;
+	public AudioMixer bgmMixer;
 
 	// Use this for initialization
 	void Start () {
@@ -23,7 +22,7 @@ public class setMusicVolume : MonoBehaviour {
 		musicVol = PlayerPrefs.GetFloat ("Music Vol");
 
 
-		quietSource.volume = chaseSource.volume = musicVol;
+		bgmMixer.SetFloat ("BGM Master Vol", musicVol);
 
 	}
 }
