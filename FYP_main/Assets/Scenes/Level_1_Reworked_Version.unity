@@ -7673,16 +7673,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11450012, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
-      propertyPath: sfxMixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 554a71a709e29974f82d4d499d1b79fc,
-        type: 2}
-    - target: {fileID: 11450012, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
-      propertyPath: dogMixer
-      value: 
-      objectReference: {fileID: 24100000, guid: cf9efcf4ff3730b4098147ab841edb5a,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 49324c5f8a9bf4a468bf8aacda577c5c, type: 2}
   m_IsPrefabParent: 0
@@ -72342,16 +72332,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 11413638, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
-      propertyPath: bmgMixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 05d5f004d32a408479820b7e10288ae3,
-        type: 2}
-    - target: {fileID: 11413638, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
-      propertyPath: bgmMixer
-      value: 
-      objectReference: {fileID: 24100000, guid: 05d5f004d32a408479820b7e10288ae3,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef873d3af0ea8fb4b9d1daa49ec95846, type: 2}
   m_IsPrefabParent: 0
