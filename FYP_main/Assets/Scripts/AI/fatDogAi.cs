@@ -776,7 +776,7 @@ public class fatDogAi : MonoBehaviour {
                             else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
                             {
                                
-                                if (currentAngle > targetAngle || currentAngle <= targetAngle - 180)
+                                if (currentAngle > targetAngle && currentAngle <= targetAngle - 180)
                                 {
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;

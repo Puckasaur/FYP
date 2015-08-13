@@ -54,7 +54,7 @@ public class ladderClimbing : MonoBehaviour
 	{
 		if (inside == true && characterController.GetComponent<TemporaryMovement>().movement.magnitude > 0.01f)
 		{
-			characterController.transform.position += Vector3.up / heightFactor;
+			characterController.transform.position += Vector3.up / heightFactor * climbMovement.movement.magnitude;
 		}
 
         //print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);

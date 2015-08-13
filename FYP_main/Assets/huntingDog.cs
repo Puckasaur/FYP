@@ -6,7 +6,7 @@ public enum enumStatesHunter
     chase = 2,
     alert = 3,
     idleSuspicious = 4,
-
+    returnToSpawner = 5
 }
 public class huntingDog : MonoBehaviour {
 
@@ -56,7 +56,7 @@ public class huntingDog : MonoBehaviour {
 
     float barkTimer;
     float alertTimer;
-    float escapeTimer;
+    public float escapeTimer;
     int timer;
     int idleTimer; 
 
@@ -127,7 +127,6 @@ public class huntingDog : MonoBehaviour {
                     }
                     else
                     {
-                        ////print("pilasi kaiken");
                         leapTimer--;
                         if (leapTimer <= 0)
                         {
@@ -157,6 +156,7 @@ public class huntingDog : MonoBehaviour {
                     Physics.Linecast(transform.position, player.transform.position, out hit);
                     if (hit.collider.tag != player.GetComponent<Collider>().tag)
                     {
+                        escapeTimer--;
                         if (vectorx >= chaseRange || vectorz >= chaseRange)
                         {
                             agent.speed = patrolSpeed;
@@ -173,7 +173,7 @@ public class huntingDog : MonoBehaviour {
                             alertTimer = defaultAlertTimer;
                             stateManager(3);
                         }
-                        else if(escapeTimer <= 0)
+                        else if (escapeTimer <= 0)
                         {
                             agent.speed = patrolSpeed;
                             if (alertArea[areaCounter] != null)
@@ -189,7 +189,7 @@ public class huntingDog : MonoBehaviour {
                             alertTimer = defaultAlertTimer;
                             stateManager(3);
                         }
-                        escapeTimer--;
+
                     }
                     else
                     {
@@ -256,7 +256,8 @@ public class huntingDog : MonoBehaviour {
                     }
                     if (alertTimer <= 0)
                     {
-                        selfDestruct();
+                        //selfDestruct();
+                        stateManager(5);
                     }
                     if (turnCounter < 3)
                     {
@@ -283,6 +284,15 @@ public class huntingDog : MonoBehaviour {
                     idleTimer--;
 
                     break;
+                }
+
+            case returnToSpawner:
+                {
+                    currentTarget = transform.parent;
+                    if(vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
+                    {
+                        selfDestruct();
+                    }
                 }
         }
         if (currentTarget != null)
@@ -532,6 +542,7 @@ public class huntingDog : MonoBehaviour {
     }
     public void selfDestruct()
     {
+        if(hunterSpawnScript)
         hunterSpawnScript.spawnedHunters--;
         Destroy(gameObject);
     }

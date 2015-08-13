@@ -970,6 +970,7 @@ public class enemyPathfinding : MonoBehaviour
                 break;
 
         }
+        //Calculating the distance between game object's target and this game object
                 if (currentTarget != null)
                 {
                     //vector calculations used multiple times during the update
@@ -990,6 +991,7 @@ public class enemyPathfinding : MonoBehaviour
                         vectorx *= -1;
                     }
                 }
+        //Checking if player is near enough to be smelled
                     Vector3 direction = (player.transform.position - transform.position).normalized;
                     Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
                     Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
@@ -1039,10 +1041,10 @@ public class enemyPathfinding : MonoBehaviour
             }            
         }
         timer--;
-        if(dodgeTimer > 0)
-        {
-            dodgeTimer--;
-        }
+        //if(dodgeTimer > 0)
+        //{
+        //    dodgeTimer--;
+        //}
 
        //To decide what player should do when he's not moving in the end of an update.
         if (agentStopped == true)
@@ -1069,7 +1071,7 @@ public class enemyPathfinding : MonoBehaviour
             }
             else if (States == enumStates.idle)
             {                
-                agentStopped = false;
+                agentStopped = true;
                 agent.velocity = Vector3.zero;
                 GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
                 GetComponent<Rigidbody>().velocity = Vector3.zero;

@@ -134,23 +134,8 @@ public class ringOfSmell : MonoBehaviour {
         //-----------------------------------------------------------------------//
         //if player crosses the cone, informs the parent(Enemy) of visible player//
         //-----------------------------------------------------------------------//  
-        if(other.gameObject.tag == "looker")
-        {
-            ////print("hitting enemy ring");
-            if(script != null)
-            {
-                script.stateManager(2);
-            }
-            if(huntingDogScript != null)
-            {
-                huntingDogScript.stateManager(2);
-            }
-            if(scriptFatDog != null)
-            {
-                scriptFatDog.stateManager(2);
-            }
-        }
-        else if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
+
+        if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
             //detectionTimer--;
 
