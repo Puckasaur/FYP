@@ -424,10 +424,12 @@ public class fatDogAi : MonoBehaviour {
 
                     if (wasChasing == true)
                     {
-                        float angle = Mathf.Atan2(startingVector.x, startingVector.z) * Mathf.Rad2Deg;
-                        transform.Rotate(Vector3.up, angle * Time.deltaTime * 0.75f, 0);
-                        float angle2 = targetAngle - currentAngle;
-                        if (angleOffsetMin < angle2 && angle2 < angleOffsetMax)
+                       
+                        //Vector3 relative = transform.InverseTransformPoint(startingVector);
+                        //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                        transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);                      
+                       // float angle2 = targetAngle - currentAngle;
+                        if (angleOffsetMin < angleDiff && angleDiff < angleOffsetMax)
                         {
                             wasChasing = false; 
                         }

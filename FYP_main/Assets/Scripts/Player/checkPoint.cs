@@ -106,7 +106,10 @@ public class checkPoint: MonoBehaviour
         foreach(GameObject fatDog in allFatDogs)
         {
             fatDogScript = (fatDogAi)fatDog.GetComponent<fatDogAi>();
+            fatDogScript.agent.Stop();
+            fatDogScript.agent.velocity = Vector3.zero;
             fatDogScript.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            fatDogScript.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             if (fatDogScript.respawnPosition != null)
             {
                 fatDog.transform.position = fatDogScript.respawnPosition;
@@ -119,7 +122,7 @@ public class checkPoint: MonoBehaviour
             script.agent.Stop();
             script.agent.velocity = Vector3.zero;
             script.GetComponent<Rigidbody>().velocity = Vector3.zero;
-
+            script.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             if (script.respawnPosition != null)
             {
                 enemy.transform.position = script.respawnPosition;
