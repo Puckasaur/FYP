@@ -1,0 +1,734 @@
+fileFormatVersion: 2
+guid: 278a565741beb0645bd7ccacdddc781f
+timeCreated: 1439437145
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Char_PatrolDog15
+    100004: joint1
+    100006: joint10
+    100008: joint12
+    100010: joint13
+    100012: joint14
+    100014: joint15
+    100016: joint16
+    100018: joint17
+    100020: joint18
+    100022: joint19
+    100024: joint2
+    100026: joint2 1
+    100028: joint21
+    100030: joint22
+    100032: joint22 1
+    100034: joint23
+    100036: joint23 1
+    100038: joint24
+    100040: joint24 1
+    100042: joint29
+    100044: joint3
+    100046: joint3 1
+    100048: joint34
+    100050: joint35
+    100052: joint36
+    100054: joint37
+    100056: joint38
+    100058: joint39
+    100060: joint4
+    100062: joint4 1
+    100064: joint6
+    100066: joint7
+    100068: joint8
+    100070: joint9
+    400000: //RootNode
+    400002: Char_PatrolDog15
+    400004: joint1
+    400006: joint10
+    400008: joint12
+    400010: joint13
+    400012: joint14
+    400014: joint15
+    400016: joint16
+    400018: joint17
+    400020: joint18
+    400022: joint19
+    400024: joint2
+    400026: joint2 1
+    400028: joint21
+    400030: joint22
+    400032: joint22 1
+    400034: joint23
+    400036: joint23 1
+    400038: joint24
+    400040: joint24 1
+    400042: joint29
+    400044: joint3
+    400046: joint3 1
+    400048: joint34
+    400050: joint35
+    400052: joint36
+    400054: joint37
+    400056: joint38
+    400058: joint39
+    400060: joint4
+    400062: joint4 1
+    400064: joint6
+    400066: joint7
+    400068: joint8
+    400070: joint9
+    4300000: Char_PatrolDog15
+    7400000: HUNTINGDOG_Run
+    7400002: HUNTINGDOG_Sniff
+    7400004: HUNTINGDOG_SniffLow
+    7400006: HUNTINGDOG_Suspicion
+    7400008: HUNTINGDOG_Bark
+    7400010: HUNTINGDOG_Idle
+    9500000: //RootNode
+    13700000: Char_PatrolDog15
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: HUNTINGDOG_Run
+      takeName: Take 001
+      firstFrame: 160
+      lastFrame: 190
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HUNTINGDOG_Sniff
+      takeName: Take 001
+      firstFrame: 96
+      lastFrame: 126
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HUNTINGDOG_SniffLow
+      takeName: Take 001
+      firstFrame: 64
+      lastFrame: 84
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HUNTINGDOG_Suspicion
+      takeName: Take 001
+      firstFrame: 192
+      lastFrame: 222
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HUNTINGDOG_Bark
+      takeName: Take 001
+      firstFrame: 128
+      lastFrame: 158
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    - serializedVersion: 16
+      name: HUNTINGDOG_Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Char_PatrolDog15
+        weight: 1
+      - path: joint10
+        weight: 1
+      - path: joint10/joint1
+        weight: 1
+      - path: joint10/joint1/joint2
+        weight: 1
+      - path: joint10/joint1/joint2/joint3
+        weight: 1
+      - path: joint10/joint1/joint2/joint3/joint4
+        weight: 1
+      - path: joint10/joint9
+        weight: 1
+      - path: joint10/joint9/joint8
+        weight: 1
+      - path: joint10/joint9/joint8/joint7
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6
+        weight: 1
+      - path: joint10/joint9/joint8/joint7/joint6/joint35
+        weight: 1
+      - path: joint10/joint12
+        weight: 1
+      - path: joint10/joint12/joint13
+        weight: 1
+      - path: joint10/joint12/joint13/joint14
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint16
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint17
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18
+        weight: 1
+      - path: joint10/joint12/joint13/joint14/joint15/joint18/joint19
+        weight: 1
+      - path: joint10/joint12/joint13/joint21
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23
+        weight: 1
+      - path: joint10/joint12/joint13/joint21/joint22/joint23/joint24
+        weight: 1
+      - path: joint10/joint12/joint13/joint29
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint29/joint22 1/joint23 1/joint24 1
+        weight: 1
+      - path: joint10/joint12/joint13/joint36
+        weight: 1
+      - path: joint10/joint12/joint13/joint37
+        weight: 1
+      - path: joint10/joint12/joint13/joint38
+        weight: 1
+      - path: joint10/joint12/joint39
+        weight: 1
+      - path: joint10/joint34
+        weight: 1
+      - path: joint10/joint34/joint2 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1
+        weight: 1
+      - path: joint10/joint34/joint2 1/joint3 1/joint4 1
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 50
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

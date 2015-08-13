@@ -283,10 +283,10 @@ public class huntingDog : MonoBehaviour {
 
                     idleTimer--;
 
-                    break;
                 }
 
-            case returnToSpawner:
+                    break;
+            case enumStatesHunter.returnToSpawner:
                 {
                     currentTarget = transform.parent;
                     if(vectorx >= waypointOffsetMin && vectorx <= waypointOffsetMax && vectorz >= waypointOffsetMin && vectorz <= waypointOffsetMax)
@@ -294,6 +294,9 @@ public class huntingDog : MonoBehaviour {
                         selfDestruct();
                     }
                 }
+                break;
+            default:
+                break;
         }
         if (currentTarget != null)
         {
