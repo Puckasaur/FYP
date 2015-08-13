@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bed8f4b307550704ab9155abd3041128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmMixer: {fileID: 0}
+  bgmMixer: {fileID: 24100000, guid: 05d5f004d32a408479820b7e10288ae3, type: 2}
 --- !u!114 &11488668
 MonoBehaviour:
   m_ObjectHideFlags: 1
