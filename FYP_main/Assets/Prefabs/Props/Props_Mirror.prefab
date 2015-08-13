@@ -51,9 +51,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156440}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
-  m_LocalPosition: {x: 2.38000011, y: 1.49000001, z: -5.5999999}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalRotation: {x: 4.57624836e-08, y: -5.08757445e-08, z: .707106888, w: .707106709}
+  m_LocalPosition: {x: 97.3600006, y: 10.4499998, z: 5.50899982}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 403202}
   m_Father: {fileID: 0}
@@ -100,11 +100,11 @@ ReflectionProbe:
   m_Type: 0
   m_Mode: 1
   m_RefreshMode: 1
-  m_TimeSlicingMode: 0
+  m_TimeSlicingMode: 2
   m_Resolution: 128
   m_UpdateFrequency: 0
   m_Importance: 1
-  m_BoxSize: {x: 2, y: 2, z: 2}
+  m_BoxSize: {x: 4, y: 4, z: 4}
   m_BoxOffset: {x: 0, y: 0, z: 0}
   m_NearClip: .00999999978
   m_FarClip: 1000
@@ -118,7 +118,7 @@ ReflectionProbe:
   m_HDR: 0
   m_BoxProjection: 1
   m_RenderDynamicObjects: 0
-  m_UseOcclusionCulling: 0
+  m_UseOcclusionCulling: 1
   m_CustomBakedTexture: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
