@@ -137,7 +137,7 @@ public class DisplayInstruction : MonoBehaviour
 	
 	IEnumerator FadeIn()
 	{
-		yield return new WaitForSeconds(0.06f);
+		//yield return new WaitForSeconds(0.06f);
 		
 		instruction.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0.2f);
 		
