@@ -482,7 +482,6 @@ GameObject:
   - 114: {fileID: 11461068}
   - 114: {fileID: 11481764}
   - 114: {fileID: 11437144}
-  - 114: {fileID: 11489280}
   m_Layer: 2
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -914,7 +913,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 190620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.9300003, y: 0, z: -7.94999981}
+  m_LocalPosition: {x: 55.9000015, y: 8.39999962, z: .200000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 415238}
@@ -1312,7 +1311,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 27.7099991, y: 23.2999992, z: 69.5899963}
+  m_LocalPosition: {x: 1.03999996, y: .939999998, z: 1.72000003}
   m_LocalScale: {x: .800000012, y: .800000012, z: .800000012}
   m_Children:
   - {fileID: 432244}
@@ -1439,7 +1438,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 175616}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .168998241, y: -.329999983, z: -.0180001259}
+  m_LocalPosition: {x: .169, y: -.0719999969, z: -.0179999992}
   m_LocalScale: {x: 3, y: .100000001, z: 3}
   m_Children: []
   m_Father: {fileID: 469692}
@@ -1524,7 +1523,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -27.1000004, y: -13.21, z: -70.8399963}
+  m_LocalPosition: {x: -.5, y: -.075000003, z: -1.15999997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 421224}
@@ -1590,7 +1589,7 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_HDR: 1
+  m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
@@ -2097,7 +2096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceFog: 1
   useRadialDistance: 0
-  heightFog: 1
+  heightFog: 0
   height: 3
   heightDensity: 2
   startDistance: 5
@@ -2154,6 +2153,7 @@ MonoBehaviour:
   bagBackground: {fileID: 0}
   spriteAnimationBone: {fileID: 7400000, guid: 37adc9a7621e3ea478daaea6db953c87, type: 2}
   spriteAnimationBag: {fileID: 7400000, guid: c434cd8736ee62f41beaba6e298ddd4a, type: 2}
+  numberOfBones: {fileID: 0}
   joystickPressure: .850000024
   numberOfKeys: 0
   keyPossessed: 000000000000000000000000
@@ -2253,7 +2253,7 @@ MonoBehaviour:
   white: 2
   adaptionSpeed: 1.5
   tonemapper: {fileID: 4800000, guid: 003377fc2620a44939dadde6fe3f8190, type: 3}
-  validRenderTextureFormat: 1
+  validRenderTextureFormat: 0
 --- !u!114 &11473824
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2307,17 +2307,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   orbitY: 0
---- !u!114 &11489280
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 158408}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &12421700
 Behaviour:
   m_ObjectHideFlags: 1
