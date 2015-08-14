@@ -34,9 +34,9 @@ public class DisplayInstruction : MonoBehaviour
 		
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider fadingText)
 	{
-		if (other.gameObject.tag == "player") 
+		if (fadingText.gameObject.tag == "player") 
 		{
 			StartCoroutine(FadeIn());
 
@@ -44,11 +44,14 @@ public class DisplayInstruction : MonoBehaviour
 		}
 	}
 
-    void OnTriggerExit()
+	void OnTriggerExit(Collider fadingText)
     {
-		StartCoroutine(FadeOut());
-		//instruction.enabled = false;
+		if (fadingText.gameObject.tag == "player") 
+		{
+			StartCoroutine(FadeOut());
+		}
 	}
+
 	void OnGUI()
 	{
 		isMouseKeyboard ();
