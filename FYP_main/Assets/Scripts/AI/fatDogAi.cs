@@ -407,7 +407,7 @@ public class fatDogAi : MonoBehaviour {
                     }
                     else if (currentAngle != targetAngle)
                     {
-                        rotateEnemy(targetAngle, rotationStep);
+                        rotateEnemy(targetAngle, rotationStep); //castatastastast
                     }
                     
             }
@@ -427,7 +427,15 @@ public class fatDogAi : MonoBehaviour {
                        
                         //Vector3 relative = transform.InverseTransformPoint(startingVector);
                         //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                        transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);                      
+                       // if (angleDiff >= 180)
+                       // {
+                        print("rotation stuff happens");
+                            transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0); 
+                        //}
+                        //if (angleDiff < 180)
+                        //{
+                        //    transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);
+                        //}                
                        // float angle2 = targetAngle - currentAngle;
                         if (angleOffsetMin < angleDiff && angleDiff < angleOffsetMax)
                         {
@@ -733,7 +741,7 @@ public class fatDogAi : MonoBehaviour {
 
                                 if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
                                 {
-
+                                    print("rotation 1");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -753,7 +761,7 @@ public class fatDogAi : MonoBehaviour {
                                 else //if (currentAngle > targetAngle && turnTimer == 0)
                                 {
 
-
+                                    print("rotation 2");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -778,6 +786,7 @@ public class fatDogAi : MonoBehaviour {
                                
                                 if (currentAngle > targetAngle && currentAngle <= targetAngle - 180)
                                 {
+                                    print("rotation 3");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -795,7 +804,7 @@ public class fatDogAi : MonoBehaviour {
                                 }
                                 else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
                                 {
-
+                                    print("rotation 4");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -820,7 +829,7 @@ public class fatDogAi : MonoBehaviour {
 
                                 if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                                 {
-
+                                    print("rotation 5");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -837,7 +846,7 @@ public class fatDogAi : MonoBehaviour {
                                 }
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
-                                    
+                                    print("rotation 6");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                   //  currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -859,7 +868,7 @@ public class fatDogAi : MonoBehaviour {
 
                                 if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                                 {
-
+                                    print("rotation 7");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -878,7 +887,7 @@ public class fatDogAi : MonoBehaviour {
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
 
-
+                                    print("rotation 8");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                   //  currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;

@@ -1963,6 +1963,7 @@ MonoBehaviour:
   allDoors: []
   allDestructibles: []
   allBones: []
+  allSpheres: []
   script: {fileID: 0}
   hunterScript: {fileID: 0}
   fatDogScript: {fileID: 0}
@@ -2133,6 +2134,7 @@ MonoBehaviour:
   duration: .200000003
   defaultBoneCooldown: 0
   boneSpawnTimer: 3
+  defaultBoneSpawnTimer: 0
   grav: 1.75
   throwForce: 9.99999975e-05
   movieFolder: 
@@ -2153,7 +2155,6 @@ MonoBehaviour:
   bagBackground: {fileID: 0}
   spriteAnimationBone: {fileID: 7400000, guid: 37adc9a7621e3ea478daaea6db953c87, type: 2}
   spriteAnimationBag: {fileID: 7400000, guid: c434cd8736ee62f41beaba6e298ddd4a, type: 2}
-  numberOfBones: {fileID: 0}
   joystickPressure: .850000024
   numberOfKeys: 0
   keyPossessed: 000000000000000000000000

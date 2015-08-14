@@ -17,6 +17,7 @@ public class TemporaryMovement : MonoBehaviour
     float boneCooldown;
     public float defaultBoneCooldown;
     public float boneSpawnTimer;
+    public float defaultBoneSpawnTimer;
     private float durationOfSpriteAnimationBone;
     public float grav;
     private float durationOfSpriteAnimationBag;
@@ -100,7 +101,7 @@ public class TemporaryMovement : MonoBehaviour
         //bagCoolDown.GetComponent<Animator>().enabled = false;
 
         //bagCoolDown.enabled = false;
-        //boneSpawnTimer = defaultBoneCooldown;
+        boneSpawnTimer = defaultBoneSpawnTimer;
         m_GroundCheckDistance = 0.6f;
         rb = GetComponent<Rigidbody>();
         catAnim = GetComponent<Animator>();
@@ -117,7 +118,10 @@ public class TemporaryMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-
+        if(boneCooldown > 0 )
+        {
+            boneCooldown -= Time.deltaTime;
+        }
         bags = inventory.inventoryArray[0];
         sprint();
         updateAnimator();
@@ -133,7 +137,7 @@ public class TemporaryMovement : MonoBehaviour
         rb.MovePosition(transform.position + movement.normalized * (movementSpeed + movement.magnitude) * Time.deltaTime);
         transform.LookAt(transform.position + look, Vector3.up);
 
-        if ((Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3")) && bones > 0 && bonesPlaced < maxBonesPlaced) // BONE
+        if ((Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3")) && bones > 0 && bonesPlaced < maxBonesPlaced && boneCooldown <= 0) // BONE
         {
             boneCoolDown.enabled = true;
             //bagCoolDown.enabled = false;
@@ -172,6 +176,7 @@ public class TemporaryMovement : MonoBehaviour
 
 
             newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+            boneCooldown = defaultBoneCooldown;
         }
 
         if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/) // BAG
@@ -224,7 +229,7 @@ public class TemporaryMovement : MonoBehaviour
             if (bones < maxBones)
             {
                 bones++;
-                boneSpawnTimer = defaultBoneCooldown;
+                boneSpawnTimer = defaultBoneSpawnTimer;
             }
         }
         if (boneSpawnTimer > 0)
