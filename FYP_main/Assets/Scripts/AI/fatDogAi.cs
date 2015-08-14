@@ -427,7 +427,15 @@ public class fatDogAi : MonoBehaviour {
                        
                         //Vector3 relative = transform.InverseTransformPoint(startingVector);
                         //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                        transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);                      
+                       // if (angleDiff >= 180)
+                       // {
+                        print("rotation stuff happens");
+                            transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0); 
+                        //}
+                        //if (angleDiff < 180)
+                        //{
+                        //    transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);
+                        //}                
                        // float angle2 = targetAngle - currentAngle;
                         if (angleOffsetMin < angleDiff && angleDiff < angleOffsetMax)
                         {
@@ -860,7 +868,7 @@ public class fatDogAi : MonoBehaviour {
                                 if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
                                 {
 
-                                    transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
+                                    transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
                                     if (rotationDifference < 0)
@@ -879,7 +887,7 @@ public class fatDogAi : MonoBehaviour {
                                 {
 
 
-                                    transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
+                                    transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                   //  currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
                                  
