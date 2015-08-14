@@ -20,7 +20,9 @@ public class pushButton : MonoBehaviour
     {
         if(buttonActivated == true)
         {
+            GetComponentInParent<Animator>().SetBool("isDown", true);
             timer--;
+
             if(timer <= 0)
             {
                 buttonActivated = false;
@@ -44,14 +46,12 @@ public class pushButton : MonoBehaviour
         if (other.gameObject.tag == "player" || other.gameObject.tag == "enemy" || other.gameObject.tag == "fatDog")
         {
             timer = defaultTimer;
-            //anim.SetBool("isDown", true);
-            GetComponentInParent<Animator>().SetBool("isDown", true);
+            GetComponentInParent<Animator>().SetBool("isDown", false); 
         }
     }
-
+    /*
     void OnTriggerExit()
     {
-        //anim.SetBool("isDown", false);
-        //GetComponentInParent<Animator>().SetBool("isDown", false);
-    }
+        
+    }*/
 }
