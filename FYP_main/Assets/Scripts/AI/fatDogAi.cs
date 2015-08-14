@@ -424,19 +424,7 @@ public class fatDogAi : MonoBehaviour {
 
                     if (wasChasing == true)
                     {
-                       
-                        //Vector3 relative = transform.InverseTransformPoint(startingVector);
-                        //float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
-                       // if (angleDiff >= 180)
-                       // {
-                        print("rotation stuff happens");
-                            transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0); 
-                        //}
-                        //if (angleDiff < 180)
-                        //{
-                        //    transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);
-                        //}                
-                       // float angle2 = targetAngle - currentAngle;
+                            transform.Rotate(Vector3.up, -angleDiff * Time.deltaTime * 0.75f, 0);                     
                         if (angleOffsetMin < angleDiff && angleDiff < angleOffsetMax)
                         {
                             wasChasing = false; 
@@ -739,9 +727,8 @@ public class fatDogAi : MonoBehaviour {
                             if (targetAngle <= 90 && targetAngle >= 0)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
                             {                              
 
-                                if (currentAngle <= targetAngle && currentAngle > targetAngle - 180)
+                                if (currentAngle <= targetAngle || (currentAngle > targetAngle - 180 && currentAngle < 0))
                                 {
-                                    print("rotation 1");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -760,8 +747,6 @@ public class fatDogAi : MonoBehaviour {
                                 }
                                 else //if (currentAngle > targetAngle && turnTimer == 0)
                                 {
-
-                                    print("rotation 2");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -783,16 +768,15 @@ public class fatDogAi : MonoBehaviour {
                                 
                             else if (targetAngle > 90 && targetAngle <= 180)// decide which sector the target is
                             {
-                               
-                                if (currentAngle > targetAngle && currentAngle <= targetAngle - 180)
+
+                                if (targetAngle < currentAngle || (currentAngle <= targetAngle - 180 && currentAngle < 0))
                                 {
-                                    print("rotation 3");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                     //currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
                                     if (rotationDifference < 0)
                                     {
-                                        rotationDifference = rotationDifference * -1;
+                                        rotationDifference = rotationDifference * 1;
                                     }
 
                                     if (currentAngle == targetAngle || angleOffsetMin <= rotationDifference && rotationDifference <= angleOffsetMax)
@@ -802,9 +786,8 @@ public class fatDogAi : MonoBehaviour {
                                        // turnTimer += defaultTurnTimer; // *Time.deltaTime;
                                     }
                                 }
-                                else //if (currentAngle > targetAngle || targetAngle - 180 >= currentAngle)
+                                else //if (currentAngle > targetAngle & targetAngle - 180 > currentAngle)
                                 {
-                                    print("rotation 4");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -827,9 +810,8 @@ public class fatDogAi : MonoBehaviour {
                             if (targetAngle >= -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
                             {                                
 
-                                if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
+                                if ((currentAngle >= targetAngle  && currentAngle < 0) || (currentAngle <= 180 + targetAngle  && currentAngle > 0))
                                 {
-                                    print("rotation 5");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -846,7 +828,6 @@ public class fatDogAi : MonoBehaviour {
                                 }
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
-                                    print("rotation 6");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                   //  currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -866,9 +847,8 @@ public class fatDogAi : MonoBehaviour {
                             else if (targetAngle < -90)// decide which sector the target is. 4 different sectors 0-90, 90-180, 0-(-90), (-90)- (-180)
                             {
 
-                                if (currentAngle >= targetAngle && currentAngle <= 180 + targetAngle)
+                                if ((currentAngle >= targetAngle && currentAngle <= 0) ||  (currentAngle <= 180 + targetAngle && currentAngle >= 0))
                                 {
-                                    print("rotation 7");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * 1);
                                    // currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
@@ -886,8 +866,6 @@ public class fatDogAi : MonoBehaviour {
                                 }
                                 else //if (currentAngle < targetAngle && turnTimer == 0)
                                 {
-
-                                    print("rotation 8");
                                     transform.Rotate(Vector3.up * Time.deltaTime * rotationStep * -1);
                                   //  currentAngle = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
                                     rotationDifference = targetAngle - currentAngle;
