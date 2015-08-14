@@ -17,8 +17,8 @@ public class DoorTrigger : MonoBehaviour
 	void Start ()
 	{
         m_Animator = GetComponent<Animator>();
-		showLock = GetComponentInChildren<SpriteRenderer>();
-		showLock.enabled = false;
+		//showLock = GetComponentInChildren<SpriteRenderer>();
+		//showLock.enabled = false;
 	}
     
      

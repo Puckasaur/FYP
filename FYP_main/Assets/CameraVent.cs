@@ -9,6 +9,8 @@ public class CameraVent : MonoBehaviour
     public Animator animator; // scripted camera's movement animator
     public AnimationClip animation; // the movement of the cam
 
+    public GameObject button;
+
     private float durationOfAnim; // duration of the cam anim
 
     private bool isActivated = false; // security variable
@@ -42,10 +44,32 @@ public class CameraVent : MonoBehaviour
                     scriptedCam.enabled = true;
                     mainCam.enabled = false;
                     animator.SetBool("cameraMovement", true);
+                    StartCoroutine(ButtonPressure());
+                    StartCoroutine(DoorOpening());
                     StartCoroutine(EndOfAnimation());
                 }
             }
         }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            button.GetComponent<pushButton>().buttonActivated = true;
+        }
+    }
+
+    IEnumerator ButtonPressure()
+    {
+        yield return new WaitForSeconds(durationOfAnim / 3f);
+        button.GetComponent<pushButton>().buttonActivated = true;
+    }
+
+    IEnumerator DoorOpening()
+    {
+        yield return new WaitForSeconds(durationOfAnim/1.2f);
+        button.GetComponent<pushButton>().buttonActivated = true;
     }
 
     IEnumerator EndOfAnimation()
@@ -57,6 +81,7 @@ public class CameraVent : MonoBehaviour
         playerMovement.GetComponent<Animator>().enabled = true;
         scriptedCam.enabled = false;
         mainCam.enabled = true;
+        button.GetComponent<pushButton>().buttonActivated = false;
         animator.SetBool("cameraMovement", false);
         isDone = true;
     }
