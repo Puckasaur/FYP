@@ -23,6 +23,7 @@ public class checkPoint: MonoBehaviour
     public GameObject[] allDoors;
     public GameObject[] allDestructibles;
     public GameObject[] allBones;
+    public GameObject[] allSpheres;
 
     public enemyPathfinding script;
     public huntingDog hunterScript;
@@ -95,6 +96,7 @@ public class checkPoint: MonoBehaviour
         allDestructibles = GameObject.FindGameObjectsWithTag("destructible");
         allBones = GameObject.FindGameObjectsWithTag("bone");
         allFatDogs = GameObject.FindGameObjectsWithTag("fatDog");
+        allSpheres = GameObject.FindGameObjectsWithTag("soundSphere");
 		chaseTransScript.resetChaseTrans(); //resets BGM.
 
         foreach(GameObject hunter in allHunters)
@@ -161,5 +163,9 @@ public class checkPoint: MonoBehaviour
             DoorTrigger dt = door.GetComponent<DoorTrigger>();
             dt.checkpoint();
         }       
+        foreach (GameObject sphere in allSpheres)
+        {
+            Destroy(sphere);
+        }
     }
 }
