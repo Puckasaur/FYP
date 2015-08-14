@@ -6,9 +6,14 @@ public class spawnHunter : MonoBehaviour {
     GameObject newDog;
     public int spawnedHunters;
     public bool spawnhunter;
+    public Transform spawnLocation;
 	// Use this for initialization
 	void Start () {
 	
+        if(spawnLocation == null)
+        {
+            spawnLocation = this.transform;
+        }
 	}
 	
 	// Update is called once per frame
@@ -18,7 +23,7 @@ public class spawnHunter : MonoBehaviour {
         {
             if (spawnedHunters <= 2)
             {
-                newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
+                newDog = (GameObject)Instantiate(huntingDog, spawnLocation.position, Quaternion.identity);
                 newDog.transform.parent = transform;
                 spawnedHunters++;
             }
@@ -32,7 +37,7 @@ public class spawnHunter : MonoBehaviour {
             {
                 if (spawnedHunters <= 2)
                 {
-                    newDog = (GameObject)Instantiate(huntingDog, this.transform.position, Quaternion.identity);
+                    newDog = (GameObject)Instantiate(huntingDog, spawnLocation.transform.position, Quaternion.identity);
                     newDog.transform.parent = transform;
                     spawnedHunters++;
                 }
