@@ -991,7 +991,7 @@ LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
   m_GIWorkflowMode: 1
-  m_LightmapsMode: 1
+  m_LightmapsMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1010,8 +1010,7 @@ LightmapSettings:
     m_AOMaxDistance: 1
     m_Padding: 2
     m_CompAOExponent: 1
-    m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000,
-      type: 0}
+    m_LightmapParameters: {fileID: 0}
     m_TextureCompression: 1
     m_FinalGather: 1
     m_FinalGatherRayCount: 256
@@ -32086,7 +32085,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400696, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: checkPointPosition
@@ -32096,14 +32095,6 @@ Prefab:
       propertyPath: startPosition
       value: 
       objectReference: {fileID: 796228135}
-    - target: {fileID: 11437144, guid: ba6011b71f850964a88a001872fa5889, type: 2}
-      propertyPath: startDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 11437144, guid: ba6011b71f850964a88a001872fa5889, type: 2}
-      propertyPath: useRadialDistance
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
   m_IsPrefabParent: 0
@@ -79416,15 +79407,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 484662, guid: 80525ef493e2ce7498a6dcd836986232, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.0699994192
+      value: -.103
       objectReference: {fileID: 0}
     - target: {fileID: 484662, guid: 80525ef493e2ce7498a6dcd836986232, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.06000018
+      value: 1.05999994
       objectReference: {fileID: 0}
     - target: {fileID: 484662, guid: 80525ef493e2ce7498a6dcd836986232, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.1840018
+      value: -1.18400002
       objectReference: {fileID: 0}
     - target: {fileID: 484662, guid: 80525ef493e2ce7498a6dcd836986232, type: 2}
       propertyPath: m_LocalRotation.x
