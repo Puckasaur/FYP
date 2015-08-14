@@ -61,8 +61,6 @@ public class TemporaryMovement : MonoBehaviour
     public AnimationClip spriteAnimationBone;
     public AnimationClip spriteAnimationBag;
 
-	public Text numberOfBones;
-
     [HideInInspector]
     public float joystickPressure;
     [HideInInspector]
@@ -119,7 +117,6 @@ public class TemporaryMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-		numberOfBones.GetComponent<Text>().text = "" + bones;
 
         bags = inventory.inventoryArray[0];
         sprint();
