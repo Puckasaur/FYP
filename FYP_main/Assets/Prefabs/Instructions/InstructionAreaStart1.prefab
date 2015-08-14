@@ -1,61 +1,45 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &194238
+--- !u!1 &153628
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 479152}
-  - 114: {fileID: 11471926}
-  - 65: {fileID: 6533604}
+  - 4: {fileID: 430050}
+  - 65: {fileID: 6514916}
   m_Layer: 0
-  m_Name: Camera_Script_Teach_Vent
+  m_Name: InstructionAreaStart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &479152
+--- !u!4 &430050
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194238}
+  m_GameObject: {fileID: 153628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 35.4399986, y: .43999958, z: 9.68000031}
+  m_LocalPosition: {x: -295.549988, y: -49.1500015, z: -104.989998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!65 &6533604
+--- !u!65 &6514916
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194238}
+  m_GameObject: {fileID: 153628}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.45192254, y: 2.78079796, z: 5.25252247}
-  m_Center: {x: -.0218658447, y: .890399039, z: .418054581}
---- !u!114 &11471926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 194238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6931233a9b81ccf46a2aaade10b73b7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCam: {fileID: 0}
-  scriptedCam: {fileID: 0}
-  animator: {fileID: 0}
-  animation: {fileID: 7400000, guid: 03e6c2748cbe97640805ea4a747ff1f2, type: 2}
+  m_Size: {x: 1, y: 2.90440202, z: 5.15369701}
+  m_Center: {x: 0, y: .708553314, z: .0835189819}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -65,5 +49,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 194238}
+  m_RootGameObject: {fileID: 153628}
   m_IsPrefabParent: 1
