@@ -1493,6 +1493,15 @@ public class enemyPathfinding : MonoBehaviour
                 agent.Stop();
                 Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
                 float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
+                if (angle >= 0)
+                {
+                    angle++;
+                }
+                else if (angle < 0)
+                {
+                    angle--;
+                }
+
                 transform.Rotate(0, angle * Time.deltaTime * 1.5f, 0);
                 if (angle < 5.0f && angle > -5.0f)
                 {
