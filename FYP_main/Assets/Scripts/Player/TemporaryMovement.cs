@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class TemporaryMovement : MonoBehaviour
 {
+    
     public float magnMultiplier;
     public float movementSpeed;
     public float sprintModifier;
@@ -45,6 +46,7 @@ public class TemporaryMovement : MonoBehaviour
     private bool isEsc;    
     bool smellHidden;
     bool disguisedAsDog;
+    public bool playerHidden;
 
     public List<GameObject> enemies = new List<GameObject>();
 
@@ -139,44 +141,47 @@ public class TemporaryMovement : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.T) || Input.GetButtonDown("Fire3")) && bones > 0 && bonesPlaced < maxBonesPlaced && boneCooldown <= 0) // BONE
         {
-            boneCoolDown.enabled = true;
-            //bagCoolDown.enabled = false;
-
-            boneBackground.enabled = true;
-            //bagBackground.enabled = false;
-
-            boneBackground.CrossFadeAlpha(1.0f, duration, true);
-           // bagBackground.CrossFadeAlpha(0.0f, duration, true);
-
-            StartCoroutine(spriteBoneTimer());
-            bones--;
-            bonesPlaced++;
-          
-            Vector3 direction = (boneSpawner.transform.position - this.transform.position).normalized;
-            Physics.Raycast(transform.position, direction, out hit, 1.3f);
-            Debug.DrawRay(transform.position, direction * 1.3f, Color.blue, 2.0f);
-            if (hit.collider != null)
+            if(playerHidden == false)
             {
-                if (hit.collider.tag == "wall")
+                boneCoolDown.enabled = true;
+                //bagCoolDown.enabled = false;
+
+                boneBackground.enabled = true;
+                //bagBackground.enabled = false;
+
+                boneBackground.CrossFadeAlpha(1.0f, duration, true);
+                // bagBackground.CrossFadeAlpha(0.0f, duration, true);
+
+                StartCoroutine(spriteBoneTimer());
+                bones--;
+                bonesPlaced++;
+
+                Vector3 direction = (boneSpawner.transform.position - this.transform.position).normalized;
+                Physics.Raycast(transform.position, direction, out hit, 1.3f);
+                Debug.DrawRay(transform.position, direction * 1.3f, Color.blue, 2.0f);
+                if (hit.collider != null)
                 {
-                    Vector3 vectorBetweenWallPlayer = hit.point - this.transform.position;
-                    float distanceWallPlayer = vectorBetweenWallPlayer.magnitude;
-                    vectorBetweenWallPlayer = vectorBetweenWallPlayer.normalized;
-                    Debug.DrawRay(transform.position, vectorBetweenWallPlayer * distanceWallPlayer, Color.red, 5.0f);
-                    boneSpawner.transform.position = this.transform.position + (distanceWallPlayer * vectorBetweenWallPlayer);
+                    if (hit.collider.tag == "wall")
+                    {
+                        Vector3 vectorBetweenWallPlayer = hit.point - this.transform.position;
+                        float distanceWallPlayer = vectorBetweenWallPlayer.magnitude;
+                        vectorBetweenWallPlayer = vectorBetweenWallPlayer.normalized;
+                        Debug.DrawRay(transform.position, vectorBetweenWallPlayer * distanceWallPlayer, Color.red, 5.0f);
+                        boneSpawner.transform.position = this.transform.position + (distanceWallPlayer * vectorBetweenWallPlayer);
+                    }
                 }
+
+                else
+                {
+                    Vector3 length = (boneSpawner.transform.position - this.transform.position).normalized;
+                    boneSpawner.transform.position = this.transform.position + (length * 1.3f);
+                }
+
+
+
+                newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
+                boneCooldown = defaultBoneCooldown;
             }
-               
-                else 
-                {
-                   Vector3 length = (boneSpawner.transform.position - this.transform.position).normalized;
-                   boneSpawner.transform.position = this.transform.position + (length * 1.3f);
-                }
-            
-
-
-            newBone = (GameObject)Instantiate(bone, boneSpawner.transform.position, Quaternion.identity);
-            boneCooldown = defaultBoneCooldown;
         }
 
         if (Input.GetKeyDown(KeyCode.Y) /*&& bags > 0*/) // BAG

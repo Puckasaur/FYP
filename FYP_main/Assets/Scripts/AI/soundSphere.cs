@@ -39,9 +39,11 @@ public class soundSphere : MonoBehaviour
                     {                        
                         script.stateManager(6);
                         script.soundSource = transform.parent.gameObject;
+                        print("sound source = " + script.soundSource);
                         if (transform.parent.gameObject != null)
                         {
                             script._soundSource = transform.parent.gameObject.transform.position;
+                           
                         } 
                     }
             }
