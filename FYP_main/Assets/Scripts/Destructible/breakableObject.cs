@@ -21,6 +21,10 @@ public class breakableObject: MonoBehaviour
     public float cubeRadius;
     soundSphere sphereScript;
 	sfxPlayer SFX;
+    bool isGrounded;
+    float m_GroundCheckDistance;
+    Rigidbody rb;
+
 	void Start () 
     {
         //---------------------------------------------------//
@@ -36,6 +40,13 @@ public class breakableObject: MonoBehaviour
         }
         playerMovement = GameObject.FindGameObjectWithTag("player").GetComponent<TemporaryMovement>();
 		//SFX = GameObject.Find ("SFX").GetComponent<sfxPlayer>();
+
+        m_GroundCheckDistance = 0.6f;
+        if (GetComponent<Rigidbody>() != null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+        
 	}
 	
 	// Update is called once per frame
@@ -89,6 +100,23 @@ public class breakableObject: MonoBehaviour
             destroySelf();
         }
     }
+   void FixedUpdate()
+    {
+        //uses raycast to check if bone is grounded
+        if (this.gameObject.tag == "bone")
+        {
+            checkGroundStatus();
+            if (isGrounded)
+            {
+               
+                rb.useGravity = false;
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
+        }
+       
+    }
+    
     void OnCollisionEnter(Collision Other)
     {
         //----------------------------------------------------------//
@@ -151,6 +179,24 @@ public class breakableObject: MonoBehaviour
             sphereScript = newSphere.GetComponent<soundSphere>();
             sphereScript.setMaxDiameter(maxScale);
             destroySelf();
+        }
+    }
+    void checkGroundStatus()
+    {
+        RaycastHit hitInfo;
+#if UNITY_EDITOR
+        // helper to visualise the ground check ray in the scene view
+        Debug.DrawLine(transform.position + (Vector3.up * 0.1f), transform.position + (Vector3.up * 0.1f) + (Vector3.down * m_GroundCheckDistance));
+#endif
+        // 0.1f is a small offset to start the ray from inside the character
+        // it is also good to note that the transform position in the sample assets is at the base of the character
+        if (Physics.Raycast(transform.position + (Vector3.up * 0.1f), Vector3.down, out hitInfo, m_GroundCheckDistance))
+        {
+             isGrounded = true;
+        }
+        else
+        {
+            isGrounded = false;
         }
     }
 }
