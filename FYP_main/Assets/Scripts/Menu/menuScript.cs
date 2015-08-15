@@ -11,6 +11,8 @@ public class menuScript : MonoBehaviour {
 	public Button optionsButton;
 	public Button exitButton;
 
+	sfxPlayer SFX;
+
 
 	// Use this for initialization
 	void Start () 
@@ -23,18 +25,24 @@ public class menuScript : MonoBehaviour {
 		exitButton = exitButton.GetComponent<Button> ();
 		quitMenu.enabled = false;
 
+		SFX = GameObject.Find ("SFX").GetComponent<sfxPlayer>();
+
 	}
 
 	public void exitPress()
 	{
+
+		SFX.playButtonPress ();
 		quitMenu.enabled = true;
 		startButton.enabled = false;
 		optionsButton.enabled = false;
 		exitButton.enabled = false;
+
 	}
 
 	public void noPress()
 	{
+		SFX.playButtonPress ();
 		quitMenu.enabled = false;
 		startButton.enabled = true;
 		optionsButton.enabled = true;
@@ -43,12 +51,13 @@ public class menuScript : MonoBehaviour {
 
 	public void exitGame()
 	{
+		SFX.playButtonPress ();
 		Application.Quit ();
 	}
 
 	public void startGame ()
 	{
-		//StartCoroutine(fadeChange());
+		SFX.playButtonPress ();
      	PlayerPrefs.SetString("Movie", "Intro");
         PlayerPrefs.SetInt("Scene", 2);
         PlayerPrefs.Save();
@@ -57,6 +66,7 @@ public class menuScript : MonoBehaviour {
 
 	public void optionsPage()
 	{
+		SFX.playButtonPress ();
 		Application.LoadLevel(5);
 	}
 
