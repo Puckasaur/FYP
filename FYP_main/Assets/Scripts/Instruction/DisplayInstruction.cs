@@ -30,7 +30,8 @@ public class DisplayInstruction : MonoBehaviour
 		animate = GetComponentInChildren<Animator>();
 		instruction = GetComponentInChildren<SpriteRenderer>();
 	
-		if (instruction.enabled == true) instruction.enabled = false;
+		if (instruction.enabled == true)
+			instruction.enabled = false;
 		
 	}
 
