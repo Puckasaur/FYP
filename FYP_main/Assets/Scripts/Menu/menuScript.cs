@@ -57,7 +57,7 @@ public class menuScript : MonoBehaviour {
 
 	public void optionsPage()
 	{
-		//Application.LoadLevel(2);
+		Application.LoadLevel(5);
 	}
 
 	IEnumerator fadeChange()
