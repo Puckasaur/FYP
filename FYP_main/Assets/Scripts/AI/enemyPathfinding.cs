@@ -354,7 +354,6 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.patrol:
                 {
-                    print("patrol state");
                     //-----------------------------------------------------------------------------------------//
                     //patrol, moves from one waypoint to the next waiting for a second before advancing forward//
                     //-----------------------------------------------------------------------------------------//
@@ -409,7 +408,6 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.idle:
                 {
-                    print("idle state");
                     //--------------------------------------------------------//
                     // idle, look around, without moving towards any waypoints//
                     //--------------------------------------------------------//
@@ -476,7 +474,6 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.chase:
                 {
-                    print("chase state");
                     //----------------------------------------------------------------------------//
                     // chase the Player constantly searching for a waypoint at the Player position//
                     //----------------------------------------------------------------------------//
@@ -592,7 +589,6 @@ public class enemyPathfinding : MonoBehaviour
                 //------------------------------------------------------//
                 //Look around a room by moving from waypoint to waypoint//
                 //------------------------------------------------------//
-                print("alert");
                 if (isPatrolling)
                 {
                     isPatrolling = false;
@@ -687,7 +683,6 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.idleSuspicious:
                 {
-                    print("idle suspicious state");
                     //-----------------------------------------------//
                     //Stand on the spot and look at preset directions//
                     //-----------------------------------------------//
@@ -759,7 +754,6 @@ public class enemyPathfinding : MonoBehaviour
                 }
             case enumStates.distracted:
                 {
-                    print("distracted state");
                     //-------------------------//
                     // Move towards distraction//
                     //-------------------------//
@@ -786,7 +780,6 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-                    print("detect sound");
                     if (isPatrolling)
                     {
                         isPatrolling = false;
@@ -824,20 +817,16 @@ public class enemyPathfinding : MonoBehaviour
                        //Check if the enemy is within offset range from the current target
                        if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
                        {
-                           print("fix 1");
                            if (soundSource != null || !soundSource.Equals(null))
                            {
                                Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
                                Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
-                               print("fix 2  " + soundSource + " << sound source" );
+                       
                            }
                            alertTimer = defaultAlertTimer;
 
                            if (hit.collider != null)
                            {
-                               //hit.
-                               print("fix 3  " + hit.collider.tag + " << hit.tag");
-
                                if (agentStopped == false)
                                {
                                    agent.velocity = Vector3.zero;
@@ -848,7 +837,6 @@ public class enemyPathfinding : MonoBehaviour
                                {
                                    randomPointSelected = false;
                                    stateManager(7);
-                                   print("fix 4");
                                }
 
                                else
@@ -879,7 +867,6 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.eatBone:
                 {
-                    print("eat bone");
                     //------------------------------------------------------------------//
                     // holds the enemy still for long enough for the distraction to pass//
                     //------------------------------------------------------------------//
@@ -930,7 +917,6 @@ public class enemyPathfinding : MonoBehaviour
 
             case enumStates.smell:
                 {
-                    print("smell state");
                     if (smellTimer > 0)
                     {
                         smellTimer--;

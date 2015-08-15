@@ -13,6 +13,8 @@ public class hidingThirdPerson : MonoBehaviour {
     public Transform hidingPosition;
     public TemporaryMovement playerScript;
 
+	public GameObject showHiding;
+
     public bool isHiding;
 	public bool isPaused;
 
@@ -26,6 +28,8 @@ public class hidingThirdPerson : MonoBehaviour {
 		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
 		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
         playerScript = GameObject.Find("Char_Cat").GetComponent<TemporaryMovement>();
+
+		showHiding.SetActive(false);
 	}
 
     void OnTriggerStay(Collider catType)
@@ -39,6 +43,8 @@ public class hidingThirdPerson : MonoBehaviour {
 			
 			if (isHiding == false)
 			{
+				showHiding.SetActive(false);
+
 				if (Input.GetButtonDown("Interact"))
 				{
 					character.transform.position = hidingPosition.transform.position;
@@ -72,6 +78,8 @@ public class hidingThirdPerson : MonoBehaviour {
                 if(ros.disguised == true)
             	ros.isNotDisguised("htp");
                 playerScript.playerHidden = false;
+
+		
 			}
 		} 
 
@@ -99,7 +107,7 @@ public class hidingThirdPerson : MonoBehaviour {
         	ros.isDisguised("htp");
 
 
-
+		showHiding.SetActive(true);
 		//keyboardCheckToEnter.SetActive(false);
 		//keyboardCheckToExit.SetActive(true);
 
