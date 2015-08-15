@@ -7,10 +7,14 @@ public class OnScreenInstruction : MonoBehaviour {
 	public GameObject chatBox;
 	public GameObject instruction1;
 
+	//public GameObject instructionForPlayer;
+	
 	void Start()
-	{
+	{	
 		chatBox.SetActive(false);
 		instruction1.SetActive(false);
+		//instructionForPlayer.SetActive(false);
+
 	}
 
 	void OnTriggerEnter(Collider instruction)
@@ -19,6 +23,8 @@ public class OnScreenInstruction : MonoBehaviour {
 		{
 			instruction1.SetActive(true);
 			chatBox.SetActive(true);
+			//instructionForPlayer.SetActive(true);
+				
 
 			StartCoroutine(FadeIn());
 		}
@@ -62,6 +68,8 @@ public class OnScreenInstruction : MonoBehaviour {
 		chatBox.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0.0f);
 		
 		instruction1.SetActive(false);
+		//instructionForPlayer.SetActive(false);
+		
 	}
 	
 	IEnumerator FadeIn()
