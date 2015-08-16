@@ -12,8 +12,10 @@ public class checkPoint: MonoBehaviour
 {
 	chaseTransition chaseTransScript;
     public GameObject checkPointPosition; // Position of the check point
+    public GameObject checkPointPosition_2; // Position of the check point
     public Transform startPosition;
     public bool checkPointActivated = false; // if the check point has been reached or not
+    public bool checkPointActivated_2 = false;
 
     private string currentLevel; // the current level
     public  GameObject[] allEnemies; // needed to reset enemies' positions
@@ -43,12 +45,19 @@ public class checkPoint: MonoBehaviour
 
     void OnTriggerEnter(Collider other) // turns the check point on
     {
-        if (other.gameObject.tag == "checkPoint") this.checkPointActivated = true;
+        if (other.gameObject.name == "checkPoint_Trigger")
+        {
+            this.checkPointActivated = true;
+        }
+        if (other.gameObject.name == "checkPoint_Trigger_2")
+        {
+            this.checkPointActivated_2 = true;
+        }
     }
 
     void OnCollisionEnter(Collision other) // On collision with an enemy
     {
-        if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == false) // if check point has not been reached
+        if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == false && checkPointActivated_2 == false ) // if check point has not been reached
         {
             if (other.gameObject.tag == "enemy")
             {
@@ -67,14 +76,20 @@ public class checkPoint: MonoBehaviour
             //Application.LoadLevel(currentLevel);
         }
 
-        else if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && checkPointActivated == true) // if check point has been reached
+        else if ((other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog") && (checkPointActivated == true || checkPointActivated_2 == true)) // if check point has been reached
         {
             if (other.gameObject.tag == "enemy")
             {
                 other.gameObject.GetComponent<enemyPathfinding>().agent.velocity = Vector3.zero;
             }
-
-            this.transform.position = checkPointPosition.transform.position;
+            if (checkPointActivated_2)
+            {
+                this.transform.position = checkPointPosition_2.transform.position;
+            }
+            if (checkPointActivated)
+            {
+                this.transform.position = checkPointPosition.transform.position;
+            } 
             resetLevel();
         }
     }

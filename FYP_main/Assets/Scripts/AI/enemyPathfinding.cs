@@ -487,6 +487,20 @@ public class enemyPathfinding : MonoBehaviour
                     }
                     patrolAnim.SetBool("patrolRun", true);
 
+                    navPath = new NavMeshPath();
+                    agent.CalculatePath(currentTarget.position, navPath);
+                    if (navPath.status == NavMeshPathStatus.PathInvalid)
+                    {
+                        if (RandomPoint(currentTarget.position, maxRange, out soundSourcePos))
+                        {
+                            randomPointSelected = true;
+                            Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
+                            tempWaypointPos = currentTarget;
+                            currentTarget = tempWaypointPos;//soundSourcePos;
+                        }
+                    }
+
+
                     if (vectorx < chargeRange || vectorz < chargeRange)
                     {
                         agent.autoBraking = false;
@@ -518,6 +532,7 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         newSphere = (GameObject)Instantiate(sphere, this.transform.position, Quaternion.identity);
                         newSphere.transform.parent = transform;
+                        newSphere.tag = "sound";
                         barkTimer = defaultBarkTimer;
                         if (newSphere)
                         {
@@ -695,6 +710,8 @@ public class enemyPathfinding : MonoBehaviour
                     {
                         agent.velocity = Vector3.zero;
                         agentStopped = true;
+                        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                        GetComponent<Rigidbody>().velocity = Vector3.zero;
                         agent.Stop();
                     }
                     if (coneOfVisionScript.playerSeen == true)
@@ -780,86 +797,106 @@ public class enemyPathfinding : MonoBehaviour
                 break;
             case enumStates.detectSound:
                 {
-                    if (isPatrolling)
-                    {
-                        isPatrolling = false;
+
+                    if (soundSource.tag == "sound")
+                    {                        
+                        if (isPatrolling)
+                        {
+                            isPatrolling = false;
+                        }
+                        navPath = new NavMeshPath();
+                        NavMesh.CalculatePath(transform.position, soundSource.transform.position, NavMesh.AllAreas, navPath);
+                        if (navPath != null)
+                        {
+                            organizeAlertWaypoints();
+
+                            patrolAnim.SetBool("patrolRun", false);
+
+                            if (soundSource && soundSource.tag != "bone" && randomPointSelected == false)
+                            {
+                                if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
+                                {
+                                    randomPointSelected = true;
+                                    Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
+                                    tempWaypointPos = soundSource.transform;
+                                    currentTarget = tempWaypointPos;//soundSourcePos;
+                                }
+                            }
+                            else if (soundSource && soundSource.tag == "bone")
+                            {
+                                currentTarget = soundSource.transform;
+                            }
+                            // agent.SetDestination(currentTarget.transform.position);
+
+                            //---------------------------------------------//
+                            // when sound is heard, move towards the source//
+                            //---------------------------------------------//    
+
+                            //Check if the enemy is within offset range from the current target
+                            if (vectorx >= (waypointOffsetMin) && vectorx <= (waypointOffsetMax) && vectorz >= (waypointOffsetMin) && vectorz <= (waypointOffsetMax))
+                            {
+                                if (soundSource != null || !soundSource.Equals(null))
+                                {
+                                    //Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
+                                    //Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
+
+                                }
+                                alertTimer = defaultAlertTimer;
+
+                                if (soundSource)//(hit.collider != null)
+                                {
+                                    if (agentStopped == false)
+                                    {
+                                        agent.velocity = Vector3.zero;
+                                        agentStopped = true;
+                                        agent.Stop();
+                                        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                                        GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+                                    }
+                                    if (soundSource.tag == "bone")//(hit.collider.tag == "bone")
+                                    {
+                                        randomPointSelected = false;
+                                        stateManager(7);
+                                    }
+
+                                    else
+                                    {
+                                        randomPointSelected = false;
+                                        stateManager(3);
+                                    }
+                                }
+                                else
+                                {
+                                    randomPointSelected = false;
+                                    stateManager(3);
+                                }
+                            }
+                            else if (soundSource == null)
+                            {
+                                stateManager(3);
+                            }
+                        }
+                        else
+                        {
+                            stateManager(3);
+                        }
+
                     }
-                    navPath = new NavMeshPath();
-                   NavMesh.CalculatePath(transform.position, soundSource.transform.position, NavMesh.AllAreas, navPath);
-                   if (navPath != null)
-                   {
-                       organizeAlertWaypoints();
-
-                       patrolAnim.SetBool("patrolRun", false);
-
-                       if (soundSource && soundSource.tag != "bone" && randomPointSelected == false)
-                       {
-                           if (RandomPoint(soundSource.transform.position, maxRange, out soundSourcePos))
-                           {
-                               randomPointSelected = true;
-                               Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
-                               tempWaypointPos = soundSource.transform;
-                               currentTarget = tempWaypointPos;//soundSourcePos;
-                           }
+                    else if (soundSource.tag == "bone")
+                    {
+                       // if (smellDetectedBefore)
+                       // {
+                            // continue towards the soundsource
+                            // but change target if the enemy 
+                     //   }
+                       // else
+                      //  { 
+                           // pick this as a new sound
+                     //   }
 
 
-                       }
-                       else if (soundSource && soundSource.tag == "bone")
-                       {
-                           currentTarget = soundSource.transform;
-                       }
-                       // agent.SetDestination(currentTarget.transform.position);
-
-                       //---------------------------------------------//
-                       // when sound is heard, move towards the source//
-                       //---------------------------------------------//    
-
-                       //Check if the enemy is within offset range from the current target
-                       if (vectorx >= (waypointOffsetMin * 2) && vectorx <= (waypointOffsetMax * 2) && vectorz >= (waypointOffsetMin * 2) && vectorz <= (waypointOffsetMax * 2))
-                       {
-                           if (soundSource != null || !soundSource.Equals(null))
-                           {
-                               Physics.Linecast(this.transform.position, soundSource.transform.position, out hit);
-                               Debug.DrawLine(this.transform.position, soundSource.transform.position, Color.blue);
-                       
-                           }
-                           alertTimer = defaultAlertTimer;
-
-                           if (hit.collider != null)
-                           {
-                               if (agentStopped == false)
-                               {
-                                   agent.velocity = Vector3.zero;
-                                   agentStopped = true;
-                                   agent.Stop();
-                               }
-                               if (hit.collider.tag == "bone")
-                               {
-                                   randomPointSelected = false;
-                                   stateManager(7);
-                               }
-
-                               else
-                               {
-                                   randomPointSelected = false;
-                                   stateManager(3);
-                               }
-                           }
-                           else
-                           {
-                               randomPointSelected = false;
-                               stateManager(3);
-                           }
-                       }
-                       else if (soundSource == null)
-                       {
-                           stateManager(3);
-                       }
-                   }
-                   else
-                   {
-                       stateManager(3);
-                   }
+                    }
 
 
                 }
@@ -935,6 +972,8 @@ public class enemyPathfinding : MonoBehaviour
                         agentStopped = true;
                         agent.velocity = Vector3.zero;
                         agent.Stop();
+                        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                        GetComponent<Rigidbody>().velocity = Vector3.zero;
                         if (tempSmellPosition != null)
                         {            
                             Vector3 relative = transform.InverseTransformPoint(tempSmellPosition);
@@ -1491,6 +1530,8 @@ public class enemyPathfinding : MonoBehaviour
                 agentStopped = true;
                 agent.velocity = Vector3.zero;
                 agent.Stop();
+                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
                 Vector3 relative = transform.InverseTransformPoint(targetTransformPosition);
                 float angle = Mathf.Atan2(relative.x, relative.z) * Mathf.Rad2Deg;
                 if (angle >= 0)

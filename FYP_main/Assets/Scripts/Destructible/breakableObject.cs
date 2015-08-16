@@ -65,6 +65,7 @@ public class breakableObject: MonoBehaviour
             timer += 60;
                 newSphere = (GameObject)Instantiate(Sphere, this.transform.localPosition, Quaternion.identity);
                 newSphere.transform.parent = transform;
+                newSphere.tag = "bone";
                 sphereScript = newSphere.GetComponent<soundSphere>();
                 sphereScript.setMaxDiameter(boneRadius);
                 expireTimer--;

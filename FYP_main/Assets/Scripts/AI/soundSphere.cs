@@ -36,10 +36,10 @@ public class soundSphere : MonoBehaviour
             {
                 if (this.transform.parent != other.transform)
                     if (script.States != enumStates.chase && script.States != enumStates.distracted && script.States != enumStates.eatBone)
-                    {                        
+                    {
                         script.stateManager(6);
                         script.soundSource = transform.parent.gameObject;
-                        print("sound source = " + script.soundSource);
+                        //print("sound source = " + script.soundSource);
                         if (transform.parent.gameObject != null)
                         {
                             script._soundSource = transform.parent.gameObject.transform.position;
