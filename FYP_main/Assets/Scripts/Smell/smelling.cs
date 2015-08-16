@@ -36,21 +36,22 @@ public class smelling : MonoBehaviour
             exitPoint.GetComponent<ParticleSystem>().enableEmission = true;
 
             newBoneComo = (GameObject)Instantiate(boneComo, boneSpawnerComo.transform.position, Quaternion.identity);
+            boneCount++;
 
             yield return new WaitForSeconds(7);
 
             isEnterBone = false;
         }
 
-        if(hasSpawnedBone == true)
-        {
-            cooldown--;
-            if(cooldown <=0)
-            {
-                hasSpawnedBone = false;
-                cooldown = defautCooldown;
-            }
-        }
+        //if(hasSpawnedBone == true)
+        //{
+        //    cooldown--;
+        //    if(cooldown <=0)
+        //    {
+        //        hasSpawnedBone = false;
+        //        cooldown = defautCooldown;
+        //    }
+        //}
     }
 
 	//Bag
@@ -139,10 +140,11 @@ public class smelling : MonoBehaviour
 
         if (hasSpawnedBone == true)
         {
-            cooldown--;
+            cooldown -= Time.deltaTime;
             if (cooldown <= 0)
             {
                 hasSpawnedBone = false;
+                boneCount--;
                 cooldown = defautCooldown;
             }
         }
