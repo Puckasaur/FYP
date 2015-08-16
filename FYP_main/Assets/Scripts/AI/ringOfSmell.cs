@@ -14,6 +14,7 @@ public class ringOfSmell : MonoBehaviour {
 
     Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
+    public ParticleSystem particle;
     RaycastHit hit;
 	AudioSource sniff;
 
@@ -43,6 +44,17 @@ public class ringOfSmell : MonoBehaviour {
     public Color color;
     public Color minColor;
     public float colorAlpha;
+    //public Texture fatParticle;
+    //public Texture mediumParticle;
+    //public Texture smallParticle;
+    //public Mesh fatMesh;
+    //public Mesh mediumMesh;
+    //public Mesh smallMesh;
+    //Renderer particlesystemRenderer;
+    //Mesh particleSystemMesh;
+    //Material particlesystemMaterial;
+
+    //Material[] particles;
 
     //Vector3 to make sure the enemy does not smell the player when the player exits the ring of smell
     Vector3 exitrange;
@@ -59,6 +71,10 @@ public class ringOfSmell : MonoBehaviour {
         sniff = GetComponent<AudioSource>();
         chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
         detectionTimer = defaultDetectionRange;
+        particle = GetComponent<ParticleSystem>();
+        //particlesystemRenderer = particle.GetComponent<ParticleSystem>().GetComponent<Renderer>();
+        //particlesystemMaterial = particlesystemRenderer.sharedMaterial;
+        //particleSystemMesh = particlesystemRenderer.GetComponent<Mesh>();
        // disGuiseAsDog();
 
     }
@@ -78,16 +94,32 @@ public class ringOfSmell : MonoBehaviour {
         if (radius == maxRadius && color != Color.cyan) // Fat radius
         {
             rend.material.SetColor("_Color", maxColor);
+            //particlesystemMaterial.mainTexture = fatParticle;
+            //print(particlesystemMaterial);
+            //particleSystemMesh = fatMesh;
+            //print(particleSystemMesh);
+            particle.startColor = new Color(maxColor.r,maxColor.g,maxColor.b);
+
         }
 
         else if (radius < maxRadius && radius > minRadius) // Any radius which 
         {
             rend.material.SetColor("_Color", color);
+            //particlesystemMaterial.mainTexture = mediumParticle;
+            //print(particlesystemMaterial);
+
+            particle.startColor = new Color(color.r, color.g, color.b);
+            //particleSystemMesh = mediumMesh;
+            //print(particleSystemMesh);
         }
 
         else if (radius == minRadius)
         {
             rend.material.SetColor("_Color", minColor);
+            //particlesystemMaterial.mainTexture = smallParticle;
+            particle.startColor = new Color(minColor.r, minColor.g, minColor.b);
+            //particle.
+            //particleSystemMesh = smallMesh;
         }
     }
 
