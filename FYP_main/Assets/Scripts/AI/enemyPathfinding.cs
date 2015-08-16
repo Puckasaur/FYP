@@ -489,14 +489,18 @@ public class enemyPathfinding : MonoBehaviour
 
                     navPath = new NavMeshPath();
                     agent.CalculatePath(currentTarget.position, navPath);
-                    if (navPath.status == NavMeshPathStatus.PathInvalid)
+                    if (navPath.status == NavMeshPathStatus.PathPartial)
                     {
-                        if (RandomPoint(currentTarget.position, maxRange, out soundSourcePos))
+                        agent.autoBraking = false;
+                        enemyRotation = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+                        transform.LookAt(enemyRotation);
+                        transform.position = Vector3.MoveTowards(transform.position, currentTarget.position, chaseSpeed * Time.deltaTime);
+
+                        chargeTimer--;
+                        if (chargeTimer <= 0)
                         {
-                            randomPointSelected = true;
-                            Debug.DrawRay(soundSourcePos, Vector3.up, Color.blue, 5.0f);
-                            tempWaypointPos = currentTarget;
-                            currentTarget = tempWaypointPos;//soundSourcePos;
+                            agent.autoBraking = true;
+                            chargeTimer = defaultChargeTimer;
                         }
                     }
 
