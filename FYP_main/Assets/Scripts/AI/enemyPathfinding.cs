@@ -210,8 +210,8 @@ public class enemyPathfinding : MonoBehaviour
     public float animationSpeedModifier;
     //This is for Animator guy to see enemies actual speeds, it uses normal update atm.
     //It can be changed to FixedUpdate if it gives better results
-    Vector3 previousPosition;
-    Vector3 currentPosition;
+   Vector3 currentMove;
+   Vector3 previousPosition;
     int smellTimer = 180;
 
     [Tooltip("To show enemy's current speed")]
@@ -319,14 +319,13 @@ public class enemyPathfinding : MonoBehaviour
     void Update()
     {
         //Velocity meter for the animator guy to see enemies actual speed
-        if (agent.velocity != Vector3.zero)
-        {
-            Vector3 currentMove = transform.position - previousPosition;
+
+            currentMove = transform.position - previousPosition;
             currentSpeed = currentMove.magnitude / Time.deltaTime;
             previousPosition = transform.position;
             patrolAnim.speed = agent.speed * animationSpeedModifier;
             updateAnimator();
-        }
+
         //end of Timer for the animator guy to see enemies actual speed
 
         //Tried to make enemies be able to dodge each other when pahtfinding
@@ -362,9 +361,10 @@ public class enemyPathfinding : MonoBehaviour
                         isPatrolling = true;
                     }
                     if (newTargetTimer >= 0)
-                    {
+                    {                       
                         agent.velocity = Vector3.zero;
                         newTargetTimer--;
+                        
                     }
                     else
                     {
