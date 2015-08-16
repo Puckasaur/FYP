@@ -35,7 +35,7 @@ public class soundSphere : MonoBehaviour
             if (script != null)
             {
                 if (this.transform.parent != other.transform)
-                    if (script.States != enumStates.chase && script.States != enumStates.distracted && script.States != enumStates.eatBone)
+                    if (script.States != enumStates.chase && script.States != enumStates.distracted && script.States != enumStates.eatBone && script.soundSource.tag != "enemy" && script.soundSource.tag != "fatDog")
                     {
                         script.stateManager(6);
                         script.soundSource = transform.parent.gameObject;
