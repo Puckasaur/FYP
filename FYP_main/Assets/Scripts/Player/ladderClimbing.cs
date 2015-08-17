@@ -22,7 +22,7 @@ public class ladderClimbing : MonoBehaviour
 		{
             ladder.GetComponent<TemporaryMovement>().onLadder = true;
 
-            if (climbMovement.movement.magnitude > 0.1)
+            if (climbMovement.movement.magnitude > 1)
             {    
                 climbMovement.rb.useGravity = false;
                 climbMovement.enabled = false;
@@ -52,9 +52,9 @@ public class ladderClimbing : MonoBehaviour
 		
 	void Update()
 	{
-		if (inside == true && characterController.GetComponent<TemporaryMovement>().movement.magnitude > 0.01f)
+        if (inside == true && climbMovement.movement.magnitude > 0.01f)
 		{
-			characterController.transform.position += Vector3.up / heightFactor * climbMovement.movement.magnitude;
+            climbMovement.transform.position += Vector3.up / heightFactor * climbMovement.movement.magnitude;
 		}
 
         //print("MAGNITUDE: " + characterController.GetComponent<TemporaryMovement>().movement.magnitude);
