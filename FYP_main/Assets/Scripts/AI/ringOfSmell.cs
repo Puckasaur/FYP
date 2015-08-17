@@ -12,7 +12,7 @@ public class ringOfSmell : MonoBehaviour {
     public float maxRadius;
     public float minRadius;
 
-    Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
+    public Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
     public ParticleSystem particle;
     RaycastHit hit;
@@ -28,6 +28,7 @@ public class ringOfSmell : MonoBehaviour {
     public float detectionTimer;
     public float defaultDetectionRange;
     public float alarmBonus;
+    float maxDifference = 0.2f;
 
     public bool smellDetected = false;
 
@@ -81,19 +82,19 @@ public class ringOfSmell : MonoBehaviour {
 
     void Update()
     {
-        if (this.transform.localScale.x < radius)
+        if (this.transform.localScale.x < radius - maxDifference)
         {
             this.transform.localScale += scalingRate;
         }
 
-        else if (transform.localScale.x > radius)
+        else if (transform.localScale.x > radius + maxDifference)
         {
             transform.localScale -= scalingRate;
         }
 
         if (radius == maxRadius && color != Color.cyan) // Fat radius
         {
-            rend.material.SetColor("_Color", maxColor);
+           rend.material.SetColor("_Color", maxColor);
             //particlesystemMaterial.mainTexture = fatParticle;
             //print(particlesystemMaterial);
             //particleSystemMesh = fatMesh;
