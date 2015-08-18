@@ -12,7 +12,7 @@ public class moviePlayer : MonoBehaviour
     bool loadingLevel = false;
     public Material material;
     AsyncOperation async;
-
+    AudioSource movieSource;
 	public bool movieDone = false;
 
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class moviePlayer : MonoBehaviour
     {
         material = gameObject.GetComponent<Renderer>().sharedMaterial;
         movie = (MovieTexture)GetComponent<Renderer>().sharedMaterial.mainTexture;
-
+        movieSource = gameObject.GetComponent<AudioSource>();
         filename = (PlayerPrefs.GetString("Movie"));
         movies = Resources.LoadAll<MovieTexture>("Movie");
         materials = Resources.LoadAll<Material>("Movie/Materials");
@@ -43,7 +43,9 @@ public class moviePlayer : MonoBehaviour
             }
             if (movie != null)
             {
+                movieSource.clip = movie.audioClip;
                 movie.Play();
+                movieSource.Play();
             }
 
 		//Background.SetActive(false);
