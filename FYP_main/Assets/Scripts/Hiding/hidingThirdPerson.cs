@@ -26,7 +26,7 @@ public class hidingThirdPerson : MonoBehaviour {
         //isPaused = false;
 		
 		cp = GameObject.Find ("Char_Cat").GetComponent<checkPoint>();
-		ros = GameObject.Find ("ring of Smell").GetComponent<ringOfSmell>();
+		ros = GameObject.Find ("Smell ring FBX").GetComponent<ringOfSmell>();
         playerScript = GameObject.Find("Char_Cat").GetComponent<TemporaryMovement>();
 
 		showHiding.SetActive(false);

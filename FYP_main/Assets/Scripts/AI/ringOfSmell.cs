@@ -99,7 +99,7 @@ public class ringOfSmell : MonoBehaviour {
             //print(particlesystemMaterial);
             //particleSystemMesh = fatMesh;
             //print(particleSystemMesh);
-            particle.startColor = new Color(maxColor.r,maxColor.g,maxColor.b);
+
 
         }
 
