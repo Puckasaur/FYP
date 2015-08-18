@@ -72,9 +72,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 192988}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 109.040001, y: .699999988, z: 10.6300001}
-  m_LocalScale: {x: 1, y: 1.7820648, z: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -15.1199999, y: -1.29999995, z: 11.8199997}
+  m_LocalScale: {x: -1.08000004, y: 2.07999992, z: 1.04999995}
   m_Children:
   - {fileID: 406326}
   - {fileID: 464474}
@@ -87,8 +87,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171828}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.573000014, y: .777999997, z: -.485000014}
+  m_LocalRotation: {x: 0, y: -1.49011626e-07, z: 0, w: -1}
+  m_LocalPosition: {x: 0, y: .810000002, z: -1.76999998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405746}
@@ -99,8 +99,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171554}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 8.18000031, y: .140000001, z: 16.8700008}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -3.57627869e-07}
+  m_LocalPosition: {x: 6, y: 1.04999995, z: -1.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405746}
@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 186440}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.60000038, y: 0, z: 16.9400005}
+  m_LocalPosition: {x: 6, y: .850000024, z: -3.0999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 405746}
@@ -127,8 +127,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.5, y: 2.29080439, z: 5.48000002}
-  m_Center: {x: .221273422, y: .71731329, z: -.0382943153}
+  m_Size: {x: 4.50229883, y: 2.29080391, z: 2.1640203}
+  m_Center: {x: .915139258, y: .717312932, z: -2.61467361}
 --- !u!114 &11457880
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,6 +149,7 @@ MonoBehaviour:
   isEnterBone: 0
   isEnterBag: 0
   smellArea: 0
+  defautCooldown: 15
   boneLimit: 1
   boneCount: 0
 --- !u!198 &19833726
