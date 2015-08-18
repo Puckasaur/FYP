@@ -69,7 +69,7 @@ public class TemporaryMovement : MonoBehaviour
 
     public int numberOfKeys;
   
-    public int[] keyPossessed = new int[3];
+    public int[] keyPossessed = new int[4];
     [HideInInspector]
     public float horizontal;
     [HideInInspector]
@@ -428,7 +428,7 @@ public class TemporaryMovement : MonoBehaviour
     }
     public void resetKeys()
     {
-
-        keyPossessed = new int[3];
+        keyPossessed = new int[4];
+        numberOfKeys = 0;
     }
 }
