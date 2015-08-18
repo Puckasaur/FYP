@@ -8501,7 +8501,7 @@ Transform:
   - {fileID: 829351232}
   - {fileID: 834082856}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 158
+  m_RootOrder: 148
 --- !u!1001 &197192016
 Prefab:
   m_ObjectHideFlags: 0
@@ -24415,7 +24415,7 @@ Transform:
   - {fileID: 127695991}
   - {fileID: 333980749}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 177
+  m_RootOrder: 150
 --- !u!1001 &593275812
 Prefab:
   m_ObjectHideFlags: 0
@@ -30498,7 +30498,7 @@ Transform:
   - {fileID: 170585038}
   - {fileID: 1369963067}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 147
+  m_RootOrder: 124
 --- !u!1001 &770689993
 Prefab:
   m_ObjectHideFlags: 0
@@ -42333,7 +42333,9 @@ Transform:
   - {fileID: 1221387646}
   - {fileID: 334969147}
   - {fileID: 1803667297}
+  - {fileID: 769441466}
   - {fileID: 1612135091}
+  - {fileID: 1132304837}
   - {fileID: 764089787}
   - {fileID: 1986037930}
   - {fileID: 815632676}
@@ -42348,17 +42350,19 @@ Transform:
   - {fileID: 2104206370}
   - {fileID: 1653499653}
   - {fileID: 989640124}
+  - {fileID: 1902783681}
   - {fileID: 1951477993}
   - {fileID: 492717685}
   - {fileID: 1839483293}
   - {fileID: 1622330015}
   - {fileID: 784873975}
   - {fileID: 152317707}
+  - {fileID: 196050605}
+  - {fileID: 1513967932}
+  - {fileID: 592534107}
+  - {fileID: 1883642403}
   - {fileID: 1576100407}
   - {fileID: 1209166635}
-  - {fileID: 769441466}
-  - {fileID: 1132304837}
-  - {fileID: 1902783681}
   - {fileID: 340086525}
   - {fileID: 781578246}
   - {fileID: 357545710}
@@ -42367,7 +42371,6 @@ Transform:
   - {fileID: 47632597}
   - {fileID: 1178902921}
   - {fileID: 1230187549}
-  - {fileID: 196050605}
   - {fileID: 409495647}
   - {fileID: 188265933}
   - {fileID: 867322949}
@@ -42384,11 +42387,8 @@ Transform:
   - {fileID: 1663500759}
   - {fileID: 2015667024}
   - {fileID: 738885541}
-  - {fileID: 1513967932}
   - {fileID: 376930577}
-  - {fileID: 592534107}
   - {fileID: 1570552475}
-  - {fileID: 1883642403}
   - {fileID: 1779659424}
   - {fileID: 2142268195}
   - {fileID: 706087511}
@@ -44159,7 +44159,7 @@ Transform:
   - {fileID: 23261065}
   - {fileID: 82445651}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 148
+  m_RootOrder: 126
 --- !u!1001 &1132916898
 Prefab:
   m_ObjectHideFlags: 0
@@ -58989,7 +58989,7 @@ Transform:
   - {fileID: 1266327871}
   - {fileID: 2056539470}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 175
+  m_RootOrder: 149
 --- !u!4 &1514929236 stripped
 Transform:
   m_PrefabParentObject: {fileID: 492392, guid: 88fe77e9e75636941be0cd467f67d15a, type: 2}
@@ -59056,6 +59056,10 @@ Prefab:
     - target: {fileID: 104464, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_Name
       value: Smell ring FBX
+      objectReference: {fileID: 0}
+    - target: {fileID: 104464, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
@@ -73864,7 +73868,7 @@ Transform:
   - {fileID: 1807242738}
   - {fileID: 887054972}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 179
+  m_RootOrder: 151
 --- !u!1001 &1884452619
 Prefab:
   m_ObjectHideFlags: 0
@@ -74782,7 +74786,7 @@ Transform:
   - {fileID: 1741782017}
   - {fileID: 1872273734}
   m_Father: {fileID: 1082387422}
-  m_RootOrder: 149
+  m_RootOrder: 141
 --- !u!1001 &1904628986
 Prefab:
   m_ObjectHideFlags: 0
