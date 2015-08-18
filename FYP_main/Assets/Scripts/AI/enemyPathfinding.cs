@@ -989,8 +989,8 @@ public class enemyPathfinding : MonoBehaviour
                 }
         //Checking if player is near enough to be smelled
                     Vector3 direction = (player.transform.position - transform.position).normalized;
-                    Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius * 0.48f));
-                    Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius * 0.48f, Color.yellow);
+                    Physics.Raycast(transform.position, direction, out hit, (ringOfSmellScript.radius));
+                    Debug.DrawRay(transform.position, direction * ringOfSmellScript.radius, Color.yellow);
                     if (hit.collider != null)
                     {
                         if (hit.collider.tag == player.GetComponent<Collider>().tag)
