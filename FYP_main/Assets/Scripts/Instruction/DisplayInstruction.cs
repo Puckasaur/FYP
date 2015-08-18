@@ -100,7 +100,8 @@ public class DisplayInstruction : MonoBehaviour
 		   Input.GetKey(KeyCode.Joystick1Button18) ||
 		   Input.GetKey(KeyCode.Joystick1Button19) )
 		{
-
+			instruction.sprite = controller; 
+			animate.runtimeAnimatorController = controller1;
 		}
 		
 		// joystick axis
