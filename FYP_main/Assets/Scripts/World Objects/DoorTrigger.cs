@@ -40,11 +40,11 @@ public class DoorTrigger : MonoBehaviour
 
                 if (other.GetComponent<TemporaryMovement>().keyPossessed[j] == doorNumber && opening == false)
                 {
+					showLock.SetActive(false);
 					//showLock.enabled = false;
                     opening = true;
                     m_Animator.SetBool("DoorOpen", true);
 
-					showLock.SetActive(false);
 					
 
 					//SFX.playUnlock();

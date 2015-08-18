@@ -48924,7 +48924,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1265326504
 Transform:
   m_ObjectHideFlags: 0
@@ -58803,15 +58803,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.449999988
+      value: 31.6000004
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.0799999982
+      value: 4.80000019
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -1.15999997
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalRotation.x
@@ -58831,7 +58831,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 11400696, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: checkPointPosition
@@ -66376,31 +66376,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!65 &1721620096
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1721620094}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.83277392, y: 2.39678097, z: 1.48821414}
-  m_Center: {x: .0289045367, y: 1.23704958, z: -1.00964344}
---- !u!114 &1721620097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1721620094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676f693f8e9bf484abbecb9e9ea27d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showLock: {fileID: 0}
-  doorNumber: 2
 --- !u!1001 &1722195692
 Prefab:
   m_ObjectHideFlags: 0
@@ -68126,6 +68101,18 @@ Prefab:
       propertyPath: showLock
       value: 
       objectReference: {fileID: 1970739068}
+    - target: {fileID: 469004, guid: b0f0a9dfb1814104ebc80ea35996a86c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .0109999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 469004, guid: b0f0a9dfb1814104ebc80ea35996a86c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 469004, guid: b0f0a9dfb1814104ebc80ea35996a86c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.39999998
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9592556, guid: b0f0a9dfb1814104ebc80ea35996a86c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b0f0a9dfb1814104ebc80ea35996a86c, type: 2}
