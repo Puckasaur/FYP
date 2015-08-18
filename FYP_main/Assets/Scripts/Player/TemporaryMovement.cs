@@ -66,9 +66,9 @@ public class TemporaryMovement : MonoBehaviour
 
     [HideInInspector]
     public float joystickPressure;
-    [HideInInspector]
+
     public int numberOfKeys;
-    [HideInInspector]
+  
     public int[] keyPossessed = new int[3];
     [HideInInspector]
     public float horizontal;
