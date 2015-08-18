@@ -20,6 +20,8 @@ public class DoorTrigger : MonoBehaviour
 		//showLock = GetComponentInChildren<SpriteRenderer>();
 		showLock.SetActive(false);
 
+		SFX = GameObject.Find("SFX").GetComponent<sfxPlayer>();
+
 		//showLock.GetComponent<SpriteRenderer>().enabled = false;
 	}
     
@@ -47,7 +49,7 @@ public class DoorTrigger : MonoBehaviour
 
 					
 
-					//SFX.playUnlock();
+					SFX.playUnlock();
                     //Destroy(this.gameObject, 0.1f);
                     //this.transform.Rotate(new Vector3(0.0f, 0.0f, zRotation), angle, Space.Self);
                 }

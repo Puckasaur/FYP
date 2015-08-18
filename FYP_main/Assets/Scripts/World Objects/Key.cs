@@ -15,7 +15,7 @@ public class Key : MonoBehaviour
 
 	void Start()
 	{
-		//SFX = GameObject.Find("SFX").GetComponent<sfxPlayer>();
+		SFX = GameObject.Find("SFX").GetComponent<sfxPlayer>();
 	}
     
  
@@ -28,7 +28,7 @@ public class Key : MonoBehaviour
             i = other.GetComponent<TemporaryMovement>().numberOfKeys;
             other.GetComponent<TemporaryMovement>().keyPossessed[i] = keyNumber;
             other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
-			//SFX.playKey();
+			SFX.playKey();
 			Destroy(this.gameObject, 0.1f);
         }
     }
