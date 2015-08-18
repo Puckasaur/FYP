@@ -58803,15 +58803,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 31.6000004
+      value: -1.42999995
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 4.80000019
+      value: -.550000012
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 6
+      value: -1.60000002
       objectReference: {fileID: 0}
     - target: {fileID: 498802, guid: ba6011b71f850964a88a001872fa5889, type: 2}
       propertyPath: m_LocalRotation.x
@@ -58853,6 +58853,10 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8cb43aa829b37504cb7b6f6a33210122, type: 2}
+    - target: {fileID: 104464, guid: ba6011b71f850964a88a001872fa5889, type: 2}
+      propertyPath: m_Name
+      value: Smell ring FBX
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba6011b71f850964a88a001872fa5889, type: 2}
   m_IsPrefabParent: 0

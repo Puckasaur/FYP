@@ -23,7 +23,6 @@ public class coneOfVision : MonoBehaviour
     void Start()
     {
         chaseTransScript = GameObject.Find("BGM").GetComponent<chaseTransition>();
-
         range = startRange;
         width = startWidth;
         height = startHeight;

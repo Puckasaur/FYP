@@ -29,13 +29,11 @@ public class enemyPathfinding : MonoBehaviour
     //rotation after smelling values
      [Tooltip("We have no idea what this is used for Aleksi/Toni")]
     public Vector3 tempSmellPosition; 
-
     //These variables are for the enemies to use when they smell a bone
     float maxRange = 1.5f;
     Vector3 soundSourcePos;
     Transform tempWaypointPos;
     //end of rotation after smelling values
-
     //sound detection
     soundSphere sphereScript;
     GameObject newSphere;
@@ -45,29 +43,21 @@ public class enemyPathfinding : MonoBehaviour
     //vision detection
     coneOfVision coneOfVisionScript;
     //end of Detection variables
-
     RaycastHit hit;
     [Tooltip("Where the player will respawn")]
     public Vector3 respawnPosition;
-
     //Pathfinding variables
     [Tooltip("Waypoint to go during patrol")]
     public Transform target1;
-
     [Tooltip("Waypoint to go during patrol")]
     public Transform target2;
-
     [Tooltip("Waypoint to go during patrol")]
     public Transform target3;
-
     [Tooltip("Waypoint to go during patrol")]
     public Transform target4;
-
     [Tooltip("Waypoint the enemy is heading right now")]
     public Transform currentTarget;
-
     [Tooltip("Waypoint the enemy was heading moment ago")]
-
     public Transform lastTarget;
     [Tooltip("The first waypoint enemy will head, used for checkpoint")]
     public Transform firstTarget;
@@ -83,55 +73,40 @@ public class enemyPathfinding : MonoBehaviour
 	Vector3[] path = new Vector3[0];
     Vector3 currentWaypoint;
     Vector3 firstWaypoint;
-
     public float rotationSpeed;
-
     //End of Pathfinding variables
-
     [Tooltip("FOR DEBUG The state where enemy is right now")]
     public enumStates States;
-
     [Tooltip("Enemy speed for non chase state")]
     public float patrolSpeed;
-
     [Tooltip("Enemy speed for chase state")]
     public float chaseSpeed;
-
     [Tooltip("if player gets outside of this range enemy goes to alert")]
     public float chaseRange;
-
     //Idle Suspicious variables
     float rotationDifference = 0;
     [Tooltip("from -180° to 180°. Used on Idle suspicious")]
     public float firstDirection;    // -These are used to determine where the opponen will look when it
                                     // reaches the waypoint.
                                     // Insert integer to set the angle between -180 and 180.
-
     [Tooltip("from -180° to 180°. Used on Idle suspicious")]
     public float secondDirection;  
-
     [Tooltip("from -180° to 180°. Used on Idle suspicious")]
     public float thirdDirection;    
- 
     List<float> directionDegrees = new List<float>();
     GameObject enemyObject;    
     float rotationStep = 65.0f;             //-Enemies turning speed
-
     [Tooltip("By how much can the enemy miss their intended direction in angles")]
     public float angleOffsetMax = 10.0f;    // -These values are used to prevent the Unity from missing
-
     [Tooltip("By how much can the enemy miss their intended direction in angles")]
     public float angleOffsetMin = -10.0f;   // the right angle during updates.
-
     [Tooltip("How long will the enemy wait between turning from one direction to another")]
     public float turnTimer = 100.0f;        // -This is used to determine how long the enemy will sit idling between turning from a single angle to another.
-
     float currentTargetDirection;           
     int turnCounter = 0;
     bool rotating = false;
     bool rotationInProgress = false;       
     // end of Idle Suspicious variables
-
     //Timers
     int tempcounters = 0;
     int timer;
@@ -141,57 +116,40 @@ public class enemyPathfinding : MonoBehaviour
     float dodgeTimer;
     [Tooltip("How long will enemy dodge another enemy")]
     public int defaultDodgeTimer;
-
     [Tooltip("How long the enemy will eat a bone")]
     public int defaultEatTimer;
-
     [Tooltip("How long the enemy will idle when waypoint is reached")]
     public int defaultIdleTimer;
-
     [Tooltip("How long the enemy will wait before barking")]
     public int defaultBarkTimer;
-
     [Tooltip("How long the enemy will stay in alert state")]
     public int defaultAlertTimer;
-
     [Tooltip("How long the player needs to be out of sight for enemies to return into alert state")]
     public int defaultEscapeTimer;
-
     [Tooltip("Time between turns during suspicious state")]
     public float defaultTurnTimer;
-
     [Tooltip("How often enemies will ensure that they have a target to go for")]
     public float defaultNewTargetTimer; 
-     
     [Tooltip("How long enemy will wait before turning towards the smell")]
     public float defaultTurnTowardsSmellTimer;
-
     [Tooltip("How long enemy can stand still before checking if he's stuck")]
     public float defaultAgentNotMovingTimer;
-
     [Tooltip("How long until Alert Waypoints can be organized again by the same enemy")]
     public int organizeAlertWaypointsTimer;
     //end of Timers  
-
-
     //Charge variables
     float chargeTimer;
-
     [Tooltip("Time 'til the enemy 'charges'")]
     public float defaultChargeTimer;
-
     [Tooltip("Range from where the enemy can 'charge'")]
     public float chargeRange;
-
     Vector3 enemyRotation;
     //end of Charge variables
-
     //If enemies get stuck variables
     float tempPosX = 0;
     float tempPosZ = 0;
     bool visited = false;
     //end of If enemies get stuck variables
-
     //Alert waypoint organization variables
     List<Transform> usedWaypoints = new List<Transform>();
     List<Vector3> waypointLocations = new List<Vector3>();
@@ -202,7 +160,6 @@ public class enemyPathfinding : MonoBehaviour
     Vector3 waypointDifference;
     Vector3 _soundSourceValue;
     //end of Alert waypoint organization variables
-
     //Misc variables
     Collider playerCollider;
     Animator patrolAnim;
@@ -213,10 +170,8 @@ public class enemyPathfinding : MonoBehaviour
    Vector3 currentMove;
    Vector3 previousPosition;
     int smellTimer = 180;
-
     [Tooltip("To show enemy's current speed")]
     public float currentSpeed;
-
     //[HideInInspector]
     public bool isPatrolling = true;
     [HideInInspector]
@@ -271,11 +226,9 @@ public class enemyPathfinding : MonoBehaviour
     public bool agentStopped = false;
    // [HideInInspector]
     public Vector3 _soundSource;
-
     //public float deceleration = 60f;
     //public float acceleration = 0.0f;
     NavMeshPath navPath;
-
     //end of Misc variables
 
     void Start()
@@ -1591,41 +1544,4 @@ public class enemyPathfinding : MonoBehaviour
 	{
 		patrolAnim.SetFloat ("patrolMovement", currentSpeed);
 	}
-    //public void dodge(Collider other)
-    //{
-    //    print("Dodging");
-    //    dodging = true;
-    //    Transform obstacl = other.transform;
-    //    Vector3 obstacle = obstacl.transform.position;
-    //    Vector3 forward = transform.forward;
-    //    if (forward.x > 0)
-    //    {
-    //        obstacle.z = obstacle.z * -1;
-    //    }
-    //    else if (forward.z > 0)
-    //    {
-    //        obstacle.x = obstacle.x * -1;
-    //    }
-    //    print("dodging target");
-    //    if (currentTarget != obstacl)
-    //    {
-    //        lastTarget = currentTarget;
-    //    }
-    //    if (dodgeTimer <= 0)
-    //    {
-    //        currentTarget = obstacl;
-    //        agent.SetDestination(obstacle);
-    //        dodgeTimer = defaultDodgeTimer;
-    //    }
-    //}
-    //void OnCollisionExit(Collider col)
-    //{
-    //    if(col.gameObject.tag == "player" ||col.gameObject.tag == "enemy" || col.gameObject.tag == "fatDog" || col.gameObject.tag == " huntingDog")
-    //    {
-    //        agent.Stop();
-    //        agent.velocity = Vector3.zero;
-    //        GetComponent<Rigidbody>().velocity = Vector3.zero;
-    //        agent.Resume();
-    //    }
-    //}
 }

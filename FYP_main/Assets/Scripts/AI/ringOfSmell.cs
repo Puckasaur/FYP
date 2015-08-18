@@ -11,15 +11,11 @@ public class ringOfSmell : MonoBehaviour {
     public float startRadius;
     public float maxRadius;
     public float minRadius;
-
     public Vector3 scalingRate = new Vector3(1.0f, 0.0f, 1.0f);
     GameObject player;
     public ParticleSystem particle;
     RaycastHit hit;
 	AudioSource sniff;
-
-    //public List<GameObject> enemies = new List<GameObject>();
-
 	public bool setToOff;
     public bool playerSeen = false;
     public bool disguised = false;
@@ -29,35 +25,16 @@ public class ringOfSmell : MonoBehaviour {
     public float defaultDetectionRange;
     public float alarmBonus;
     float maxDifference = 0.2f;
-
     public bool smellDetected = false;
-
     public float sniffDistance;
     public float visualDistance;
     public float detectionDistance;
     public float somethingElseDistance;
-    
-	//AudioSource sniff;
-
     public Renderer rend;
-    
     public Color maxColor;
     public Color color;
     public Color minColor;
     public float colorAlpha;
-    //public Texture fatParticle;
-    //public Texture mediumParticle;
-    //public Texture smallParticle;
-    //public Mesh fatMesh;
-    //public Mesh mediumMesh;
-    //public Mesh smallMesh;
-    //Renderer particlesystemRenderer;
-    //Mesh particleSystemMesh;
-    //Material particlesystemMaterial;
-
-    //Material[] particles;
-
-    //Vector3 to make sure the enemy does not smell the player when the player exits the ring of smell
     Vector3 exitrange;
     float maximumDistance;
     
@@ -66,20 +43,14 @@ public class ringOfSmell : MonoBehaviour {
         maxColor.a = colorAlpha;
         color.a = colorAlpha;
         minColor.a = colorAlpha;
-
         rend = GetComponent<Renderer>();
         radius = startRadius;
         sniff = GetComponent<AudioSource>();
         chaseTransScript = GameObject.Find ("BGM").GetComponent<chaseTransition>();
         detectionTimer = defaultDetectionRange;
         particle = GetComponent<ParticleSystem>();
-        //particlesystemRenderer = particle.GetComponent<ParticleSystem>().GetComponent<Renderer>();
-        //particlesystemMaterial = particlesystemRenderer.sharedMaterial;
-        //particleSystemMesh = particlesystemRenderer.GetComponent<Mesh>();
-       // disGuiseAsDog();
 
     }
-
     void Update()
     {
         if (this.transform.localScale.x < radius - maxDifference)
@@ -94,36 +65,23 @@ public class ringOfSmell : MonoBehaviour {
 
         if (radius == maxRadius && color != Color.cyan) // Fat radius
         {
-           rend.material.SetColor("_Color", maxColor);
-            //particlesystemMaterial.mainTexture = fatParticle;
-            //print(particlesystemMaterial);
-            //particleSystemMesh = fatMesh;
-            //print(particleSystemMesh);
-
+            rend.material.SetColor("_Color", maxColor);
+            particle.startColor = new Color(maxColor.r,maxColor.g,maxColor.b);
 
         }
 
         else if (radius < maxRadius && radius > minRadius) // Any radius which 
         {
             rend.material.SetColor("_Color", color);
-            //particlesystemMaterial.mainTexture = mediumParticle;
-            //print(particlesystemMaterial);
-
             particle.startColor = new Color(color.r, color.g, color.b);
-            //particleSystemMesh = mediumMesh;
-            //print(particleSystemMesh);
         }
 
         else if (radius == minRadius)
         {
             rend.material.SetColor("_Color", minColor);
-            //particlesystemMaterial.mainTexture = smallParticle;
             particle.startColor = new Color(minColor.r, minColor.g, minColor.b);
-            //particle.
-            //particleSystemMesh = smallMesh;
         }
     }
-
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "enemy")
@@ -160,7 +118,6 @@ public class ringOfSmell : MonoBehaviour {
             }
         }
     }
-
     void OnTriggerStay(Collider other)
     {
 
@@ -170,12 +127,6 @@ public class ringOfSmell : MonoBehaviour {
 
         if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
         {
-            //detectionTimer--;
-
-            //if (detectionTimer <= 0)
-            //{
-            //    detectionTimer = 60;
-            //}
             Physics.Linecast(transform.parent.position, other.transform.position, out hit);
             Debug.DrawLine(transform.parent.position, other.transform.position, Color.cyan);
             if (hit.collider == other)
@@ -183,11 +134,6 @@ public class ringOfSmell : MonoBehaviour {
                 smellingPlayer = true;
                 if (hit.distance <= sniffDistance)
                 {
-
-                    //                if (!sniff.isPlaying)
-                    //                {
-                    //                    sniff.Play();
-                    //                }
                 }
 
                 if (hit.distance <= detectionDistance)
@@ -196,20 +142,15 @@ public class ringOfSmell : MonoBehaviour {
 
                     if (script != null)
                     {
-                        // script.stateManager(2);
                         smellDetected = true;
-                        // scriptFatDog.RotateDogWhileSmelling();
                     }
                     if (scriptFatDog != null)
                     {
                         smellDetected = true;
-                        //scriptFatDog.RotateDogWhileSmelling();
                     }
                     if (huntingDogScript != null)
                     {
                         huntingDogScript.stateManager(2);
-                        // smellDetected = true;
-                        //  scriptFatDog.RotateDogWhileSmelling();
                     }
                 }
                 if (hit.distance <= somethingElseDistance)
@@ -237,11 +178,9 @@ public class ringOfSmell : MonoBehaviour {
                 {
                 playerSeen = false;
                 }
-                // transform.parent.position, other.transform.position
             }
         }
     }
-
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "enemy" || other.gameObject.tag == "huntingDog" || other.gameObject.tag == "fatDog")
@@ -256,10 +195,6 @@ public class ringOfSmell : MonoBehaviour {
                 {
                     Destroy(GetComponent<ParticleSystem>());
                 }
-                //            if (sniff.isPlaying)
-                //            {
-                //                sniff.Stop();
-                //            }
                 if (script != null)
                 {
                     if (script.States != enumStates.chase)
@@ -292,33 +227,24 @@ public class ringOfSmell : MonoBehaviour {
     }
     public void isDisguised(string script)
     {
-        ////print(script);
-        ////print("1");
         radius = 0;
         disguised = true;
 
     }
     public void isNotDisguised(string script)
     {
-        ////print(script);
-        ////print("2");
         radius = startRadius;
         disguised = false;
     }
     public void increaseSmell(float value)
     {
-        ////print("3");
-        //radius = startRadius;
         if (radius < maxRadius) radius += value;
         if (radius > maxRadius-1 || radius > maxRadius) radius = maxRadius;
         
     }
     public void decreaseSmell(float value)
     {
-        ////print("4");
-        //radius = startRadius;
         if (radius > minRadius) radius -= value;
         if (radius < minRadius+1 || radius < minRadius) radius = minRadius;
-        //radius = Mathf.Floor(radius);
     }
 }

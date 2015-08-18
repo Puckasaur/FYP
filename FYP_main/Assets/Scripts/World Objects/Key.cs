@@ -24,9 +24,10 @@ public class Key : MonoBehaviour
         if (other.gameObject.tag == "player")
         {
 			inventory.inventoryArray[1]++;
+
             i = other.GetComponent<TemporaryMovement>().numberOfKeys;
-            other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
             other.GetComponent<TemporaryMovement>().keyPossessed[i] = keyNumber;
+            other.GetComponent<TemporaryMovement>().numberOfKeys += 1;
 			//SFX.playKey();
 			Destroy(this.gameObject, 0.1f);
         }

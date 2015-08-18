@@ -21,15 +21,11 @@ public class fatDogAi : MonoBehaviour {
     coneOfVision coneOfVisionScript;
 	soundSphere sphereScript;
 	RaycastHit hit;
-
 	public Vector3 respawnPosition;
-	
 	public Transform target1;
-	
 	public Transform currentTarget;
 	public Transform lastTarget;
 	public Vector3 lastSeenPosition = new Vector3(0,0,0);
-	
 	public enumStatesFatDog States;
 	GameObject vision;
 	GameObject smell;
@@ -39,7 +35,6 @@ public class fatDogAi : MonoBehaviour {
 	public GameObject sphere;
 	public GameObject soundSource;
 	GameObject brokenObject;
-	
 	public NavMeshAgent agent;
 	List<Transform> targets = new List<Transform>();
 	public bool eatBone = false;
@@ -47,9 +42,7 @@ public class fatDogAi : MonoBehaviour {
     public bool onWaypoint = false;
     public bool isOnWaypoint;
 	public float turnSpeed = 2.0f;
-	
 	public float speed = 2;
-	
 	float maxSpeed = 5;
 	float maxScale = 20;
 	float waypointOffsetMin = -2.05f;
@@ -60,8 +53,6 @@ public class fatDogAi : MonoBehaviour {
 	float vectorCurrentTargetz = 0;
 	float vectorx;
 	float vectorz;
-	
-	
 	//Idle Suspicious values
 	public float firstDirection;
 	public float secondDirection;
@@ -69,7 +60,6 @@ public class fatDogAi : MonoBehaviour {
     public float fourthDirection;
 	List<float> directionDegrees = new List<float>();
 	GameObject enemyObject;
-	
 	bool rotating = false;
 	float rotationStep = 65.0f;
 	public float currentAngle = 0;
@@ -81,7 +71,6 @@ public class fatDogAi : MonoBehaviour {
     public float turnTimer;
 	int turnCounter = 0;
     public  float rotationDifference = 0;
-
     // Alert Values for FatDog
     public float firstDirectionAlert;
     public float secondDirectionAlert;
@@ -89,11 +78,8 @@ public class fatDogAi : MonoBehaviour {
     public float turnTimerAlert;
     public float defaultTurnTimerAlert;
     bool alertLookingDirectionsSet = false;
-
     //Distracted values
     bool agentStopped = false;
-
-
 	//So many timers
 	public int timer;
 	public int idleTimer;    
@@ -112,23 +98,16 @@ public class fatDogAi : MonoBehaviour {
 	public int areaCounter = 0;
 	public float defaultTurnTimer;
     public float newTargetTimer;
-
     float raycastRange;
     public float defaultRaycastRange;
-
 	public float patrolSpeed;
 	public float chaseSpeed;
     public float chaseRange;
-	
 	Vector3[] path = new Vector3[0];
 	Vector3 currentWaypoint;
-	
 	//values if enemy doesn't receive a new waypoint to prevent them from being stuck
 	Vector3 worldPositionNow;
 	Vector3 worldPositionPast;
-	//int checkIfStuck = 100;
-	//bool isStuck = false;
-
     float x;
     float y;
     public float startingAngle;
@@ -136,11 +115,8 @@ public class fatDogAi : MonoBehaviour {
     public float facingAngle;
     public float angleDiff;
     Vector3 startingVector;
-
     public bool wasChasing = false;
-
     Rigidbody rigidbody;
-	
 	void Start()
 	{
         turnTimerAlert = defaultTurnTimerAlert;

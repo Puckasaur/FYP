@@ -16,7 +16,6 @@ public class checkPoint: MonoBehaviour
     public Transform startPosition;
     public bool checkPointActivated = false; // if the check point has been reached or not
     public bool checkPointActivated_2 = false;
-
     private string currentLevel; // the current level
     public  GameObject[] allEnemies; // needed to reset enemies' positions
     private GameObject[] allHunters; // Hunters need to be destroyed on player death
@@ -26,14 +25,12 @@ public class checkPoint: MonoBehaviour
     public GameObject[] allDestructibles;
     public GameObject[] allBones;
     public GameObject[] allSpheres;
-
     public enemyPathfinding script;
     public huntingDog hunterScript;
     public fatDogAi fatDogScript;
     public TemporaryMovement playerScript;
     public GameObject player;
     public breakableObject bo;
-
 	public bool sendBack;
 
     void Start()
@@ -96,10 +93,10 @@ public class checkPoint: MonoBehaviour
         }
     }
 
-    public static bool isNull(System.Object aObj)
-    {
-        return aObj == null || aObj.Equals(null);
-    }
+    //public static bool isNull(System.Object aObj)
+    //{
+    //    return aObj == null || aObj.Equals(null);
+    //}
 
     void resetLevel()
     {

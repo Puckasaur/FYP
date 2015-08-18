@@ -20,20 +20,16 @@ public class huntingDog : MonoBehaviour {
     public GameObject sphere;
     NavMeshAgent agent;
     public List<Transform> alertArea = new List<Transform>();
-
     float maxScale = 20;
     float waypointOffsetMin = -2.05f;
     float waypointOffsetMax = 2.05f;
     float vectorx;
     float vectorz;
-
-   
     public float firstDirection; //= 33;
     public float secondDirection; // = 66;
     public float thirdDirection; // = 78;
     public List<float> directionDegrees = new List<float>();
     GameObject enemyObject;
-
     float rotationStep = 65.0f;
     public float currentAngle = 0;
     public float targetAngle = 0;
@@ -46,29 +42,24 @@ public class huntingDog : MonoBehaviour {
     public int areaCounter = 0;
     int turnCounter = 0;
     int tempcounters = 0;
-
     public int defaultBarkTimer;
     public int defaultAlertTimer;
     public int defaultIdleTimer;
     public int defaultTimer;
     public float defaultTurnTimer;
     public float defaultEscapeTimer;
-
     float barkTimer;
     float alertTimer;
     public float escapeTimer;
     int timer;
     int idleTimer; 
-
     public float patrolSpeed;
     public float chaseSpeed;
     public float chaseRange;
-
     float vectorTransformPositionx = 0;
     float vectorTransformPositionz = 0;
     float vectorCurrentTargetx = 0;
     float vectorCurrentTargetz = 0;
-
     //Leap values
     public float leapRange;
     float leapTimer;
